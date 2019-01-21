@@ -749,7 +749,7 @@ bool MGL_EXPORT mgl_check_vec3(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay
 bool MGL_EXPORT mgl_check_trig(HMGL gr, HCDT nums, HCDT x, HCDT y, HCDT z, HCDT a, const char *name, int d=3);
 bool MGL_EXPORT mgl_isnboth(HCDT x, HCDT y, HCDT z, HCDT a);
 bool MGL_EXPORT mgl_isboth(HCDT x, HCDT y, HCDT z, HCDT a);
-inline bool mgl_islog(mreal a,mreal b)	{	return (a>0 && b>10*a) || (b<0 && a<10*b);	}
+inline bool mgl_islog(mreal a,mreal b)	{	return (a>0 && b>0 && (b/a+a/b)>=10.1) || (a<0 && b<0 && (b/a+a/b)>=10.1);	}
 //-----------------------------------------------------------------------------
 #endif
 #endif

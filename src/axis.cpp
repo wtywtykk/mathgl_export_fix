@@ -395,18 +395,18 @@ void mglCanvas::LabelTicks(mglAxis &aa)
 	if(aa.ch=='z')	aa.v0 = aa.org.z;
 
 	wchar_t buf[64]=L"";
-	mreal v,v0,v1,w=0;
-	int d,ds;
 	if(aa.f)	return;
 	aa.txt.clear();
 	bool minus = mglchr(aa.stl.c_str(),'-') && !mglchr(aa.stl.c_str(),'+');
 	if(aa.dv==0 && aa.v1>0)	// positive log-scale
 	{
-		v0 = exp(M_LN10*floor(0.1+log10(aa.v1)));
-		ds = int(floor(0.1+log10(aa.v2/v0))/7)+1;
-		for(v=v0;v<=aa.v2*MGL_EPSILON;v*=10)	if(v*MGL_EPSILON>=aa.v1)
+		mreal v1 = aa.v1, v2 = aa.v2;
+		if(v1>v2)	{	v1 = aa.v2; v2 = aa.v1;	}
+		mreal v0 = exp(M_LN10*floor(0.1+log10(v1)));
+		int ds = int(floor(0.1+log10(v2/v0))/7)+1;
+		for(mreal v=v0;v<=v2*MGL_EPSILON;v*=10)	if(v*MGL_EPSILON>=v1)
 		{
-			d = int(floor(0.1+log10(v)));
+			int d = int(floor(0.1+log10(v)));
 			if(d==0)	wcscpy(buf,L"1");
 			else if(d==1)	wcscpy(buf,L"10");
 			else if(d>0)	mglprintf(buf,64,L"10^{%d}",d);
@@ -417,11 +417,13 @@ void mglCanvas::LabelTicks(mglAxis &aa)
 	}
 	else if(aa.dv==0 && aa.v2<0)	// negative log-scale
 	{
-		v0 = -exp(M_LN10*floor(0.1+log10(-aa.v2)));
-		ds = int(floor(0.1+log10(aa.v1/v0))/7)+1;
-		for(v=v0;v>=aa.v1*MGL_EPSILON;v*=10)	if(v*MGL_EPSILON<=aa.v2)
+		mreal v1 = aa.v1, v2 = aa.v2;
+		if(v1>v2)	{	v1 = aa.v2; v2 = aa.v1;	}
+		mreal v0 = -exp(M_LN10*floor(0.1+log10(-v2)));
+		int ds = int(floor(0.1+log10(v1/v0))/7)+1;
+		for(mreal v=v0;v>=v1*MGL_EPSILON;v*=10)	if(v*MGL_EPSILON<=v2)
 		{
-			d = int(floor(0.1+log10(-v)));
+			int d = int(floor(0.1+log10(-v)));
 			if(d==0)	wcscpy(buf,minus?L"-1":L"\u22121");
 			else if(d==1)	wcscpy(buf,minus?L"-10":L"\u221210");
 			else if(d>0)	mglprintf(buf,64,minus?L"-10^{%d}":L"\u221210^{%d}",d);
@@ -432,6 +434,7 @@ void mglCanvas::LabelTicks(mglAxis &aa)
 	}
 	else if(aa.dv)	// ticks drawing
 	{
+		mreal w=0;
 		int kind=0;
 		wchar_t s[32]=L"";
 		if(aa.t.empty() && TuneTicks && !strchr(aa.stl.c_str(),'!'))
@@ -439,7 +442,7 @@ void mglCanvas::LabelTicks(mglAxis &aa)
 		if(((TuneTicks&1)==0 && kind==2) || ((TuneTicks&2)==0 && kind!=2))
 			kind=0;
 
-		v0 = mgl_isnan(aa.o) ? aa.v0 : aa.o;
+		mreal v0 = mgl_isnan(aa.o) ? aa.v0 : aa.o, v1;
 		if(mgl_isnan(v0))	v0=0;
 		if(aa.v2>aa.v1)
 		{	v1 = aa.v2;		v0 = v0 - aa.dv*floor((v0-aa.v1)/aa.dv+1e-3);	}
@@ -448,9 +451,9 @@ void mglCanvas::LabelTicks(mglAxis &aa)
 
 		if(v0+aa.dv!=v0 && v1+aa.dv!=v1)
 		{
-			if(aa.t.empty())	for(v=v0;v<=v1;v+=aa.dv)
+			if(aa.t.empty())	for(mreal v=v0;v<=v1;v+=aa.dv)
 				aa.AddLabel(mgl_tick_text(v,v0,aa.dv/100,w,kind,aa.fact,aa.d,aa.stl.c_str()),v);
-			else	for(v=v0;v<=v1;v+=aa.dv)
+			else	for(mreal v=v0;v<=v1;v+=aa.dv)
 			{
 				if(aa.t[0]!='&')	mglprintf(buf, 64, aa.t.c_str(), fabs(v)<aa.dv/100 ? 0 : v);
 				else	mglprintf(buf, 64, aa.t.c_str()+1, mgl_int(fabs(v)<aa.dv/100 ? 0 : v));
@@ -1000,10 +1003,10 @@ void mglCanvas::Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h)
 
 	long n=256, s = AddTexture(sch);
 	mglData v(n);
-	if(ac.d || Min.c*Max.c<=0)	v.Fill(Min.c,Max.c);
-	else if(Max.c>Min.c && Min.c>0)
+	if(ac.d || fa==0 || Min.c*Max.c<=0)	v.Fill(Min.c,Max.c);
+	else if(Min.c>0)
 	{	v.Fill(log(Min.c), log(Max.c));		v.Modify("exp(u)");		}
-	else if(Min.c<Max.c && Max.c<0)
+	else if(Max.c<0)
 	{	v.Fill(log(-Min.c), log(-Max.c));	v.Modify("-exp(u)");	}
 	mreal *c=new mreal[n];
 	for(long i=0;i<n;i++)	c[i] = GetC(s,v.a[i]);
@@ -1061,7 +1064,9 @@ void mglCanvas::colorbar(HCDT vv, const mreal *c, int where, mreal x, mreal y, m
 	set(MGL_DISABLE_SCALE);		// NOTE this make colorbar non-thread-safe!!!
 	x = s3*(2*x-1);	y = s3*(2*y-1);	w *= s3;	h *= s3;
 	mask = MGL_SOLID_MASK;
-	for(long i=0;i<n-1;i++)
+
+	const long kq = AllocPnts(n*2);
+	for(long i=0;i<n;i++)
 	{
 		mreal d = GetA(vv->v(i))*2-1;
 		p1 = p2 = mglPoint((ss*d+1)*w+x, (ss*d+1)*h+y, s3);
@@ -1072,18 +1077,11 @@ void mglCanvas::colorbar(HCDT vv, const mreal *c, int where, mreal x, mreal y, m
 			case 3:	p1.y = y;	p2.y = y+0.1*h;	break;
 			default:p1.x = x-0.1*w;	p2.x = x;	break;
 		}
-		long n1 = AddPnt(&M, p1,c[i]), n2 = AddPnt(&M, p2,c[i]);
-		d = GetA(vv->v(i+1))*2-1;
-		p1 = p2 = mglPoint((ss*d+1)*w+x, (ss*d+1)*h+y, s3);
-		switch(where)
-		{
-			case 1:	p1.x = x;	p2.x = x+0.1*w;	break;
-			case 2:	p1.y = y-0.1*h;	p2.y = y;	break;
-			case 3:	p1.y = y;	p2.y = y+0.1*h;	break;
-			default:p1.x = x-0.1*w;	p2.x = x;	break;
-		}
-		quad_plot(n1,n2, AddPnt(&M, p1,c[i]), AddPnt(&M, p2,c[i]));
+		AddPntQ(kq+i, &M, p1,c[i]);
+		AddPntQ(kq+i+n, &M, p2,c[i]);
 	}
+	for(long i=0;i<n-1;i++)	quad_plot(kq+i, kq+i+n, kq+i+1, kq+i+1+n);
+
 	if(n<64)
 	{
 		ac.txt.clear();
