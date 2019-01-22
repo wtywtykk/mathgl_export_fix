@@ -33,6 +33,8 @@
 5. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
 6. Flag to determine discontinuous surfaces in 'fsurf'
 
+7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
+
 ZZ. Update *.i for new functions {before release!!!}
 
 curve_draw: step?, bifurcation?, flow3d

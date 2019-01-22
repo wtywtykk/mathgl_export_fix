@@ -112,7 +112,8 @@ void mglCanvas::trig_pix(long i, long j, const mglPnt &p1, const mglPnt &p2, con
 	{	mglPoint nr(mglPoint(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z)^mglPoint(p3.x-p1.x,p3.y-p1.y,p3.z-p1.z));
 		p.u = nr.x;	p.v = nr.y;	p.w = nr.z;	}
 	unsigned char r[4];
-	if(r[3])	pnt_plot(i,j,p.z,col2int(p,r,d->ObjId),d->ObjId);
+	col2int(p,r,d->ObjId);
+	if(r[3])	pnt_plot(i,j,p.z,r,d->ObjId);
 }
 //-----------------------------------------------------------------------------
 void mglCanvas::line_pix(long i, long j, const mglPnt &p1, const mglPnt &p2, const mglDrawReg *dr)
