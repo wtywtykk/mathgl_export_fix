@@ -99,6 +99,7 @@ call mgl_delete_graph(gr);
 * Drawing in memory::
 * Draw and calculate::
 * Using QMathGL::
+* OpenGL output::
 * MathGL and PyQt::
 * MathGL and MPI::
 @end menu
@@ -475,7 +476,7 @@ int main(int argc,char **argv)
 
 @c ------------------------------------------------------------------
 @external{}
-@node Using QMathGL, MathGL and PyQt, Draw and calculate, Basic usage
+@node Using QMathGL, OpenGL output, Draw and calculate, Basic usage
 @subsection Using QMathGL
 @nav{}
 
@@ -512,9 +513,92 @@ int main(int argc,char **argv)
 }
 @end verbatim
 
+
+
 @c ------------------------------------------------------------------
 @external{}
-@node MathGL and PyQt, MathGL and MPI, Using QMathGL, Basic usage
+@node OpenGL output, MathGL and PyQt, Using QMathGL, Basic usage
+@subsection OpenGL output
+@nav{}
+
+MathGL have possibility to draw resulting plot using OpenGL. This produce resulting plot a bit faster, but with some limitations (especially at use of transparency and lighting). Generally, you need to prepare OpenGL window and call MathGL functions to draw it. There is GLUT interface (see @ref{Widget classes}) to do it by simple way. Below I show example of OpenGL usage basing on Qt libraries (i.e. by using @code{QGLWidget} widget).
+
+First, one need to define widget class derived from @code{QGLWidget} and implement a few methods: @code{resizeGL()} called after each window resize, @code{paintGL()} for displaying the image on the screen, and @code{initializeGL()} for initializing OpenGL. The header file looks as following.
+@verbatim
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QGLWidget>
+#include <mgl2/mgl.h>
+
+class MainWindow : public QGLWidget
+{
+  Q_OBJECT
+protected:
+  mglGraph *gr;         // pointer to MathGL core class
+  void resizeGL(int nWidth, int nHeight);   // Method called after each window resize
+  void paintGL();       // Method to display the image on the screen
+  void initializeGL();  // Method to initialize OpenGL
+public:
+  MainWindow(QWidget *parent = 0);
+  ~MainWindow();
+};
+#endif // MAINWINDOW_H
+@end verbatim
+
+The class implementation is rather straightforward. One need to recreate the instance of mglGraph at initializing OpenGL, and ask MathGL to use OpenGL output (set argument @code{1} in mglGraph constructor). Of course, the mglGraph object should be deleted at destruction. The method @code{resizeGL()} just pass new sizes to OpenGL and update viewport sizes. All plotting functions are located in the method @code{paintGL()}. At this, one need to add 2 calls: @code{gr->Clf()} at beginning for clearing previous OpenGL primitives; and @code{swapBuffers()} for showing output on the screen. The source file looks as following.
+@verbatim
+#include "qgl_example.h"
+#include <QApplication>
+//#include <QtOpenGL>
+//-----------------------------------------------------------------------------
+MainWindow::MainWindow(QWidget *parent) : QGLWidget(parent)	{	gr=0;	}
+//-----------------------------------------------------------------------------
+MainWindow::~MainWindow()	{	if(gr)	delete gr;	}
+//-----------------------------------------------------------------------------
+void MainWindow::initializeGL()	// recreate instance of MathGL core
+{
+	if(gr)	delete gr;
+	gr = new mglGraph(1);	// use '1' for argument to force OpenGL output in MathGL
+}
+//-----------------------------------------------------------------------------
+void MainWindow::resizeGL(int w, int h) // standard resize replace
+{
+	QGLWidget::resizeGL(w, h);
+	glViewport (0, 0, w, h);
+}
+//-----------------------------------------------------------------------------
+void MainWindow::paintGL()	// main drawing function
+{
+	gr->Clf();	// clear previous OpenGL primitives
+	gr->SubPlot(1,1,0);
+	gr->Rotate(40,60);
+	gr->Light(true);
+	gr->AddLight(0,mglPoint(0,0,10),mglPoint(0,0,-1));
+	gr->Axis();
+	gr->Box();
+	gr->FPlot("sin(pi*x)","i2");
+	gr->FPlot("cos(pi*x)","|");
+	gr->FSurf("cos(2*pi*(x^2+y^2))");
+	gr->Finish();
+	swapBuffers();	// show output on the screen
+}
+//-----------------------------------------------------------------------------
+int main(int argc, char *argv[])	// create application
+{
+	mgl_textdomain(argv?argv[0]:NULL,"");
+	QApplication a(argc, argv);
+	MainWindow w;
+	w.show();
+	return a.exec();
+}
+//-----------------------------------------------------------------------------
+@end verbatim
+
+
+@c ------------------------------------------------------------------
+@external{}
+@node MathGL and PyQt, MathGL and MPI, OpenGL output, Basic usage
 @subsection MathGL and PyQt
 @nav{}
 

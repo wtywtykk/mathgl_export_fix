@@ -84,14 +84,14 @@ int main(int argc, char *argv[])
 	bool e[10];
 	if(argc<3)    // if incorrect number of arguments then print the help
 	{
-		printf("Usage mgltask\n");
-		printf("  mgltask maskfile outputfile [min1:step1:max1] [min2:step2:max2]\n\n");
-		printf("  mask file  -- mask file in which all '$#' will be replaced by counter # value\n");
-		printf("                Here # = 0 is random number in [0,1].\n");
-		printf("                Here # = 1,2...9 is counter number.\n");
-		printf("  outputfile -- file where result will be saved\n");
-		printf("  min#:step#:max# -- is minimum, step increment and maximum values of counter #\n");
-		printf("  'e'min#:step#:max# -- the same but in exponential form 10^#\n");
+		printf("mgltask make output file with a set of copies of mask-file with repeatedly replaced $# by loop values. It useful for making set of initial conditions with a few parameters varied in specified range.\n");
+		printf("Usage:\tmgltask maskfile outputfile [min1:step1:max1] [min2:step2:max2]\n\n");
+		printf("\tmask file  -- mask file in which all '$#' will be replaced by counter # value\n");
+		printf("\t\tHere # = 0 is random number in [0,1].\n");
+		printf("\t\tHere # = 1,2...9 is counter number.\n");
+		printf("\toutputfile -- file where result will be saved\n");
+		printf("\tmin#:step#:max# -- is minimum, step increment and maximum values of counter #\n");
+		printf("\t'e'min#:step#:max# -- the same but in exponential form 10^#\n");
 //		system("PAUSE");
 		return 0;
 	}

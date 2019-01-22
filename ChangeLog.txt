@@ -1,4 +1,4 @@
-2.4.3 Released ??? November 2018
+2.4.3 Released 28 January 2019
 
 * Add 'clabel' command -- draw labels for colorbar. Should be used *after* drawing colorbar!
 * Extend 'ctick' command
@@ -14,6 +14,7 @@
 * Bypass user-specified extension in base font family name.
 * Improve hints in mgllab and udav.
 * Add utility 'mgltask' for making output file with a set of copies of mask-file. It useful for making set of initial conditions with a few parameters varied in specified range.
+* Add example of OpenGL output.
 * Bugfix for approximate min and max position.
 * Bugfix for position of SVG output.
 * Compatibility fixes for new versions of CMake, compilers and libraries.

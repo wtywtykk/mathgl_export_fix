@@ -53,11 +53,8 @@ Generally, MathGL is GPL library. However, you can use LGPL license for MathGL c
 @strong{Latest news}
 @itemize
 
-@item @strong{31 March 2018.}
-Bugfix version (v.2.4.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
-
-@item @strong{21 March 2018.}
-New version (v.2.4.2) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There area custom dialog for FLTK widgets (see @ref{Special comments}); display of execution @ref{progress}; new plots @ref{contp}, @ref{flow3}; style of plots @ref{cont}, @ref{flow}, @ref{tube}; change drawing for @ref{axis}, @ref{colorbar}; data handling (@ref{coil}) and setup (@ref{scaletext}, @ref{setup}) functions; modulo operation @samp{@code{%}} in formulas; automatic omit points for all curves; new section @ref{All samples} of documentation; speeding up and bugfixes.
+@item @strong{28 January 2018.}
+New version (v.2.4.3) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are new @ref{clabel} command for drawing colorbar labels, EPS output now may have @ref{mask}, compatibility changes for complex numbers, and many other improvements.
 
 @item @emph{17 May 2017.}
 New version (v.2.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are @code{mgllab} executable, string manipulation in MGL, new functions, plot types and styles, translation to Russian using @code{gettext} and bugfixes, which denoted @ref{News, here}.
@@ -79,6 +76,35 @@ Javascript interface was developed with support of @url{http://www.datadvance.ne
 @nav{}
 
 @itemize
+
+@item @strong{28 January 2019}
+New version (v.2.4.3) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
+@itemize @bullet
+
+@item Add @ref{clabel} command for drawing colorbar labels. Should be used @strong{after} drawing colorbar!
+@item Extend @ref{ctick} command.
+@item Add subpixel smoothing for @ref{mask}.
+@item Boxes around @ref{text} (style @samp{@@}) now use actual height and position of the text.
+@item Add mask to EPS export. Note, @ref{mask} angles are reduced to 45*(0,1,...7) degrees for decreasing pattern size in the EPS.
+@item Update default masks: @samp{*} become dot, @samp{^} become bricks, @samp{d} become plus, @samp{D} become tacks, @samp{;} and @samp{j} change lengths. Note, you can use @code{brush.ods} to prepare user-defined masks.
+@item Add styles @samp{^} and @samp{_} for command @ref{smooth} to find upper/lower bound of the data.
+@item Improve @code{FlowP()} to draw both branches (in positive and negative time direction).
+@item Improve CGI interface and update website.
+@item Introduce struct @code{mdual} as interface for C and C++ complex numbers. It is implicitly converted to @code{std::complex<>} in C++. And need to call @code{c2mdual()} and @code{mdual2c()} in pure C. However @code{mdual} is binary compatible with C @code{_Complex} numbers.
+@item Add flag in CMake to manually disable support of C99 complex numbers.
+@item Bypass user-specified extension in base font family name.
+@item Improve hints in @code{mgllab} and @code{udav}.
+@item Add utility @code{mgltask} for making output file with a set of copies of mask-file. It useful for making set of initial conditions with a few parameters varied in specified range.
+@item Add example of @ref{OpenGL output}.
+@item Bugfix for approximate min and max position.
+@item Bugfix for position of SVG output.
+@item Compatibility fixes for new versions of CMake, compilers and libraries.
+
+@strong{INCOMPATIBLE:}
+@item Formally pure C interface handle complex numbers by new way due to strict following of C/C++ standards. However, the MathGL library is binary compatible with previous version(s).
+
+@end itemize
+
 
 @item @strong{31 March 2018.}
 Bugfix version (v.2.4.2.1) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.

@@ -81,7 +81,6 @@ D. Docs about JS interface
 	
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
-6. Example with qgl_example.cpp
 
 ZZ. Update time.texi {before release!!!}
 
