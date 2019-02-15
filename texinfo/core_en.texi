@@ -921,6 +921,9 @@ Set the ticks step, number of sub-ticks and initial ticks position to be the mos
 @deftypefn {MGL command} {} xtick @code{val [sub=0 org=nan 'fact'='']}
 @deftypefnx {MGL command} {} ytick @code{val [sub=0 org=nan 'fact'='']}
 @deftypefnx {MGL command} {} ztick @code{val [sub=0 org=nan 'fact'='']}
+@deftypefnx {MGL command} {} xtick @code{val sub ['fact'='']}
+@deftypefnx {MGL command} {} ytick @code{val sub ['fact'='']}
+@deftypefnx {MGL command} {} ztick @code{val sub ['fact'='']}
 @deftypefnx {MGL command} {} ctick @code{val ['fact'='']}
 @ifclear UDAV
 @deftypefnx {Method on @code{mglGraph}} @code{void} SetTicks (@code{char} dir, @code{mreal} d=@code{0}, @code{int} ns=@code{0}, @code{mreal} org=@code{NAN}, @code{const char *}fact=@code{""})

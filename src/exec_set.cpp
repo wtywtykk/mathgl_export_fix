@@ -855,12 +855,12 @@ mglCommand mgls_set_cmd[] = {
 	{"view",_("Change view angles - use 'rotate' for plot rotation"),"view tetz tetx [tety]", mgls_view ,5},
 	{"write",_("Write current image to graphical file"),"write ['fname']", mgls_write ,2},
 	{"xrange",_("Set range for x-axis"),"xrange Dat [add]|x1 x2 [add]", mgls_xrange ,14},
-	{"xtick",_("Set ticks for x-axis"),"xtick dx ['factor']|dx sx ['factor']|dx sx tx ['factor']|'tmpl'|Xdat 'lbl' [add]|v1 'lbl1' ...", mgls_xtick,14},
+	{"xtick",_("Set ticks for x-axis"),"xtick dx sx ['factor']|dx sx tx ['factor']|'tmpl'|Xdat 'lbl' [add]|v1 'lbl1' ...", mgls_xtick,14},
 	{"yrange",_("Set range for y-axis"),"yrange Dat [add]|y1 y2 [add]", mgls_yrange,14},
-	{"ytick",_("Set ticks for y-axis"),"ytick dy ['factor']|dy sy ['factor']|dy sy ty ['factor']|'tmpl'|Ydat 'lbl' [add]|v1 'lbl1' ...", mgls_ytick,14},
+	{"ytick",_("Set ticks for y-axis"),"ytick dy sy ['factor']|dy sy ty ['factor']|'tmpl'|Ydat 'lbl' [add]|v1 'lbl1' ...", mgls_ytick,14},
 	{"zoom",_("Zoom plot region"),"zoom x1 x2 y1 y2", mgls_zoom,5},
 	{"zoomaxis",_("Zoom axis range"),"zoomaxis x1 x2|x1 y1 x2 y2|x1 y1 z1 x2 y2 z2|x1 y1 z1 c1 x2 y2 z2 c2", mgls_zoomaxis,14},
 	{"zrange",_("Set range for z-axis"),"yrange Dat [add]|z1 z2 [add]", mgls_zrange ,14},
-	{"ztick",_("Set ticks for z-axis"),"ztick dz ['factor']|dz sz ['factor']|dz sz tz ['factor']|'tmpl'|Zdat 'lbl' [add]|v1 'lbl1' ...", mgls_ztick,14},
+	{"ztick",_("Set ticks for z-axis"),"ztick dz sz ['factor']|dz sz tz ['factor']|'tmpl'|Zdat 'lbl' [add]|v1 'lbl1' ...", mgls_ztick,14},
 {"","","",NULL,0}};
 //-----------------------------------------------------------------------------

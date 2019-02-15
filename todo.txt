@@ -34,6 +34,7 @@
 6. Flag to determine discontinuous surfaces in 'fsurf'
 
 7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
+8. Check title & rasterize
 
 ZZ. Update *.i for new functions {before release!!!}
 

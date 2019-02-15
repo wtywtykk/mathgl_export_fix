@@ -921,6 +921,9 @@ Ternary -- специальный тип графика для 3 зависим�
 @deftypefn {Команда MGL} {} xtick @code{val [sub=0 org=nan 'fact'='']}
 @deftypefnx {Команда MGL} {} ytick @code{val [sub=0 org=nan 'fact'='']}
 @deftypefnx {Команда MGL} {} ztick @code{val [sub=0 org=nan 'fact'='']}
+@deftypefnx {Команда MGL} {} xtick @code{val sub ['fact'='']}
+@deftypefnx {Команда MGL} {} ytick @code{val sub ['fact'='']}
+@deftypefnx {Команда MGL} {} ztick @code{val sub ['fact'='']}
 @deftypefnx {Команда MGL} {} ctick @code{val ['fact'='']}
 @ifclear UDAV
 @deftypefnx {Метод класса @code{mglGraph}} @code{void} SetTicks (@code{char} dir, @code{mreal} d=@code{0}, @code{int} ns=@code{0}, @code{mreal} org=@code{NAN}, @code{const char *}fact=@code{""})
