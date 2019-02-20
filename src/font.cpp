@@ -436,7 +436,7 @@ float mglFont::Puts(const unsigned *text, float x,float y,float f,int style,floa
 			Puts(b1, x+(ww-w1)/2, yy, ff, (st&(~MGL_FONT_OLINE)&(~MGL_FONT_ULINE)), ccol,ccol, h1,h2);
 			MGL_USE_H12
 			Puts(b2, x+(ww-w2)/2, yy-175*ff/fact[a], ff/3, (st&(~MGL_FONT_OLINE)&(~MGL_FONT_ULINE)), ccol,ccol, h1,h2);
-			MGL_USE_H12(-175/fact[a]);
+			MGL_USE_H12
 			if(gr && !(style&0x10))	// add under-/over- line now
 				draw_ouline(st,x,y,f,fact[a],ww,ccol);
 			MGL_CLEAR_STYLE

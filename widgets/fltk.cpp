@@ -769,7 +769,7 @@ void static mgl_sshow_cb(Fl_Widget *, void *v)
 	if(e->is_sshow())	Fl::add_timeout(e->delay(e->par), mgl_time_cb, v);
 }
 void mglCanvasFL::Animation()	{	mgl_sshow_cb(0,mgl);	}
-void MGL_LOCAL_CONST mgl_no_cb(Fl_Widget *, void *)	{}
+void MGL_NO_EXPORT mgl_no_cb(Fl_Widget *, void *)	{}
 //-----------------------------------------------------------------------------
 void static mgl_stop_cb(Fl_Widget*, void* v)
 {

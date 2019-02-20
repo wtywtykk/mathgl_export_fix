@@ -77,7 +77,7 @@ struct MGL_EXPORT mglDrawReg
 	{	PDef = p.n3;	pPos = p.s;	ObjId = p.id;	PenWidth=p.w;	angle = p.angl;
 		if(p.type==2 || p.type==3) PDef = p.m;	}
 	inline const mglDrawReg &operator=(const mglDrawReg &aa)
-	{	memcpy(this,&aa,sizeof(mglDrawReg));	return aa;	}
+	{	PDef=aa.PDef;	angle=aa.angle;	ObjId=aa.ObjId;	PenWidth=aa.PenWidth;	pPos=aa.pPos;	x1=aa.x1;	x2=aa.x2;	y1=aa.y1;	y2=aa.y2;	return aa;	}
 	union
 	{
 		uint64_t PDef;

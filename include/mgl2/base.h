@@ -156,7 +156,8 @@ struct MGL_EXPORT mglPrim	// NOTE: use float for reducing memory size
 	mglPrim():n1(0),n2(0),n3(0),n4(0),type(0),angl(0),id(0),z(0),w(0),m(0)	{}
 	explicit mglPrim(int t):n1(0),n2(0),n3(0),n4(0),type(t),angl(0),id(0),z(0),w(0),m(0)	{}
 	mglPrim(const mglPrim &aa) : n1(aa.n1),n2(aa.n2),n3(aa.n3),n4(aa.n4),type(aa.type),angl(aa.angl),id(aa.id),z(aa.z),w(aa.w),m(aa.m) 	{}
-	const mglPrim &operator=(const mglPrim &aa)	{	memcpy(this, &aa, sizeof(mglPrim));	return aa;	}
+	const mglPrim &operator=(const mglPrim &aa)
+	{	n1=aa.n1;	n2=aa.n2;	n3=aa.n3;	n4=aa.n4;	type=aa.type;	angl=aa.angl;	id=aa.id;	z=aa.z;	w=aa.w;	m=aa.m;	return aa;	}
 };
 bool operator<(const mglPrim &a,const mglPrim &b);
 bool operator>(const mglPrim &a,const mglPrim &b);
@@ -167,7 +168,7 @@ struct MGL_EXPORT mglLight
 	mglLight():a(0),b(0),n(false)	{}
 	mglLight(const mglLight &aa) : d(aa.d),r(aa.r),q(aa.q),p(aa.p),c(aa.c),a(aa.a),b(aa.b),n(aa.n)	{}
 	const mglLight &operator=(const mglLight &aa)
-	{	memcpy(this,&aa,sizeof(mglLight));	return aa;	}
+	{	d=aa.d;	r=aa.r;	q=aa.q;	p=aa.p;	c=aa.c;	a=aa.a;	b=aa.b;	n=aa.n;	return aa;	}
 
 	mglPoint d;		///< Direction of light sources
 	mglPoint r;		///< Position of light sources (NAN for infinity)
@@ -192,7 +193,9 @@ struct MGL_EXPORT mglBlock
 
 	mglBlock():n1(0),n2(0),n3(0),n4(0),AmbBr(0.5),DifBr(0.5),id(0)	{}
 	mglBlock(const mglBlock &aa)	{	memcpy(this, &aa, sizeof(mglBlock));	}
-	const mglBlock &operator=(const mglBlock &aa)	{	memcpy(this, &aa, sizeof(mglBlock));	return aa;	}
+	const mglBlock &operator=(const mglBlock &aa)
+	{	n1=aa.n1;	n2=aa.n2;	n3=aa.n3;	n4=aa.n4;	for(int i=0;i<10;i++)	light[i]=aa.light[i];
+		AmbBr=aa.AmbBr;	DifBr=aa.DifBr;	B=aa.B;	id=aa.id;	return aa;	}
 };
 //-----------------------------------------------------------------------------
 /// Structure for group of primitives

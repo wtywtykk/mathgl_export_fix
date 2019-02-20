@@ -346,8 +346,8 @@ typedef cmdual mdual;
 	#else
 		typedef float _Complex dual;
 	#endif
-	dual mdual2c(cmdual c);
-	cmdual c2mdual(dual c);
+	MGL_EXPORT dual mdual2c(cmdual c);
+	MGL_EXPORT cmdual c2mdual(dual c);
 #endif
 #endif
 //-----------------------------------------------------------------------------
