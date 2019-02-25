@@ -124,21 +124,24 @@ void MGL_EXPORT mgl_flow3_(uintptr_t *gr, uintptr_t *ax, uintptr_t *ay, uintptr_
 /// Plot flow from point p for vector field {ax,ay} parametrically depended on coordinate {x,y} with color proportional to |a|
 /** String \a sch may contain:
  * color scheme: up-half (warm) corresponds to normal flow (like attractor), bottom-half (cold) corresponds to inverse flow (like source);
- * ‘#’ for starting threads from edges only;
+ * ‘>’ for drawing in forward direction only;
+ * ‘<’ for drawing in backward direction only;
  * ‘v’ for drawing arrows on the threads. */
 void MGL_EXPORT mgl_flowp_xy(HMGL gr, double x0, double y0, double z0, HCDT x, HCDT y, HCDT ax, HCDT ay, const char *sch, const char *opt);
 void MGL_EXPORT mgl_flowp_xy_(uintptr_t *gr, mreal *x0, mreal *y0, mreal *z0, uintptr_t *x, uintptr_t *y, uintptr_t *ax, uintptr_t *ay, const char *sch, const char *opt,int, int);
 /// Plot flow from point p for vector field {ax,ay} with color proportional to |a|
 /** String \a sch may contain:
  * color scheme: up-half (warm) corresponds to normal flow (like attractor), bottom-half (cold) corresponds to inverse flow (like source);
- * ‘#’ for starting threads from edges only;
+ * ‘>’ for drawing in forward direction only;
+ * ‘<’ for drawing in backward direction only;
  * ‘v’ for drawing arrows on the threads. */
 void MGL_EXPORT mgl_flowp_2d(HMGL gr, double x0, double y0, double z0, HCDT ax, HCDT ay, const char *sch, const char *opt);
 void MGL_EXPORT mgl_flowp_2d_(uintptr_t *gr, mreal *x0, mreal *y0, mreal *z0, uintptr_t *ax, uintptr_t *ay, const char *sch, const char *opt,int, int);
 /// Plot flow from point p for vector field {ax,ay,az} parametrically depended on coordinate {x,y,z} with color proportional to |a|
 /** String \a sch may contain:
  * color scheme: up-half (warm) corresponds to normal flow (like attractor), bottom-half (cold) corresponds to inverse flow (like source);
- * ‘#’ for starting threads from edges only;
+ * ‘>’ for drawing in forward direction only;
+ * ‘<’ for drawing in backward direction only;
  * ‘v’ for drawing arrows on the threads;
  * ‘x’, ‘z’ for drawing tapes of normals in x-y and y-z planes correspondingly. */
 void MGL_EXPORT mgl_flowp_xyz(HMGL gr, double x0, double y0, double z0, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay, HCDT az, const char *sch, const char *opt);
@@ -146,7 +149,8 @@ void MGL_EXPORT mgl_flowp_xyz_(uintptr_t *gr, mreal *x0, mreal *y0, mreal *z0, u
 /// Plot flow from point p for vector field {ax,ay,az} with color proportional to |a|
 /** String \a sch may contain:
  * color scheme: up-half (warm) corresponds to normal flow (like attractor), bottom-half (cold) corresponds to inverse flow (like source);
- * ‘#’ for starting threads from edges only;
+ * ‘>’ for drawing in forward direction only;
+ * ‘<’ for drawing in backward direction only;
  * ‘v’ for drawing arrows on the threads;
  * ‘x’, ‘z’ for drawing tapes of normals in x-y and y-z planes correspondingly. */
 void MGL_EXPORT mgl_flowp_3d(HMGL gr, double x0, double y0, double z0, HCDT ax, HCDT ay, HCDT az, const char *sch, const char *opt);

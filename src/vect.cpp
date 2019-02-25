@@ -743,6 +743,9 @@ void MGL_EXPORT mgl_flowp_xy(HMGL gr, double x0, double y0, double z0, HCDT x, H
 	long n=ax->GetNx(), m=ax->GetNy();
 	bool nboth = x->GetNx()*x->GetNy()!=n*m || y->GetNx()*y->GetNy()!=n*m;
 	if(mgl_check_dim2(gr,x,y,ax,ay,"FlowP"))	return;
+	bool forward=true, backward=true;
+	if(mglchr(sch,'<'))	{	forward=false;	backward=true;	}
+	if(mglchr(sch,'>'))	{	forward=true;	backward=false;	}
 
 	gr->SaveState(opt);
 	static int cgid=1;	gr->StartGroup("FlowP",cgid++);
@@ -787,8 +790,8 @@ void MGL_EXPORT mgl_flowp_xy(HMGL gr, double x0, double y0, double z0, HCDT x, H
 			v = (j0-(dxu*dy-dx*dyu)/d)/m;
 		}
 	}
-	flow(gr, z0, u, v, x, y, ax, ay,ss,vv);
-	flow(gr, z0,-u,-v, x, y, ax, ay,ss,vv);
+	if(forward)		flow(gr, z0, u, v, x, y, ax, ay,ss,vv);
+	if(backward)	flow(gr, z0,-u,-v, x, y, ax, ay,ss,vv);
 	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------
@@ -1111,6 +1114,9 @@ void MGL_EXPORT mgl_flowp_xyz(HMGL gr, double x0, double y0, double z0, HCDT x, 
 	gr->SetPenPal("-");
 	long ss = gr->AddTexture(sch);
 	bool vv = mglchr(sch,'v'), xo = mglchr(sch,'x'), zo = mglchr(sch,'z');
+	bool forward=true, backward=true;
+	if(mglchr(sch,'<'))	{	forward=false;	backward=true;	}
+	if(mglchr(sch,'>'))	{	forward=true;	backward=false;	}
 
 	// find coordinates u, v, w
 	mreal dm=INFINITY;
@@ -1157,8 +1163,8 @@ void MGL_EXPORT mgl_flowp_xyz(HMGL gr, double x0, double y0, double z0, HCDT x, 
 			w = (i0+(dx*(dyv*dzu-dyu*dzv)+dxu*(dy*dzv-dyv*dz)+dxv*(dyu*dz-dy*dzu))/d)/l;
 		}
 	}
-	flow(gr, u, v, w, x, y, z, ax, ay, az,ss,vv,xo,zo);
-	flow(gr,-u,-v,-w, x, y, z, ax, ay, az,ss,vv,xo,zo);
+	if(forward)		flow(gr, u, v, w, x, y, z, ax, ay, az,ss,vv,xo,zo);
+	if(backward)	flow(gr,-u,-v,-w, x, y, z, ax, ay, az,ss,vv,xo,zo);
 	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------

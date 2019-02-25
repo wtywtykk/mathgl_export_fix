@@ -3413,7 +3413,7 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefnx {Функция С} @code{void} mgl_flowp_2d (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{HCDT} ax, @code{HCDT} ay, @code{const char *}sch, @code{const char *}opt)
 @deftypefnx {Функция С} @code{void} mgl_flowp_xy (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{HCDT} x, @code{HCDT} y, @code{HCDT} ax, @code{HCDT} ay, @code{const char *}sch, @code{const char *}opt)
 @end ifclear
-Аналогично @ref{flow}, но рисует одну нить из точки @var{p0}=@{@var{x0},@var{y0},@var{z0}@}.
+Аналогично @ref{flow}, но рисует одну нить из точки @var{p0}=@{@var{x0},@var{y0},@var{z0}@}. Строка @var{sch} также может содержать: @samp{>} или @samp{<} для рисования линии тока только вперед или только назад от заданной точки (по умолчанию, рисует в обе стороны).
 @end deftypefn
 
 @deftypefn {Команда MGL} {} flow @code{x0 y0 z0} udat vdat wdat ['sch'='']

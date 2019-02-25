@@ -3444,7 +3444,7 @@ This is 3D version of the first functions. Here arrays @var{ax}, @var{ay}, @var{
 @deftypefnx {C function} @code{void} mgl_flowp_2d (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{HCDT} ax, @code{HCDT} ay, @code{const char *}sch, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_flowp_xy (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{HCDT} x, @code{HCDT} y, @code{HCDT} ax, @code{HCDT} ay, @code{const char *}sch, @code{const char *}opt)
 @end ifclear
-The same as first one (@ref{flow}) but draws single flow thread starting from point @var{p0}=@{@var{x0},@var{y0},@var{z0}@}.
+The same as first one (@ref{flow}) but draws single flow thread starting from point @var{p0}=@{@var{x0},@var{y0},@var{z0}@}. String @var{sch} may also contain: @samp{>} or @samp{<} for drawing in forward or backward direction only (default is both).
 @end deftypefn
 
 @deftypefn {MGL command} {} flow @code{x0 y0 z0} udat vdat wdat ['sch'='']
