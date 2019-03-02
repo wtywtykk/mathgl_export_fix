@@ -162,13 +162,13 @@ static void *mgl_smth_x(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-		{
-			long j = i%nx;
-			if(j-kind<0)	j = i+kind-j;
-			else if(j+kind>nx-1)	j = i+nx-1-j-kind;
-			else	j=i;
-			for(long k=-kind;k<=kind;k++)	b[i] += a[j+k]/(2*kind+1);
-		}
+			if(mgl_isnum(a[i]))	// bypass NAN values
+			{
+				long j = i%nx, nk = 2*kind+1;
+				for(long k=-kind;k<=kind;k++)
+					if(j+k>=0 && j+k<nx && mgl_isnum(a[i+k])) b[i] += a[i+k];	else nk--;
+				b[i] /= nk;
+			}	else	b[i] = a[i];
 	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
@@ -222,13 +222,13 @@ static void *mgl_smth_y(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-		{
-			long j = (i/nx)%ny;
-			if(j-kind<0)	j = i+(kind-j)*nx;
-			else if(j+kind>ny-1)	j = i+(ny-1-j-kind)*nx;
-			else	j=i;
-			for(long k=-kind;k<=kind;k++)	b[i] += a[j+k*nx]/(2*kind+1);
-		}
+			if(mgl_isnum(a[i]))	// bypass NAN values
+			{
+				long j = (i/nx)%ny, nk = 2*kind+1;
+				for(long k=-kind;k<=kind;k++)
+					if(j+k>=0 && j+k<ny && mgl_isnum(a[i+k*nx])) b[i] += a[i+k*nx];	else nk--;
+				b[i] /= nk;
+			}	else	b[i] = a[i];
 	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
@@ -282,13 +282,13 @@ static void *mgl_smth_z(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-		{
-			long j = i/nn;
-			if(j-kind<0)	j = i+(kind-j)*nn;
-			else if(j+kind>nz-1)	j = i+(nz-1-j-kind)*nn;
-			else	j=i;
-			for(long k=-kind;k<=kind;k++)	b[i] += a[j+k*nn]/(2*kind+1);
-		}
+			if(mgl_isnum(a[i]))	// bypass NAN values
+			{
+				long j = i/nn, nk = 2*kind+1;
+				for(long k=-kind;k<=kind;k++)
+					if(j+k>=0 && j+k<nz && mgl_isnum(a[i+k*nn])) b[i] += a[i+k*nn];	else nk--;
+				b[i] /= nk;
+			}	else	b[i] = a[i];
 	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for

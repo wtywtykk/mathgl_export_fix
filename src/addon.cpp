@@ -234,10 +234,10 @@ void MGL_EXPORT mgl_difr_axial_old(dual *a,int n,int step,dual q,int Border,dual
 				b[n-1] = b[n-4] + mreal(3)*(b[n-2]-b[n-3]);
 				break;
 			case -1:		// exponent at border
-				b[n-1] = norm(b[n-3])<norm(b[n-2]) ? b[n-2] : b[n-2]*b[n-2]/b[n-3];
+				b[n-1] = norm(b[n-3])>norm(b[n-2]) ? b[n-2]*b[n-2]/b[n-3] : mreal(2)*b[n-2]-b[n-3];
 				break;
 			case -2:		// gaussian at border
-				b[n-1] = norm(b[n-3])<norm(b[n-2]) ? b[n-4] : pow(b[n-2]/b[n-3],3)*b[n-4];
+				b[n-1] = norm(b[n-3])>norm(b[n-2]) ? pow(b[n-2]/b[n-3],3)*b[n-4] : b[n-4] + mreal(3)*(b[n-2]-b[n-3]);
 				break;
 		}
 	}
