@@ -1,4 +1,4 @@
-2.4.3 Released 28 January 2019
+2.4.3 Released 14 March 2019
 
 * Add 'clabel' command -- draw labels for colorbar. Should be used *after* drawing colorbar!
 * Extend 'ctick' command
