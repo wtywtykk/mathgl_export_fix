@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for MathGL (version 2.4.2), a collection of classes and routines for scientific plotting. Please report any errors in this manual to mathgl.abalakin@gmail.org.
+<!-- This manual is for MathGL (version 2.4.3), a collection of classes and routines for scientific plotting. Please report any errors in this manual to mathgl.abalakin@gmail.org.
 
 Copyright (C) 2008-2012 Alexey A. Balakin.
 
@@ -12,12 +12,12 @@ Texts.  A copy of the license is included in the section entitled "GNU
 Free Documentation License."
  -->
 <!-- Created by GNU Texinfo 6.5, http://www.gnu.org/software/texinfo/ -->
-<head>
+<head><link rel="stylesheet" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>MathGL 2.4.2</title>
+<title>MathGL 2.4.3</title>
 
-<meta name="description" content="MathGL 2.4.2">
-<meta name="keywords" content="MathGL 2.4.2">
+<meta name="description" content="MathGL 2.4.3">
+<meta name="keywords" content="MathGL 2.4.3">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="texi2any">
@@ -56,8 +56,8 @@ ul.no-bullet {list-style: none}
 
 </head>
 
-<body lang="en">
-<h1 class="settitle" align="center">MathGL 2.4.2</h1>
+<body lang="en"><div class="topnav" id="myTopnav"></div><div class="main">
+<h1 class="settitle" align="center">MathGL 2.4.3</h1>
 
 
 
@@ -88,8 +88,9 @@ ul.no-bullet {list-style: none}
       <li><a name="toc-Drawing-in-memory-1" href="#Drawing-in-memory">2.1.4 Drawing in memory</a></li>
       <li><a name="toc-Draw-and-calculate-1" href="#Draw-and-calculate">2.1.5 Draw and calculate</a></li>
       <li><a name="toc-Using-QMathGL-1" href="#Using-QMathGL">2.1.6 Using QMathGL</a></li>
-      <li><a name="toc-MathGL-and-PyQt-1" href="#MathGL-and-PyQt">2.1.7 MathGL and PyQt</a></li>
-      <li><a name="toc-MathGL-and-MPI-1" href="#MathGL-and-MPI">2.1.8 MathGL and MPI</a></li>
+      <li><a name="toc-OpenGL-output-1" href="#OpenGL-output">2.1.7 OpenGL output</a></li>
+      <li><a name="toc-MathGL-and-PyQt-1" href="#MathGL-and-PyQt">2.1.8 MathGL and PyQt</a></li>
+      <li><a name="toc-MathGL-and-MPI-1" href="#MathGL-and-MPI">2.1.9 MathGL and MPI</a></li>
     </ul></li>
     <li><a name="toc-Advanced-usage-1" href="#Advanced-usage">2.2 Advanced usage</a>
     <ul class="no-bullet">
@@ -414,7 +415,7 @@ Next: <a href="#Overview" accesskey="n" rel="next">Overview</a>, Up: <a href="di
 <a name="MathGL"></a>
 <h1 class="top">MathGL</h1>
 
-<p>This file documents the Mathematical Graphic Library (MathGL), a collection of classes and routines for scientific plotting. It corresponds to release 2.4.2 of the library. Please report any errors in this manual to <a href="mailto:mathgl.abalakin@gmail.org">mathgl.abalakin@gmail.org</a>. More information about MathGL can be found at the project homepage, <a href="http://mathgl.sourceforge.net/">http://mathgl.sourceforge.net/</a>.
+<p>This file documents the Mathematical Graphic Library (MathGL), a collection of classes and routines for scientific plotting. It corresponds to release 2.4.3 of the library. Please report any errors in this manual to <a href="mailto:mathgl.abalakin@gmail.org">mathgl.abalakin@gmail.org</a>. More information about MathGL can be found at the project homepage, <a href="http://mathgl.sourceforge.net/">http://mathgl.sourceforge.net/</a>.
 </p>
 <p>Copyright &copy; 2008-2012 Alexey A. Balakin.
 </p>
@@ -517,7 +518,7 @@ Next: <a href="#MathGL-features" accesskey="n" rel="next">MathGL features</a>, U
 
 <p>A code for making high-quality scientific graphics under Linux and Windows. A  code for the fast handling and plotting of large data arrays. A code for working in window and console regimes and for easy including into another program. A code with large and renewal set of graphics. Exactly such a code I tried to put in MathGL library.
 </p>
-<p>At this version (2.4.2) MathGL has more than 50 general types of graphics for 1d, 2d and 3d data arrays. It can export graphics to bitmap and vector (EPS or SVG) files. It has OpenGL interface and can be used from console programs. It has functions for data handling and script MGL language for simplification of data plotting. It also has several types of transparency and smoothed lighting, vector fonts and TeX-like symbol parsing, arbitrary curvilinear coordinate system and many other useful things (see pictures section at <a href="http://mathgl.sf.net/">homepage</a>). Finally it is platform-independent and free (under GPL v.2.0 or later license).
+<p>At this version (2.4.3) MathGL has more than 50 general types of graphics for 1d, 2d and 3d data arrays. It can export graphics to bitmap and vector (EPS or SVG) files. It has OpenGL interface and can be used from console programs. It has functions for data handling and script MGL language for simplification of data plotting. It also has several types of transparency and smoothed lighting, vector fonts and TeX-like symbol parsing, arbitrary curvilinear coordinate system and many other useful things (see pictures section at <a href="http://mathgl.sf.net/">homepage</a>). Finally it is platform-independent and free (under GPL v.2.0 or later license).
 </p>
 
 <hr>
@@ -835,9 +836,11 @@ Next: <a href="#Advanced-usage" accesskey="n" rel="next">Advanced usage</a>, Up:
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Using-QMathGL" accesskey="6">Using QMathGL</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#MathGL-and-PyQt" accesskey="7">MathGL and PyQt</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#OpenGL-output" accesskey="7">OpenGL output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#MathGL-and-MPI" accesskey="8">MathGL and MPI</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#MathGL-and-PyQt" accesskey="8">MathGL and PyQt</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#MathGL-and-MPI" accesskey="9">MathGL and MPI</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 </table>
 
@@ -1202,7 +1205,7 @@ int main(int argc,char **argv)
 <a name="Using-QMathGL"></a>
 <div class="header">
 <p>
-Next: <a href="#MathGL-and-PyQt" accesskey="n" rel="next">MathGL and PyQt</a>, Previous: <a href="#Draw-and-calculate" accesskey="p" rel="prev">Draw and calculate</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#OpenGL-output" accesskey="n" rel="next">OpenGL output</a>, Previous: <a href="#Draw-and-calculate" accesskey="p" rel="prev">Draw and calculate</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="Using-QMathGL-1"></a>
 <h4 class="subsection">2.1.6 Using QMathGL</h4>
@@ -1241,13 +1244,95 @@ int main(int argc,char **argv)
 </pre>
 
 <hr>
+<a name="OpenGL-output"></a>
+<div class="header">
+<p>
+Next: <a href="#MathGL-and-PyQt" accesskey="n" rel="next">MathGL and PyQt</a>, Previous: <a href="#Using-QMathGL" accesskey="p" rel="prev">Using QMathGL</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="OpenGL-output-1"></a>
+<h4 class="subsection">2.1.7 OpenGL output</h4>
+
+
+<p>MathGL have possibility to draw resulting plot using OpenGL. This produce resulting plot a bit faster, but with some limitations (especially at use of transparency and lighting). Generally, you need to prepare OpenGL window and call MathGL functions to draw it. There is GLUT interface (see <a href="#Widget-classes">Widget classes</a>) to do it by simple way. Below I show example of OpenGL usage basing on Qt libraries (i.e. by using <code>QGLWidget</code> widget).
+</p>
+<p>First, one need to define widget class derived from <code>QGLWidget</code> and implement a few methods: <code>resizeGL()</code> called after each window resize, <code>paintGL()</code> for displaying the image on the screen, and <code>initializeGL()</code> for initializing OpenGL. The header file looks as following.
+</p><pre class="verbatim">#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include &lt;QGLWidget&gt;
+#include &lt;mgl2/mgl.h&gt;
+
+class MainWindow : public QGLWidget
+{
+  Q_OBJECT
+protected:
+  mglGraph *gr;         // pointer to MathGL core class
+  void resizeGL(int nWidth, int nHeight);   // Method called after each window resize
+  void paintGL();       // Method to display the image on the screen
+  void initializeGL();  // Method to initialize OpenGL
+public:
+  MainWindow(QWidget *parent = 0);
+  ~MainWindow();
+};
+#endif // MAINWINDOW_H
+</pre>
+<p>The class implementation is rather straightforward. One need to recreate the instance of mglGraph at initializing OpenGL, and ask MathGL to use OpenGL output (set argument <code>1</code> in mglGraph constructor). Of course, the mglGraph object should be deleted at destruction. The method <code>resizeGL()</code> just pass new sizes to OpenGL and update viewport sizes. All plotting functions are located in the method <code>paintGL()</code>. At this, one need to add 2 calls: <code>gr-&gt;Clf()</code> at beginning for clearing previous OpenGL primitives; and <code>swapBuffers()</code> for showing output on the screen. The source file looks as following.
+</p><pre class="verbatim">#include &quot;qgl_example.h&quot;
+#include &lt;QApplication&gt;
+//#include &lt;QtOpenGL&gt;
+//-----------------------------------------------------------------------------
+MainWindow::MainWindow(QWidget *parent) : QGLWidget(parent)	{	gr=0;	}
+//-----------------------------------------------------------------------------
+MainWindow::~MainWindow()	{	if(gr)	delete gr;	}
+//-----------------------------------------------------------------------------
+void MainWindow::initializeGL()	// recreate instance of MathGL core
+{
+	if(gr)	delete gr;
+	gr = new mglGraph(1);	// use '1' for argument to force OpenGL output in MathGL
+}
+//-----------------------------------------------------------------------------
+void MainWindow::resizeGL(int w, int h) // standard resize replace
+{
+	QGLWidget::resizeGL(w, h);
+	glViewport (0, 0, w, h);
+}
+//-----------------------------------------------------------------------------
+void MainWindow::paintGL()	// main drawing function
+{
+	gr-&gt;Clf();	// clear previous OpenGL primitives
+	gr-&gt;SubPlot(1,1,0);
+	gr-&gt;Rotate(40,60);
+	gr-&gt;Light(true);
+	gr-&gt;AddLight(0,mglPoint(0,0,10),mglPoint(0,0,-1));
+	gr-&gt;Axis();
+	gr-&gt;Box();
+	gr-&gt;FPlot(&quot;sin(pi*x)&quot;,&quot;i2&quot;);
+	gr-&gt;FPlot(&quot;cos(pi*x)&quot;,&quot;|&quot;);
+	gr-&gt;FSurf(&quot;cos(2*pi*(x^2+y^2))&quot;);
+	gr-&gt;Finish();
+	swapBuffers();	// show output on the screen
+}
+//-----------------------------------------------------------------------------
+int main(int argc, char *argv[])	// create application
+{
+	mgl_textdomain(argv?argv[0]:NULL,&quot;&quot;);
+	QApplication a(argc, argv);
+	MainWindow w;
+	w.show();
+	return a.exec();
+}
+//-----------------------------------------------------------------------------
+</pre>
+
+
+<hr>
 <a name="MathGL-and-PyQt"></a>
 <div class="header">
 <p>
-Next: <a href="#MathGL-and-MPI" accesskey="n" rel="next">MathGL and MPI</a>, Previous: <a href="#Using-QMathGL" accesskey="p" rel="prev">Using QMathGL</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#MathGL-and-MPI" accesskey="n" rel="next">MathGL and MPI</a>, Previous: <a href="#OpenGL-output" accesskey="p" rel="prev">OpenGL output</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="MathGL-and-PyQt-1"></a>
-<h4 class="subsection">2.1.7 MathGL and PyQt</h4>
+<h4 class="subsection">2.1.8 MathGL and PyQt</h4>
 
 
 <p>Generally SWIG based classes (including the Python one) are the same as C++ classes. However, there are few tips for using MathGL with PyQt. Below I place a very simple python code which demonstrate how MathGL can be used with PyQt. This code is mostly written by Prof. Dr. Heino Falcke. You can just copy it to a file <code>mgl-pyqt-test.py</code> and execute it from python shell by command <code>execfile(&quot;mgl-pyqt-test.py&quot;)</code>
@@ -1324,7 +1409,7 @@ qw.raise_()
 Previous: <a href="#MathGL-and-PyQt" accesskey="p" rel="prev">MathGL and PyQt</a>, Up: <a href="#Basic-usage" accesskey="u" rel="up">Basic usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
 <a name="MathGL-and-MPI-1"></a>
-<h4 class="subsection">2.1.8 MathGL and MPI</h4>
+<h4 class="subsection">2.1.9 MathGL and MPI</h4>
 
 
 <p>For using MathGL in MPI program you just need to: (1) plot its own part of data for each running node; (2) collect resulting graphical information in a single program (for example, at node with rank=0); (3) save it. The sample code below demonstrate this for very simple sample of surface drawing.
@@ -4405,20 +4490,20 @@ Next: <a href="#Error-handling" accesskey="n" rel="next">Error handling</a>, Pre
 <a name="index-SetMaskAngle"></a>
 
 <a name="mask"></a><dl>
-<dt><a name="index-mask"></a>MGL command: <em></em> <strong>mask</strong> <em>'id' 'hex'</em></dt>
-<dt><a name="index-mask-1"></a>Команда MGL: <em></em> <strong>mask</strong> <em>'id' hex</em></dt>
+<dt><a name="index-mask"></a>MGL command: <em></em> <strong>mask</strong> <em>'id' 'hex' [angle]</em></dt>
+<dt><a name="index-mask-1"></a>Команда MGL: <em></em> <strong>mask</strong> <em>'id' hex [angle]</em></dt>
 <dt><a name="index-SetMask-1"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetMask</strong> <em>(<code>char</code> id, <code>const char *</code>hex)</em></dt>
 <dt><a name="index-SetMask-2"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetMask</strong> <em>(<code>char</code> id, <code>uint64_t</code> hex)</em></dt>
 <dt><a name="index-mgl_005fset_005fmask"></a>C function: <em><code>void</code></em> <strong>mgl_set_mask</strong> <em>(<code>HMGL</code> gr, <code>const char *</code>hex)</em></dt>
 <dt><a name="index-mgl_005fset_005fmask_005fval"></a>C function: <em><code>void</code></em> <strong>mgl_set_mask_val</strong> <em>(<code>HMGL</code> gr, <code>uint64_t</code> hex)</em></dt>
-<dd><p>Sets new bit matrix <var>hex</var> of size 8*8 for mask with given <var>id</var>. This is global setting which influence on any later usage of symbol <var>id</var>. The predefined masks are (see <a href="#Color-scheme">Color scheme</a>): &lsquo;<samp>-</samp>&rsquo; is 000000FF00000000, &lsquo;<samp>+</samp>&rsquo; is 080808FF08080808,	&lsquo;<samp>=</samp>&rsquo; is 0000FF00FF000000,	&lsquo;<samp>;</samp>&rsquo; is 0000007700000000, &lsquo;<samp>o</samp>&rsquo; is 0000182424180000,	&lsquo;<samp>O</samp>&rsquo; is 0000183C3C180000,	&lsquo;<samp>s</samp>&rsquo; is 00003C24243C0000,	&lsquo;<samp>S</samp>&rsquo; is 00003C3C3C3C0000, &lsquo;<samp>~</samp>&rsquo; is 0000060990600000,	&lsquo;<samp>&lt;</samp>&rsquo; is 0060584658600000,	&lsquo;<samp>&gt;</samp>&rsquo; is 00061A621A060000,	&lsquo;<samp>j</samp>&rsquo; is 0000005F00000000, &lsquo;<samp>d</samp>&rsquo; is 0008142214080000,	&lsquo;<samp>D</samp>&rsquo; is 00081C3E1C080000,	&lsquo;<samp>*</samp>&rsquo; is 8142241818244281,	&lsquo;<samp>^</samp>&rsquo; is 0000001824420000.
+<dd><p>Sets new bit matrix <var>hex</var> of size 8*8 for mask with given <var>id</var>. This is global setting which influence on any later usage of symbol <var>id</var>. The predefined masks are (see <a href="#Color-scheme">Color scheme</a>): &lsquo;<samp>-</samp>&rsquo; give lines (<code>0x000000FF00000000</code>), &lsquo;<samp>+</samp>&rsquo; give cross-lines (<code>080808FF08080808</code>),	&lsquo;<samp>=</samp>&rsquo; give double lines (<code>0000FF00FF000000</code>),	&lsquo;<samp>;</samp>&rsquo; give dash lines (<code>0x0000000F00000000</code>), &lsquo;<samp>o</samp>&rsquo; give circles (<code>0000182424180000</code>),	&lsquo;<samp>O</samp>&rsquo; give filled circles (<code>0000183C3C180000</code>),	&lsquo;<samp>s</samp>&rsquo; give squares (<code>00003C24243C0000</code>),	&lsquo;<samp>S</samp>&rsquo; give solid squares (<code>00003C3C3C3C0000</code>), &lsquo;<samp>~</samp>&rsquo; give waves (<code>0000060990600000</code>),	&lsquo;<samp>&lt;</samp>&rsquo; give left triangles (<code>0060584658600000</code>),	&lsquo;<samp>&gt;</samp>&rsquo; give right triangles (<code>00061A621A060000</code>),	&lsquo;<samp>j</samp>&rsquo; give dash-dot lines (<code>0000002700000000</code>), &lsquo;<samp>d</samp>&rsquo; give pluses (<code>0x0008083E08080000</code>),	&lsquo;<samp>D</samp>&rsquo; give tacks (<code>0x0139010010931000</code>),	&lsquo;<samp>*</samp>&rsquo; give dots (<code>0x0000001818000000</code>),	&lsquo;<samp>^</samp>&rsquo; give bricks (<code>0x101010FF010101FF</code>). Parameter <var>angle</var> set the rotation angle too. IMPORTANT: the rotation angle will be replaced by a multiple of 45 degrees at export to EPS.
 </p></dd></dl>
 
 <dl>
 <dt><a name="index-mask-2"></a>MGL command: <em></em> <strong>mask</strong> <em>angle</em></dt>
 <dt><a name="index-SetMaskAngle-1"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetMaskAngle</strong> <em>(<code>int</code> angle)</em></dt>
 <dt><a name="index-mgl_005fset_005fmask_005fangle"></a>C function: <em><code>void</code></em> <strong>mgl_set_mask_angle</strong> <em>(<code>HMGL</code> gr, <code>int</code> angle)</em></dt>
-<dd><p>Sets the default rotation angle (in degrees) for masks. Note, you can use symbols &lsquo;<samp>\</samp>&rsquo;, &lsquo;<samp>/</samp>&rsquo;, &lsquo;<samp>I</samp>&rsquo; in color scheme for setting rotation angles as 45, -45 and 90 degrees correspondingly.
+<dd><p>Sets the default rotation angle (in degrees) for masks. Note, you can use symbols &lsquo;<samp>\</samp>&rsquo;, &lsquo;<samp>/</samp>&rsquo;, &lsquo;<samp>I</samp>&rsquo; in color scheme for setting rotation angles as 45, -45 and 90 degrees correspondingly. IMPORTANT: the rotation angle will be replaced by a multiple of 45 degrees at export to EPS.
 </p></dd></dl>
 
 
@@ -4812,7 +4897,10 @@ Previous: <a href="#Curved-coordinates" accesskey="p" rel="prev">Curved coordina
 <dt><a name="index-xtick"></a>MGL command: <em></em> <strong>xtick</strong> <em><code>val [sub=0 org=nan 'fact'='']</code></em></dt>
 <dt><a name="index-ytick"></a>MGL command: <em></em> <strong>ytick</strong> <em><code>val [sub=0 org=nan 'fact'='']</code></em></dt>
 <dt><a name="index-ztick"></a>MGL command: <em></em> <strong>ztick</strong> <em><code>val [sub=0 org=nan 'fact'='']</code></em></dt>
-<dt><a name="index-ctick"></a>MGL command: <em></em> <strong>ctick</strong> <em><code>val [sub=0 org=nan 'fact'='']</code></em></dt>
+<dt><a name="index-xtick-1"></a>MGL command: <em></em> <strong>xtick</strong> <em><code>val sub ['fact'='']</code></em></dt>
+<dt><a name="index-ytick-1"></a>MGL command: <em></em> <strong>ytick</strong> <em><code>val sub ['fact'='']</code></em></dt>
+<dt><a name="index-ztick-1"></a>MGL command: <em></em> <strong>ztick</strong> <em><code>val sub ['fact'='']</code></em></dt>
+<dt><a name="index-ctick"></a>MGL command: <em></em> <strong>ctick</strong> <em><code>val ['fact'='']</code></em></dt>
 <dt><a name="index-SetTicks-1"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTicks</strong> <em>(<code>char</code> dir, <code>mreal</code> d=<code>0</code>, <code>int</code> ns=<code>0</code>, <code>mreal</code> org=<code>NAN</code>, <code>const char *</code>fact=<code>&quot;&quot;</code>)</em></dt>
 <dt><a name="index-SetTicks-2"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTicks</strong> <em>(<code>char</code> dir, <code>mreal</code> d, <code>int</code> ns, <code>mreal</code> org, <code>const wchar_t *</code>fact)</em></dt>
 <dt><a name="index-mgl_005fset_005fticks"></a>C function: <em><code>void</code></em> <strong>mgl_set_ticks</strong> <em>(<code>HMGL</code> gr, <code>char</code> dir, <code>mreal</code> d, <code>int</code> ns, <code>mreal</code> org)</em></dt>
@@ -4822,12 +4910,14 @@ Previous: <a href="#Curved-coordinates" accesskey="p" rel="prev">Curved coordina
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-xtick-1"></a>MGL command: <em></em> <strong>xtick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
-<dt><a name="index-ytick-1"></a>MGL command: <em></em> <strong>ytick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
-<dt><a name="index-ztick-1"></a>MGL command: <em></em> <strong>ztick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
-<dt><a name="index-xtick-2"></a>MGL command: <em></em> <strong>xtick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
-<dt><a name="index-ytick-2"></a>MGL command: <em></em> <strong>ytick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
-<dt><a name="index-ztick-2"></a>MGL command: <em></em> <strong>ztick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
+<dt><a name="index-xtick-2"></a>MGL command: <em></em> <strong>xtick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
+<dt><a name="index-ytick-2"></a>MGL command: <em></em> <strong>ytick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
+<dt><a name="index-ztick-2"></a>MGL command: <em></em> <strong>ztick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
+<dt><a name="index-ctick-1"></a>MGL command: <em></em> <strong>ctick</strong> <em><code>val1</code> 'lbl1' [<code>val2</code> 'lbl2' ...]</em></dt>
+<dt><a name="index-xtick-3"></a>MGL command: <em></em> <strong>xtick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
+<dt><a name="index-ytick-3"></a>MGL command: <em></em> <strong>ytick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
+<dt><a name="index-ztick-3"></a>MGL command: <em></em> <strong>ztick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
+<dt><a name="index-ctick-2"></a>MGL command: <em></em> <strong>ctick</strong> <em>vdat 'lbls' [<code>add=off</code>]</em></dt>
 <dt><a name="index-SetTicksVal-1"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTicksVal</strong> <em>(<code>char</code> dir, <code>const char *</code>lbl, <code>bool</code> add=<code>false</code>)</em></dt>
 <dt><a name="index-SetTicksVal-2"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTicksVal</strong> <em>(<code>char</code> dir, <code>const wchar_t *</code>lbl, <code>bool</code> add=<code>false</code>)</em></dt>
 <dt><a name="index-SetTicksVal-3"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTicksVal</strong> <em>(<code>char</code> dir, <code>const mglDataA &amp;</code>val, <code>const char *</code>lbl, <code>bool</code> add=<code>false</code>)</em></dt>
@@ -4848,10 +4938,10 @@ Previous: <a href="#Curved-coordinates" accesskey="p" rel="prev">Curved coordina
 </p></dd></dl>
 
 <dl>
-<dt><a name="index-xtick-3"></a>MGL command: <em></em> <strong>xtick</strong> <em>'templ'</em></dt>
-<dt><a name="index-ytick-3"></a>MGL command: <em></em> <strong>ytick</strong> <em>'templ'</em></dt>
-<dt><a name="index-ztick-3"></a>MGL command: <em></em> <strong>ztick</strong> <em>'templ'</em></dt>
-<dt><a name="index-ctick-1"></a>MGL command: <em></em> <strong>ctick</strong> <em>'templ'</em></dt>
+<dt><a name="index-xtick-4"></a>MGL command: <em></em> <strong>xtick</strong> <em>'templ'</em></dt>
+<dt><a name="index-ytick-4"></a>MGL command: <em></em> <strong>ytick</strong> <em>'templ'</em></dt>
+<dt><a name="index-ztick-4"></a>MGL command: <em></em> <strong>ztick</strong> <em>'templ'</em></dt>
+<dt><a name="index-ctick-3"></a>MGL command: <em></em> <strong>ctick</strong> <em>'templ'</em></dt>
 <dt><a name="index-SetTickTempl-1"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTickTempl</strong> <em>(<code>char</code> dir, <code>const char *</code>templ)</em></dt>
 <dt><a name="index-SetTickTempl-2"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>SetTickTempl</strong> <em>(<code>char</code> dir, <code>const wchar_t *</code>templ)</em></dt>
 <dt><a name="index-mgl_005fset_005ftick_005ftempl"></a>C function: <em><code>void</code></em> <strong>mgl_set_tick_templ</strong> <em>(<code>HMGL</code> gr, <code>const char *</code>templ)</em></dt>
@@ -5981,16 +6071,17 @@ Next: <a href="#Legend" accesskey="n" rel="next">Legend</a>, Previous: <a href="
 <dd><p>Draws bounding box outside the plotting volume with color <var>col</var>. If <var>col</var> contain &lsquo;<samp>@</samp>&rsquo; then filled faces are drawn. At this first color is used for faces (default is light yellow), last one for edges. See <a href="#Bounding-box">Bounding box</a>, for sample code and picture.
 </p></dd></dl>
 
-<a name="xlabel"></a><a name="ylabel"></a><a name="zlabel"></a><a name="tlabel"></a><dl>
+<a name="xlabel"></a><a name="ylabel"></a><a name="zlabel"></a><a name="tlabel"></a><a name="clabel"></a><dl>
 <dt><a name="index-xlabel"></a>MGL command: <em></em> <strong>xlabel</strong> <em>'text' [<code>pos=1</code>]</em></dt>
 <dt><a name="index-ylabel"></a>MGL command: <em></em> <strong>ylabel</strong> <em>'text' [<code>pos=1</code>]</em></dt>
 <dt><a name="index-zlabel"></a>MGL command: <em></em> <strong>zlabel</strong> <em>'text' [<code>pos=1</code>]</em></dt>
 <dt><a name="index-tlabel"></a>MGL command: <em></em> <strong>tlabel</strong> <em>'text' [<code>pos=1</code>]</em></dt>
+<dt><a name="index-clabel"></a>MGL command: <em></em> <strong>clabel</strong> <em>'text' [<code>pos=1</code>]</em></dt>
 <dt><a name="index-Label-3"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>Label</strong> <em>(<code>char</code> dir, <code>const char *</code>text, <code>mreal</code> pos=<code>1</code>, <code>const char *</code>opt=<code>&quot;&quot;</code>)</em></dt>
 <dt><a name="index-Label-4"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>Label</strong> <em>(<code>char</code> dir, <code>const wchar_t *</code>text, <code>mreal</code> pos=<code>1</code>, <code>const char *</code>opt=<code>&quot;&quot;</code>)</em></dt>
 <dt><a name="index-mgl_005flabel"></a>C function: <em><code>void</code></em> <strong>mgl_label</strong> <em>(<code>HMGL</code> gr, <code>char</code> dir, <code>const char *</code>text, <code>mreal</code> pos, <code>const char *</code>opt)</em></dt>
 <dt><a name="index-mgl_005flabelw"></a>C function: <em><code>void</code></em> <strong>mgl_labelw</strong> <em>(<code>HMGL</code> gr, <code>char</code> dir, <code>const wchar_t *</code>text, <code>mreal</code> pos, <code>const char *</code>opt)</em></dt>
-<dd><p>Prints the label <var>text</var> for axis <var>dir</var>=&lsquo;<samp>x</samp>&rsquo;,&lsquo;<samp>y</samp>&rsquo;,&lsquo;<samp>z</samp>&rsquo;,&lsquo;<samp>t</samp>&rsquo; (here &lsquo;<samp>t</samp>&rsquo; is &ldquo;ternary&rdquo; axis <em>t=1-x-y</em>). The position of label is determined by <var>pos</var> parameter. If <var>pos</var>=0 then label is printed at the center of axis. If <var>pos</var>&gt;0 then label is printed at the maximum of axis. If <var>pos</var>&lt;0 then label is printed at the minimum of axis. Option <code>value</code> set additional shifting of the label. See <a href="#Text-printing">Text printing</a>.
+<dd><p>Prints the label <var>text</var> for axis <var>dir</var>=&lsquo;<samp>x</samp>&rsquo;,&lsquo;<samp>y</samp>&rsquo;,&lsquo;<samp>z</samp>&rsquo;,&lsquo;<samp>t</samp>&rsquo;,&lsquo;<samp>c</samp>&rsquo;, where &lsquo;<samp>t</samp>&rsquo; is &ldquo;ternary&rdquo; axis <em>t=1-x-y</em>; &lsquo;<samp>c</samp>&rsquo; is color axis (should be called after <a href="#colorbar">colorbar</a>). The position of label is determined by <var>pos</var> parameter. If <var>pos</var>=0 then label is printed at the center of axis. If <var>pos</var>&gt;0 then label is printed at the maximum of axis. If <var>pos</var>&lt;0 then label is printed at the minimum of axis. Option <code>value</code> set additional shifting of the label. See <a href="#Text-printing">Text printing</a>.
 </p></dd></dl>
 
 
@@ -7100,7 +7191,7 @@ Next: <a href="#Other-plotting" accesskey="n" rel="next">Other plotting</a>, Pre
 <dt><a name="index-FlowP-2"></a>Method on <code>mglGraph</code>: <em><code>void</code></em> <strong>FlowP</strong> <em>(<code>mglPoint</code> p0, <code>const mglDataA &amp;</code>x, <code>const mglDataA &amp;</code>y, <code>const mglDataA &amp;</code>ax, <code>const mglDataA &amp;</code>ay, <code>const char *</code>sch=<code>&quot;&quot;</code>, <code>const char *</code>opt=<code>&quot;&quot;</code>)</em></dt>
 <dt><a name="index-mgl_005fflowp_005f2d"></a>C function: <em><code>void</code></em> <strong>mgl_flowp_2d</strong> <em>(<code>HMGL</code> gr, <code>mreal</code> x0, <code>mreal</code> y0, <code>mreal</code> z0, <code>HCDT</code> ax, <code>HCDT</code> ay, <code>const char *</code>sch, <code>const char *</code>opt)</em></dt>
 <dt><a name="index-mgl_005fflowp_005fxy"></a>C function: <em><code>void</code></em> <strong>mgl_flowp_xy</strong> <em>(<code>HMGL</code> gr, <code>mreal</code> x0, <code>mreal</code> y0, <code>mreal</code> z0, <code>HCDT</code> x, <code>HCDT</code> y, <code>HCDT</code> ax, <code>HCDT</code> ay, <code>const char *</code>sch, <code>const char *</code>opt)</em></dt>
-<dd><p>The same as first one (<a href="#flow">flow</a>) but draws single flow thread starting from point <var>p0</var>={<var>x0</var>,<var>y0</var>,<var>z0</var>}.
+<dd><p>The same as first one (<a href="#flow">flow</a>) but draws single flow thread starting from point <var>p0</var>={<var>x0</var>,<var>y0</var>,<var>z0</var>}. String <var>sch</var> may also contain: &lsquo;<samp>&gt;</samp>&rsquo; or &lsquo;<samp>&lt;</samp>&rsquo; for drawing in forward or backward direction only (default is both).
 </p></dd></dl>
 
 <dl>
@@ -9544,7 +9635,9 @@ Next: <a href="#Interpolation" accesskey="n" rel="next">Interpolation</a>, Previ
 </li><li> &lsquo;<samp>0</samp>&rsquo; does nothing,
 </li><li> &lsquo;<samp>3</samp>&rsquo; for linear averaging over 3 points,
 </li><li> &lsquo;<samp>5</samp>&rsquo; for linear averaging over 5 points,
-</li><li> &lsquo;<samp>d1</samp>&rsquo;...&lsquo;<samp>d9</samp>&rsquo; for linear averaging over (2*N+1)-th points.
+</li><li> &lsquo;<samp>d1</samp>&rsquo;...&lsquo;<samp>d9</samp>&rsquo; for linear averaging over (2*N+1)-th points,
+</li><li> &lsquo;<samp>^</samp>&rsquo; for finding upper bound,
+</li><li> &lsquo;<samp>_</samp>&rsquo; for finding lower bound.
 </li></ul>
 <p>By default quadratic averaging over 5 points is used.
 </p></dd></dl>
@@ -11539,15 +11632,15 @@ protected:
   inline mreal vthr(long i) const
   { return use_abs ? abs(a[i]) : arg(a[i]);  }
   inline mreal dvx(long i,long j=0,long k=0) const
-  { register long i0=i+nx*(j+ny*k);
+  { long i0=i+nx*(j+ny*k);
     std::complex&lt;double&gt; res=i&gt;0? (i&lt;nx-1? (a[i0+1]-a[i0-1])/2.:a[i0]-a[i0-1]) : a[i0+1]-a[i0];
     return use_abs? abs(res) : arg(res);  }
   inline mreal dvy(long i,long j=0,long k=0) const
-  { register long i0=i+nx*(j+ny*k);
+  { long i0=i+nx*(j+ny*k);
     std::complex&lt;double&gt; res=j&gt;0? (j&lt;ny-1? (a[i0+nx]-a[i0-nx])/2.:a[i0]-a[i0-nx]) : a[i0+nx]-a[i0];
     return use_abs? abs(res) : arg(res);  }
   inline mreal dvz(long i,long j=0,long k=0) const
-  { register long i0=i+nx*(j+ny*k), n=nx*ny;
+  { long i0=i+nx*(j+ny*k), n=nx*ny;
     std::complex&lt;double&gt; res=k&gt;0? (k&lt;nz-1? (a[i0+n]-a[i0-n])/2.:a[i0]-a[i0-n]) : a[i0+n]-a[i0];
     return use_abs? abs(res) : arg(res);  }
 };
@@ -15078,13 +15171,13 @@ subplot 5 4 10 '':title '&quot;~&quot; mask':dens a '3~'
 subplot 5 4 11 '':title '&quot;&lt;&quot; mask':dens a '3&lt;'
 subplot 5 4 12 '':title '&quot;&gt;&quot; mask':dens a '3&gt;'
 subplot 5 4 13 '':title '&quot;j&quot; mask':dens a '3j'
-subplot 5 4 14 '':title '&quot;-;\&quot; mask':dens a '3;\ '
+subplot 5 4 14 '':title '&quot;-;\&quot; mask':dens a '3\;'
 subplot 5 4 15 '':title '&quot;d&quot; mask':dens a '3d'
 subplot 5 4 16 '':title '&quot;D&quot; mask':dens a '3D'
 subplot 5 4 17 '':title '&quot;*&quot; mask':dens a '3*'
-subplot 5 4 18 '':title '&quot;^&quot; mask':dens a '3^'
+subplot 5 4 18 '':title '&quot;\^&quot; mask':dens a '3^'
 subplot 5 4 19 '':title 'manual mask'
-mask '+' 'ff00182424f800':dens a '3+'
+mask '+' '24242424FF0101FF':dens a '3+'
 </pre>
 <p><strong>C++ code:</strong>
 </p><pre class="verbatim">void smgl_mask(mglGraph *gr)
@@ -15108,9 +15201,9 @@ mask '+' 'ff00182424f800':dens a '3+'
 	gr-&gt;SubPlot(5,4,15,&quot;&quot;);	gr-&gt;Title(&quot;'d' mask&quot;);	gr-&gt;Dens(a,&quot;3d&quot;);
 	gr-&gt;SubPlot(5,4,16,&quot;&quot;);	gr-&gt;Title(&quot;'D' mask&quot;);	gr-&gt;Dens(a,&quot;3D&quot;);
 	gr-&gt;SubPlot(5,4,17,&quot;&quot;);	gr-&gt;Title(&quot;'*' mask&quot;);	gr-&gt;Dens(a,&quot;3*&quot;);
-	gr-&gt;SubPlot(5,4,18,&quot;&quot;);	gr-&gt;Title(&quot;'^' mask&quot;);	gr-&gt;Dens(a,&quot;3^&quot;);
+	gr-&gt;SubPlot(5,4,18,&quot;&quot;);	gr-&gt;Title(&quot;'\\^' mask&quot;);	gr-&gt;Dens(a,&quot;3^&quot;);
 	gr-&gt;SubPlot(5,4,19,&quot;&quot;);	gr-&gt;Title(&quot;manual mask&quot;);
-	gr-&gt;SetMask('+', &quot;ff00182424f80000&quot;);	gr-&gt;Dens(a,&quot;3+&quot;);
+	gr-&gt;SetMask('+', &quot;24242424FF0101FF&quot;);	gr-&gt;Dens(a,&quot;3+&quot;);
 }
 </pre><div align="center"><img src="png/mask.png" alt="Sample mask">
 </div>
@@ -21253,5 +21346,5 @@ Previous: <a href="#Copying-This-Manual" accesskey="p" rel="prev">Copying This M
 
 
 
-</body>
+</div><script type="text/javascript" src="accordion.js"></script></body>
 </html>
