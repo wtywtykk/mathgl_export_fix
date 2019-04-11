@@ -32,9 +32,10 @@
 4. "latex on" option ?!?
 5. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
 6. Flag to determine discontinuous surfaces in 'fsurf'
-
 7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
 8. Check title & rasterize
+
+10. mgltask -- add $3-loop, $R=formula for R=4,...,9,0,A,...,Z
 
 ZZ. Update *.i for new functions {before release!!!}
 

@@ -391,11 +391,11 @@ bool mglBase::AddPntQ(mglPnt &q, const mglMatrix *mat, mglPoint p, mreal c, mglP
 	// scl&8 -- bypass palette for enabling alpha
 	// scl&16 -- put points inside axis range
 	if(mgl_isnan(c) || mgl_isnan(a))	{	q.x=NAN;	return false;	}
-	bool norefr = mgl_isnan(n.x) && mgl_isnan(n.y) && !mgl_isnan(n.z);
+	bool norefr = mgl_isnan(n.x) && mgl_isnan(n.y) && !mgl_isnan(n.z), res=true;
 	if(scl>0)
 	{
 		if(scl&16)	mgl_coor_box(this, p);
-		ScalePoint(mat,p,n,!(scl&2));
+		res = ScalePoint(mat,p,n,!(scl&2));
 	}
 	if(mgl_isnan(p.x))	{	q.x=NAN;	return false;	}
 	a = (a>=0 && a<=1) ? a : AlphaDef;
@@ -434,7 +434,7 @@ bool mglBase::AddPntQ(mglPnt &q, const mglMatrix *mat, mglPoint p, mreal c, mglP
 	if(norefr)	q.v=0;
 	if(!get(MGL_ENABLE_LIGHT) && !(scl&4))	q.u=q.v=NAN;
 	q.sub=mat->norot?-1*(int)Sub.size():Sub.size()-1;
-	return true;
+	return res;
 }
 //-----------------------------------------------------------------------------
 long mglBase::CopyNtoC(long from, mreal c)

@@ -525,8 +525,9 @@ void MGL_EXPORT mgl_area_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, const char *pen, c
 			double cc=gr->NextColor(pal,i);
 			if(i>0 && i<np-1)	{	nn.x=(pp[i-1].p.y-pp[i+1].p.y)/2;	nn.y=(pp[i+1].p.x-pp[i-1].p.x)/2;	}
 			else if(i==np-1)	{	nn.x=pp[np-2].p.y-pp[np-1].p.y;	nn.y=pp[np-1].p.x-pp[np-2].p.x;	}
-			gr->AddPntQ(kq+2*i,pp[i].p, sh?cc:c1,nn,-1,27);	pp[i].p.z = z0;
-			gr->AddPntQ(kq+2*i+1,pp[i].p, sh?cc:c2,nn,-1,27);
+			bool r1 = gr->AddPntQ(kq+2*i,pp[i].p, sh?cc:c1,nn,-1,27);	pp[i].p.z = z0;
+			bool r2 = gr->AddPntQ(kq+2*i+1,pp[i].p, sh?cc:c2,nn,-1,27);
+			if(!r1 && !r2)	{	gr->DisablePnt(kq+2*i);	gr->DisablePnt(kq+2*i+1);	}
 		}
 		for(size_t i=1;i<np;i++)
 		{
@@ -573,8 +574,9 @@ void MGL_EXPORT mgl_area_xy(HMGL gr, HCDT x, HCDT y, const char *pen, const char
 		for(msize i=0;i<np;i++)
 		{
 			double cc=gr->NextColor(pal,i);
-			gr->AddPntQ(kq+2*i,pp[i].p, sh?cc:c1,nn,-1,27);	pp[i].p.y = y0;
-			gr->AddPntQ(kq+2*i+1,pp[i].p, sh?cc:c2,nn,-1,27);
+			bool r1 = gr->AddPntQ(kq+2*i,pp[i].p, sh?cc:c1,nn,-1,27);	pp[i].p.y = y0;
+			bool r2 = gr->AddPntQ(kq+2*i+1,pp[i].p, sh?cc:c2,nn,-1,27);
+			if(!r1 && !r2)	{	gr->DisablePnt(kq+2*i);	gr->DisablePnt(kq+2*i+1);	}
 		}
 		if(wire)	gr->line_plot(kq,kq+1);
 		for(size_t i=1;i<np;i++)
@@ -726,8 +728,9 @@ void MGL_EXPORT mgl_region_3d(HMGL gr, HCDT x1, HCDT y1, HCDT z1, HCDT x2, HCDT 
 		for(msize i=0;i<np;i++)
 		{
 			double cc=gr->NextColor(pal,i);
-			gr->AddPntQ(kq+2*i,pp[i].p1, sh?cc:c1,nn,-1,27);
-			gr->AddPntQ(kq+2*i+1,pp[i].p2, sh?cc:c2,nn,-1,27);
+			bool r1 = gr->AddPntQ(kq+2*i,pp[i].p1, sh?cc:c1,nn,-1,27);
+			bool r2 = gr->AddPntQ(kq+2*i+1,pp[i].p2, sh?cc:c2,nn,-1,27);
+			if(!r1 && !r2)	{	gr->DisablePnt(kq+2*i);	gr->DisablePnt(kq+2*i+1);	}
 		}
 		if(wire)	gr->line_plot(kq,kq+1);
 		for(size_t i=1;i<np;i++)
@@ -778,8 +781,9 @@ void MGL_EXPORT mgl_region_xy(HMGL gr, HCDT x, HCDT y1, HCDT y2, const char *pen
 		for(msize i=0;i<np;i++)
 		{
 			double cc=gr->NextColor(pal,i);
-			gr->AddPntQ(kq+2*i,pp[i].p1, sh?cc:c1,nn,-1,27);
-			gr->AddPntQ(kq+2*i+1,pp[i].p2, sh?cc:c2,nn,-1,27);
+			bool r1 = gr->AddPntQ(kq+2*i,pp[i].p1, sh?cc:c1,nn,-1,27);
+			bool r2 = gr->AddPntQ(kq+2*i+1,pp[i].p2, sh?cc:c2,nn,-1,27);
+			if(!r1 && !r2)	{	gr->DisablePnt(kq+2*i);	gr->DisablePnt(kq+2*i+1);	}
 		}
 		if(wire)	gr->line_plot(kq,kq+1);
 		for(size_t i=1;i<np;i++)

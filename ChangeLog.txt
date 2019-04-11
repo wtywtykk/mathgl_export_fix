@@ -1,3 +1,7 @@
+2.4.4 Released ?? August 2019
+
+* Fix [xyz]range option for Area and Region.
+
 2.4.3 Released 14 March 2019
 
 * Add 'clabel' command -- draw labels for colorbar. Should be used *after* drawing colorbar!

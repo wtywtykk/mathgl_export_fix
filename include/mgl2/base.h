@@ -552,6 +552,7 @@ public:
 	bool CopyProj(mglPnt &q, long from, mglPoint p, mglPoint n, short sub=0);
 	void CopyProj(long id, long from, mglPoint p, mglPoint n, short sub=0)
 	{	if(id>=0)	CopyProj(Pnt[id],from,p,n,sub);	}
+	void DisablePnt(long id)	{	Pnt[id].x = NAN;	}
 	void SetRGBA(long k, const mglColor &c)
 	{	if(k>=0)	{mglPnt &p=Pnt[k];	p.r = c.r;	p.g = c.g;	p.b = c.b;	p.a = c.a;}	}
 	virtual void Reserve(long n);	///< Allocate n-cells for Pnt and return current position
