@@ -36,6 +36,9 @@ public:
 	inline int GetError() const	{	return Error;	}
 	/// Parse the formula str and create formula-tree
 	mglFormulaC(const char *str);
+	/// Set data for the spline interpolation
+	mglFormulaC(HCDT d, mreal x1=0, mreal x2=1, mreal y1=0, mreal y2=1, mreal z1=0, mreal z2=1) : 
+		dat(d),dx1(x1),dx2(x2),dy1(y1),dy2(y2),dz1(z1),dz2(z2)	{};
 	/// Clean up formula-tree
 	virtual ~mglFormulaC();
 protected:
@@ -43,6 +46,8 @@ protected:
 	mglFormulaC *Left,*Right;	// first and second argument of the function
 	int Kod;					// the function ID
 	dual Res;					// the number or the variable ID
+	HCDT dat;				// data file for the interpolation
+	mreal dx1,dx2,dy1,dy2,dz1,dz2;	// ranges of data files
 	static int Error;
 };
 //-----------------------------------------------------------------------------

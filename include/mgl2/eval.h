@@ -20,14 +20,14 @@
 #ifndef _MGL_EVAL_H_
 #define _MGL_EVAL_H_
 //-----------------------------------------------------------------------------
-#include "mgl2/define.h"
+#include "mgl2/abstract.h"
 /// types of errors
 #define MGL_ERR_LOG		1
 #define MGL_ERR_ARC		2
 #define MGL_ERR_SQRT	3
 //-----------------------------------------------------------------------------
 /// Class for evaluating formula specified by the string
-class MGL_EXPORT mglFormula					// îáúåêò äëÿ ââîäà è âû÷èñëåíèÿ ôîðìóë
+class MGL_EXPORT mglFormula
 {
 public:
 	/// Evaluates the formula for 'x','r'=\a x, 'y','n'=\a y, 'z','t'=\a z, 'u'=\a u
@@ -46,6 +46,9 @@ public:
 	inline int GetError() const	{	return Error;	}
 	/// Parse the formula str and create formula-tree
 	mglFormula(const char *str);
+	/// Set data for the spline interpolation
+	mglFormula(HCDT d, mreal x1=0, mreal x2=1, mreal y1=0, mreal y2=1, mreal z1=0, mreal z2=1) : 
+		dat(d),dx1(x1),dx2(x2),dy1(y1),dy2(y2),dz1(z1),dz2(z2)	{};
 	/// Clean up formula-tree
 	~mglFormula();
 protected:
@@ -54,6 +57,8 @@ protected:
 	mglFormula *Left,*Right;	// first and second argument of the function
 	int Kod;					// the function ID
 	mreal Res;					// the number or the variable ID
+	HCDT dat;				// data file for the interpolation
+	mreal dx1,dx2,dy1,dy2,dz1,dz2;	// ranges of data files
 	static int Error;
 };
 //-----------------------------------------------------------------------------

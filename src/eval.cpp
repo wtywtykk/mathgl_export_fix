@@ -20,7 +20,7 @@
 #include <time.h>
 #include <ctype.h>
 
-#include "mgl2/data_cf.h"
+#include "mgl2/data.h"
 #include "mgl2/eval.h"
 
 #if MGL_HAVE_GSL
@@ -194,6 +194,8 @@ mglFormula::~mglFormula()
 // Formula constructor (automatically parse and "compile" formula)
 mglFormula::mglFormula(const char *string)
 {
+	dat = NULL;
+	dx1=dy1=dz1=0;	dx2=dy2=dz2=1;
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();
 #endif
@@ -214,6 +216,21 @@ mglFormula::mglFormula(const char *string)
 		len-=2;	str[len]=0;
 	}
 	len=strlen(str);
+	if(str[0]==':')		//	this data file for interpolation
+	{
+		double sx1,sx2,sy1,sy2,sz1,sz2;
+		char *buf = new char[strlen(str)+1];
+		int r = sscanf(str,":%s:%lg:%lg:%lg:%lg:%lg:%lg",buf,&sx1,&sx2,&sy1,&sy2,&sz1,&sz2);
+		mglData *d = new mglData(buf);	// TODO! memory leak here
+		if(d->GetNN()>1)
+		{
+			dat = d;
+			if(r>2 && sx1!=sx2)	{	dx1=sx1;	dx2=sx2;	}
+			if(r>4 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
+			if(r>6 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
+		}
+		delete []buf;	return;
+	}
 	n=mglFindInText(str,"&|");				// lowest priority -- logical
 	if(n>=0)
 	{
@@ -551,6 +568,13 @@ static const func_1 f1[EQ_SN-EQ_SIN] = {sin,cos,tan,asin,acos,atan,sinh,cosh,tan
 // evaluation of embedded (included) expressions
 mreal mglFormula::CalcIn(const mreal *a1) const
 {
+	if(dat)
+	{
+		mreal x = (a1['x'-'a']-dx1)*(dat->GetNx()-1)/(dx2-dx1);
+		mreal y = (a1['y'-'a']-dy1)*(dat->GetNy()-1)/(dy2-dy1);
+		mreal z = (a1['z'-'a']-dz1)*(dat->GetNz()-1)/(dz2-dz1);
+		return mgl_data_spline(dat,x,y,z);
+	}
 	if(Kod<EQ_LT)
 	{
 		if(Kod==EQ_RND)	return mgl_rnd();
@@ -668,6 +692,18 @@ static const func_1 f11[EQ_SN-EQ_SIN] = {cos,cos_d,tan_d,asin_d,acos_d,atan_d,co
 // evaluation of derivative of embedded (included) expressions
 mreal mglFormula::CalcDIn(int id, const mreal *a1) const
 {
+	if(dat)
+	{
+		mreal x = (a1['x'-'a']-dx1)*(dat->GetNx()-1)/(dx2-dx1);
+		mreal y = (a1['y'-'a']-dy1)*(dat->GetNy()-1)/(dy2-dy1);
+		mreal z = (a1['z'-'a']-dz1)*(dat->GetNz()-1)/(dz2-dz1);
+		mreal dx,dy,dz, res=0;
+		mgl_data_spline_ext(dat,x,y,z,&dx,&dy,&dz);
+		if(id=='x'-'a')	res = dx/(dat->GetNx()-1)*(dx2-dx1);
+		if(id=='y'-'a')	res = dy/(dat->GetNy()-1)*(dy2-dy1);
+		if(id=='z'-'a')	res = dz/(dat->GetNz()-1)*(dz2-dz1);
+		return res;
+	}
 	if(Kod==EQ_A && id==(int)Res)	return 1;
 	else if(Kod<EQ_LT)	return 0;
 	double a = Left->CalcIn(a1), d = Left->CalcDIn(id,a1);

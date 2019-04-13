@@ -18,8 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include <time.h>
-#include "mgl2/data_cf.h"
-#include "mgl2/datac_cf.h"
+#include "mgl2/datac.h"
 #include "mgl2/evalc.h"
 #if MGL_HAVE_GSL
 #include <gsl/gsl_sf.h>
@@ -83,6 +82,8 @@ mglFormulaC::~mglFormulaC()
 // Formula constructor (automatically parse and "compile" formula)
 mglFormulaC::mglFormulaC(const char *string)
 {
+	dat = NULL;
+	dx1=dy1=dz1=0;	dx2=dy2=dz2=1;
 	Error=0;
 	Left=Right=0;
 	Res=0; Kod=0;
@@ -100,6 +101,21 @@ mglFormulaC::mglFormulaC(const char *string)
 		len-=2;	str[len]=0;
 	}
 	len=strlen(str);
+	if(str[0]==':')		//	this data file for interpolation
+	{
+		double sx1,sx2,sy1,sy2,sz1,sz2;
+		char *buf = new char[strlen(str)+1];
+		int r = sscanf(str,":%s:%lg:%lg:%lg:%lg:%lg:%lg",buf,&sx1,&sx2,&sy1,&sy2,&sz1,&sz2);
+		mglDataC *d = new mglDataC(buf);	// TODO! memory leak here
+		if(d->GetNN()>1)
+		{
+			dat = d;
+			if(r>2 && sx1!=sx2)	{	dx1=sx1;	dx2=sx2;	}
+			if(r>4 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
+			if(r>6 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
+		}
+		delete []buf;	return;
+	}
 	n=mglFindInText(str,"<>=");				// low priority -- conditions
 	if(n>=0)
 	{
@@ -283,6 +299,13 @@ static const func_1 f1[EQ_LAST-EQ_SIN] = {sinc,cosc,tanc,asinc,acosc,atanc,sinhc
 // evaluation of embedded (included) expressions
 dual mglFormulaC::CalcIn(const dual *a1) const
 {
+	if(dat)
+	{
+		mreal x = (real(a1['x'-'a'])-dx1)*(dat->GetNx()-1)/(dx2-dx1);
+		mreal y = (real(a1['y'-'a'])-dy1)*(dat->GetNy()-1)/(dy2-dy1);
+		mreal z = (real(a1['z'-'a'])-dz1)*(dat->GetNz()-1)/(dz2-dz1);
+		return mgl_datac_spline(dat,x,y,z);
+	}
 	if(Kod<EQ_LT)
 	{
 		if(Kod==EQ_RND)	return mgl_rnd();

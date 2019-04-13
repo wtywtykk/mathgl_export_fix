@@ -1,5 +1,7 @@
 2.4.4 Released ?? August 2019
 
+* Classes mglFormula and mglFormulaC now can read file with given sizes if string have the format ":fname:x1:x2:y1:y2:z1:z2". Here data is supposed in range [x1,x2]*[y1,y2]*[z1,z2] (by default [0,1]*[0,1]*[0,1]). Calc() in this case return the interpolated values
+
 * Fix [xyz]range option for Area and Region.
 
 2.4.3 Released 14 March 2019
