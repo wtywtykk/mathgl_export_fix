@@ -1,6 +1,6 @@
 \input texinfo
 @documentencoding UTF-8
-@c @documentlanguage ru
+@documentlanguage ru
 
 @setfilename mgl_ru.info
 @documentencoding UTF-8

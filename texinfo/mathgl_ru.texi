@@ -1,5 +1,5 @@
 \input texinfo
-@c @documentencoding UTF-8
+@documentencoding UTF-8
 @documentlanguage ru
 
 @setfilename mathgl_ru.info

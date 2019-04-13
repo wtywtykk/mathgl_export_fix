@@ -219,17 +219,18 @@ mglFormula::mglFormula(const char *string)
 	if(str[0]==':')		//	this data file for interpolation
 	{
 		double sx1,sx2,sy1,sy2,sz1,sz2;
-		char *buf = new char[strlen(str)+1];
-		int r = sscanf(str,":%s:%lg:%lg:%lg:%lg:%lg:%lg",buf,&sx1,&sx2,&sy1,&sy2,&sz1,&sz2);
-		mglData *d = new mglData(buf);	// TODO! memory leak here
-		if(d->GetNN()>1)
+		char *buf = strchr(str+1,':');
+		if(buf && *buf)
 		{
-			dat = d;
-			if(r>2 && sx1!=sx2)	{	dx1=sx1;	dx2=sx2;	}
-			if(r>4 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
-			if(r>6 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
+			*buf = 0;
+			int r = sscanf(buf+1,"%lg:%lg:%lg:%lg:%lg:%lg",&sx1,&sx2,&sy1,&sy2,&sz1,&sz2);
+			if(r>1 && sx1!=sx2)	{	dx1=sx1;	dx2=sx2;	}
+			if(r>3 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
+			if(r>5 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
 		}
-		delete []buf;	return;
+		mglData *d = new mglData(str+1);	// TODO! memory leak here
+		if(d->GetNN()>1)	dat = d;
+		delete []str;	return;
 	}
 	n=mglFindInText(str,"&|");				// lowest priority -- logical
 	if(n>=0)

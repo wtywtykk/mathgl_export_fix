@@ -74,6 +74,7 @@ void save(mglGraph *gr,const char *name,const char *suf);
 void test(mglGraph *gr)
 {
 	mglParse par;
+	par.Execute(gr,"new f 100 'x^3':save f 'test.dat':axis:box:fplot ':test.dat:-1:1'");
 	par.Execute(gr,"text 0 0 'ab' '@'");
 //	par.Execute(gr,"new a 3 3 'x*y'\nsubplot 2 1 0 '':dens a:dens a 'k+/'\n"
 //	"subplot 2 1 1 '':mask '+' 'ff00182424f800' 30:dens a '3+'");
