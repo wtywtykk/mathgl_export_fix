@@ -187,14 +187,15 @@ double MGL_EXPORT mgl_rnd_()	{	return mgl_rnd();	}
 //-----------------------------------------------------------------------------
 mglFormula::~mglFormula()
 {
-	if(Left) delete Left;
-	if(Right) delete Right;
+	if(tmp)		delete tmp;
+	if(Left)	delete Left;
+	if(Right)	delete Right;
 }
 //-----------------------------------------------------------------------------
 // Formula constructor (automatically parse and "compile" formula)
 mglFormula::mglFormula(const char *string)
 {
-	dat = NULL;
+	dat = tmp = NULL;
 	dx1=dy1=dz1=0;	dx2=dy2=dz2=1;
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();
@@ -228,8 +229,7 @@ mglFormula::mglFormula(const char *string)
 			if(r>3 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
 			if(r>5 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
 		}
-		mglData *d = new mglData(str+1);	// TODO! memory leak here
-		if(d->GetNN()>1)	dat = d;
+		dat = tmp = new mglData(str+1);
 		delete []str;	return;
 	}
 	n=mglFindInText(str,"&|");				// lowest priority -- logical

@@ -32,6 +32,7 @@
 #include "mgl2/mgl.h"
 #include "mgl2/font.h"
 #include "mgl2/eval.h"
+#include "mgl2/evalc.h"
 //-----------------------------------------------------------------------------
 void smgl_fexport(mglGraph *gr);	// test file export
 void MGL_EXPORT mgl_create_cpp_font(HMGL gr, const wchar_t *how);

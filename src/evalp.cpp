@@ -366,6 +366,14 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 	long n,len=str.length();
 	if(str[0]=='(' && mglCheck(str.substr(1,len-2)))	// remove braces
 	{	str = str.substr(1,len-2);	len-=2;	}
+	if(str[0]==':')		//	this data file
+	{
+		size_t l=str.length()+1;
+		char *buf = new char[l];	memset(buf,0,l);
+		for(int i=1;str[i]!=0 && str[i]!=':' && i<l;i++)	buf[i-1]=str[i];
+		HMDT res = new mglData(buf);	delete []buf;
+		return res;
+	}
 	if(str[0]=='[')	// this is manual subdata
 	{
 		long i, j, br=0,k;

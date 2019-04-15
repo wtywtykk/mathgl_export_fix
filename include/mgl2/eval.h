@@ -25,6 +25,7 @@
 #define MGL_ERR_LOG		1
 #define MGL_ERR_ARC		2
 #define MGL_ERR_SQRT	3
+class mglData;
 //-----------------------------------------------------------------------------
 /// Class for evaluating formula specified by the string
 class MGL_EXPORT mglFormula
@@ -48,7 +49,7 @@ public:
 	mglFormula(const char *str);
 	/// Set data for the spline interpolation
 	mglFormula(HCDT d, mreal x1=0, mreal x2=1, mreal y1=0, mreal y2=1, mreal z1=0, mreal z2=1) : 
-		dat(d),dx1(x1),dx2(x2),dy1(y1),dy2(y2),dz1(z1),dz2(z2)	{};
+		dat(d),dx1(x1),dx2(x2),dy1(y1),dy2(y2),dz1(z1),dz2(z2),tmp(NULL)	{};
 	/// Clean up formula-tree
 	~mglFormula();
 protected:
@@ -60,6 +61,8 @@ protected:
 	HCDT dat;				// data file for the interpolation
 	mreal dx1,dx2,dy1,dy2,dz1,dz2;	// ranges of data files
 	static int Error;
+private:
+	mglData *tmp;
 };
 //-----------------------------------------------------------------------------
 #endif

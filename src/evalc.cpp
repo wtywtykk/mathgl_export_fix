@@ -75,14 +75,15 @@ int MGL_LOCAL_PURE mglFindInText(const char *str, const char *lst);
 //-----------------------------------------------------------------------------
 mglFormulaC::~mglFormulaC()
 {
-	if(Left) delete Left;
-	if(Right) delete Right;
+	if(tmp)		delete tmp;
+	if(Left)	delete Left;
+	if(Right)	delete Right;
 }
 //-----------------------------------------------------------------------------
 // Formula constructor (automatically parse and "compile" formula)
 mglFormulaC::mglFormulaC(const char *string)
 {
-	dat = NULL;
+	dat = tmp = NULL;
 	dx1=dy1=dz1=0;	dx2=dy2=dz2=1;
 	Error=0;
 	Left=Right=0;
@@ -113,8 +114,7 @@ mglFormulaC::mglFormulaC(const char *string)
 			if(r>3 && sy1!=sy2)	{	dy1=sy1;	dy2=sy2;	}
 			if(r>5 && sz1!=sz2)	{	dz1=sz1;	dz2=sz2;	}
 		}
-		mglDataC *d = new mglDataC(str+1);	// TODO! memory leak here
-		if(d->GetNN()>1)	dat = d;
+		dat = tmp = new mglDataC(str+1);
 		delete []str;	return;
 	}
 	n=mglFindInText(str,"<>=");				// low priority -- conditions

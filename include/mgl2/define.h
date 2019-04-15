@@ -353,7 +353,7 @@ typedef cmdual mdual;
 //-----------------------------------------------------------------------------
 extern float mgl_cos[360];	///< contain cosine with step 1 degree
 //-----------------------------------------------------------------------------
-/// Find length of wchar_t string (bypass standard wcslen bug)
+/// Calculate sqrt(x*x+y*y)
 double MGL_EXPORT_CONST mgl_hypot(double x, double y);
 /// Find length of wchar_t string (bypass standard wcslen bug)
 size_t MGL_EXPORT mgl_wcslen(const wchar_t *str);
