@@ -39,7 +39,7 @@ typedef void *HADT;
 #endif
 /// Get integer power of x
 cmdual MGL_EXPORT_CONST mgl_ipowc(mdual x,int n);
-cmdual MGL_EXPORT mgl_ipowc_(mdual *x,int *n);
+cmdual MGL_EXPORT_PURE mgl_ipowc_(mdual *x,int *n);
 /// Get complex number from string. Parse (%g,%g), {%g,%g} and [%g,%g] if adv!=0.
 cmdual MGL_EXPORT mgl_atoc(const char *s, int adv);
 /// Get exp(i*a)
@@ -101,7 +101,7 @@ HADT MGL_EXPORT mgl_datac_tridmat(HCDT A, HCDT B, HCDT C, HCDT D, const char *ho
 uintptr_t MGL_EXPORT mgl_datac_tridmat_(uintptr_t *A, uintptr_t *B, uintptr_t *C, uintptr_t *D, const char *how, int);
 
 /// Returns pointer to internal data array
-MGL_EXPORT mdual *mgl_datac_data(HADT dat);
+MGL_EXPORT_PURE mdual *mgl_datac_data(HADT dat);
 /// Returns pointer to data element [i,j,k]
 MGL_EXPORT mdual *mgl_datac_value(HADT dat, long i,long j,long k);
 

@@ -30,7 +30,7 @@ MGL_NO_EXPORT inline struct tm *mgl_localtime (const time_t *clock, tm *result, 
 	const tm *res = use_utc?gmtime(clock):localtime(clock);
 	memcpy(result,res,sizeof(tm));	return result;	}
 //-----------------------------------------------------------------------------
-long MGL_EXPORT mgl_have_color(const char *stl)
+long MGL_EXPORT_PURE mgl_have_color(const char *stl)
 {
 	return mgl_get_num_color(stl,0);
 // 	long j=0;

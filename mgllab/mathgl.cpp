@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 mglParse *Parse=0;
 //-----------------------------------------------------------------------------
-mreal udav_delay(void *v)
+mreal MGL_FUNC_PURE udav_delay(void *v)
 {	return ((Fl_MGL*)v)->delay;	}
 void udav_reload(void *v)
 {	Parse->RestoreOnce();	((Fl_MGL*)v)->update();	}

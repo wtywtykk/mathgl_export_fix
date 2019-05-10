@@ -57,7 +57,7 @@ void set_style(int kind, int size)
 	font_kind = kind;	font_size = size;
 }
 //-----------------------------------------------------------------------------
-bool is_sfx(const char *s)	// suffix
+bool MGL_FUNC_PURE is_sfx(const char *s)	// suffix
 {
 	size_t i,n=strlen(s);
 	for(i=0;i<n && s[i]>='a';i++);
@@ -71,7 +71,7 @@ bool is_sfx(const char *s)	// suffix
 //	char *t = new char[i+1];	memcpy(t,s,i*sizeof(char));	t[i]=0;
 }
 //-----------------------------------------------------------------------------
-bool is_opt(const char *s)	// option
+bool MGL_FUNC_PURE is_opt(const char *s)	// option
 {
 	const char *o[13]={"xrange","yrange","zrange","crange","alpha",
 					"cut","value","meshnum","size","legend",
@@ -81,7 +81,7 @@ bool is_opt(const char *s)	// option
 	return false;
 }
 //-----------------------------------------------------------------------------
-bool is_num(const char *s)	// number
+bool MGL_FUNC_PURE is_num(const char *s)	// number
 {
 	size_t n=strlen(s);
 //	if(s[0]==':' && (s[1]<=' ' || s[1]==';'))	return true;

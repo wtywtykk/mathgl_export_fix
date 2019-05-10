@@ -57,7 +57,7 @@ HMDT MGL_EXPORT mgl_fit_xyzas(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT a, HCDT s, c
 uintptr_t MGL_EXPORT mgl_fit_xyzas_(uintptr_t* gr, uintptr_t* x, uintptr_t* y, uintptr_t* z, uintptr_t* a, uintptr_t* ss, const char *eq, const char *vars, uintptr_t *ini, const char *opt,int, int l, int n);
 
 /// Get last fitted formula
-MGL_EXPORT const char *mgl_get_fit(HMGL gr);
+MGL_EXPORT_CONST const char *mgl_get_fit(HMGL gr);
 int MGL_EXPORT mgl_get_fit_(uintptr_t *gr, char *out, int len);
 
 /// Make histogram (distribution) of data. This function do not plot data.
@@ -77,11 +77,11 @@ uintptr_t MGL_EXPORT mgl_hist_xyz_(uintptr_t* gr, uintptr_t* x, uintptr_t* y, ui
 void MGL_EXPORT mgl_puts_fit(HMGL gr, double x, double y, double z, const char *prefix, const char *font, double size);
 void MGL_EXPORT mgl_puts_fit_(uintptr_t* gr, mreal *x, mreal *y, mreal *z, const char *prefix, const char *font, mreal *size, int l, int n);
 /// Get chi for last fitted formula
-mreal MGL_EXPORT mgl_get_fit_chi();
-mreal MGL_EXPORT mgl_get_fit_chi_();
+mreal MGL_EXPORT_PURE mgl_get_fit_chi();
+mreal MGL_EXPORT_PURE mgl_get_fit_chi_();
 /// Get covariance matrix for last fitted formula
-HCDT MGL_EXPORT mgl_get_fit_covar();
-uintptr_t MGL_EXPORT mgl_get_fit_covar_();
+HCDT MGL_EXPORT_CONST mgl_get_fit_covar();
+uintptr_t MGL_EXPORT_CONST mgl_get_fit_covar_();
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 }

@@ -42,7 +42,7 @@
 mglFont mglDefFont;
 #define MGL_USE_H12	{if(h1<y1) y1=h1;	if(h2>y2) y2=h2;	h1=1e5;	h2=-1e5;}
 //-----------------------------------------------------------------------------
-size_t MGL_EXPORT mgl_wcslen(const wchar_t *str)
+size_t MGL_EXPORT_PURE mgl_wcslen(const wchar_t *str)
 {
 	long i=0;
 	if(str)	while(str[i])	i++;

@@ -882,7 +882,7 @@ cmdual MGL_EXPORT mgl_datac_get_value(HCDT dat, long i, long j, long k)
 cmdual MGL_EXPORT mgl_datac_get_value_(uintptr_t *d, int *i, int *j, int *k)
 {	return mgl_datac_get_value(_DA_(d),*i,*j,*k);	}
 //-----------------------------------------------------------------------------
-MGL_EXPORT mdual *mgl_datac_data(HADT dat)
+MGL_EXPORT_PURE mdual *mgl_datac_data(HADT dat)
 {	return reinterpret_cast<mdual*>(dat->a);	}
 //-----------------------------------------------------------------------------
 MGL_EXPORT mdual *mgl_datac_value(HADT dat, long i,long j,long k)

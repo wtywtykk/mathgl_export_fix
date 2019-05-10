@@ -31,7 +31,7 @@ uintptr_t MGL_EXPORT mgl_create_graph_qt_(const char *title, int);
 int MGL_EXPORT mgl_qt_run();
 int MGL_EXPORT mgl_qt_run_();
 /// Return pointer to widget (QMathGL*) used for plotting
-MGL_EXPORT void *mgl_qt_widget(HMGL gr);
+MGL_EXPORT_PURE void *mgl_qt_widget(HMGL gr);
 #ifdef __cplusplus
 }
 //-----------------------------------------------------------------------------

@@ -340,7 +340,7 @@ dual MGL_LOCAL_CONST mgl_ipowc_c(dual x,int n)
 }
 cmdual MGL_EXPORT_CONST mgl_ipowc(mdual x,int n)
 {	return mdual(mgl_ipowc_c(x,n));	}
-cmdual MGL_EXPORT mgl_ipowc_(mdual *x,int *n)	{	return mgl_ipowc(*x,*n);	}
+cmdual MGL_EXPORT_PURE mgl_ipowc_(mdual *x,int *n)	{	return mgl_ipowc(*x,*n);	}
 //-----------------------------------------------------------------------------
 HAEX MGL_EXPORT mgl_create_cexpr(const char *expr)	{	return new mglFormulaC(expr);	}
 uintptr_t MGL_EXPORT mgl_create_cexpr_(const char *expr, int l)

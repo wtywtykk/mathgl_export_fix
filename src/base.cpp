@@ -434,7 +434,7 @@ bool mglBase::AddPntQ(mglPnt &q, const mglMatrix *mat, mglPoint p, mreal c, mglP
 	if(norefr)	q.v=0;
 	if(!get(MGL_ENABLE_LIGHT) && !(scl&4))	q.u=q.v=NAN;
 	q.sub=mat->norot?-1*(int)Sub.size():Sub.size()-1;
-	return res;
+	return (scl&16)?res:true;
 }
 //-----------------------------------------------------------------------------
 long mglBase::CopyNtoC(long from, mreal c)
@@ -998,7 +998,7 @@ void MGL_EXPORT mgl_chrrgb(char p, float c[3])
 		}
 }
 //-----------------------------------------------------------------------------
-size_t MGL_EXPORT mgl_get_num_color(const char *s, int smooth)
+size_t MGL_EXPORT_PURE mgl_get_num_color(const char *s, int smooth)
 {
 	if(!s || !s[0])	return 0;
 	size_t l=strlen(s), n=0;	long j=0;
@@ -1193,7 +1193,7 @@ mreal mglBase::NextColor(long id, long sh)
 	return cc;
 }
 //-----------------------------------------------------------------------------
-MGL_EXPORT const char *mglchrs(const char *str, const char *chr)
+MGL_EXPORT_PURE const char *mglchrs(const char *str, const char *chr)
 {
 	if(!str || !str[0] || !chr || !chr[0])	return NULL;
 	size_t l=strlen(chr);
@@ -1205,7 +1205,7 @@ MGL_EXPORT const char *mglchrs(const char *str, const char *chr)
 	return NULL;
 }
 //-----------------------------------------------------------------------------
-MGL_EXPORT const char *mglchr(const char *str, char ch)
+MGL_EXPORT_PURE const char *mglchr(const char *str, char ch)
 {
 	if(!str || !str[0])	return NULL;
 	size_t l=strlen(str),k=0;

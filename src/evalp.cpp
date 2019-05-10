@@ -258,7 +258,7 @@ HADT mglApplyOperDivC(std::wstring a1, std::wstring a2, mglParser *arg, const st
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-bool mglCheck(std::wstring str)
+bool MGL_LOCAL_PURE mglCheck(std::wstring str)
 {
 	long s = 0,i,n=str.length();
 	for(i=0;i<n;i++)
@@ -270,7 +270,7 @@ bool mglCheck(std::wstring str)
 	return (s==0) ? true : false;
 }
 //-----------------------------------------------------------------------------
-long mglFindInText(const std::wstring &str,const char *lst)
+long MGL_LOCAL_PURE mglFindInText(const std::wstring &str,const char *lst)
 {
 	long l=0,r=0;
 	for(long i=str.length()-1;i>=0;i--)

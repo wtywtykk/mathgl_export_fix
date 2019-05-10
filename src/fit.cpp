@@ -35,11 +35,11 @@ char mglFitRes[1024];	///< Last fitted formula
 mreal mglFitChi=NAN;	///< Chi value for last fitted formula
 mglData mglFitCovar;	///< Covar matrix for lat fitted formula
 //-----------------------------------------------------------------------------
-mreal MGL_EXPORT mgl_get_fit_chi()	{	return mglFitChi;	}
-mreal MGL_EXPORT mgl_get_fit_chi_()	{	return mglFitChi;	}
+mreal MGL_EXPORT_PURE mgl_get_fit_chi()		{	return mglFitChi;	}
+mreal MGL_EXPORT_PURE mgl_get_fit_chi_()	{	return mglFitChi;	}
 //-----------------------------------------------------------------------------
-HCDT MGL_EXPORT mgl_get_fit_covar()	{	return &mglFitCovar;	}
-uintptr_t MGL_EXPORT mgl_get_fit_covar_()	{	return (uintptr_t)&mglFitCovar;	}
+HCDT MGL_EXPORT_CONST mgl_get_fit_covar()	{	return &mglFitCovar;	}
+uintptr_t MGL_EXPORT_CONST mgl_get_fit_covar_()	{	return (uintptr_t)&mglFitCovar;	}
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_puts_fit(HMGL gr, double x, double y, double z, const char *pre, const char *font, double size)
 {
@@ -512,7 +512,7 @@ uintptr_t MGL_EXPORT mgl_hist_xyz_(uintptr_t* gr, uintptr_t* x, uintptr_t* y, ui
 	uintptr_t r = (uintptr_t)mgl_hist_xyz(_GR_, _DA_(x), _DA_(y), _DA_(z), _DA_(a), o);
 	delete []o;	return r;	}
 //-----------------------------------------------------------------------------
-MGL_EXPORT const char *mgl_get_fit(HMGL )	{	return mglFitRes;	}
+MGL_EXPORT_CONST const char *mgl_get_fit(HMGL )	{	return mglFitRes;	}
 int MGL_EXPORT mgl_get_fit_(uintptr_t *gr, char *out, int len)
 {
 	const char *res = mgl_get_fit(_GR_);

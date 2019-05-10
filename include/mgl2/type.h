@@ -64,9 +64,9 @@ inline mglPoint operator-(const mglPoint &a, const mglPoint &b)
 inline mglPoint operator-(const mglPoint &a)
 {	return mglPoint(-a.x, -a.y, -a.z, -a.c);	}
 inline mglPoint operator*(mreal b, const mglPoint &a)
-{	return mglPoint(a.x*b, a.y*b, a.z*b, a.c*b);	}	// TODO check conficts of a.c*b!!!
+{	return mglPoint(a.x*b, a.y*b, a.z*b, a.c*b);	}
 inline mglPoint operator*(const mglPoint &a, mreal b)
-{	return mglPoint(a.x*b, a.y*b, a.z*b, a.c*b);	}	// TODO check conficts of a.c*b!!!
+{	return mglPoint(a.x*b, a.y*b, a.z*b, a.c*b);	}
 inline mglPoint operator/(const mglPoint &a, mreal b)
 {	return mglPoint(a.x/b, a.y/b, a.z/b);	}
 inline mreal operator*(const mglPoint &a, const mglPoint &b)
@@ -105,9 +105,9 @@ struct MGL_EXPORT mglColor
 	float b;	///< Blue component of color
 	float a;	///< Alpha component of color
 
-	/// Constructor for RGB components manualy
+	/// Constructor for RGB components manually
 	mglColor(float R,float G,float B, float A=1):r(R),g(G),b(B),a(A)	{}
-	/// Constructor for RGB components manualy
+	/// Constructor for RGB components manually
 	mglColor(const unsigned char *c, float A=1):r(c[0]/255.f),g(c[1]/255.f),b(c[2]/255.f),a(A)	{}
 	/// Constructor set default color
 	mglColor():r(0),g(0),b(0),a(1)	{}

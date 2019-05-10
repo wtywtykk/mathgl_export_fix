@@ -36,6 +36,9 @@
 8. Check title & rasterize
 
 10. mgltask -- add $3-loop, $R=formula for R=4,...,9,0,A,...,Z
+11. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
+12. mglWnd -- add window pointer as void*, add wnd_size() and wnd_pos()
+
 
 ZZ. Update *.i for new functions {before release!!!}
 

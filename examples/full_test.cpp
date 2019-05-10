@@ -114,11 +114,10 @@ void mgl_generate_texi()
 	FILE *fs = fopen("wnd_samples.cpp","r");
 	while(!feof(fs))
 	{
-		fgets(buf,512,fs);
-		if(strstr(buf,"void mgls_prepare1d"))	break;
+		if(!fgets(buf,512,fs) || strstr(buf,"void mgls_prepare1d"))	break;
 	}
 	while(!feof(fs))
-	{	fprintf(fp,"%s",buf);	fgets(buf,512,fs);	}
+	{	fprintf(fp,"%s",buf);	if(!fgets(buf,512,fs))	break;	}
 	fprintf(fp,"\n@end verbatim\n@end ifclear\n\n@external{}\n");
 	fclose(fs);
 
@@ -142,11 +141,11 @@ void mgl_generate_texi()
 		fseek(fs,0,SEEK_SET);
 		snprintf(name, 64, "void smgl_%s", samp[i].name);
 		while(!feof(fs))
-		{	fgets(buf,512,fs);	if(strstr(buf,name))	break;	}
+		{	if(!fgets(buf,512,fs) || strstr(buf,name))	break;	}
 		while(!feof(fs))
 		{
-			fprintf(fp,"%s",buf);	fgets(buf,512,fs);
-			if(*buf=='}')	break;
+			fprintf(fp,"%s",buf);
+			if(!fgets(buf,512,fs) || *buf=='}')	break;
 		}
 		fprintf(fp,"}\n@end verbatim\n@end ifclear\n@pfig{%s, Sample @samp{%s}}\n@external{}\n", samp[i].name, samp[i].name);
 	}
@@ -386,7 +385,7 @@ int main(int argc,char **argv)
 		{
 			char buf[128];
 			while(!feof(fi))
-			{	fgets(buf,128,fi);	
+			{	if(!fgets(buf,128,fi))	break;
 				if(!strstr(buf,"model name"))
 				{	fprintf(fp,"@c %s\n",buf);	break;	}	}
 			fclose(fi);

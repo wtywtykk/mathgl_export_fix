@@ -114,13 +114,13 @@ void MGL_EXPORT mglStartThreadV(void *(*func)(void *), long n, mreal *a, const v
 	}
 }
 //-----------------------------------------------------------------------------
-mreal MGL_EXPORT mglSpline3s(const mreal *a, long nx, long ny, long nz, mreal x, mreal y, mreal z)
+mreal MGL_EXPORT_PURE mglSpline3s(const mreal *a, long nx, long ny, long nz, mreal x, mreal y, mreal z)
 {	return mglSpline3st<mreal>(a,nx,ny,nz,x,y,z);	}
 //-----------------------------------------------------------------------------
 mreal MGL_EXPORT mglSpline3(const mreal *a, long nx, long ny, long nz, mreal x, mreal y, mreal z,mreal *dx, mreal *dy, mreal *dz)
 {	return mglSpline3t<mreal>(a,nx,ny,nz,x,y,z,dx,dy,dz);	}
 //-----------------------------------------------------------------------------
-mreal MGL_EXPORT mglLinear(const mreal *a, long nx, long ny, long nz, mreal x, mreal y, mreal z)
+mreal MGL_EXPORT_PURE mglLinear(const mreal *a, long nx, long ny, long nz, mreal x, mreal y, mreal z)
 {	return mglLineart<mreal>(a,nx,ny,nz,x,y,z);	}
 //-----------------------------------------------------------------------------
 double MGL_EXPORT_CONST mgl_ipow(double x,int n)
@@ -134,7 +134,7 @@ double MGL_EXPORT_CONST mgl_ipow(double x,int n)
 	if(n%2==1)	t *= x;
 	return t;
 }
-double MGL_EXPORT mgl_ipow_(mreal *x,int *n)	{	return mgl_ipow(*x,*n);	}
+double MGL_EXPORT_PURE mgl_ipow_(mreal *x,int *n)	{	return mgl_ipow(*x,*n);	}
 //-----------------------------------------------------------------------------
 double mgl_get_time(const char *time, const char *fmt)
 {
@@ -1136,7 +1136,7 @@ mreal MGL_EXPORT mgl_data_solve_1d_(uintptr_t *d, mreal *val, int *spl, int *i0)
 uintptr_t MGL_EXPORT mgl_data_solve_(uintptr_t *d, mreal *val, const char *dir, uintptr_t *i0, int *norm,int)
 {	return uintptr_t(mgl_data_solve(_DA_(d),*val, *dir, _DA_(i0), *norm));	}
 //-----------------------------------------------------------------------------
-long static int_pow(long x, long n)
+long MGL_LOCAL_CONST int_pow(long x, long n)
 {
 	if(n==2)	return x*x;
 	if(n==1)	return x;
@@ -2004,7 +2004,7 @@ mreal MGL_EXPORT mgl_data_get_value(HCDT dat, long i, long j, long k)
 mreal MGL_EXPORT mgl_data_get_value_(uintptr_t *d, int *i, int *j, int *k)
 {	return mgl_data_get_value(_DA_(d),*i,*j,*k);	}
 //-----------------------------------------------------------------------------
-MGL_EXPORT mreal *mgl_data_data(HMDT dat)	{	return dat->a;	}
+MGL_EXPORT_PURE mreal *mgl_data_data(HMDT dat)	{	return dat->a;	}
 //-----------------------------------------------------------------------------
 MGL_EXPORT mreal *mgl_data_value(HMDT dat, long i,long j,long k)
 {	long ii=i*dat->nx*(j+dat->ny*k);

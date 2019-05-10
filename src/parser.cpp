@@ -1139,10 +1139,10 @@ void MGL_EXPORT mgl_delete_parser(HMPR p)	{	delete p;	}
 void MGL_EXPORT mgl_parser_add_param(HMPR p, int id, const char *str)			{	p->AddParam(id,str);	}
 void MGL_EXPORT mgl_parser_add_paramw(HMPR p, int id, const wchar_t *str)		{	p->AddParam(id,str);	}
 MGL_EXPORT mglDataA *mgl_parser_add_var(HMPR p, const char *name)	{	return p->AddVar(name);	}
-MGL_EXPORT mglDataA *mgl_parser_find_var(HMPR p, const char *name)	{	return p->FindVar(name);}
+MGL_EXPORT_PURE mglDataA *mgl_parser_find_var(HMPR p, const char *name)	{	return p->FindVar(name);}
 void MGL_EXPORT mgl_parser_del_var(HMPR p, const char *name)	{	p->DeleteVar(name);	}
 MGL_EXPORT mglDataA *mgl_parser_add_varw(HMPR p, const wchar_t *name)	{	return p->AddVar(name);	}
-MGL_EXPORT mglDataA *mgl_parser_find_varw(HMPR p, const wchar_t *name)	{	return p->FindVar(name);}
+MGL_EXPORT_PURE mglDataA *mgl_parser_find_varw(HMPR p, const wchar_t *name)	{	return p->FindVar(name);}
 void MGL_EXPORT mgl_parser_del_varw(HMPR p, const wchar_t *name)	{	p->DeleteVar(name);	}
 int MGL_EXPORT mgl_parse_line(HMGL gr, HMPR p, const char *str, int pos)
 {	return p->Parse(gr, str, pos);	}
@@ -1194,46 +1194,46 @@ long MGL_EXPORT mgl_use_parser(HMPR pr, int inc)
 long MGL_EXPORT mgl_use_parser_(uintptr_t *p, int *inc)
 {	_PR_->InUse+=*inc;	return _PR_->InUse;	}
 //---------------------------------------------------------------------------
-MGL_EXPORT mglDataA *mgl_parser_get_var(HMPR p, unsigned long id)
+MGL_EXPORT_PURE mglDataA *mgl_parser_get_var(HMPR p, unsigned long id)
 {	return id<p->DataList.size()?p->DataList[id]:0;	}
-uintptr_t MGL_EXPORT mgl_parser_get_var_(uintptr_t* p, unsigned long *id)
+uintptr_t MGL_EXPORT_PURE mgl_parser_get_var_(uintptr_t* p, unsigned long *id)
 {	return uintptr_t(mgl_parser_get_var(_PR_,*id));	}
-long MGL_EXPORT mgl_parser_num_var(HMPR p)
+long MGL_EXPORT_PURE mgl_parser_num_var(HMPR p)
 {	return p->DataList.size();	}
-long MGL_EXPORT mgl_parser_num_var_(uintptr_t* p)
+long MGL_EXPORT_PURE mgl_parser_num_var_(uintptr_t* p)
 {	return mgl_parser_num_var(_PR_);	}
-long MGL_EXPORT mgl_parser_num_const(HMPR p)
+long MGL_EXPORT_PURE mgl_parser_num_const(HMPR p)
 {	return p->NumList.size();	}
-long MGL_EXPORT mgl_parser_num_const_(uintptr_t* p)
+long MGL_EXPORT_PURE mgl_parser_num_const_(uintptr_t* p)
 {	return mgl_parser_num_const(_PR_);	}
-MGL_EXPORT mglNum *mgl_parser_get_const(HMPR p, unsigned long id)
+MGL_EXPORT_PURE mglNum *mgl_parser_get_const(HMPR p, unsigned long id)
 {	return id<p->NumList.size()?p->NumList[id]:0;	}
-uintptr_t MGL_EXPORT mgl_parser_get_const_(uintptr_t* p, unsigned long *id)
+uintptr_t MGL_EXPORT_PURE mgl_parser_get_const_(uintptr_t* p, unsigned long *id)
 {	return uintptr_t(mgl_parser_get_const(_PR_,*id));	}
 //---------------------------------------------------------------------------
-int MGL_EXPORT mgl_parser_cmd_type(HMPR pr, const char *name)
+int MGL_EXPORT_PURE mgl_parser_cmd_type(HMPR pr, const char *name)
 {
 	const mglCommand *cmd = pr->FindCommand(name);
 	return cmd ? cmd->type + 1 : 0;
 }
-int MGL_EXPORT mgl_parser_cmd_type_(uintptr_t* p, const char *str, int l)
+int MGL_EXPORT_PURE mgl_parser_cmd_type_(uintptr_t* p, const char *str, int l)
 {	char *s=new char[l+1];	memcpy(s,str,l);	s[l]=0;
 	l = mgl_parser_cmd_type(_PR_, s);	delete []s;	return l;	}
 //---------------------------------------------------------------------------
-MGL_EXPORT const char *mgl_parser_cmd_desc(HMPR pr, const char *name)
+MGL_EXPORT_PURE const char *mgl_parser_cmd_desc(HMPR pr, const char *name)
 {
 	const mglCommand *cmd = pr->FindCommand(name);
 	return cmd ? cmd->desc : 0;
 }
-MGL_EXPORT const char *mgl_parser_cmd_frmt(HMPR pr, const char *name)
+MGL_EXPORT_PURE const char *mgl_parser_cmd_frmt(HMPR pr, const char *name)
 {
 	const mglCommand *cmd = pr->FindCommand(name);
 	return cmd ? cmd->form : 0;
 }
 //---------------------------------------------------------------------------
-MGL_EXPORT const char *mgl_parser_cmd_name(HMPR pr, long id)
+MGL_EXPORT_PURE const char *mgl_parser_cmd_name(HMPR pr, long id)
 {	return (id<mgl_parser_cmd_num(pr) && id>=0) ? pr->Cmd[id].name:"";	}
-long MGL_EXPORT mgl_parser_cmd_num(HMPR pr)
+long MGL_EXPORT_PURE mgl_parser_cmd_num(HMPR pr)
 {	long i=0;	while(pr->Cmd[i].name[0])	i++; 	return i;	}
 //---------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_parser_calc(HMPR pr, const char *formula)

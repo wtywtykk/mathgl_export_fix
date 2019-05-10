@@ -85,7 +85,7 @@ void MGL_EXPORT mgl_data_set_name(mglDataA *dat, const char *name);
 void MGL_EXPORT mgl_data_set_name_(uintptr_t *dat, const char *name,int);
 void MGL_EXPORT mgl_data_set_name_w(mglDataA *dat, const wchar_t *name);
 /// Get name of data variable
-MGL_EXPORT const wchar_t *mgl_data_get_name_w(HCDT dat);
+MGL_EXPORT_PURE const wchar_t *mgl_data_get_name_w(HCDT dat);
 /// Set callback function which is called at deleting variable
 void MGL_EXPORT mgl_data_set_func(mglDataA *dat, void (*func)(void *), void *par);
 
@@ -95,7 +95,7 @@ void MGL_EXPORT mgl_data_set_func(mglDataA *dat, void (*func)(void *), void *par
 void MGL_EXPORT mgl_data_set_id(mglDataA *d, const char *ids);
 void MGL_EXPORT mgl_datac_set_id_(uintptr_t *d, const char *eq,int );
 /// Get names for columns (slices)
-MGL_EXPORT const char *mgl_data_get_id(HCDT d);
+MGL_EXPORT_PURE const char *mgl_data_get_id(HCDT d);
 
 /// Save whole data array (for ns=-1) or only ns-th slice to text file
 void MGL_EXPORT mgl_data_save(HCDT dat, const char *fname,long ns);
@@ -177,15 +177,15 @@ uintptr_t MGL_EXPORT mgl_create_expr_(const char *expr, int);
 void MGL_EXPORT mgl_delete_expr(HMEX ex);
 void MGL_EXPORT mgl_delete_expr_(uintptr_t *ex);
 /// Return value of expression for given x,y,z variables
-double MGL_EXPORT mgl_expr_eval(HMEX ex, double x, double y,double z);
-double MGL_EXPORT mgl_expr_eval_(uintptr_t *ex, mreal *x, mreal *y, mreal *z);
+double MGL_EXPORT_PURE mgl_expr_eval(HMEX ex, double x, double y,double z);
+double MGL_EXPORT_PURE mgl_expr_eval_(uintptr_t *ex, mreal *x, mreal *y, mreal *z);
 /// Return value of expression for given variables
-double MGL_EXPORT mgl_expr_eval_v(HMEX ex, mreal *vars);
+double MGL_EXPORT_PURE mgl_expr_eval_v(HMEX ex, mreal *vars);
 /// Return value of expression differentiation over variable dir for given x,y,z variables
-double MGL_EXPORT mgl_expr_diff(HMEX ex, char dir, double x, double y,double z);
-double MGL_EXPORT mgl_expr_diff_(uintptr_t *ex, const char *dir, mreal *x, mreal *y, mreal *z, int);
+double MGL_EXPORT_PURE mgl_expr_diff(HMEX ex, char dir, double x, double y,double z);
+double MGL_EXPORT_PURE mgl_expr_diff_(uintptr_t *ex, const char *dir, mreal *x, mreal *y, mreal *z, int);
 /// Return value of expression differentiation over variable dir for given variables
-double MGL_EXPORT mgl_expr_diff_v(HMEX ex, char dir, mreal *vars);
+double MGL_EXPORT_PURE mgl_expr_diff_v(HMEX ex, char dir, mreal *vars);
 //-----------------------------------------------------------------------------
 /// Create HAEX object for expression evaluating
 HAEX MGL_EXPORT mgl_create_cexpr(const char *expr);

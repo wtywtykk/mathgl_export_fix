@@ -1298,7 +1298,7 @@ HMGL MGL_EXPORT mgl_create_graph_qt(int (*draw)(HMGL gr, void *p), const char *t
 	g->Window(0,0,draw,title,par,load);
 	return g;
 }
-void* mgl_qt_widget(HMGL gr)
+MGL_EXPORT_PURE void* mgl_qt_widget(HMGL gr)
 {
 	mglCanvasQT *g = dynamic_cast<mglCanvasQT *>(gr);
 	return g?g->QMGL:NULL;

@@ -1045,7 +1045,7 @@ HMGL MGL_EXPORT mgl_create_graph_fltk(int (*draw)(HMGL gr, void *p), const char 
 	g->mgl->FMGL->set_handle_key(true);
 	return g;
 }
-void* mgl_fltk_widget(HMGL gr)
+MGL_EXPORT_PURE void* mgl_fltk_widget(HMGL gr)
 {
 	mglCanvasFL *g = dynamic_cast<mglCanvasFL *>(gr);
 	return g?g->mgl:NULL;

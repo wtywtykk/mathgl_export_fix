@@ -363,7 +363,7 @@ bool parse_file(const char *fname, FILE *out)
 	char buf[1024], *ptr;
 	while ( !feof(fp) )
 	{
-		fgets(buf, 1024, fp);
+		if(!fgets(buf, 1024, fp)) break;
 		// first filter unwanted strings
 		if ( buf[0] == 0 || buf[0] == '\n' || buf[1] == '\n' )
 		{

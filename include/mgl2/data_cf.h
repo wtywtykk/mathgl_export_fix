@@ -40,7 +40,7 @@ extern "C" {
 #endif
 /// Get integer power of x
 double MGL_EXPORT_CONST mgl_ipow(double x,int n);
-double MGL_EXPORT mgl_ipow_(mreal *x,int *n);
+double MGL_EXPORT_PURE mgl_ipow_(mreal *x,int *n);
 /// Get number of seconds since 1970 for given string
 double MGL_EXPORT mgl_get_time(const char *time, const char *fmt);
 double MGL_EXPORT mgl_get_time_(const char *time, const char *fmt,int,int);
@@ -273,7 +273,7 @@ uintptr_t MGL_EXPORT mgl_data_tridmat_(uintptr_t *A, uintptr_t *B, uintptr_t *C,
 /// Returns pointer to data element [i,j,k]
 MGL_EXPORT mreal *mgl_data_value(HMDT dat, long i,long j,long k);
 /// Returns pointer to internal data array
-MGL_EXPORT mreal *mgl_data_data(HMDT dat);
+MGL_EXPORT_PURE mreal *mgl_data_data(HMDT dat);
 
 /// Gets the x-size of the data.
 long MGL_EXPORT mgl_data_get_nx(HCDT d);
