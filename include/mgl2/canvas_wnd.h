@@ -62,6 +62,12 @@ public:
 	virtual void NextFrame()	{GotoFrame(+1);}	///< Show next frame (if one)
 	virtual void PrevFrame()	{GotoFrame(-1);}	///< Show previous frame (if one)
 	virtual void Animation()=0;		///< Run slideshow (animation) of frames
+	
+	virtual void *Window()=0;		///< Return pointer to widget (Fl_Window* or QMainWindow*) used for plotting
+	virtual void *Widget()=0;		///< Return pointer to widget (Fl_MGLView* or QMathGL*) used for plotting
+	virtual void WndSize(int w, int h)=0;	///< Resize window
+	virtual void WndMove(int x, int y)=0;	///< Move window
+	
 	void ReLoad();					///< Reload user data and update picture
 	/// Create a window for plotting based on callback function (can be NULL).
 	virtual void Window(int argc, char **argv, int (*draw)(mglBase *gr, void *p),

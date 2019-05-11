@@ -88,8 +88,14 @@ public:
 	mglWnd() : mglGraph(-1)	{}
 	virtual ~mglWnd() {	mgl_use_graph(gr,-255);	}
 	virtual int Run()=0;		///< Run main loop for event handling
-	/// Return pointer to widget used for plotting
-	virtual void *Widget()	{	return NULL;	}
+	inline void *Window()		///< Return pointer to widget (Fl_Window* or QMainWindow*) used for plotting
+	{	return mgl_wnd_window(gr);	}
+	inline void *Widget()		///< Return pointer to widget (Fl_MGLView* or QMathGL*) used for plotting
+	{	return mgl_wnd_widget(gr);	}
+	inline void WndSize(int w, int h)	///< Resize window
+	{	mgl_wnd_size(gr,w,h);	}
+	inline void WndMove(int x, int y)	///< Move window
+	{	mgl_wnd_move(gr,x,y);	}
 
 	inline void ToggleAlpha()	///< Switch on/off transparency (do not overwrite user settings)
 	{	mgl_wnd_toggle_alpha(gr);	}

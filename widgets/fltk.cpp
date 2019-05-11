@@ -61,6 +61,10 @@ using mglCanvasWnd::Window;
 	void Animation();	///< Run animation (I'm too lasy to change it)
 	void MakeDialog(const char *ids, char const * const *args, const char *title="")
 	{	if(GetNumFig()==1)	mgl->dialog(ids,args,title);	}
+	void *Window()	{return Wnd;}	///< Return pointer to widget (Fl_Window*) used for plotting
+	void *Widget()	{return mgl;}	///< Return pointer to widget (Fl_MGLView*) used for plotting
+	void WndSize(int w, int h)	{	Wnd->size(w,h);	}	///< Resize window
+	void WndMove(int x, int y)	{	Wnd->position(x,y);	}	///< Move window
 };
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_ask_fltk(const wchar_t *quest, wchar_t *res)

@@ -65,8 +65,6 @@ public:
     virtual ~mglFLTK() {}
 	int Run()	{	return mgl_fltk_run();	}	///< Run main loop for event handling
 	int RunThr()	{	return mgl_fltk_thr();	}	///< Run main loop for event handling in separate thread
-	/// Return pointer to widget (Fl_MGLView*) used for plotting
-	void *Widget()	{	return mgl_fltk_widget(gr);	}
 };
 //-----------------------------------------------------------------------------
 #endif

@@ -73,6 +73,10 @@ using mglCanvasWnd::Window;
 	void GotoFrame(int d);	///< Show arbitrary frame (use relative step)
 	void Animation();		///< Run slideshow (animation) of frames
 	void MakeDialog(const char *ids, char const * const *args, const char *title=""){}	// TODO
+	void *Window()	{return Wnd;}	///< Return pointer to widget (QMainWindow*) used for plotting
+	void *Widget()	{return QMGL;}	///< Return pointer to widget (QMathGL*) used for plotting
+	void WndSize(int w, int h)	{	Wnd->resize(w,h);	}	///< Resize window
+	void WndMove(int x, int y)	{	Wnd->move(x,y);	}	///< Move window
 
 
 protected:

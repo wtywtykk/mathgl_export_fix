@@ -172,6 +172,20 @@ void MGL_EXPORT mgl_get_last_mouse_pos(HMGL gr, mreal *x, mreal *y, mreal *z)
 {	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>(gr);
 	mglPoint p;	if(g)	p=g->GetMousePos();
 	*x=p.x;	*y=p.y;	*z=p.z;	}
+MGL_EXPORT void *mgl_wnd_window(HMGL gr)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>(gr);	return g?g->Window():NULL;	}
+MGL_EXPORT void *mgl_wnd_widget(HMGL gr)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>(gr);	return g?g->Widget():NULL;	}
+/// Move window to given position
+void MGL_EXPORT mgl_wnd_move(HMGL gr, int x, int y)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>(gr);	if(g)	g->WndMove(x,y);	}
+void MGL_EXPORT mgl_wnd_move_(uintptr_t *gr, int *x, int *y)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>((HMGL)(*gr));	if(g)	g->WndMove(*x,*y);	}
+/// Change window sizes
+void MGL_EXPORT mgl_wnd_size(HMGL gr, int w, int h)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>(gr);	if(g)	g->WndSize(w,h);	}
+void MGL_EXPORT mgl_wnd_size_(uintptr_t *gr, int *w, int *h)
+{	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>((HMGL)(*gr));	if(g)	g->WndSize(*w,*h);	}
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_wnd_toggle_alpha_(uintptr_t *gr)
 {	mglCanvasWnd *g = dynamic_cast<mglCanvasWnd *>((HMGL)(*gr));

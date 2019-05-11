@@ -54,8 +54,6 @@ public:
 		mgl_set_click_func(gr, mgl_click_class);	}
 	virtual ~mglQT() {}
 	int Run()	{	return mgl_qt_run();	}	///< Run main loop for event handling
-	/// Return pointer to widget (QMathGL*) used for plotting
-	void *Widget()	{	return mgl_qt_widget(gr);	}
 };
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_ask_qt(const wchar_t *quest, wchar_t *res);

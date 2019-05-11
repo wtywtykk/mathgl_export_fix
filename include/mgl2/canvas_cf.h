@@ -592,6 +592,16 @@ void MGL_EXPORT mgl_wnd_animation_(uintptr_t *gr);
 /// Get last mouse position
 void MGL_EXPORT mgl_get_last_mouse_pos(HMGL gr, mreal *x, mreal *y, mreal *z);
 void MGL_EXPORT mgl_get_last_mouse_pos_(uintptr_t *gr, mreal *x, mreal *y, mreal *z);
+/// Return pointer to widget (Fl_Window* or QMainWindow*) used for plotting
+MGL_EXPORT void *mgl_wnd_window(HMGL gr);
+/// Return pointer to widget (Fl_MGLView* or QMathGL*) used for plotting
+MGL_EXPORT void *mgl_wnd_widget(HMGL gr);
+/// Move window to given position
+void MGL_EXPORT mgl_wnd_move(HMGL gr, int x, int y);
+void MGL_EXPORT mgl_wnd_move_(uintptr_t *gr, int *x, int *y);
+/// Change window sizes
+void MGL_EXPORT mgl_wnd_size(HMGL gr, int w, int h);
+void MGL_EXPORT mgl_wnd_size_(uintptr_t *gr, int *w, int *h);
 //-----------------------------------------------------------------------------
 /// Create HMPR object for parsing MGL scripts
 HMPR MGL_EXPORT mgl_create_parser();
