@@ -395,6 +395,15 @@ void MGL_EXPORT mgl_parse_animation(const wchar_t *text, std::vector<std::wstrin
 	mgl_parse_comments(text, a1, a2, da, anim, ids, par);
 }
 //-----------------------------------------------------------------------------
+#undef _GR_
+#define _GR_	((mglCanvas *)(*gr))
+void MGL_EXPORT mgl_wnd_set_delay(HMGL gr, double dt)
+{	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->SetDelay(dt);	}
+double MGL_EXPORT_PURE mgl_wnd_get_delay(HMGL gr)
+{	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	return g?g->GetDelay():0;	}
+void MGL_EXPORT mgl_wnd_set_delay_(uintptr_t *gr, mreal *dt)	{	_GR_->SetDelay(*dt);	}
+double MGL_EXPORT_PURE mgl_wnd_get_delay_(uintptr_t *gr)	{	return _GR_->GetDelay();	}
+//-----------------------------------------------------------------------------
 MGL_EXPORT const char *mgl_hints[] = {
 	_("You can shift axis range by pressing middle button and moving mouse. Also, you can zoom in/out axis range by using mouse wheel."),
 	_("You can rotate/shift/zoom whole plot by mouse. Just press 'Rotate' toolbutton, click image and hold a mouse button: left button for rotation, right button for zoom/perspective, middle button for shift."),

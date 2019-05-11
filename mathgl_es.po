@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 06:17+0300\n"
+"POT-Creation-Date: 2019-05-11 08:21+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -698,7 +698,7 @@ msgstr "Optimizar marcas de los ejes"
 msgid "Airy and Gamma"
 msgstr "Funciones de Airy y Gamma"
 
-#: src/window.cpp:408
+#: src/window.cpp:417
 msgid ""
 "All indexes (of data arrays, subplots and so on) are always start from 0."
 msgstr ""
@@ -3392,7 +3392,7 @@ msgstr "Navegacion"
 msgid "New command"
 msgstr "Nuevo comando"
 
-#: src/window.cpp:406
+#: src/window.cpp:415
 msgid ""
 "New drawing never clears things drawn already. For example, you can make a "
 "surface with contour lines by calling commands 'surf' and 'cont' one after "
@@ -3657,7 +3657,7 @@ msgstr "PNG"
 msgid "PNG Files \t*.png"
 msgstr "Archivos PNG \t*.png"
 
-#: src/canvas_cf.cpp:502 src/canvas_cf.cpp:504 src/data_png.cpp:118
+#: src/canvas_cf.cpp:495 src/canvas_cf.cpp:497 src/data_png.cpp:118
 #: src/export.cpp:75 src/export.cpp:109
 msgid "PNG support was disabled. Please, enable it and rebuild MathGL."
 msgstr "Formato PNG deshabilitado. Habilítelo y recompile MathGL."
@@ -5164,7 +5164,7 @@ msgstr "Texto en contornos"
 msgid "Text style"
 msgstr "Estilo de texto"
 
-#: src/window.cpp:414
+#: src/window.cpp:423
 msgid ""
 "The calculator can help you to put complex expression in the script. Just "
 "type the expression (which may depend on coordinates x,y,z and so on) and "
@@ -5182,7 +5182,7 @@ msgstr ""
 "El archivo actual no se ha guardado.\n"
 "¿Desea guardarlo ahora?"
 
-#: src/window.cpp:416
+#: src/window.cpp:425
 msgid ""
 "The special dialog (Edit|Insert|New Command) help you select the command, "
 "fill its arguments and put it into the script."
@@ -5222,7 +5222,7 @@ msgstr "No hay solicitud. Salir.\n"
 msgid "There is no selection to evaluate."
 msgstr "No hay selección para evaluar."
 
-#: src/window.cpp:413
+#: src/window.cpp:422
 msgid ""
 "There is powerful calculator with a lot of special functions. You can use "
 "buttons or keyboard to type the expression. Also you can use existed "
@@ -5784,7 +5784,7 @@ msgstr "Y/Z"
 msgid "Yes"
 msgstr "Sí"
 
-#: src/window.cpp:418
+#: src/window.cpp:427
 msgid ""
 "You can concatenation of strings and numbers using `,` with out spaces (for "
 "example, `'max(u)=',u.max,' a.u.'` or `'u=',!(1+i2)` for complex numbers). "
@@ -5794,7 +5794,7 @@ msgid ""
 "together."
 msgstr ""
 
-#: src/window.cpp:402
+#: src/window.cpp:411
 msgid ""
 "You can copy the current image to clipboard by pressing Ctrl-Shift-C. Later "
 "you can paste it directly into yours document or presentation."
@@ -5802,7 +5802,7 @@ msgstr ""
 "Puede copiar la imagen actual a memoria presionando Ctrl-Shift-C. Luego se "
 "puede pegar directamente en un documento o presentación."
 
-#: src/window.cpp:415
+#: src/window.cpp:424
 msgid ""
 "You can easily insert file or folder names, last fitted formula or numerical "
 "value of selection by using menu Edit|Insert."
@@ -5811,7 +5811,7 @@ msgstr ""
 "fórmula ajustada o o valores numéricos seleccionados usando el menú Editar|"
 "Insertar."
 
-#: src/window.cpp:409
+#: src/window.cpp:418
 msgid ""
 "You can edit MGL file in any text editor. Also you can run it in console by "
 "help of commands: mglconv, mglview."
@@ -5819,7 +5819,7 @@ msgstr ""
 "Puede editar un archivo MGL en cualquier editor. También lo puede ejecutar "
 "en una terminal con ayuda de los comandos mglconv, mglview."
 
-#: src/window.cpp:403
+#: src/window.cpp:412
 msgid ""
 "You can export image into a set of format (EPS, SVG, PNG, JPEG) by pressing "
 "right mouse button inside image and selecting 'Export as ...'."
@@ -5828,7 +5828,7 @@ msgstr ""
 "presionando el botón derecho del mouse sobre la imagen y seleccionado "
 "\"Exportar como ...'."
 
-#: src/window.cpp:407
+#: src/window.cpp:416
 msgid ""
 "You can put several plots in the same image by help of commands 'subplot' or "
 "'inplot'."
@@ -5836,7 +5836,7 @@ msgstr ""
 "Puede poner varias gráficas en la misma imagen con ayuda de los comando "
 "\"subplot\" o \"inplot\"."
 
-#: src/window.cpp:417
+#: src/window.cpp:426
 msgid ""
 "You can put several plotting commands in the same line or in separate "
 "function, for highlighting all of them simultaneously."
@@ -5844,7 +5844,7 @@ msgstr ""
 "Puede poner varios comandos en la misma línea o en una función separada, "
 "para resaltarlos todos simultáneamente."
 
-#: src/window.cpp:400
+#: src/window.cpp:409
 msgid ""
 "You can rotate/shift/zoom whole plot by mouse. Just press 'Rotate' "
 "toolbutton, click image and hold a mouse button: left button for rotation, "
@@ -5855,7 +5855,7 @@ msgstr ""
 "mouse: izquierdo para rotación, derecho para zoom/perspectiva, del medio "
 "para traslación."
 
-#: src/window.cpp:405
+#: src/window.cpp:414
 msgid ""
 "You can save the parameter of animation inside MGL script by using comment "
 "started from '##a ' or '##c ' for loops."
@@ -5863,7 +5863,7 @@ msgstr ""
 "Puede guardar los parámetros de una animación en un script MGL usando "
 "comentarios que inicien con '##a ' o '##c ' para bucles."
 
-#: src/window.cpp:404
+#: src/window.cpp:413
 msgid ""
 "You can setup colors for script highlighting in Property dialog. Just select "
 "menu item 'Settings/Properties'."
@@ -5871,7 +5871,7 @@ msgstr ""
 "Puede configurar los colores para el resaltado del script en el dialogo "
 "\"Propiedades\". Solo seleccione 'Configuración/Propiedades'."
 
-#: src/window.cpp:399
+#: src/window.cpp:408
 msgid ""
 "You can shift axis range by pressing middle button and moving mouse. Also, "
 "you can zoom in/out axis range by using mouse wheel."
@@ -5881,7 +5881,7 @@ msgstr ""
 "rueda del mouse."
 
 # Needs revision of the English version
-#: src/window.cpp:412
+#: src/window.cpp:421
 msgid ""
 "You can type arbitrary expression as input argument for data or number. In "
 "last case (for numbers), the first value of data array is used."
@@ -5890,7 +5890,7 @@ msgstr ""
 "datos. En el primer caso (para números), el primer valor del arreglo es "
 "usado."
 
-#: src/window.cpp:410
+#: src/window.cpp:419
 msgid ""
 "You can use command 'once on|off' for marking the block which should be "
 "executed only once. For example, this can be the block of large data reading/"
@@ -5902,7 +5902,7 @@ msgstr ""
 "un bloque largo de lectura/creación/manipulación de datos. Presione F9 (o "
 "seleccione 'Gráfica/Recargar') para volver a ejecutar el bloque."
 
-#: src/window.cpp:411
+#: src/window.cpp:420
 msgid ""
 "You can use command 'stop' for terminating script parsing. It is useful if "
 "you don't want to execute a part of script."
@@ -5910,7 +5910,7 @@ msgstr ""
 "Puede usar el comando \"stop\" para terminar la ejecución del script. Esto "
 "es útil si se desea que una parte de este no se ejecute."
 
-#: src/window.cpp:401
+#: src/window.cpp:410
 msgid ""
 "You may quickly draw the data from file. Just use: mgllab 'filename.dat' in "
 "command line."

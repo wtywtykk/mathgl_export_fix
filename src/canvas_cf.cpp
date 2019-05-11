@@ -480,13 +480,6 @@ void MGL_EXPORT mgl_legend_(uintptr_t *gr, int *where, const char *font, const c
 void MGL_EXPORT mgl_set_legend_marks_(uintptr_t *gr, int *num)
 {	_GR_->SetLegendMarks(*num);	}
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_wnd_set_delay(HMGL gr, double dt)
-{	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->SetDelay(dt);	}
-double MGL_EXPORT_PURE mgl_wnd_get_delay(HMGL gr)
-{	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	return g?g->GetDelay():0;	}
-void MGL_EXPORT mgl_wnd_set_delay_(uintptr_t *gr, mreal *dt)	{	_GR_->SetDelay(*dt);	}
-double MGL_EXPORT_PURE mgl_wnd_get_delay_(uintptr_t *gr)	{	return _GR_->GetDelay();	}
-//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_set_plotfactor(HMGL gr, double val)
 {	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->SetPlotFactor(val);	}
 void MGL_EXPORT mgl_set_plotfactor_(uintptr_t *gr, mreal *val)

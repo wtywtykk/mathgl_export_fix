@@ -21,6 +21,7 @@
 #define _MGL_WND_H_
 
 #include "mgl2/mgl.h"
+#include "mgl2/wnd_cf.h"
 //-----------------------------------------------------------------------------
 MGL_EXPORT void *mgl_draw_calc(void *p);
 void MGL_EXPORT mgl_parse_comments(const char *text, double &a1, double &a2, double &da, std::vector<std::string> &anim, std::string &dlg_ids, std::vector<std::string> &dlg_par);
