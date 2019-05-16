@@ -408,7 +408,7 @@ void MGL_EXPORT mgl_set_axis_stl_(uintptr_t *gr, const char *stl, const char *tc
 void MGL_EXPORT mgl_adjust_ticks_(uintptr_t *gr, const char *dir, int l)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	_GR_->AdjustTicks(s,true);	delete []s;	}
-void MGL_EXPORT mgl_adjust_ticks_(uintptr_t *gr, const char *dir, const char *stl, int l, int m)
+void MGL_EXPORT mgl_adjust_ticks_ext_(uintptr_t *gr, const char *dir, const char *stl, int l, int m)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	char *f=new char[m+1];	memcpy(f,stl,m);	f[m]=0;
 	_GR_->AdjustTicks(s,true,f);	delete []s;	delete []f;	}

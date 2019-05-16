@@ -462,7 +462,7 @@ void MGL_EXPORT mgl_subplot_(uintptr_t *gr, int *nx,int *ny,int *m, const char *
  *  '_' for reserving space at bottom
  *  '#' for using whole region. */
 void MGL_EXPORT mgl_subplot_d(HMGL gr, int nx,int ny,int m,const char *style, double dx, double dy);
-void MGL_EXPORT mgl_subplot_d_(uintptr_t *gr, int *nx,int *ny,int *m, mreal *dx, mreal *dy);
+void MGL_EXPORT mgl_subplot_d_(uintptr_t *gr, int *nx,int *ny,int *m,const char *style, mreal *dx, mreal *dy,int l);
 /// Put further plotting in rectangle of dx*dy cells starting from m-th cell of nx*ny grid of the image.
 /** String \a style may contain:
  *  '<' for reserving space at left

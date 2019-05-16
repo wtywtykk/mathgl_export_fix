@@ -343,14 +343,14 @@ void MGL_EXPORT mgl_datac_create(HADT d,long mx,long my,long mz)
 void MGL_EXPORT mgl_datac_create_(uintptr_t *d, int *nx,int *ny,int *nz)
 {	mgl_datac_create(_DC_,*nx,*ny,*nz);	}
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_datac_link(HADT d, dual *A, long mx,long my,long mz)
+void MGL_EXPORT mgl_datac_link(HADT d, mdual *A, long mx,long my,long mz)
 {
 	if(!A)	return;
 	if(!d->link && d->a)	delete [](d->a);
 	d->nx = mx>0 ? mx:1;	d->ny = my>0 ? my:1;	d->nz = mz>0 ? mz:1;
-	d->link=true;	d->a=A;	d->NewId();
+	d->link=true;	d->a=reinterpret_cast<dual*>(A);	d->NewId();
 }
-void MGL_EXPORT mgl_datac_link_(uintptr_t *d, dual *A, int *nx,int *ny,int *nz)
+void MGL_EXPORT mgl_datac_link_(uintptr_t *d, mdual *A, int *nx,int *ny,int *nz)
 {	mgl_datac_link(_DC_,A,*nx,*ny,*nz);	}
 //-----------------------------------------------------------------------------
 int MGL_EXPORT mgl_datac_read_dim(HADT d, const char *fname,long mx,long my,long mz)
