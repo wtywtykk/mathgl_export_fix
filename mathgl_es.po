@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 08:21+0300\n"
+"POT-Creation-Date: 2019-06-06 10:25+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -5119,7 +5119,7 @@ msgstr "Rango simétrico"
 msgid "Symmetrical?"
 msgstr "¿Simétrico?"
 
-#: src/addon.cpp:111 src/base_cf.cpp:268
+#: src/addon.cpp:121 src/base_cf.cpp:268
 #, c-format
 msgid "TEST: %s\n"
 msgstr "TEST: %s\n"

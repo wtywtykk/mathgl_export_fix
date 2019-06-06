@@ -56,6 +56,11 @@ long MGL_EXPORT_PURE mgl_chrpos(const char *str,char ch)
 	return p?p-str:-1L;
 }
 //-----------------------------------------------------------------------------
+int mgl_fgetstr_script = 0;
+void MGL_EXPORT mgl_fgetstr_mgl(int enable)
+{
+	mgl_fgetstr_script = enable;
+}
 MGL_EXPORT char *mgl_fgetstr(FILE *fp)
 {
 	const long size=10240;	// NOTE: this set maximal length of string to be read
@@ -64,6 +69,11 @@ MGL_EXPORT char *mgl_fgetstr(FILE *fp)
 	{
 		if(!fgets(s,size,fp))	break;
 		mgl_strtrim(s);
+		if(mgl_fgetstr_script && s[0]=='#' && s[1]=='M' && s[2]=='G' && s[3]=='L' && s[4]==' ')
+		{
+			std::string buf("mglconv -n ");	buf+= s+5;
+			system(buf.c_str());
+		}
 		//		strlwr(s);
 	} while(!feof(fp) && (s[0]==0 || s[0]=='%' || s[0]=='#'));
 	for(long i=0;s[i];i++)	if(s[i]=='#')	{	s[i]=0;	break;	}

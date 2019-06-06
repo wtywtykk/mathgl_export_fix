@@ -56,6 +56,8 @@ void MGL_EXPORT mgl_test(const char *str, ...);
 void MGL_EXPORT mgl_info(const char *str, ...);
 /// Locate next data block (block started by -----)
 MGL_EXPORT FILE *mgl_next_data(const char *fname,int p);
+/// Enable executing MGL script if mgl_fgetstr() meet '#MGL fname.mgl [args]. Default value is 0 (false).
+void MGL_EXPORT mgl_fgetstr_mgl(int enable);
 
 #ifdef __cplusplus
 }
