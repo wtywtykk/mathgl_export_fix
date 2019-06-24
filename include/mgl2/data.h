@@ -279,6 +279,9 @@ using mglDataA::Momentum;
 	{	return mglData(true,mgl_data_section(this,&ids,dir,val));	}
 	inline mglData Section(long id, char dir='y', mreal val=NAN) const
 	{	return mglData(true,mgl_data_section_val(this,id,dir,val));	}
+	/// Get contour lines for dat[i,j]=val. NAN values separate the the curves
+	inline mglData Conts(mreal val)
+	{	return mglData(true,mgl_data_conts(val,this));	}
 
 	/// Get trace of the data array
 	inline mglData Trace() const

@@ -169,6 +169,8 @@ uintptr_t MGL_EXPORT mgl_data_section_(uintptr_t *d, uintptr_t *ids, const char 
 /** If section id is negative then reverse order is used (i.e. -1 give last section). */
 HMDT MGL_EXPORT mgl_data_section_val(HCDT dat, long id, char dir, mreal val);
 uintptr_t MGL_EXPORT mgl_data_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int);
+/// Get contour lines for dat[i,j]=val. NAN values separate the the curves
+HMDT mgl_data_conts(mreal val, HCDT dat);
 
 /// Equidistantly fill the data to range [x1,x2] in direction dir
 void MGL_EXPORT mgl_data_fill(HMDT dat, mreal x1,mreal x2,char dir);

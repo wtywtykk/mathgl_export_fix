@@ -236,12 +236,12 @@ std::vector<mglSegment> MGL_EXPORT mgl_get_lines(mreal val, HCDT a, HCDT x, HCDT
 	return lines;
 }
 //-----------------------------------------------------------------------------
-std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(HMGL gr, std::vector<mglSegment> lines)
+std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(const mglPoint &Min, const mglPoint &Max, std::vector<mglSegment> lines)
 {
 	long n = lines.size(), m = n;
 	const long nsl=(n>0 && n*n>100)?sqrt(double(n)):10;
-	mreal dxsl = nsl/((gr->Max.x-gr->Min.x)*MGL_FEPSILON), x0 = gr->Min.x;
-	mreal dysl = nsl/((gr->Max.y-gr->Min.y)*MGL_FEPSILON), y0 = gr->Min.y;
+	mreal dxsl = nsl/((Max.x-Min.x)*MGL_FEPSILON), x0 = Min.x;
+	mreal dysl = nsl/((Max.y-Min.y)*MGL_FEPSILON), y0 = Min.y;
 	std::vector<long> *xsl, *ysl;
 	xsl = new std::vector<long>[nsl+1];
 	ysl = new std::vector<long>[nsl+1];
@@ -327,6 +327,8 @@ std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(HMGL gr, std::vector<mglSegment
 	delete []used;	delete []xsl;	delete []ysl;
 	return curvs;
 }
+std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(HMGL gr, std::vector<mglSegment> lines)
+{	return mgl_get_curvs(gr->Min, gr->Max, lines);	}
 //-----------------------------------------------------------------------------
 void MGL_NO_EXPORT mgl_draw_curvs(HMGL gr, mreal val, mreal c, int text, const std::vector<mglSegment> &curvs)
 {
@@ -382,6 +384,33 @@ void MGL_NO_EXPORT mgl_draw_curvs(HMGL gr, mreal val, mreal c, int text, const s
 	delete []nn;	delete []ff;
 }
 //-----------------------------------------------------------------------------
+HMDT mgl_data_conts(mreal val, HCDT dat)
+{
+	mglPoint Min(0,0,0), Max(1,1,1);
+	mglDataV x(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'x');
+	mglDataV y(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'y');
+	mglDataV z(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'z');
+	std::vector<mglSegment> curvs = mgl_get_curvs(Min,Max,mgl_get_lines(val,dat,&x,&y,&z,0));
+	long pc=0, m=0;
+	for(size_t i=0;i<curvs.size();i++)	pc += curvs[i].pp.size();
+	// fill arguments for other functions
+	HMDT res = new mglData(3,pc);
+	for(size_t i=0;i<curvs.size();i++)
+	{
+		const std::list<mglPoint> &pp=curvs[i].pp;
+		for(std::list<mglPoint>::const_iterator it=pp.begin(); it != pp.end(); ++it)
+		{
+			long i0 = 3*m;
+			res->a[i0] = (*it).x;
+			res->a[1+i0] = (*it).y;
+			res->a[2+i0] = (*it).z;
+			m++;
+		}
+		long i0 = 3*m-3;
+		res->a[i0] = res->a[1+i0] = res->a[2+i0] = NAN;
+	}
+	return res;
+}
 // NOTE! All data MUST have the same size! Only first slice is used!
 void MGL_EXPORT mgl_cont_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak)
 {
