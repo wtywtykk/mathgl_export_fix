@@ -413,6 +413,8 @@ int static mgls_cont(mglGraph *gr, long , mglArg *a, const char *k, const char *
 	else if(!strcmp(k,"ddds"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s,opt);
 	else if(!strcmp(k,"dddd"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
+	else if(!strcmp(k,"ndddd"))	gr->ContGen(a[0].v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d),"",opt);
+	else if(!strcmp(k,"ndddds"))	gr->ContGen(a[0].v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -443,6 +445,8 @@ int static mgls_contf(mglGraph *gr, long , mglArg *a, const char *k, const char 
 	else if(!strcmp(k,"ddds"))	gr->ContF(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s,opt);
 	else if(!strcmp(k,"dddd"))	gr->ContF(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->ContF(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
+	else if(!strcmp(k,"nndddd"))	gr->ContFGen(a[0].v, a[1].v, *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d),"",opt);
+	else if(!strcmp(k,"nndddds"))	gr->ContFGen(a[0].v, a[1].v, *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), a[6].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -1139,10 +1143,10 @@ mglCommand mgls_grf_cmd[] = {
 	{"chart",_("Draw chart"),"chart Dat ['fmt']", mgls_chart ,7},
 	{"cloud",_("Draw cloud"),"cloud Adat ['fmt']|Xdat Ydat Zdat Adat ['fmt']", mgls_cloud ,9},
 	{"cones",_("Draw cones for 1D data"),"cones Ydat ['fmt' above]|Xdat Ydat ['fmt' above]|Xdat Ydat Zdat ['fmt' above]", mgls_cones ,7},
-	{"cont",_("Draw contour lines"),"cont Zdat ['fmt' num zpos]|Vdat Zdat ['fmt' zpos]|Xdat Ydat Zdat ['fmt' num zpos]|Vdat Xdat Ydat Zdat ['fmt' zpos]", mgls_cont ,8},
+	{"cont",_("Draw contour lines"),"cont Zdat ['fmt']|Vdat Zdat ['fmt']|Xdat Ydat Zdat ['fmt']|Vdat Xdat Ydat Zdat ['fmt']|val Adat Xdat Ydat Zdat ['fmt']", mgls_cont ,8},
 	{"cont3",_("Draw contour lines for 3D data"),"cont3 Adat 'dir' [val 'fmt' num]|Vdat Adat 'dir' [val 'fmt']|Xdat Ydat Zdat Adat 'dir' [val 'fmt' num]|Vdat Xdat Ydat Zdar Adat 'dir' [val 'fmt']", mgls_cont3 ,9},
-	{"contd",_("Draw solid contours with manual colors"),"contd Zdat ['fmt' num zpos]|Vdat Zdat ['fmt' zpos]|Xdat Ydat Zdat ['fmt' num zpos]|Vdat Xdat Ydat Zdat ['fmt' zpos]", mgls_contd ,8},
-	{"contf",_("Draw solid contours"),"contf Zdat ['fmt' num zpos]|Vdat Zdat ['fmt' zpos]|Xdat Ydat Zdat ['fmt' num zpos]|Vdat Xdat Ydat Zdat ['fmt' zpos]", mgls_contf ,8},
+	{"contd",_("Draw solid contours with manual colors"),"contd Zdat ['fmt']|Vdat Zdat ['fmt']|Xdat Ydat Zdat ['fmt']|Vdat Xdat Ydat Zdat ['fmt']", mgls_contd ,8},
+	{"contf",_("Draw solid contours"),"contf Zdat ['fmt']|Vdat Zdat ['fmt']|Xdat Ydat Zdat ['fmt']|Vdat Xdat Ydat Zdat ['fmt']|v1 v2 Adat Xdat Ydat Zdat ['fmt']", mgls_contf ,8},
 	{"contf3",_("Draw solid contour lines for 3D data"),"contf3 Adat 'dir' [val 'fmt' num]|Vdat Adat 'dir' [val 'fmt']|Xdat Ydat Zdat Adat 'dir' [val 'fmt' num]|Vdat Xdat Ydat Zdar Adat 'dir' [val 'fmt']", mgls_contf3 ,9},
 	{"contfx",_("Draw solid contour lines at x-slice (or x-plane)"),"contfx Dat ['fmt' pos num]", mgls_contfx ,0},
 	{"contfy",_("Draw solid contour lines at y-slice (or y-plane)"),"contfy Dat ['fmt' pos num]", mgls_contfy ,0},

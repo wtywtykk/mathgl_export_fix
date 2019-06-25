@@ -321,6 +321,9 @@ uintptr_t MGL_EXPORT mgl_data_max_dir_(uintptr_t *dat, const char *dir,int);
 /// Get array which is result of minimal values in given direction or directions
 HMDT MGL_EXPORT mgl_data_min_dir(HCDT dat, const char *dir);
 uintptr_t MGL_EXPORT mgl_data_min_dir_(uintptr_t *dat, const char *dir,int);
+/// Get positions of local maximums and minimums
+HMDT MGL_EXPORT mgl_data_extr(HCDT dat);
+uintptr_t MGL_EXPORT mgl_data_extr_(uintptr_t *dat);
 /// Cumulative summation the data in given direction or directions
 void MGL_EXPORT mgl_data_cumsum(HMDT dat, const char *dir);
 void MGL_EXPORT mgl_data_cumsum_(uintptr_t *dat, const char *dir,int);

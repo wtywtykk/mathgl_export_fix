@@ -391,7 +391,7 @@ HMDT mgl_data_conts(mreal val, HCDT dat)
 	mglDataV y(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'y');
 	mglDataV z(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'z');
 	std::vector<mglSegment> curvs = mgl_get_curvs(Min,Max,mgl_get_lines(val,dat,&x,&y,&z,0));
-	long pc=0, m=0;
+	long pc=curvs.size(), m=0;
 	for(size_t i=0;i<curvs.size();i++)	pc += curvs[i].pp.size();
 	// fill arguments for other functions
 	HMDT res = new mglData(3,pc);
@@ -406,11 +406,12 @@ HMDT mgl_data_conts(mreal val, HCDT dat)
 			res->a[2+i0] = (*it).z;
 			m++;
 		}
-		long i0 = 3*m-3;
+		long i0 = 3*m;	m++;
 		res->a[i0] = res->a[1+i0] = res->a[2+i0] = NAN;
 	}
 	return res;
 }
+//-----------------------------------------------------------------------------
 // NOTE! All data MUST have the same size! Only first slice is used!
 void MGL_EXPORT mgl_cont_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak)
 {
@@ -421,13 +422,18 @@ void MGL_EXPORT mgl_cont_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z,
 	mgl_draw_curvs(gr,val,c,text,mgl_get_curvs(gr,mgl_get_lines(val,a,x,y,z,ak)));
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_cont_gen(HMGL gr, double val, HCDT a, HCDT x, HCDT y, HCDT z, const char *sch)
+void MGL_EXPORT mgl_cont_gen(HMGL gr, double val, HCDT a, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)
 {
+	if(mgl_check_dim2(gr,x,y,z,a,"ContGen"))	return;
+	gr->SaveState(opt);
+	static int cgid=1;	gr->StartGroup("ContGen",cgid++);
+
 	int text=0;
 	if(mglchr(sch,'t'))	text=1;
 	if(mglchr(sch,'T'))	text=2;
 	gr->SetPenPal(sch);
 	mgl_cont_gen(gr,val,a,x,y,z,gr->CDef,text,0);
+	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_cont_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)
@@ -776,10 +782,15 @@ void MGL_EXPORT mgl_contf_gen(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT 
 	delete []kk;
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_contf_gen(HMGL gr, double v1, double v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *c)
+void MGL_EXPORT mgl_contf_gen(HMGL gr, double v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)
 {
-	gr->SetPenPal(c);
+	if(mgl_check_dim2(gr,x,y,z,a,"ContFGen"))	return;
+	gr->SaveState(opt);
+	static int cgid=1;	gr->StartGroup("ContFGen",cgid++);
+
+	gr->SetPenPal(sch);
 	mgl_contf_gen(gr,v1,v2,a,x,y,z,gr->CDef,0);
+	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_contf_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)

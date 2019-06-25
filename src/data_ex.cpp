@@ -472,6 +472,81 @@ uintptr_t MGL_EXPORT mgl_data_min_dir_(uintptr_t *d, const char *dir,int l)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	uintptr_t r=uintptr_t(mgl_data_min_dir(_DT_,s));	delete []s;	return r;	}
 //-----------------------------------------------------------------------------
+HMDT MGL_EXPORT mgl_data_extr(HCDT dat)
+{
+	long n=dat->GetNx(), m=dat->GetNy(), l=dat->GetNz();
+	std::vector<mreal> imax, jmax, kmax;
+	HMDT res=NULL;
+	if(n>3 && m==1 && l==1)
+	{
+		std::vector<mreal> imax;
+		for(long i=1;i<n-1;i++)
+		{
+			mreal v = dat->v(i);
+			if(v > dat->v(i-1) && v >= dat->v(i+1))	imax.push_back(i);
+			if(v < dat->v(i-1) && v <= dat->v(i+1))	imax.push_back(i);
+		}
+		size_t nn = imax.size();
+		res = new mglData(nn);
+		for(size_t i=0;i<nn;i++)	res->a[i] = imax[i]/(n-1.);
+	}
+	else if(n>3 && m>3 && l==1)
+	{
+		std::vector<mreal> imax, jmax;
+		for(long j=1;j<m-1;j++)	for(long i=1;i<n-1;i++)
+		{
+			mreal v = dat->v(i,j);
+			long di[] = {-1,0,1, -1,1, -1,0,1}, dj[] = {-1,-1, -1,0, 0,1,1,1};
+			if(v > dat->v(i-1,j-1))
+			{
+				bool ok=true;
+				for(int ii=1;ii<8;ii++)	if(v < dat->v(i+di[ii],j+dj[ii]))	ok=false;
+				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	}
+			}
+			if(v < dat->v(i-1,j-1))
+			{
+				bool ok=true;
+				for(int ii=1;ii<8;ii++)	if(v > dat->v(i+di[ii],j+dj[ii]))	ok=false;
+				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	}
+			}
+		}
+		size_t nn = imax.size();
+		res = new mglData(2,nn);
+		for(size_t i=0;i<nn;i++)
+		{	res->a[2*i] = imax[i]/(n-1.);	res->a[2*i+1] = jmax[i]/(m-1.);	}
+	}
+	else if(n>3 && m>3 && l>3)
+	{
+		std::vector<mreal> imax, jmax;
+		for(long k=1;k<l-1;k++)	for(long j=1;j<m-1;j++)	for(long i=1;i<n-1;i++)
+		{
+			mreal v = dat->v(i,j,k);
+			long di[] = {-1,0,1,-1,0,1,-1,0,1,		-1,0,1,-1,1,-1,0,1,	-1,0,1,-1,0,1,-1,0,1};
+			long dj[] = {-1,-1,-1,0,0,0,1,1,1,		-1,-1,-1,0,0,1,1,1,	-1,-1,-1,0,0,0,1,1,1};
+			long dk[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1, 0,0,0,0,0,0,0,0,	1,1,1,1,1,1,1,1,1};
+			if(v > dat->v(i-1,j-1,k-1))
+			{
+				bool ok=true;
+				for(int ii=1;ii<26;ii++)	if(v < dat->v(i+di[ii],j+dj[ii],k+dk[ii]))	ok=false;
+				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
+			}
+			if(v < dat->v(i-1,j-1,k-1))
+			{
+				bool ok=true;
+				for(int ii=1;ii<8;ii++)	if(v > dat->v(i+di[ii],j+dj[ii],k+dk[ii]))	ok=false;
+				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
+			}
+		}
+		size_t nn = imax.size();
+		res = new mglData(3,nn);
+		for(size_t i=0;i<nn;i++)
+		{	res->a[3*i] = imax[i]/(n-1.);	res->a[3*i+1] = jmax[i]/(m-1.);	res->a[3*i+2] = kmax[i]/(l-1.);	}
+	}
+	return res;
+}
+uintptr_t MGL_EXPORT mgl_data_extr_(uintptr_t *d)
+{	return uintptr_t(mgl_data_extr(_DT_));	}
+//-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_data_momentum(HCDT dat, char dir, const char *how)
 {
 	if(!how || !(*how) || !strchr("xyz",dir))	return 0;

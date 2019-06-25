@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-25 00:24+0300\n"
+"POT-Creation-Date: 2019-06-25 17:18+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -590,7 +590,7 @@ msgstr "Добавить кривую"
 msgid "Add curve which properties can be changed later by mouse."
 msgstr "Добавить кривую. Ее свойства можно изменить позже мышью."
 
-#: src/exec_dat.cpp:1644
+#: src/exec_dat.cpp:1654
 msgid "Add data or number"
 msgstr "Прибавить массив или число"
 
@@ -1126,7 +1126,7 @@ msgstr "Копировать координаты последнего нажа�
 msgid "Copy data"
 msgstr "Копировать данные"
 
-#: src/exec_dat.cpp:1651
+#: src/exec_dat.cpp:1661
 msgid "Copy data from another variable"
 msgstr "Копировать данные из другой переменной"
 
@@ -1170,7 +1170,7 @@ msgstr "Косинус-Фурье"
 msgid "Cos-Fourier transform along direction(s)"
 msgstr "Косинус-Фурье преобразование вдоль направления(й)"
 
-#: src/exec_dat.cpp:1653
+#: src/exec_dat.cpp:1663
 msgid "Cos-Fourier transform at some direction"
 msgstr "Косинус-Фурье преобразование вдоль направления"
 
@@ -1207,7 +1207,7 @@ msgstr "Создание данных и I/O"
 msgid "Create data and IO"
 msgstr "Создание данных и ввод-вывод"
 
-#: src/exec_dat.cpp:1678
+#: src/exec_dat.cpp:1689
 msgid "Create histogram (distribution) of data values"
 msgstr "Создать гистограмму (распределение) значений данных"
 
@@ -1215,11 +1215,11 @@ msgstr "Создать гистограмму (распределение) зн�
 msgid "Create new"
 msgstr "Создать новый"
 
-#: src/exec_dat.cpp:1738
+#: src/exec_dat.cpp:1749
 msgid "Create new 1D data and fill it in range"
 msgstr "Создать новые 1d данные и заполнить их в диапазоне"
 
-#: src/exec_dat.cpp:1693
+#: src/exec_dat.cpp:1704
 msgid "Create new data"
 msgstr "Создать новый массив данных"
 
@@ -1251,7 +1251,7 @@ msgstr "Обрезать края массива данных"
 msgid "Crop data"
 msgstr "Обрезать данные"
 
-#: src/exec_dat.cpp:1654
+#: src/exec_dat.cpp:1664
 msgid "Crop edge of data"
 msgstr "Обрезать края массива данных"
 
@@ -1264,7 +1264,7 @@ msgstr ""
 msgid "CumSum"
 msgstr ""
 
-#: src/exec_dat.cpp:1655
+#: src/exec_dat.cpp:1665
 msgid "Cumulative summation along direction(s)"
 msgstr "Накопительное суммирование данных по направлению"
 
@@ -1388,7 +1388,7 @@ msgstr "Удалить @b все@. массивы данных."
 msgid "Delete ALL data arrays"
 msgstr "Удалить ВСЕ массивы данных"
 
-#: src/exec_dat.cpp:1658
+#: src/exec_dat.cpp:1668
 msgid "Delete data or slice of data"
 msgstr "Удалить данные или их срез"
 
@@ -1412,7 +1412,7 @@ msgstr "Удалить выбранный график"
 msgid "Description"
 msgstr "Описание"
 
-#: src/exec_dat.cpp:1659
+#: src/exec_dat.cpp:1669
 msgid "Detect curves for maximums of data array"
 msgstr "Найти кривые по максимумам массива данных"
 
@@ -1428,11 +1428,11 @@ msgstr "Дифференцировать данные по направлени�
 msgid "Diffuse"
 msgstr "Расс.свет"
 
-#: src/exec_dat.cpp:1663
+#: src/exec_dat.cpp:1673
 msgid "Dilate data larger val"
 msgstr "Расширить данные большие val"
 
-#: src/exec_dat.cpp:1649
+#: src/exec_dat.cpp:1659
 msgid "Direct multiplication of arrays"
 msgstr "Прямое произведение массивов"
 
@@ -1453,7 +1453,7 @@ msgstr "Расстояние между ячейками"
 msgid "Divide by"
 msgstr "Разделить на"
 
-#: src/exec_dat.cpp:1664
+#: src/exec_dat.cpp:1674
 msgid "Divide by data or number"
 msgstr "Разделить данные поэлементно на массив или число"
 
@@ -1461,11 +1461,11 @@ msgstr "Разделить данные поэлементно на массив
 msgid "Do"
 msgstr "OK"
 
-#: src/exec_dat.cpp:1727
+#: src/exec_dat.cpp:1738
 msgid "Do STFA transform"
 msgstr "Выполнить преобразование STFA"
 
-#: src/exec_dat.cpp:1733 src/exec_dat.cpp:1734
+#: src/exec_dat.cpp:1744 src/exec_dat.cpp:1745
 msgid "Do integral transform of data"
 msgstr "Выполнить интегральное преобразование данных"
 
@@ -1490,31 +1490,31 @@ msgstr "Не сохранять"
 msgid "Double diff."
 msgstr "Вторая производная"
 
-#: src/exec_gr.cpp:1135
+#: src/exec_gr.cpp:1139
 msgid "Draw Bifurcation diagram"
 msgstr "Нарисовать бифуркационную диаграмму"
 
-#: src/exec_gr.cpp:1171
+#: src/exec_gr.cpp:1175
 msgid "Draw Iris plots"
 msgstr "Нарисовать график Iris"
 
-#: src/exec_gr.cpp:1173
+#: src/exec_gr.cpp:1177
 msgid "Draw Lamerey diagram"
 msgstr "Нарисовать диаграмму Ламерея"
 
-#: src/exec_gr.cpp:1177
+#: src/exec_gr.cpp:1181
 msgid "Draw Open-High-Low-Close (OHLC) diagram"
 msgstr "Нарисовать диаграмму OHLC (Open-High-Low-Close)"
 
-#: src/exec_gr.cpp:1180
+#: src/exec_gr.cpp:1184
 msgid "Draw Poincare map"
 msgstr "Нарисовать диаграмму Пуанкаре"
 
-#: src/exec_gr.cpp:1186
+#: src/exec_gr.cpp:1190
 msgid "Draw STFA diagram"
 msgstr "Нарисовать диаграмму STFA"
 
-#: src/exec_gr.cpp:1198
+#: src/exec_gr.cpp:1202
 msgid "Draw TeX mark at point position"
 msgstr "Нарисовать ТеХ символы в положении точек"
 
@@ -1522,23 +1522,23 @@ msgstr "Нарисовать ТеХ символы в положении точ�
 msgid "Draw angle arc"
 msgstr "Нарисовать дугу"
 
-#: src/exec_gr.cpp:1128
+#: src/exec_gr.cpp:1132
 msgid "Draw area plot for 1D data"
 msgstr "Закрасить область между кривой и осью"
 
-#: src/exec_gr.cpp:1131
+#: src/exec_gr.cpp:1135
 msgid "Draw bars for 1D data"
 msgstr "Нарисовать график из вертикальных полос"
 
-#: src/exec_gr.cpp:1133
+#: src/exec_gr.cpp:1137
 msgid "Draw belts"
 msgstr "Нарисовать поверхность ленточками"
 
-#: src/exec_gr.cpp:1134
+#: src/exec_gr.cpp:1138
 msgid "Draw belts colored by other data"
 msgstr "Нарисовать поверхность ленточками с заданным цветом"
 
-#: src/exec_gr.cpp:1196
+#: src/exec_gr.cpp:1200
 msgid "Draw binormales for 1D data"
 msgstr "Нарисовать нормаль и бинормаль для кривой"
 
@@ -1550,19 +1550,19 @@ msgstr "Нарисовать растр (логотип) в области ос�
 msgid "Draw bounding box"
 msgstr "Нарисовать ограничивающий параллелепипед"
 
-#: src/exec_gr.cpp:1137
+#: src/exec_gr.cpp:1141
 msgid "Draw boxes"
 msgstr "Нарисовать поверхность ящиками"
 
-#: src/exec_gr.cpp:1136
+#: src/exec_gr.cpp:1140
 msgid "Draw boxplot for 2D data"
 msgstr "Нарисовать box-and-whisker диаграмму"
 
-#: src/exec_gr.cpp:1138
+#: src/exec_gr.cpp:1142
 msgid "Draw candlestick chart"
 msgstr "Нарисовать свечной график"
 
-#: src/exec_gr.cpp:1139
+#: src/exec_gr.cpp:1143
 msgid "Draw chart"
 msgstr "Нарисовать линейчатую (круговую) диаграмму"
 
@@ -1570,7 +1570,7 @@ msgstr "Нарисовать линейчатую (круговую) диагр�
 msgid "Draw circle"
 msgstr "Нарисовать окружность (круг)"
 
-#: src/exec_gr.cpp:1140
+#: src/exec_gr.cpp:1144
 msgid "Draw cloud"
 msgstr "Нарисовать облако для 3D данных"
 
@@ -1582,43 +1582,43 @@ msgstr "Нарисовать цветовую шкалу"
 msgid "Draw cone"
 msgstr "Нарисовать конус"
 
-#: src/exec_gr.cpp:1141
+#: src/exec_gr.cpp:1145
 msgid "Draw cones for 1D data"
 msgstr "Нарисовать конусы для 1D данных"
 
-#: src/exec_gr.cpp:1142
+#: src/exec_gr.cpp:1146
 msgid "Draw contour lines"
 msgstr "Нарисовать линии уровня"
 
-#: src/exec_gr.cpp:1152
+#: src/exec_gr.cpp:1156
 msgid "Draw contour lines at x-slice (or x-plane)"
 msgstr "Нарисовать линии уровня на x-срезе"
 
-#: src/exec_gr.cpp:1153
+#: src/exec_gr.cpp:1157
 msgid "Draw contour lines at y-slice (or y-plane)"
 msgstr "Нарисовать линии уровня на y-срезе"
 
-#: src/exec_gr.cpp:1154
+#: src/exec_gr.cpp:1158
 msgid "Draw contour lines at z-slice (or z-plane)"
 msgstr "Нарисовать линии уровня на z-срезе"
 
-#: src/exec_gr.cpp:1143
+#: src/exec_gr.cpp:1147
 msgid "Draw contour lines for 3D data"
 msgstr "Нарисовать линии уровня на срезах 3D данных"
 
-#: src/exec_gr.cpp:1203
+#: src/exec_gr.cpp:1207
 msgid "Draw contour lines for surface of triangles"
 msgstr "Нарисовать линии уровня для поверхности из треугольников"
 
-#: src/exec_gr.cpp:1150
+#: src/exec_gr.cpp:1154
 msgid "Draw contour lines on parametric surface"
 msgstr "Нарисовать линии уровня на параметрической поверхности"
 
-#: src/exec_gr.cpp:1151
+#: src/exec_gr.cpp:1155
 msgid "Draw contour tubes"
 msgstr "Нарисовать цилиндры по линиям уровней"
 
-#: src/exec_gr.cpp:1204
+#: src/exec_gr.cpp:1208
 msgid "Draw contour tubes for surface of triangles"
 msgstr "Нарисовать цилиндры по линиям уровней для поверхности из треугольников"
 
@@ -1626,35 +1626,35 @@ msgstr "Нарисовать цилиндры по линиям уровней �
 msgid "Draw curve"
 msgstr "Нарисовать кривую"
 
-#: src/exec_gr.cpp:1206
+#: src/exec_gr.cpp:1210
 msgid "Draw curve by tube"
 msgstr "Нарисовать трубу около кривой"
 
-#: src/exec_gr.cpp:1156
+#: src/exec_gr.cpp:1160
 msgid "Draw density plot"
 msgstr "Нарисовать график плотности"
 
-#: src/exec_gr.cpp:1157
+#: src/exec_gr.cpp:1161
 msgid "Draw density plot at slices of 3D data"
 msgstr "Нарисовать график плотности на срезе 3D данных"
 
-#: src/exec_gr.cpp:1158
+#: src/exec_gr.cpp:1162
 msgid "Draw density plot at x-slice (or x-plane)"
 msgstr "Нарисовать график плотности на x-срезе"
 
-#: src/exec_gr.cpp:1159
+#: src/exec_gr.cpp:1163
 msgid "Draw density plot at y-slice (or y-plane)"
 msgstr "Нарисовать график плотности на y-срезе"
 
-#: src/exec_gr.cpp:1160
+#: src/exec_gr.cpp:1164
 msgid "Draw density plot at z-slice (or z-plane)"
 msgstr "Нарисовать график плотности на z-срезе"
 
-#: src/exec_gr.cpp:1161
+#: src/exec_gr.cpp:1165
 msgid "Draw dew plot"
 msgstr "Нарисовать векторное поле каплями"
 
-#: src/exec_gr.cpp:1162
+#: src/exec_gr.cpp:1166
 msgid "Draw dots for arbitrary data points"
 msgstr "Нарисовать набор точек"
 
@@ -1670,7 +1670,7 @@ msgstr "Нарисовать эллипс"
 msgid "Draw error box"
 msgstr "Нарисовать размер ошибки"
 
-#: src/exec_gr.cpp:1163
+#: src/exec_gr.cpp:1167
 msgid "Draw error boxes"
 msgstr "Нарисовать размеры ошибок для 1D данных"
 
@@ -1690,23 +1690,23 @@ msgstr "Нарисовать грань поперек оси y"
 msgid "Draw face perpendicular to z-axis"
 msgstr "Нарисовать грань поперек оси z"
 
-#: src/exec_gr.cpp:1183
+#: src/exec_gr.cpp:1187
 msgid "Draw filled region (ribbon) between 2 curves"
 msgstr "Закрасить область между двумя кривыми"
 
-#: src/exec_gr.cpp:1178
+#: src/exec_gr.cpp:1182
 msgid "Draw flow pipes for vector field"
 msgstr "Нарисовать трубки тока для векторного поля"
 
-#: src/exec_gr.cpp:1165
+#: src/exec_gr.cpp:1169
 msgid "Draw flow threads for vector field"
 msgstr "Нарисовать линии тока для векторного поля"
 
-#: src/exec_gr.cpp:1167
+#: src/exec_gr.cpp:1171
 msgid "Draw flow threads from plain for vector field"
 msgstr "Нарисовать линии тока для векторного поля, начинающиеся с плоскости"
 
-#: src/exec_gr.cpp:1168
+#: src/exec_gr.cpp:1172
 msgid "Draw gradient lines for scalar field"
 msgstr "Нарисовать линии градиента для скалярного поля"
 
@@ -1714,43 +1714,43 @@ msgstr "Нарисовать линии градиента для скалярн
 msgid "Draw grid"
 msgstr "Нарисовать сетку осей координат"
 
-#: src/exec_gr.cpp:1170
+#: src/exec_gr.cpp:1174
 msgid "Draw grid at slices of 3D data"
 msgstr "Нарисовать сетку на срезе 3D данных"
 
-#: src/exec_gr.cpp:1169
+#: src/exec_gr.cpp:1173
 msgid "Draw grid for data array(s)"
 msgstr "Нарисовать сетку для массива"
 
-#: src/exec_gr.cpp:1130
+#: src/exec_gr.cpp:1134
 msgid "Draw horizontal bars for 1D data"
 msgstr "Нарисовать график из горизонтальных полос"
 
-#: src/exec_gr.cpp:1199
+#: src/exec_gr.cpp:1203
 msgid "Draw horizontal tiles"
 msgstr "Нарисовать поверхность горизонтальными плитками"
 
-#: src/exec_gr.cpp:1200
+#: src/exec_gr.cpp:1204
 msgid "Draw horizontal tiles with variable size"
 msgstr "Нарисовать поверхность плитками переменного размера"
 
-#: src/exec_gr.cpp:1188
+#: src/exec_gr.cpp:1192
 msgid "Draw isosurface for 3D data"
 msgstr "Нарисовать поверхность постоянного уровня"
 
-#: src/exec_gr.cpp:1191
+#: src/exec_gr.cpp:1195
 msgid "Draw isosurface for 3D data colored and transpared by other data"
 msgstr "Нарисовать поверхность уровня с заданными цветом и прозрачностью"
 
-#: src/exec_gr.cpp:1190
+#: src/exec_gr.cpp:1194
 msgid "Draw isosurface for 3D data colored by other data"
 msgstr "Нарисовать поверхность уровня с заданным цветом"
 
-#: src/exec_gr.cpp:1189
+#: src/exec_gr.cpp:1193
 msgid "Draw isosurface for 3D data transpared by other data"
 msgstr "Нарисовать поверхность уровня с заданной прозрачностью"
 
-#: src/exec_gr.cpp:1172
+#: src/exec_gr.cpp:1176
 msgid "Draw label at arbitrary position"
 msgstr "Вывести надписи для 1D данных"
 
@@ -1783,15 +1783,15 @@ msgstr "Нарисовать легенду графика"
 msgid "Draw line"
 msgstr "Нарисовать прямую линию"
 
-#: src/exec_gr.cpp:1174
+#: src/exec_gr.cpp:1178
 msgid "Draw mapping plot"
 msgstr "Нарисовать отображение матрицы"
 
-#: src/exec_gr.cpp:1175
+#: src/exec_gr.cpp:1179
 msgid "Draw mark plot for 1D data"
 msgstr "Нарисовать маркеры переменного размера"
 
-#: src/exec_gr.cpp:1176
+#: src/exec_gr.cpp:1180
 msgid "Draw mesh surface"
 msgstr "Нарисовать сетчатую поверхность"
 
@@ -1803,15 +1803,15 @@ msgstr "Нарисовать точку"
 msgid "Draw polygon"
 msgstr "Нарисовать полигон"
 
-#: src/exec_gr.cpp:1132
+#: src/exec_gr.cpp:1136
 msgid "Draw quasi-optical beam"
 msgstr "Нарисовать квазиоптический пучок"
 
-#: src/exec_gr.cpp:1182
+#: src/exec_gr.cpp:1186
 msgid "Draw radar chart"
 msgstr "Нарисовать круговой график"
 
-#: src/exec_gr.cpp:1155
+#: src/exec_gr.cpp:1159
 msgid "Draw reconstructed surface for arbitrary data points"
 msgstr "Нарисовать поверхность по произвольным точкам"
 
@@ -1823,43 +1823,43 @@ msgstr "Нарисовать прямоугольник"
 msgid "Draw rhombus"
 msgstr "Нарисовать ромб"
 
-#: src/exec_gr.cpp:1147
+#: src/exec_gr.cpp:1151
 msgid "Draw solid contour lines at x-slice (or x-plane)"
 msgstr "Закрасить линии уровня на x-срезе"
 
-#: src/exec_gr.cpp:1148
+#: src/exec_gr.cpp:1152
 msgid "Draw solid contour lines at y-slice (or y-plane)"
 msgstr "Закрасить линии уровня на y-срезе"
 
-#: src/exec_gr.cpp:1149
+#: src/exec_gr.cpp:1153
 msgid "Draw solid contour lines at z-slice (or z-plane)"
 msgstr "Закрасить линии уровня на z-срезе"
 
-#: src/exec_gr.cpp:1146
+#: src/exec_gr.cpp:1150
 msgid "Draw solid contour lines for 3D data"
 msgstr "Закрасить линии уровня на 3D данных"
 
-#: src/exec_gr.cpp:1145
+#: src/exec_gr.cpp:1149
 msgid "Draw solid contours"
 msgstr "Закрасить линии уровня"
 
-#: src/exec_gr.cpp:1144
+#: src/exec_gr.cpp:1148
 msgid "Draw solid contours with manual colors"
 msgstr "Закрасить линии уровня заданными цветами"
 
-#: src/exec_gr.cpp:1187
+#: src/exec_gr.cpp:1191
 msgid "Draw solid surface"
 msgstr "Нарисовать поверхность"
 
-#: src/exec_gr.cpp:1194
+#: src/exec_gr.cpp:1198
 msgid "Draw solid surface colored and transpared by other data"
 msgstr "Нарисовать поверхность с заданными цветом и прозрачностью"
 
-#: src/exec_gr.cpp:1193
+#: src/exec_gr.cpp:1197
 msgid "Draw solid surface colored by other data"
 msgstr "Нарисовать поверхность с заданным цветом"
 
-#: src/exec_gr.cpp:1192
+#: src/exec_gr.cpp:1196
 msgid "Draw solid surface transpared by other data"
 msgstr "Нарисовать поверхность с заданной прозрачностью"
 
@@ -1867,35 +1867,35 @@ msgstr "Нарисовать поверхность с заданной проз
 msgid "Draw sphere"
 msgstr "Нарисовать сферу"
 
-#: src/exec_gr.cpp:1184
+#: src/exec_gr.cpp:1188
 msgid "Draw stem plot for 1D data"
 msgstr "Нарисовать линии от 1D данных до оси"
 
-#: src/exec_gr.cpp:1185
+#: src/exec_gr.cpp:1189
 msgid "Draw step plot for 1D data"
 msgstr "Нарисовать ступеньки"
 
-#: src/exec_gr.cpp:1201
+#: src/exec_gr.cpp:1205
 msgid "Draw surface of curve rotation"
 msgstr "Нарисовать поверхность вращения"
 
-#: src/exec_gr.cpp:1181
+#: src/exec_gr.cpp:1185
 msgid "Draw surface of quadrangles"
 msgstr "Нарисовать поверхность из четырехугольников"
 
-#: src/exec_gr.cpp:1205
+#: src/exec_gr.cpp:1209
 msgid "Draw surface of triangles"
 msgstr "Нарисовать поверхность из треугольников"
 
-#: src/exec_gr.cpp:1129
+#: src/exec_gr.cpp:1133
 msgid "Draw surfaces of contour lines rotation"
 msgstr "Нарисовать поверхность вращения линий уровня"
 
-#: src/exec_gr.cpp:1195
+#: src/exec_gr.cpp:1199
 msgid "Draw table with data values"
 msgstr "Нарисовать таблицу значений данных"
 
-#: src/exec_gr.cpp:1197
+#: src/exec_gr.cpp:1201
 msgid "Draw tension plot for 1D data"
 msgstr "Нарисовать кривую с заданным цветом"
 
@@ -1907,23 +1907,23 @@ msgstr "Вывести текст в точке или вдоль кривой"
 msgid "Draw user-defined symbol at given position and direction"
 msgstr "Нарисовать символ в заданных точке и направлении"
 
-#: src/exec_gr.cpp:1179
+#: src/exec_gr.cpp:1183
 msgid "Draw usual plot for 1D data"
 msgstr "Нарисовать кривую для 1D данных"
 
-#: src/exec_gr.cpp:1207
+#: src/exec_gr.cpp:1211
 msgid "Draw vector field"
 msgstr "Нарисовать векторное поле"
 
-#: src/exec_gr.cpp:1208
+#: src/exec_gr.cpp:1212
 msgid "Draw vector field at slices of 3D data"
 msgstr "Нарисовать векторное поле на срезах 3D данных"
 
-#: src/exec_gr.cpp:1202
+#: src/exec_gr.cpp:1206
 msgid "Draw vectors along a curve"
 msgstr "Нарисовать вектора вдоль кривой"
 
-#: src/exec_gr.cpp:1164
+#: src/exec_gr.cpp:1168
 msgid "Draw waterfalls"
 msgstr "Нарисовать поверхность набором линий (водопад)"
 
@@ -2063,7 +2063,7 @@ msgstr "Введите значение аргумента %s"
 msgid "Envelop"
 msgstr "Огибающая"
 
-#: src/exec_dat.cpp:1667
+#: src/exec_dat.cpp:1677
 msgid "Erode data larger val"
 msgstr "Сузить данные большие val"
 
@@ -2090,7 +2090,7 @@ msgstr ""
 "Ошибка записи в файл '%s':\n"
 "%s."
 
-#: src/exec_dat.cpp:1668
+#: src/exec_dat.cpp:1678
 msgid ""
 "Evaluate (interpolate) values of array Dat at points i=idat,j=jdat,k=kdat"
 msgstr "Интерполирует значения в точках i=idat,j=jdat,k=kdat"
@@ -2144,7 +2144,7 @@ msgstr "Экспорт как 2D ..."
 msgid "Export as 3D ..."
 msgstr "Экспорт как 3D ..."
 
-#: src/exec_dat.cpp:1669 mgllab/table.cpp:846
+#: src/exec_dat.cpp:1679 mgllab/table.cpp:846
 msgid "Export data to PNG file"
 msgstr "Экспорт данных в PNG файл"
 
@@ -2157,7 +2157,7 @@ msgstr "Экспорт в GIF"
 msgid "Export to PNG"
 msgstr "Экспорт в PNG"
 
-#: src/exec_dat.cpp:1670
+#: src/exec_dat.cpp:1680
 msgid "Extend data array"
 msgstr "Расширить массив данных"
 
@@ -2165,11 +2165,11 @@ msgstr "Расширить массив данных"
 msgid "Extract data"
 msgstr "Выделить данные"
 
-#: src/exec_dat.cpp:1728
+#: src/exec_dat.cpp:1739
 msgid "Extract sub-array"
 msgstr "Выделить под-массив"
 
-#: src/exec_dat.cpp:1720
+#: src/exec_dat.cpp:1731
 msgid "Extract sub-array between values"
 msgstr "Выделить под-массив в диапазоне между значениями"
 
@@ -2215,19 +2215,19 @@ msgstr "Заполнить"
 msgid "Fill data by formula"
 msgstr "Заполнить по формуле"
 
-#: src/exec_dat.cpp:1676
+#: src/exec_dat.cpp:1687
 msgid "Fill data by global spline of Vdat"
 msgstr "Заполнить данные по глобальному сплайну Vdat"
 
-#: src/exec_dat.cpp:1712
+#: src/exec_dat.cpp:1723
 msgid "Fill data by interpolation of Vdat"
 msgstr "Заполнить данные интерполяцией Vdat"
 
-#: src/exec_dat.cpp:1656
+#: src/exec_dat.cpp:1666
 msgid "Fill data by triangulated values"
 msgstr "Заполнить данные триангуляцией"
 
-#: src/exec_dat.cpp:1671
+#: src/exec_dat.cpp:1682
 msgid "Fill data linearly in range [v1, v2]"
 msgstr "Заполнить данные линейно в диапазоне [v1, v2]"
 
@@ -2235,7 +2235,7 @@ msgstr "Заполнить данные линейно в диапазоне [v1
 msgid "Fill in range"
 msgstr "Заполнить в диапазоне"
 
-#: src/exec_dat.cpp:1672
+#: src/exec_dat.cpp:1683
 msgid "Fill x-,k-samples for transforms"
 msgstr "Заполнить как x-,k-координаты для трансформации"
 
@@ -2243,11 +2243,11 @@ msgstr "Заполнить как x-,k-координаты для трансф�
 msgid "Find"
 msgstr "Найти"
 
-#: src/exec_dat.cpp:1652
+#: src/exec_dat.cpp:1662
 msgid "Find correlation between data arrays"
 msgstr "Найти корреляцию между данными"
 
-#: src/exec_dat.cpp:1666
+#: src/exec_dat.cpp:1676
 msgid "Find envelop for the data"
 msgstr "Найти огибающую данных"
 
@@ -2259,11 +2259,11 @@ msgstr "Найти огибающую в направлении"
 msgid "Find histogram of data."
 msgstr "Найти гистограмму данных"
 
-#: src/exec_dat.cpp:1687
+#: src/exec_dat.cpp:1698
 msgid "Find maximal value over direction"
 msgstr "Найти максимум по направлению"
 
-#: src/exec_dat.cpp:1688
+#: src/exec_dat.cpp:1699
 msgid "Find minimal value over direction"
 msgstr "Найти минимум по направлению"
 
@@ -2275,19 +2275,19 @@ msgstr "Найти следующее"
 msgid "Find or replace text"
 msgstr "Найти или заменить"
 
-#: src/exec_dat.cpp:1724
+#: src/exec_dat.cpp:1735
 msgid "Find root Dat[i,j,k]=val (inverse evaluate)"
 msgstr "Найти корень Dat[i,j,k]=val (обратно evaluate)"
 
-#: src/exec_dat.cpp:1716
+#: src/exec_dat.cpp:1727
 msgid "Find roots using data as initial values"
 msgstr "Найти корни используя данные как начальные условия"
 
-#: src/exec_dat.cpp:1730
+#: src/exec_dat.cpp:1741
 msgid "Find summation over direction"
 msgstr "Найти сумму по направлению"
 
-#: src/exec_dat.cpp:1736
+#: src/exec_dat.cpp:1747
 msgid "Find triangles of randomly placed points"
 msgstr "Триангулировать произвольно расположенные точки"
 
@@ -2315,7 +2315,7 @@ msgstr "Первая ячейка"
 msgid "First slice"
 msgstr "Первый срез"
 
-#: src/exec_dat.cpp:1673 src/exec_dat.cpp:1674
+#: src/exec_dat.cpp:1684 src/exec_dat.cpp:1685
 msgid "Fit data to formula"
 msgstr "Подогнать данные по формуле"
 
@@ -2406,31 +2406,36 @@ msgstr "GIF поддержка отключена. Включите ее и пе
 msgid "General setup"
 msgstr "Общие настройки"
 
-#: src/exec_dat.cpp:1684
+#: src/exec_dat.cpp:1695
 msgid "Get Jacobian"
 msgstr "Вычислить якобиан"
 
-#: src/exec_dat.cpp:1650
+#: src/exec_dat.cpp:1660
 msgid "Get contour lines for dat[i,j]=val, separated by NAN"
 msgstr ""
 
-#: src/exec_dat.cpp:1648
+#: src/exec_dat.cpp:1658
 msgid "Get data column filled by formula on column ids"
 msgstr "Вычислить данные по формуле из имен колонок"
 
-#: src/exec_dat.cpp:1719
+#: src/exec_dat.cpp:1730
 msgid "Get formated data from file"
 msgstr "Загрузить форматированные данные из файла"
 
-#: src/exec_dat.cpp:1691
+#: src/exec_dat.cpp:1702
 msgid "Get momentum along direction"
 msgstr "Вычислить момент по направлению"
 
-#: src/exec_dat.cpp:1701
+#: src/exec_dat.cpp:1681
+#, fuzzy
+msgid "Get positions of local maximums and minimums"
+msgstr "Задать область рисования как блок в матрице"
+
+#: src/exec_dat.cpp:1712
 msgid "Get pulse properties"
 msgstr "Найти параметры импульса"
 
-#: src/exec_dat.cpp:1732
+#: src/exec_dat.cpp:1743
 msgid "Get trace of array"
 msgstr "Найти след матрицы"
 
@@ -2656,7 +2661,7 @@ msgstr "Ханкель"
 msgid "Hankel transform along direction(s)"
 msgstr "Преобразование Ханкеля по направлению(ям)"
 
-#: src/exec_dat.cpp:1677
+#: src/exec_dat.cpp:1688
 msgid "Hankel transform at some direction"
 msgstr "Преобразование Ханкеля по направлению"
 
@@ -2726,11 +2731,11 @@ msgstr "Номер среза в z-направлении"
 msgid "Image size"
 msgstr "Размер рисунка"
 
-#: src/exec_dat.cpp:1700
+#: src/exec_dat.cpp:1711
 msgid "Immediately display the progress of calculation"
 msgstr "Показать прогресс вычислений сразу"
 
-#: src/exec_dat.cpp:1699
+#: src/exec_dat.cpp:1710
 msgid "Immediately print the message"
 msgstr "Напечатать это сообщение сразу же"
 
@@ -2738,7 +2743,7 @@ msgstr "Напечатать это сообщение сразу же"
 msgid "Import Data?"
 msgstr "Импортировать данные?"
 
-#: src/exec_dat.cpp:1680 mgllab/table.cpp:842
+#: src/exec_dat.cpp:1691 mgllab/table.cpp:842
 msgid "Import data from PNG file"
 msgstr "Импортировать данные из PNG файла"
 
@@ -2750,7 +2755,7 @@ msgstr "Импортировать из PNG"
 msgid "In range"
 msgstr "В диапазоне"
 
-#: src/exec_dat.cpp:1675
+#: src/exec_dat.cpp:1686
 msgid "In-place Fourier transform"
 msgstr "Фурье преобразование по месту"
 
@@ -2819,7 +2824,7 @@ msgstr "Вставить под-график"
 msgid "Insert last fitted formula with found coefficients."
 msgstr "Вставить последнюю подогнанную формулу с найденными коэффициентами"
 
-#: src/exec_dat.cpp:1682
+#: src/exec_dat.cpp:1693
 msgid "Insert slice of data"
 msgstr "Вставить срез данных"
 
@@ -2831,7 +2836,7 @@ msgstr "Вставить в скрипт как команду 'list'"
 msgid "Integrate"
 msgstr "Интегрировать"
 
-#: src/exec_dat.cpp:1683 udav/dat_pnl.cpp:615
+#: src/exec_dat.cpp:1694 udav/dat_pnl.cpp:615
 msgid "Integrate data along direction(s)"
 msgstr "Интегрировать данные по направлению"
 
@@ -2855,7 +2860,7 @@ msgstr "JPEG поддержка отключена. Включите ее и п�
 msgid "Jacobi"
 msgstr "Якоби"
 
-#: src/exec_dat.cpp:1685
+#: src/exec_dat.cpp:1696
 msgid "Join data arrays"
 msgstr "Объединить массивы данных"
 
@@ -2955,7 +2960,7 @@ msgstr "Положение источника света должно быть �
 msgid "Light settings"
 msgstr "Настройки освещения"
 
-#: src/exec_dat.cpp:1686
+#: src/exec_dat.cpp:1697
 msgid "Limit data to be inside [-v,v]"
 msgstr "Ограничить данные диапазоном [-v,v]"
 
@@ -3272,11 +3277,11 @@ msgstr "Отразить"
 msgid "Mirror data along direction(s)"
 msgstr "Отразить данные по направлению"
 
-#: src/exec_dat.cpp:1689
+#: src/exec_dat.cpp:1700
 msgid "Mirror data at some direction"
 msgstr "Отразить данные по направлению"
 
-#: src/exec_dat.cpp:1690
+#: src/exec_dat.cpp:1701
 msgid "Modify data values by formula"
 msgstr "Изменить данные по формуле"
 
@@ -3348,7 +3353,7 @@ msgstr "Сдвиг вверх"
 msgid "Multiply by"
 msgstr "Умножить на"
 
-#: src/exec_dat.cpp:1692
+#: src/exec_dat.cpp:1703
 msgid "Multiply by data or number"
 msgstr "Умножить на массив данных или число"
 
@@ -3479,11 +3484,11 @@ msgstr "Обычный вид"
 msgid "Normalize"
 msgstr "Нормировать"
 
-#: src/exec_dat.cpp:1694
+#: src/exec_dat.cpp:1705
 msgid "Normalize data"
 msgstr "Нормировать данные"
 
-#: src/exec_dat.cpp:1695
+#: src/exec_dat.cpp:1706
 msgid "Normalize data slice by slice"
 msgstr "Нормировать данные по срезам"
 
@@ -3511,11 +3516,11 @@ msgstr "Численный параметр"
 msgid "Numeric value"
 msgstr "Численное значение"
 
-#: src/exec_dat.cpp:1660
+#: src/exec_dat.cpp:1670
 msgid "Numerically differentiate data"
 msgstr "Численно дифференцировать данные"
 
-#: src/exec_dat.cpp:1661
+#: src/exec_dat.cpp:1671
 msgid "Numerically double differentiate data"
 msgstr "Численно дифференцировать данные дважды"
 
@@ -3555,7 +3560,7 @@ msgstr "Только текущий срез будет вставлен"
 msgid "Open File?"
 msgstr "Открыть файл?"
 
-#: src/exec_dat.cpp:1697
+#: src/exec_dat.cpp:1708
 msgid "Open all data arrays from HDF file"
 msgstr "Загрузить все данные из HDF файла"
 
@@ -3703,7 +3708,7 @@ msgstr "Пауза вычислений"
 msgid "Pause on/off external calculations"
 msgstr "Пауза вкл/выкл для внешних вычислений"
 
-#: src/exec_dat.cpp:1714
+#: src/exec_dat.cpp:1725
 msgid "Perform Runge-Kutta step"
 msgstr "Выполнить шаг Рунге-Кутта"
 
@@ -3788,11 +3793,11 @@ msgstr "Примитивы ..."
 msgid "Print MathGL version or check if it is valid"
 msgstr "Вывести версию MathGL или проверить, что она подходит"
 
-#: src/exec_dat.cpp:1665
+#: src/exec_dat.cpp:1675
 msgid "Print content of the data"
 msgstr "Вывести содержимое массива данных"
 
-#: src/exec_dat.cpp:1703
+#: src/exec_dat.cpp:1714
 msgid "Print fitted formula"
 msgstr "Вывести подобранную формулу"
 
@@ -3800,11 +3805,11 @@ msgstr "Вывести подобранную формулу"
 msgid "Print graphics"
 msgstr "Напечатать график"
 
-#: src/exec_dat.cpp:1657
+#: src/exec_dat.cpp:1667
 msgid "Print list of data names in HDF file"
 msgstr "Вывести список имен переменных в HDF файле"
 
-#: src/exec_dat.cpp:1681
+#: src/exec_dat.cpp:1692
 msgid "Print message or information about the data"
 msgstr "Вывести сообщение или информацию о данных"
 
@@ -3836,7 +3841,7 @@ msgstr "Печатаю ..."
 msgid "Program flow"
 msgstr "Команды управления"
 
-#: src/exec_dat.cpp:1647
+#: src/exec_dat.cpp:1657
 msgid "Project periodical data in [v1,v2]"
 msgstr "Проецирует периодические данные в [v1,v2]"
 
@@ -3868,7 +3873,7 @@ msgstr "Поместить в этот массив данных"
 msgid "Put to script"
 msgstr "В скрипт"
 
-#: src/exec_dat.cpp:1702
+#: src/exec_dat.cpp:1713
 msgid "Put value (numeric or array) to given data element"
 msgstr "Поместить число или массив в заданный элемент данных"
 
@@ -3890,19 +3895,19 @@ msgstr "R - темно-красный"
 msgid "Rasterize plot and save to background"
 msgstr "Растеризовать график и установить вместо фона"
 
-#: src/exec_dat.cpp:1708
+#: src/exec_dat.cpp:1719
 msgid "Read and join data from several files"
 msgstr "Загрузить и объединить данные из нескольких файлов"
 
-#: src/exec_dat.cpp:1707
+#: src/exec_dat.cpp:1718
 msgid "Read data from file"
 msgstr "Загрузить данные из файла"
 
-#: src/exec_dat.cpp:1710
+#: src/exec_dat.cpp:1721
 msgid "Read data from file with sizes specified in first row"
 msgstr "Загрузить данные из файла с размерами из первой строки"
 
-#: src/exec_dat.cpp:1709
+#: src/exec_dat.cpp:1720
 msgid "Read data with name 'id' from HDF file"
 msgstr "Загрузить данные с именем 'id' из HDF файла"
 
@@ -3910,7 +3915,7 @@ msgstr "Загрузить данные с именем 'id' из HDF файла
 msgid "Ready"
 msgstr "Готов"
 
-#: src/exec_dat.cpp:1711
+#: src/exec_dat.cpp:1722
 msgid "Rearrange data dimensions"
 msgstr "Упорядочить размерности массива данных"
 
@@ -3966,11 +3971,11 @@ msgstr "Перезагрузить"
 msgid "Reload data and refresh the picture"
 msgstr "Перезагрузить данные и обновить рисунок"
 
-#: src/exec_dat.cpp:1646
+#: src/exec_dat.cpp:1656
 msgid "Remove duplicate rows"
 msgstr "Удалить одинаковые строки"
 
-#: src/exec_dat.cpp:1721
+#: src/exec_dat.cpp:1732
 msgid "Remove jump into the data, like phase jumps"
 msgstr "Убрать скачки данных, например скачки фазы"
 
@@ -4036,7 +4041,7 @@ msgstr "Изменить размер"
 msgid "Resize (interpolate) the data to specified sizes (Ctrl+Shift+R)."
 msgstr "Изменить размер (интерполоировать) данных (Ctrl+Shift+R)."
 
-#: src/exec_dat.cpp:1713
+#: src/exec_dat.cpp:1724
 msgid "Resize data array"
 msgstr "Изменить размер массива данных"
 
@@ -4093,7 +4098,7 @@ msgstr "Правый верхний угол"
 msgid "Roll"
 msgstr "Сдвинуть"
 
-#: src/exec_dat.cpp:1715
+#: src/exec_dat.cpp:1726
 msgid "Roll data along direction(s)"
 msgstr "Сдвинуть данные по направлению"
 
@@ -4194,7 +4199,7 @@ msgstr "Сохранить как ..."
 msgid "Save data"
 msgstr "Сохранить данные"
 
-#: src/exec_dat.cpp:1718
+#: src/exec_dat.cpp:1729
 msgid "Save data to HDF5 file"
 msgstr "Сохранить данные в HDF5 файл"
 
@@ -4202,7 +4207,7 @@ msgstr "Сохранить данные в HDF5 файл"
 msgid "Save data to a file (Ctrl+Shift+S)."
 msgstr "Сохранить данные в файл (Ctrl+Shift+S)."
 
-#: src/exec_dat.cpp:1717 mgllab/table.cpp:844
+#: src/exec_dat.cpp:1728 mgllab/table.cpp:844
 msgid "Save data to file"
 msgstr "Сохранить данные в файл"
 
@@ -4342,7 +4347,7 @@ msgstr "Задать кисть для маски с выбранным id"
 msgid "Set color range"
 msgstr "Задать диапазон цвета"
 
-#: src/exec_dat.cpp:1679
+#: src/exec_dat.cpp:1690
 msgid "Set column id for data"
 msgstr "Задать id колонок данных"
 
@@ -4740,7 +4745,7 @@ msgstr "Синус-Фурье"
 msgid "Sin-Fourier transform along direction(s)"
 msgstr "Синус-Фурье преобразование вдоль направления"
 
-#: src/exec_dat.cpp:1722
+#: src/exec_dat.cpp:1733
 msgid "Sin-Fourier transform at some direction"
 msgstr "Синус-Фурье преобразование вдоль направления"
 
@@ -4778,7 +4783,7 @@ msgstr "Анимация"
 msgid "Smooth"
 msgstr "Сгладить"
 
-#: src/exec_dat.cpp:1723
+#: src/exec_dat.cpp:1734
 msgid "Smooth data"
 msgstr "Сгладить массив данных"
 
@@ -4786,35 +4791,35 @@ msgstr "Сгладить массив данных"
 msgid "Smooth data along direction(s)"
 msgstr "Сгладить массив данных по направлению"
 
-#: src/exec_dat.cpp:1706
+#: src/exec_dat.cpp:1717
 msgid "Solve Hamiltonian ODE (find GO ray or trajectory)"
 msgstr "Решить гамильтонову ОДУ (найти ГО луч/траекторию)"
 
-#: src/exec_dat.cpp:1696
+#: src/exec_dat.cpp:1707
 msgid "Solve ODE"
 msgstr "Решить систему обыкновенных диф. уравнений"
 
-#: src/exec_dat.cpp:1698
+#: src/exec_dat.cpp:1709
 msgid "Solve PDE"
 msgstr "Решить уравнение в частных производных"
 
-#: src/exec_dat.cpp:1704
+#: src/exec_dat.cpp:1715
 msgid "Solve PDE in accompanied coordinates for 2d case"
 msgstr "Решить PDE в сопровождающей системе координат (2d)"
 
-#: src/exec_dat.cpp:1705
+#: src/exec_dat.cpp:1716
 msgid "Solve PDE in accompanied coordinates for 3d case"
 msgstr "Решить PDE в сопровождающей системе координат (3d)"
 
-#: src/exec_dat.cpp:1645
+#: src/exec_dat.cpp:1655
 msgid "Solve PDE using advanced method (X-Y only)"
 msgstr "Решить PDE (сложные уравнения, 2d случай)"
 
-#: src/exec_dat.cpp:1737
+#: src/exec_dat.cpp:1748
 msgid "Solve tridiagonal matrix"
 msgstr "Решить трехдиагональную систему"
 
-#: src/exec_dat.cpp:1725
+#: src/exec_dat.cpp:1736
 msgid "Sort data by values in column"
 msgstr "Сортировать данные по значениям в колонке"
 
@@ -4854,7 +4859,7 @@ msgstr ""
 msgid "Squeeze"
 msgstr "Сжать"
 
-#: src/exec_dat.cpp:1726
+#: src/exec_dat.cpp:1737
 msgid "Squeeze data"
 msgstr "Сжать данные"
 
@@ -4882,7 +4887,7 @@ msgstr "Индекс начальной ячейки"
 msgid "State"
 msgstr "Состояние"
 
-#: src/exec_dat.cpp:1662
+#: src/exec_dat.cpp:1672
 msgid "Step for pulse diffraction"
 msgstr "Шаг для расчета дифракции импульса"
 
@@ -4994,7 +4999,7 @@ msgstr "Подметки"
 msgid "Subticks"
 msgstr "Подметки"
 
-#: src/exec_dat.cpp:1729
+#: src/exec_dat.cpp:1740
 msgid "Subtract data or number"
 msgstr "Вычесть данные или число"
 
@@ -5019,7 +5024,7 @@ msgstr "Суммировать вдоль направления"
 msgid "Summation of"
 msgstr "Сумма от"
 
-#: src/exec_dat.cpp:1731
+#: src/exec_dat.cpp:1742
 msgid "Swap data (useful after Fourier transform)"
 msgstr "Поменять местами левую и правую части данных"
 
@@ -5294,7 +5299,7 @@ msgstr "Транспонировать"
 msgid "Transpose data"
 msgstr "Транспонировать данные"
 
-#: src/exec_dat.cpp:1735
+#: src/exec_dat.cpp:1746
 msgid "Transpose data array"
 msgstr "Транспонировать данные"
 
@@ -5637,7 +5642,7 @@ msgstr "Вертикальный размер"
 msgid "W - lightgray"
 msgstr "W - светло-серый"
 
-#: src/exec_dat.cpp:1739
+#: src/exec_dat.cpp:1750
 msgid "Wavelet transform at some direction"
 msgstr "Wavelet преобразование вдоль направления"
 

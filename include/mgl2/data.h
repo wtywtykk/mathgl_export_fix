@@ -301,6 +301,9 @@ using mglDataA::Momentum;
 	/// Get array which is result of minimal values in given direction or directions
 	inline mglData Min(const char *dir) const
 	{	return mglData(true,mgl_data_min_dir(this,dir));	}
+	/// Get positions of local maximums and minimums
+	inline mglData Extr() const
+	{	return mglData(true,mgl_data_extr(this));	}
 	/// Get the data which is direct multiplication (like, d[i,j] = this[i]*a[j] and so on)
 	inline mglData Combine(const mglDataA &dat) const
 	{	return mglData(true,mgl_data_combine(this,&dat));	}

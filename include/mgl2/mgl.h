@@ -1378,6 +1378,10 @@ public:
 	 * Option "value" set the number of contour levels (default is 7). */
 	inline void Cont(const mglDataA &z, const char *sch="", const char *opt="")
 	{	mgl_cont(gr, &z, sch, opt);	}
+	/// Draw contour lines at a[i,j]=val specified parametrically
+	/** Style 't'/'T' draw contour labels below/above contours.*/
+	inline void ContGen(mreal val, const mglDataA &a, const mglDataA &x, const mglDataA &y, const mglDataA &z, const char *sch="", const char *opt="")
+	{	mgl_cont_gen(gr, val, &a, &x, &y, &z, sch, opt);	}
 
 	/// Draw solid contours at manual levels for 2d data specified parametrically
 	/** Style ‘_’ to draw contours at bottom of axis box. */
@@ -1397,6 +1401,9 @@ public:
 	 * Option "value" set the number of contour levels (default is 7). */
 	inline void ContF(const mglDataA &z, const char *sch="", const char *opt="")
 	{	mgl_contf(gr, &z, sch, opt);	}
+	/// Draw solid contours between a[i,j]=v1 and a[i,j]=v2 specified parametrically */
+	inline void ContFGen(mreal v1, mreal v2, const mglDataA &a, const mglDataA &x, const mglDataA &y, const mglDataA &z, const char *sch="", const char *opt="")
+	{	mgl_contf_gen(gr, v1,v2, &a, &x, &y, &z, sch, opt);	}
 
 	/// Draw solid contours at manual levels for 2d data specified parametrically with specified colors
 	/** Style ‘_’ to draw contours at bottom of axis box. */
