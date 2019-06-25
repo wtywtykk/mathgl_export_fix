@@ -496,19 +496,16 @@ HMDT MGL_EXPORT mgl_data_extr(HCDT dat)
 		for(long j=1;j<m-1;j++)	for(long i=1;i<n-1;i++)
 		{
 			mreal v = dat->v(i,j);
-			long di[] = {-1,0,1, -1,1, -1,0,1}, dj[] = {-1,-1, -1,0, 0,1,1,1};
-			if(v > dat->v(i-1,j-1))
+			long di[] = {-1,0,1, -1,1, -1,0,1}, dj[] = {-1,-1, -1,0, 0,1,1,1}, vmax=0, vmin=0;
+			for(int ii=0;ii<8;ii++)
 			{
-				bool ok=true;
-				for(int ii=1;ii<8;ii++)	if(v < dat->v(i+di[ii],j+dj[ii]))	ok=false;
-				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	}
+				mreal u = dat->v(i+di[ii],j+dj[ii]);
+				if(mgl_isnan(u))	{	vmax=vmin=0;	break;	}
+				if(v < u)	vmin++;
+				if(v > u)	vmax++;
 			}
-			if(v < dat->v(i-1,j-1))
-			{
-				bool ok=true;
-				for(int ii=1;ii<8;ii++)	if(v > dat->v(i+di[ii],j+dj[ii]))	ok=false;
-				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	}
-			}
+			if(vmin>0 && vmax==0)	{	imax.push_back(i);	jmax.push_back(j);	}
+			if(vmax>0 && vmin==0)	{	imax.push_back(i);	jmax.push_back(j);	}
 		}
 		size_t nn = imax.size();
 		res = new mglData(2,nn);
@@ -523,19 +520,16 @@ HMDT MGL_EXPORT mgl_data_extr(HCDT dat)
 			mreal v = dat->v(i,j,k);
 			long di[] = {-1,0,1,-1,0,1,-1,0,1,		-1,0,1,-1,1,-1,0,1,	-1,0,1,-1,0,1,-1,0,1};
 			long dj[] = {-1,-1,-1,0,0,0,1,1,1,		-1,-1,-1,0,0,1,1,1,	-1,-1,-1,0,0,0,1,1,1};
-			long dk[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1, 0,0,0,0,0,0,0,0,	1,1,1,1,1,1,1,1,1};
-			if(v > dat->v(i-1,j-1,k-1))
+			long dk[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1, 0,0,0,0,0,0,0,0,	1,1,1,1,1,1,1,1,1}, vmax=0, vmin=0;
+			for(int ii=0;ii<26;ii++)
 			{
-				bool ok=true;
-				for(int ii=1;ii<26;ii++)	if(v < dat->v(i+di[ii],j+dj[ii],k+dk[ii]))	ok=false;
-				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
+				mreal u = dat->v(i+di[ii],j+dj[ii],k+dk[ii]);
+				if(mgl_isnan(u))	{	vmax=vmin=0;	break;	}
+				if(v < u)	vmin++;
+				if(v > u)	vmax++;
 			}
-			if(v < dat->v(i-1,j-1,k-1))
-			{
-				bool ok=true;
-				for(int ii=1;ii<8;ii++)	if(v > dat->v(i+di[ii],j+dj[ii],k+dk[ii]))	ok=false;
-				if(ok)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
-			}
+			if(vmin>0 && vmax==0)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
+			if(vmax>0 && vmin==0)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
 		}
 		size_t nn = imax.size();
 		res = new mglData(3,nn);
