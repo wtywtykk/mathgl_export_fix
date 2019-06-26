@@ -610,7 +610,8 @@ public:
 
 	/// Get color depending on single variable z, which should be scaled if scale=true
 	inline mreal GetC(long s,mreal z,bool scale = true) const
-	{	return s+(scale?GetA(z):(z>0?z/MGL_FEPSILON:0));	}
+	{	return s+(scale?GetA(z):(z<0?0:z/MGL_FEPSILON));	}
+//	{	return s+(scale?GetA(z):(z>0?z/MGL_FEPSILON:0));	}
 	/// Get alpha value depending on single variable a
 	mreal GetA(mreal a) const MGL_FUNC_PURE;
 	/// Set pen/palette

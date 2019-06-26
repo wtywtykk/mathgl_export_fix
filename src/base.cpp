@@ -1339,7 +1339,8 @@ mreal mglBase::GetA(mreal a) const
 {
 	if(fa)	a = fa->Calc(0,0,0,a);
 	a = (a-FMin.c)/(FMax.c-FMin.c);
-	a = (a<1?(a>0?a:0):1)/MGL_FEPSILON;	// for texture a must be <1 always!!!
+	a = (a>1?1:(a<0?0:a))/MGL_FEPSILON;	// for texture a must be <1 always!!!
+//	a = (a<1?(a>0?a:0):1)/MGL_FEPSILON;	// for texture a must be <1 always!!!
 	return a;
 }
 //-----------------------------------------------------------------------------
