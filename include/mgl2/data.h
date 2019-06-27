@@ -302,8 +302,8 @@ using mglDataA::Momentum;
 	inline mglData Min(const char *dir) const
 	{	return mglData(true,mgl_data_min_dir(this,dir));	}
 	/// Get positions of local maximums and minimums
-	inline mglData Extr() const
-	{	return mglData(true,mgl_data_extr(this));	}
+	inline mglData Extremum() const
+	{	return mglData(true,mgl_data_extremum(this));	}
 	/// Get the data which is direct multiplication (like, d[i,j] = this[i]*a[j] and so on)
 	inline mglData Combine(const mglDataA &dat) const
 	{	return mglData(true,mgl_data_combine(this,&dat));	}

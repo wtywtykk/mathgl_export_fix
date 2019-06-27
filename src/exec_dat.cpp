@@ -425,12 +425,12 @@ int static mgls_extend(mglGraph *, long , mglArg *a, const char *k, const char *
 	return res;
 }
 //-----------------------------------------------------------------------------
-int static mgls_extr(mglGraph *, long , mglArg *a, const char *k, const char *)
+int static mgls_extremum(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
 	if(k[0]=='d' && a[0].d->temp)	return 5;
 	mglData *d = dynamic_cast<mglData *>(a[0].d);
-	if(d && !strcmp(k,"dd"))	*d = mglData(true,mgl_data_extr(a[1].d));
+	if(d && !strcmp(k,"dd"))	*d = mglData(true,mgl_data_extremum(a[1].d));
 	else res = 1;
 	return res;
 }
@@ -1678,7 +1678,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"evaluate",_("Evaluate (interpolate) values of array Dat at points i=idat,j=jdat,k=kdat"),"evaluate Res Dat Idat [norm]|Res Dat Idat Jdat [norm]|Res Dat Idat Jdat Kdat [norm]", mgls_evaluate ,4},
 	{"export",_("Export data to PNG file"),"export Dat 'fname' 'sch' [v1 v2]", mgls_export ,3},
 	{"extend",_("Extend data array"),"extend Dat dim1 [dim2]", mgls_extend ,3},
-	{"extr",_("Get positions of local maximums and minimums"),"extr Res Dat", mgls_extr ,4},
+	{"extremum",_("Get positions of local maximums and minimums"),"extremum Res Dat", mgls_extremum ,4},
 	{"fill",_("Fill data linearly in range [v1, v2]"),"fill Var v1 v2 ['dir']|Var 'eq' [Vdat Wdat]", mgls_fill ,3},
 	{"fillsample",_("Fill x-,k-samples for transforms"),"fillsample Var 'how'", mgls_fillsample ,3},
 	{"fit",_("Fit data to formula"),"fit Res A 'eq' 'var' [Ini]|Res X A 'eq' 'var' [Ini]|Res X Y A 'eq' 'var' [Ini]|Res X Y Z A 'eq' 'var' [Ini]", mgls_fit ,4},

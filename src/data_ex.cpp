@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include <stdarg.h>
 #include <ctype.h>
 #include "mgl2/data.h"
 #include "mgl2/eval.h"
@@ -472,7 +473,7 @@ uintptr_t MGL_EXPORT mgl_data_min_dir_(uintptr_t *d, const char *dir,int l)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	uintptr_t r=uintptr_t(mgl_data_min_dir(_DT_,s));	delete []s;	return r;	}
 //-----------------------------------------------------------------------------
-HMDT MGL_EXPORT mgl_data_extr(HCDT dat)
+HMDT MGL_EXPORT mgl_data_extremum(HCDT dat)
 {
 	long n=dat->GetNx(), m=dat->GetNy(), l=dat->GetNz();
 	std::vector<mreal> imax, jmax, kmax;
@@ -538,8 +539,8 @@ HMDT MGL_EXPORT mgl_data_extr(HCDT dat)
 	}
 	return res;
 }
-uintptr_t MGL_EXPORT mgl_data_extr_(uintptr_t *d)
-{	return uintptr_t(mgl_data_extr(_DT_));	}
+uintptr_t MGL_EXPORT mgl_data_extremum_(uintptr_t *d)
+{	return uintptr_t(mgl_data_extremum(_DT_));	}
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_data_momentum(HCDT dat, char dir, const char *how)
 {
@@ -1219,4 +1220,20 @@ uintptr_t MGL_EXPORT mgl_data_section_(uintptr_t *d, uintptr_t *ids, const char 
 {	return uintptr_t(mgl_data_section(_DT_,_DA_(ids),dir[0],*val));	}
 uintptr_t MGL_EXPORT mgl_data_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int)
 {	return uintptr_t(mgl_data_section_val(_DT_,*id,dir[0],*val));	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_resort(char dir, int num, ...)
+{
+	va_list lst;
+	va_start(lst,num);
+	HMDT *v = new HMDT[num];
+	for(int i=0;i<num;i++)	v[i] = va_arg(lst, HMDT);
+	va_end(lst);
+	int n = v[0]->nx, m = v[0]->ny, l = v[0]->nz, nn = n*m*l;
+	for(int i=0;i<num;i++)	if(v[i]->GetNN()!=nn)	return;
+	if(dir='x')
+	{
+		
+	}
+	delete []v;
+}
 //-----------------------------------------------------------------------------
