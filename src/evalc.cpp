@@ -102,7 +102,7 @@ mglFormulaC::mglFormulaC(const char *string)
 		len-=2;	str[len]=0;
 	}
 	len=strlen(str);
-	if(str[0]==':')		//	this data file for interpolation
+	if(str[0]==':' && str[1]!=0)		//	this data file for interpolation
 	{
 		double sx1,sx2,sy1,sy2,sz1,sz2;
 		char *buf = strchr(str+1,':');
