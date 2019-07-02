@@ -322,8 +322,13 @@ uintptr_t MGL_EXPORT mgl_data_max_dir_(uintptr_t *dat, const char *dir,int);
 HMDT MGL_EXPORT mgl_data_min_dir(HCDT dat, const char *dir);
 uintptr_t MGL_EXPORT mgl_data_min_dir_(uintptr_t *dat, const char *dir,int);
 /// Get positions of local maximums and minimums
-HMDT MGL_EXPORT mgl_data_extremum(HCDT dat);
-uintptr_t MGL_EXPORT mgl_data_extremum_(uintptr_t *dat);
+HMDT MGL_EXPORT mgl_data_minmax(HCDT dat);
+uintptr_t MGL_EXPORT mgl_data_minmax_(uintptr_t *dat);
+/// Get indexes of a set of connected surfaces for set of values {a_ijk,b_ijk} as dependent on j,k
+/** NOTE: not optimized for general case!!! */
+HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b);
+uintptr_t MGL_EXPORT mgl_data_connect_(uintptr_t *a, uintptr_t *b);
+
 /// Cumulative summation the data in given direction or directions
 void MGL_EXPORT mgl_data_cumsum(HMDT dat, const char *dir);
 void MGL_EXPORT mgl_data_cumsum_(uintptr_t *dat, const char *dir,int);

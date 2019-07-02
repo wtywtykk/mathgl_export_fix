@@ -1,6 +1,7 @@
 2.4.4 Released ?? August 2019
 
-* Add 'extremum' for positions of local maximums and minimums
+* Add 'connect' for connecting points to set of surfaces
+* Add 'minmax' for positions of local maximums and minimums
 * Add ContGen() and ContFGen() to draw contour lines manually. Correspondingly 'cont' and 'contf' commands are extended.
 * Add 'conts' for getting coordinate of contour lines
 * Classes mglFormula and mglFormulaC now can read file with given sizes if string have the format ":fname:x1:x2:y1:y2:z1:z2". Here data is supposed in range [x1,x2]*[y1,y2]*[z1,z2] (by default [0,1]*[0,1]*[0,1]). Calc() in this case return the interpolated values

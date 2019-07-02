@@ -473,7 +473,7 @@ uintptr_t MGL_EXPORT mgl_data_min_dir_(uintptr_t *d, const char *dir,int l)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	uintptr_t r=uintptr_t(mgl_data_min_dir(_DT_,s));	delete []s;	return r;	}
 //-----------------------------------------------------------------------------
-HMDT MGL_EXPORT mgl_data_extremum(HCDT dat)
+HMDT MGL_EXPORT mgl_data_minmax(HCDT dat)
 {
 	long n=dat->GetNx(), m=dat->GetNy(), l=dat->GetNz();
 	std::vector<mreal> imax, jmax, kmax;
@@ -539,8 +539,8 @@ HMDT MGL_EXPORT mgl_data_extremum(HCDT dat)
 	}
 	return res;
 }
-uintptr_t MGL_EXPORT mgl_data_extremum_(uintptr_t *d)
-{	return uintptr_t(mgl_data_extremum(_DT_));	}
+uintptr_t MGL_EXPORT mgl_data_minmax_(uintptr_t *d)
+{	return uintptr_t(mgl_data_minmax(_DT_));	}
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_data_momentum(HCDT dat, char dir, const char *how)
 {
@@ -1221,19 +1221,47 @@ uintptr_t MGL_EXPORT mgl_data_section_(uintptr_t *d, uintptr_t *ids, const char 
 uintptr_t MGL_EXPORT mgl_data_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int)
 {	return uintptr_t(mgl_data_section_val(_DT_,*id,dir[0],*val));	}
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_data_resort(char dir, int num, ...)
+HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 {
-	va_list lst;
-	va_start(lst,num);
-	HMDT *v = new HMDT[num];
-	for(int i=0;i<num;i++)	v[i] = va_arg(lst, HMDT);
-	va_end(lst);
-	int n = v[0]->nx, m = v[0]->ny, l = v[0]->nz, nn = n*m*l;
-	for(int i=0;i<num;i++)	if(v[i]->GetNN()!=nn)	return;
-	if(dir='x')
+	int nx = a->GetNx(), ny = a->GetNy(), nz = a->GetNz();
+	HMDT res = new mglData(nx,ny,nz);
+	for(long j=0;j<ny*nz;j++)	for(long i=0;i<nx;i++)	res->a[i+j] = i;
+	for(long j=0;j<nz;j++)
 	{
-		
+		if(j>0)
+		{
+			long i0 = nx*(ny-1+ny*j);
+			for(long k=0;k<nx;k++)
+			{
+				mreal rm = INFINITY;
+				for(long kk=0;kk<nx;kk++)
+				{
+					mreal r = hypot(a->v(k+i0)-a->v(kk+i0-ny), b->v(k+i0)-b->v(kk+i0-ny));	// TODO exclude possible intersections!!!
+					if(r<rm)	{	rm=r;	res->a[kk+i0] = res->a[k+i0-ny];	}
+				}
+			}
+		}
+
+		for(long i=ny-1;i>=0;i--)	// TODO optimized for QHCU_dh case only!!!
+		{
+			long i0 = nx*(i+ny*j);
+			if(i>0)
+			{
+				for(long k=0;k<nx;k++)
+				{
+					mreal rm = INFINITY;
+					for(long kk=0;kk<nx;kk++)
+					{
+						mreal r = hypot(a->v(k+i0)-a->v(kk+i0-1), b->v(k+i0)-b->v(kk+i0-1));	// TODO exclude possible intersections!!!
+						if(r<rm)	{	rm=r;	res->a[kk+i0-1] = res->a[k+i0];	}
+					}
+				}
+			}
+		}
 	}
-	delete []v;
+	return res;
 }
+//-----------------------------------------------------------------------------
+uintptr_t MGL_EXPORT mgl_data_connect_(uintptr_t *a, uintptr_t *b)
+{	return uintptr_t(mgl_data_connect(_DA_(a),_DA_(b)));	}
 //-----------------------------------------------------------------------------

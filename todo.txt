@@ -37,6 +37,12 @@
 
 10. mgltask -- add $3-loop, $R=formula for R=4,...,9,0,A,...,Z
 11. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
+12. Chord diagram
+13. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
+14. Dendrogram ???
+15. Voronoi diagram ??? -- triangulation + coloring by point
+16. Sankey diagram ???
+
 
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -88,10 +94,10 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
-5. 'extremum' for positions of local maximums and minimums + example
+5. 'minmax' for positions of local maximums and minimums + example
 6. ContGen() and ContFGen() to draw contour lines manually. Correspondingly 'cont' and 'contf' commands are extended.
 7. 'conts' for getting coordinate of contour lines + example
-
+8. 'connect'
 
 
 ZZ. Update time.texi {before release!!!}

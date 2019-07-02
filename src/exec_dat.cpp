@@ -425,12 +425,22 @@ int static mgls_extend(mglGraph *, long , mglArg *a, const char *k, const char *
 	return res;
 }
 //-----------------------------------------------------------------------------
-int static mgls_extremum(mglGraph *, long , mglArg *a, const char *k, const char *)
+int static mgls_minmax(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
 	if(k[0]=='d' && a[0].d->temp)	return 5;
 	mglData *d = dynamic_cast<mglData *>(a[0].d);
-	if(d && !strcmp(k,"dd"))	*d = mglData(true,mgl_data_extremum(a[1].d));
+	if(d && !strcmp(k,"dd"))	*d = mglData(true,mgl_data_minmax(a[1].d));
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
+int static mgls_connect(mglGraph *, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData *>(a[0].d);
+	if(d && !strcmp(k,"ddd"))	*d = mglData(true,mgl_data_connect(a[1].d,a[2].d));
 	else res = 1;
 	return res;
 }
@@ -1657,6 +1667,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"coil",_("Project periodical data in [v1,v2]"),"coil Dat v1 v2 [sep]", mgls_coil ,16},
 	{"column",_("Get data column filled by formula on column ids"),"column Res Dat 'eq'", mgls_column ,4},
 	{"combine",_("Direct multiplication of arrays"), "combine Res Adat Bdat", mgls_combine ,4},
+	{"connect",_("Get indexes of set of connected surfaces for set of values {a_ijk,b_ijk} as dependent on j,k"),"connect Res Adat Bdat", mgls_minmax ,4},
 	{"conts",_("Get contour lines for dat[i,j]=val, separated by NAN"),"conts Res val Dat", mgls_conts ,4},
 	{"copy",_("Copy data from another variable"),"copy Dat1 Dat2 ['eq']|ReDat ImDat Cdat|Dat val|Dat 'name'", mgls_copy ,4},
 	{"correl",_("Find correlation between data arrays"), "correl Res Adat Bdat 'dir'|Res Adat 'dir'", mgls_correl ,4},
@@ -1678,7 +1689,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"evaluate",_("Evaluate (interpolate) values of array Dat at points i=idat,j=jdat,k=kdat"),"evaluate Res Dat Idat [norm]|Res Dat Idat Jdat [norm]|Res Dat Idat Jdat Kdat [norm]", mgls_evaluate ,4},
 	{"export",_("Export data to PNG file"),"export Dat 'fname' 'sch' [v1 v2]", mgls_export ,3},
 	{"extend",_("Extend data array"),"extend Dat dim1 [dim2]", mgls_extend ,3},
-	{"extremum",_("Get positions of local maximums and minimums"),"extremum Res Dat", mgls_extremum ,4},
+	{"minmax",_("Get positions of local maximums and minimums"),"minmax Res Dat", mgls_minmax ,4},
 	{"fill",_("Fill data linearly in range [v1, v2]"),"fill Var v1 v2 ['dir']|Var 'eq' [Vdat Wdat]", mgls_fill ,3},
 	{"fillsample",_("Fill x-,k-samples for transforms"),"fillsample Var 'how'", mgls_fillsample ,3},
 	{"fit",_("Fit data to formula"),"fit Res A 'eq' 'var' [Ini]|Res X A 'eq' 'var' [Ini]|Res X Y A 'eq' 'var' [Ini]|Res X Y Z A 'eq' 'var' [Ini]", mgls_fit ,4},
