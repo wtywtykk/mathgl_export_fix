@@ -1698,102 +1698,102 @@ void MGL_EXPORT mgl_data_put_dat(HMDT d, HCDT v, long xx, long yy, long zz)
 	long vx=v->GetNx(), vy=v->GetNy(), vz=v->GetNz();
 	if(xx<0 && yy<0 && zz<0)	// whole array
 	{
-		if(vx>=nx && vy>=ny && vz>=nz)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*ny*nz;ii++)
-			{	long i=ii%nx, j=(ii/nx)%ny, k=ii/(nx*ny);
-				a[ii] = b?b[i+vx*(j+k*vy)]:v->v(i,j,k);	}
-		else if(vx>=nx && vy>=ny)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*ny*nz;ii++)
-			{	long i=ii%nx, j=(ii/nx)%ny;
-				a[ii] = b?b[i+vx*j]:v->v(i,j);	}
+		long nn = vx>=nx?nx:vx, mm = vy>=ny?ny:vy, ll = vz>=nz?nz:vz;
+		if(nn>1 && mm>1 && ll>1)
+// #pragma omp parallel for
+			for(long k=0;k<ll;k++)	for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
+				a[i+nx*(j+k*ny)] = b?b[i+vx*(j+k*vy)]:v->v(i,j,k);
+		if(nn>1 && mm>1)
+// #pragma omp parallel for
+			for(long k=0;k<nz;k++)	for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
+				a[i+nx*(j+k*ny)] = b?b[i+vx*j]:v->v(i,j);
 		else if(vx>=nx)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*ny*nz;ii++)
-			{	long i=ii%nx;	a[ii] = b?b[i]:v->v(i);	}
+// #pragma omp parallel for
+			for(long k=0;k<nz;k++)	for(long j=0;j<ny;j++)	for(long i=0;i<nn;i++)
+				a[i+nx*(j+k*ny)] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long ii=0;ii<nx*ny*nz;ii++)	a[ii] = vv;
 	}
 	else if(xx<0 && yy<0)	// 2d
 	{
 		zz*=nx*ny;
-		if(vx>=nx && vy>=ny)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*ny;ii++)
-			{	long i=ii%nx, j=ii/nx;
-				a[ii+zz] = b?b[i+vx*j]:v->v(i,j);	}
-		else if(vx>=nx)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*ny;ii++)
-			{	long i=ii%nx;	a[ii+zz] = b?b[i]:v->v(i);	}
+		long nn = vx>=nx?nx:vx, mm = vy>=ny?ny:vy;
+		if(nn>1 && mm>1)
+// #pragma omp parallel for
+			for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
+				a[i+j*nx+zz] = b?b[i+vx*j]:v->v(i,j);
+		else if(nn>1)
+// #pragma omp parallel for
+			for(long j=0;j<ny;j++)	for(long i=0;i<nn;i++)
+				a[i+j*nx+xx] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long ii=0;ii<nx*ny;ii++) 	a[ii+zz] = vv;
 	}
 	else if(yy<0 && zz<0)	// 2d
 	{
-		if(vx>=ny && vy>=nz)
-#pragma omp parallel for
-			for(long ii=0;ii<ny*nz;ii++)
-			{	long i=ii%ny, j=ii/ny;
-				a[ii*nx+xx] = b?b[i+vx*j]:v->v(i,j);	}
-		else if(vx>=ny)
-#pragma omp parallel for
-			for(long ii=0;ii<ny*nz;ii++)
-			{	long i=ii%ny;	a[ii*nx+xx] = b?b[i]:v->v(i);	}
+		long nn = vx>=ny?ny:vx, mm = vy>=nz?nz:vy;
+		if(nn>1 && mm>1)
+// #pragma omp parallel for collapse(2)
+			for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
+				a[(i+ny*j)*nx+xx] = b?b[i+vx*j]:v->v(i,j);
+		else if(nn>1)
+// #pragma omp parallel for collapse(2)
+			for(long j=0;j<nz;j++)	for(long i=0;i<nn;i++)
+				a[(i+ny*j)*nx+xx] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long ii=0;ii<ny*nz;ii++) 	a[ii*nx+xx] = vv;
 	}
 	else if(xx<0 && zz<0)	// 2d
 	{
 		yy *= nx;	zz = nx*ny;
-		if(vx>=nx && vy>=nz)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*nz;ii++)
-			{	long i=ii%nx, j=ii/nx;
-				a[i+yy+j*zz] = b?b[i+vx*j]:v->v(i,j);	}
-		else if(vx>=nx)
-#pragma omp parallel for
-			for(long ii=0;ii<nx*nz;ii++)
-			{	long i=ii%nx, j=ii/nx;
-				a[i+yy+j*zz] = b?b[i]:v->v(i);	}
+		long nn = vx>=nx?nx:vx, mm = vy>=nz?nz:vy;
+		if(nn>1 && mm>1)
+// #pragma omp parallel for collapse(2)
+			for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
+				a[i+yy+j*zz] = b?b[i+vx*j]:v->v(i,j);
+		else if(nn>1)
+// #pragma omp parallel for collapse(2)
+			for(long j=0;j<nz;j++)	for(long i=0;i<nn;i++)
+				a[i+yy+j*zz] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long ii=0;ii<nx*nz;ii++)
-			{	long i=ii%nx, j=ii/nx;
-				a[i+yy+j*zz] = vv;	}
+			{	long i=ii%nx, j=ii/nx;	a[i+yy+j*zz] = vv;	}
 	}
 	else if(xx<0)
 	{
 		xx = nx*(yy+zz*ny);
-		if(vx>=nx)
-#pragma omp parallel for
-			for(long i=0;i<nx;i++)	a[i+xx] = b?b[i]:v->v(i);
+		long nn = vx>=nx?nx:vx;
+		if(nn>1)
+// #pragma omp parallel for
+			for(long i=0;i<nn;i++)	a[i+xx] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long i=0;i<nx;i++)	a[i+xx] = vv;
 	}
 	else if(yy<0)
 	{
 		xx += zz*nx*ny;
-		if(vx>=ny)
-#pragma omp parallel for
-			for(long i=0;i<ny;i++)	a[xx+nx*i] = b?b[i]:v->v(i);
+		long nn = vx>=ny?ny:vx;
+		if(nn>1)
+// #pragma omp parallel for
+			for(long i=0;i<nn;i++)	a[xx+nx*i] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long i=0;i<ny;i++)	a[xx+nx*i] = vv;
 	}
 	else if(zz<0)
 	{
 		xx += nx*yy;	yy = nx*ny;
-		if(vx>=nz)
-#pragma omp parallel for
-			for(long i=0;i<nz;i++)	a[xx+yy*i] = b?b[i]:v->v(i);
+		long nn = vx>=nz?nz:vx;
+		if(nn>1)
+// #pragma omp parallel for
+			for(long i=0;i<nn;i++)	a[xx+yy*i] = b?b[i]:v->v(i);
 		else
-#pragma omp parallel for
+// #pragma omp parallel for
 			for(long i=0;i<nz;i++)	a[xx+yy*i] = vv;
 	}
 	else	a[xx+nx*(yy+ny*zz)] = vv;
