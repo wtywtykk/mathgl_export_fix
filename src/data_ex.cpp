@@ -1225,19 +1225,19 @@ HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 {
 	int nx = a->GetNx(), ny = a->GetNy(), nz = a->GetNz();
 	HMDT res = new mglData(nx,ny,nz);
-	for(long j=0;j<ny*nz;j++)	for(long i=0;i<nx;i++)	res->a[i+j] = i;
+	for(long j=0;j<ny*nz;j++)	for(long i=0;i<nx;i++)	res->a[i+nx*j] = i;
 	for(long j=0;j<nz;j++)
 	{
 		if(j>0)
 		{
-			long i0 = nx*(ny-1+ny*j);
+			long i0 = nx*(ny-1+ny*j), nn=nx*ny;
 			for(long k=0;k<nx;k++)
 			{
 				mreal rm = INFINITY;
 				for(long kk=0;kk<nx;kk++)
 				{
-					mreal r = hypot(a->v(k+i0)-a->v(kk+i0-ny), b->v(k+i0)-b->v(kk+i0-ny));	// TODO exclude possible intersections!!!
-					if(r<rm)	{	rm=r;	res->a[kk+i0] = res->a[k+i0-ny];	}
+					mreal r = hypot(a->v(k+i0)-a->v(kk+i0-nn), b->v(k+i0)-b->v(kk+i0-nn));	// TODO exclude possible intersections!!!
+					if(r<rm)	{	rm=r;	res->a[kk+i0] = res->a[k+i0-nn];	}
 				}
 			}
 		}
@@ -1247,13 +1247,14 @@ HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 			long i0 = nx*(i+ny*j);
 			if(i>0)
 			{
-				for(long k=0;k<nx;k++)
+				for(long kk=0;kk<nx;kk++)
 				{
 					mreal rm = INFINITY;
-					for(long kk=0;kk<nx;kk++)
+					for(long k=0;k<nx;k++)
 					{
-						mreal r = hypot(a->v(k+i0)-a->v(kk+i0-1), b->v(k+i0)-b->v(kk+i0-1));	// TODO exclude possible intersections!!!
-						if(r<rm)	{	rm=r;	res->a[kk+i0-1] = res->a[k+i0];	}
+						mreal r = hypot(a->v(k+i0)-a->v(kk+i0-nx), b->v(k+i0)-b->v(kk+i0-nx));	// TODO exclude possible intersections!!!
+						if(r<rm)
+						{	rm=r;	res->a[kk+i0-nx] = res->a[k+i0];	}
 					}
 				}
 			}
