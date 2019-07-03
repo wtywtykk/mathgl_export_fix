@@ -1667,7 +1667,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"coil",_("Project periodical data in [v1,v2]"),"coil Dat v1 v2 [sep]", mgls_coil ,16},
 	{"column",_("Get data column filled by formula on column ids"),"column Res Dat 'eq'", mgls_column ,4},
 	{"combine",_("Direct multiplication of arrays"), "combine Res Adat Bdat", mgls_combine ,4},
-	{"connect",_("Get indexes of set of connected surfaces for set of values {a_ijk,b_ijk} as dependent on j,k"),"connect Res Adat Bdat", mgls_minmax ,4},
+	{"connect",_("Get indexes of set of connected surfaces for set of values {a_ijk,b_ijk} as dependent on j,k"),"connect Res Adat Bdat", mgls_connect ,4},
 	{"conts",_("Get contour lines for dat[i,j]=val, separated by NAN"),"conts Res val Dat", mgls_conts ,4},
 	{"copy",_("Copy data from another variable"),"copy Dat1 Dat2 ['eq']|ReDat ImDat Cdat|Dat val|Dat 'name'", mgls_copy ,4},
 	{"correl",_("Find correlation between data arrays"), "correl Res Adat Bdat 'dir'|Res Adat 'dir'", mgls_correl ,4},

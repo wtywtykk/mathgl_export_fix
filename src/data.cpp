@@ -1707,7 +1707,7 @@ void MGL_EXPORT mgl_data_put_dat(HMDT d, HCDT v, long xx, long yy, long zz)
 // #pragma omp parallel for
 			for(long k=0;k<nz;k++)	for(long j=0;j<mm;j++)	for(long i=0;i<nn;i++)
 				a[i+nx*(j+k*ny)] = b?b[i+vx*j]:v->v(i,j);
-		else if(vx>=nx)
+		else if(nn>1)
 // #pragma omp parallel for
 			for(long k=0;k<nz;k++)	for(long j=0;j<ny;j++)	for(long i=0;i<nn;i++)
 				a[i+nx*(j+k*ny)] = b?b[i]:v->v(i);
