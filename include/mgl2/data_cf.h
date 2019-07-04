@@ -328,6 +328,10 @@ uintptr_t MGL_EXPORT mgl_data_minmax_(uintptr_t *dat);
 /** NOTE: not optimized for general case!!! */
 HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b);
 uintptr_t MGL_EXPORT mgl_data_connect_(uintptr_t *a, uintptr_t *b);
+/// Resort data values according found connected surfaces for set of values {a_ijk,b_ijk} as dependent on j,k
+/** NOTE: not optimized for general case!!! */
+void MGL_EXPORT mgl_data_connect_r(HMDT a, HMDT b);
+void MGL_EXPORT mgl_data_connect_r_(uintptr_t *a, uintptr_t *b);
 
 /// Cumulative summation the data in given direction or directions
 void MGL_EXPORT mgl_data_cumsum(HMDT dat, const char *dir);

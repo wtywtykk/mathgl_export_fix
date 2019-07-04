@@ -43,6 +43,8 @@
 15. Voronoi diagram ??? -- triangulation + coloring by point
 16. Sankey diagram ???
 
+* Add 'connect' for connecting points to set of surfaces
+
 
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -97,6 +99,7 @@ D. Docs about JS interface
 5. 'minmax' for positions of local maximums and minimums + example
 6. ContGen() and ContFGen() to draw contour lines manually. Correspondingly 'cont' and 'contf' commands are extended.
 7. 'conts' for getting coordinate of contour lines + example
+
 8. 'connect'
 
 

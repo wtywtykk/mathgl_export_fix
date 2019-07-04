@@ -1,6 +1,5 @@
 2.4.4 Released ?? August 2019
 
-* Add 'connect' for connecting points to set of surfaces
 * Add 'minmax' for positions of local maximums and minimums
 * Add ContGen() and ContFGen() to draw contour lines manually. Correspondingly 'cont' and 'contf' commands are extended.
 * Add 'conts' for getting coordinate of contour lines

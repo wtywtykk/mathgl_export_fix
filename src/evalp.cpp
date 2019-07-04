@@ -370,7 +370,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 	{
 		size_t l=str.length()+1;
 		char *buf = new char[l];	memset(buf,0,l);
-		for(int i=1;str[i]!=0 && str[i]!=':' && i<l;i++)	buf[i-1]=str[i];
+		for(size_t i=1;str[i]!=0 && str[i]!=':' && i<l;i++)	buf[i-1]=str[i];
 		HMDT res = new mglData(buf);	delete []buf;
 		return res;
 	}

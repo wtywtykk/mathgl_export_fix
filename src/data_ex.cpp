@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include <set>
 #include <stdarg.h>
 #include <ctype.h>
 #include "mgl2/data.h"
@@ -1221,6 +1222,34 @@ uintptr_t MGL_EXPORT mgl_data_section_(uintptr_t *d, uintptr_t *ids, const char 
 uintptr_t MGL_EXPORT mgl_data_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int)
 {	return uintptr_t(mgl_data_section_val(_DT_,*id,dir[0],*val));	}
 //-----------------------------------------------------------------------------
+void MGL_NO_EXPORT mgl_closest(mreal *res, long n, long i0, long i1, HCDT a, HCDT b)
+{
+	mreal *rr = new mreal[n*n];
+	for(long k0=0;k0<n;k0++)	for(long k1=0;k1<n;k1++)
+		rr[k0+n*k1] = hypot(a->vthr(k0+i0)-a->vthr(k1+i1), b->vthr(k0+i0)-b->vthr(k1+i1));
+	std::set<long> ids, idk;
+	for(long k=0;k<n;k++)	{	ids.insert(k);	idk.insert(k);	}
+	for(long k=0;k<n;k++)
+	{
+		long k0=-1,k1=-1;
+		mreal rm = INFINITY;
+		for(long kk=0;kk<n*n;kk++)
+			if(rr[kk]<rm)	{	rm=rr[kk];	k0=kk%n;	k1=kk/n;	}
+		if(k0>=0)
+		{
+			for(long i=0;i<n;i++)	rr[i+k1*n] = rr[k0+i*n] = NAN;
+			long kk = long(0.5+res[k1+i1]);	res[k0+i0] = kk;
+			ids.erase(kk);	idk.erase(k0);
+		}
+		else
+		{
+			long kk=*(ids.begin()), ik = *(idk.begin());
+			res[ik+i0] = kk;
+			ids.erase(kk);	idk.erase(ik);
+		}
+	}
+	delete []rr;
+}
 HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 {
 	int nx = a->GetNx(), ny = a->GetNy(), nz = a->GetNz();
@@ -1230,34 +1259,13 @@ HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 	{
 		if(j>0)
 		{
-			long i0 = nx*(ny-1+ny*j), nn=nx*ny;
-			for(long k=0;k<nx;k++)
-			{
-				mreal rm = INFINITY;
-				for(long kk=0;kk<nx;kk++)
-				{
-					mreal r = hypot(a->v(k+i0)-a->v(kk+i0-nn), b->v(k+i0)-b->v(kk+i0-nn));	// TODO exclude possible intersections!!!
-					if(r<rm)	{	rm=r;	res->a[kk+i0] = res->a[k+i0-nn];	}
-				}
-			}
+			long i0 = nx*(ny-1+ny*j);
+			mgl_closest(res->a, nx, i0, i0-nx*ny, a, b);
 		}
-
-		for(long i=ny-1;i>=0;i--)	// TODO optimized for QHCU_dh case only!!!
+		for(long i=ny-1;i>0;i--)	// TODO optimized for QHCU_dh case only!!!
 		{
 			long i0 = nx*(i+ny*j);
-			if(i>0)
-			{
-				for(long kk=0;kk<nx;kk++)
-				{
-					mreal rm = INFINITY;
-					for(long k=0;k<nx;k++)
-					{
-						mreal r = hypot(a->v(k+i0)-a->v(kk+i0-nx), b->v(k+i0)-b->v(kk+i0-nx));	// TODO exclude possible intersections!!!
-						if(r<rm)
-						{	rm=r;	res->a[kk+i0-nx] = res->a[k+i0];	}
-					}
-				}
-			}
+			mgl_closest(res->a, nx, i0-nx, i0, a, b);
 		}
 	}
 	return res;
@@ -1265,4 +1273,27 @@ HMDT MGL_EXPORT mgl_data_connect(HCDT a, HCDT b)
 //-----------------------------------------------------------------------------
 uintptr_t MGL_EXPORT mgl_data_connect_(uintptr_t *a, uintptr_t *b)
 {	return uintptr_t(mgl_data_connect(_DA_(a),_DA_(b)));	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_connect_r(HMDT a, HMDT b)
+{
+	int nx = a->GetNx(), ny = a->GetNy(), nz = a->GetNz();
+	HMDT res = mgl_data_connect(a,b);
+	mreal *buf = new mreal[2*nx];
+	for(long j=0;j<ny*nz;j++)
+	{
+		long i0 = nx*j;
+		memcpy(buf,a->a+i0,nx*sizeof(mreal));
+		memcpy(buf+nx,b->a+i0,nx*sizeof(mreal));
+		for(long i=0;i<nx;i++)
+		{
+			long i1 = res->a[i0+i];
+			a->a[i0+i1] = buf[i];
+			b->a[i0+i1] = buf[i+nx];
+		}
+	}
+	delete []buf;	delete res;
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_connect_r_(uintptr_t *a, uintptr_t *b)
+{	mgl_data_connect_r(_DM_(a),_DM_(b));	}
 //-----------------------------------------------------------------------------
