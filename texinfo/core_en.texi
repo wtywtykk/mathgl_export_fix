@@ -2870,6 +2870,14 @@ The function draws contour lines for surface specified parametrically @{@var{x}[
 The same as previous with vector @var{v} of @var{num}-th elements equidistantly distributed in color range. Here @var{num} is equal to parameter @code{value} in options @var{opt} (default is 7). If string @var{sch} contain symbol @samp{.} then only contours at levels with saddle points will be drawn.
 @end deftypefn
 
+@deftypefn  {MGL command} {} cont @code{val} adat xdat ydat zdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} ContGen (@code{mreal} val, @code{const mglDataA &}a, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {C function} @code{void} mgl_cont_gen (@code{HMGL} gr, @code{mreal} val, @code{HCDT} a, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Draws contour lines for surface specified parametrically @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} at @var{a}[i,j]=@var{val}. If string @var{sch} have symbol @samp{t} or @samp{T} then contour labels @var{v}[k] will be drawn below (or above) the contours.
+@end deftypefn
+
 @anchor{contf}
 @deftypefn {MGL command} {} contf vdat zdat ['sch'='']
 @deftypefnx {MGL command} {} contf vdat xdat ydat zdat ['sch'='']
@@ -2891,6 +2899,14 @@ The function draws solid (or filled) contour lines for surface specified paramet
 @deftypefnx {C function} @code{void} mgl_contf_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
 @end ifclear
 The same as previous with vector @var{v} of @var{num}-th elements equidistantly distributed in color range. Here @var{num} is equal to parameter @code{value} in options @var{opt} (default is 7).
+@end deftypefn
+
+@deftypefn  {MGL command} {} contf @code{v1 v2} adat xdat ydat zdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} ContFGen (@code{mreal} v1, @code{mreal} v2, @code{const mglDataA &}a, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {C function} @code{void} mgl_contf_gen (@code{HMGL} gr, @code{mreal} v1, @code{mreal} v2, @code{HCDT} a, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Draws solid (or filled) contour lines for surface specified parametrically @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} between @var{a}[i,j]=@var{v1} and @var{a}[i,j]=@var{v2}.
 @end deftypefn
 
 @anchor{contd}

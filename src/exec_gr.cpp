@@ -220,6 +220,8 @@ int static mgls_plot(mglGraph *gr, long , mglArg *a, const char *k, const char *
 	else if(!strcmp(k,"dds"))	gr->Plot(*(a[0].d),*(a[1].d),a[2].s.s,opt);
 	else if(!strcmp(k,"ddd"))	gr->Plot(*(a[0].d),*(a[1].d),*(a[2].d),"",opt);
 	else if(!strcmp(k,"ddds"))	gr->Plot(*(a[0].d),*(a[1].d),*(a[2].d),a[3].s.s,opt);
+	else if(!strcmp(k,"nns"))	gr->Mark(mglPoint(a[0].v,a[1].v,NAN),a[2].s.s);
+	else if(!strcmp(k,"nnns"))	gr->Mark(mglPoint(a[0].v,a[1].v,a[2].v),a[3].s.s);
 	else res = 1;
 	return res;
 }

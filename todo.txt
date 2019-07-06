@@ -96,10 +96,6 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
-5. 'minmax' for positions of local maximums and minimums + example
-6. ContGen() and ContFGen() to draw contour lines manually. Correspondingly 'cont' and 'contf' commands are extended.
-7. 'conts' for getting coordinate of contour lines + example
-
 8. 'connect'
 
 

@@ -948,6 +948,24 @@ res_k = \sum_ij how(x_i,y_j,z_k) a_ij/ \sum_ij a_ij
 Возвращает минимальное значение данных вдоль направления(ий) @var{dir}. Функция возвращает NULL или пустой массив если данные не могут быть созданы при данных значениях аргументов.
 @end deftypefn
 
+@anchor{minmax}
+@deftypefn {Команда MGL} {} minmax @sc{res} dat
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{mglData} MinMax () @code{const}
+@deftypefnx {Функция С} @code{HMDT} mgl_data_minmax (@code{HCDT} dat)
+@end ifclear
+Возвращает положение локальных минимумов и максимумов. Функция возвращает NULL или пустой массив если минимумов и максимумов нет.
+@end deftypefn
+
+@anchor{conts}
+@deftypefn {Команда MGL} {} conts @sc{res} @code{val} dat
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{mglData} Conts (@code{mreal} val) @code{const}
+@deftypefnx {Функция С} @code{HMDT} mgl_data_conts (@code{mreal} val, @code{HCDT} dat)
+@end ifclear
+Возвращает координаты линий уровня для dat[i,j]=val. Кривые разделяются NAN. Функция возвращает NULL или пустой массив если линий уровня нет.
+@end deftypefn
+
 @anchor{combine}
 @deftypefn {Команда MGL} {} combine @sc{res} adat bdat
 @ifclear UDAV

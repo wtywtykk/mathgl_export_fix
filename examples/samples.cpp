@@ -3340,6 +3340,33 @@ void all_prims(mglGraph *gr)	// test drawing of all kinds
 	gr->Plot(r,"b");
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_minmax="define $p 30\n"
+"new h 300 300 '-sqrt(1-x^2-y^2)*(3*x*y^2*$p-x^3*$p+6*y)/(3*sqrt(2))+x*y+(y^2+x^2)*$p/3 -7*(y^2+x^2)^2*$p/24+y^2+3*x^2'\n"
+"\nminmax e h\n\ncrange h:dens h:box\nfplot 'sin(2*pi*t)' 'cos(2*pi*t)' '0' 'k'\nplot e(0)*2-1 e(1)*2-1 '. c'";
+void smgl_minmax(mglGraph *gr)	// test minmax
+{
+	mglData h(300,300);
+	gr->Fill(h,"-sqrt(1-x^2-y^2)*(3*x*y^2*30-x^3*30+6*y)/(3*sqrt(2))+x*y+(y^2+x^2)*10 -7*(y^2+x^2)^2*30/24+y^2+3*x^2");
+	mglData e=h.MinMax();
+	gr->SetRange('c',h);	gr->Dens(h);	gr->Box();
+	gr->FPlot("sin(2*pi*t)","cos(2*pi*t)","0","k");
+	e*=2;	e-=1;
+//	for(long i=0;i<x.nx;i++)	{	x.a[i]=e.a[2*i]*2-1;	y.a[i]=e.a[2*i+1]*2-1;	}
+	gr->Plot(e(0),e(1),". c");
+}
+//-----------------------------------------------------------------------------
+const char *mmgl_conts="new a 10 10 'sin(2*pi*x*y)'\nrotate 40 60\n"
+"dens a '#'\ncont [0,0] a 'r'\nconts r 0 a\nplot 2*r(0)-1 2*r(1)-1 1+r(2) '2c'";
+void smgl_conts(mglGraph *gr)	// test conts
+{
+	mglData a(10,10);	gr->Fill(a,"sin(2*pi*x*y)");
+	mglData v, r=a.Conts(0);
+	gr->Rotate(40,60);	gr->Dens(a,"#");	gr->Cont(v,a,"r");
+	mglData x(r.ny),y(r.ny),z(r.ny);
+	for(long i=0;i<x.nx;i++)	{	x[i]=r[2*i]*2-1;	y[i]=r[2*i+1]*2-1;	z[i]=1;	}
+	gr->Plot(x,y,z,"2c");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_fexport=all_prims_str
 "write 'fexport.jpg':#write 'fexport.png'\nwrite 'fexport.bmp':write 'fexport.tga'\n"
 "write 'fexport.eps':write 'fexport.svg'\nwrite 'fexport.gif':write 'fexport.xyz'\n"
@@ -3447,6 +3474,7 @@ mglSample samp[] = {
 	{"contf", smgl_contf, mmgl_contf, "Function @ref{contf} draw filled contours.  You can select automatic (default) or manual levels for contours."},
 	{"contf3", smgl_contf3, mmgl_contf3, "Function @ref{contf3} draw ordinary filled contours but at slices of 3D data. "},
 	{"contf_xyz", smgl_contf_xyz, mmgl_contf_xyz, "Functions @ref{contfz}, @ref{contfy}, @ref{contfx}, draw filled contours on plane perpendicular to corresponding axis. One of possible application is drawing projections of 3D field."},
+	{"conts", smgl_conts, mmgl_conts, "Function @ref{conts} get contour coordinate as data array."},
 	{"contv", smgl_contv, mmgl_contv, "Function @ref{contv} draw vertical cylinders (belts) at contour lines."},
 	{"correl", smgl_correl, mmgl_correl, "Test of correlation function (@ref{correl})."},
 //	{"crust", smgl_crust, mmgl_crust, ""},	// TODO: open after triangulation
@@ -3492,6 +3520,7 @@ mglSample samp[] = {
 	{"mark", smgl_mark, mmgl_mark, "Example of @ref{mark}."},
 	{"mask", smgl_mask, mmgl_mask, "Example of @ref{mask} kinds."},
 	{"mesh", smgl_mesh, mmgl_mesh, "Function @ref{mesh} draw wired surface. You can use @ref{meshnum} for changing number of lines to be drawn."},
+	{"minmax", smgl_minmax, mmgl_minmax, "Function @ref{minmax} get position of local minimums and maximums."},
 	{"mirror", smgl_mirror, mmgl_mirror , "Example of using options."},
 	{"molecule", smgl_molecule, mmgl_molecule , "Example of drawing molecules."},
 	{"ode", smgl_ode, mmgl_ode, "Example of phase plain created by @ref{ode} solving, contour lines (@ref{cont}) and @ref{flow} threads."},

@@ -279,7 +279,7 @@ using mglDataA::Momentum;
 	{	return mglData(true,mgl_data_section(this,&ids,dir,val));	}
 	inline mglData Section(long id, char dir='y', mreal val=NAN) const
 	{	return mglData(true,mgl_data_section_val(this,id,dir,val));	}
-	/// Get contour lines for dat[i,j]=val. NAN values separate the the curves
+	/// Get contour lines for dat[i,j]=val. NAN values separate the the curves.
 	inline mglData Conts(mreal val)
 	{	return mglData(true,mgl_data_conts(val,this));	}
 
@@ -457,6 +457,15 @@ using mglDataA::Momentum;
 	/// Direct access to the data cell
 	inline mreal operator[](long i) const	{	return a[i];	}
 	inline mreal &operator[](long i)		{	return a[i];	}
+	/// Get sub-array of the data with given fixed indexes
+	inline mglData operator()(long xx,long yy=-1,long zz=-1) const
+	{	return mglData(true,mgl_data_subdata(this,xx,yy,zz));	}
+	inline mglData operator()(const mglDataA &xx, const mglDataA &yy, const mglDataA &zz) const
+	{	return mglData(true,mgl_data_subdata_ext(this,&xx,&yy,&zz));	}
+	inline mglData operator()(const mglDataA &xx, const mglDataA &yy) const
+	{	return mglData(true,mgl_data_subdata_ext(this,&xx,&yy,0));	}
+	inline mglData operator()(const mglDataA &xx) const
+	{	return mglData(true,mgl_data_subdata_ext(this,&xx,0,0));	}
 #endif
 
 #ifndef DEBUG

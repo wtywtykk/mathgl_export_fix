@@ -961,6 +961,24 @@ Gets array which is the maximal data values in given direction or direction(s). 
 Gets array which is the maximal data values in given direction or direction(s). Function return NULL or create empty data if data cannot be created for given arguments.
 @end deftypefn
 
+@anchor{minmax}
+@deftypefn {MGL command} {} minmax @sc{res} dat
+@ifclear UDAV
+@deftypefnx {Method on @code{mglData}} @code{mglData} MinMax () @code{const}
+@deftypefnx {C function} @code{HMDT} mgl_data_minmax (@code{HCDT} dat)
+@end ifclear
+Gets positions of local maximums and minimums. Function return NULL or create empty data if there is no minimums and maximums.
+@end deftypefn
+
+@anchor{conts}
+@deftypefn {MGL command} {} conts @sc{res} @code{val} dat
+@ifclear UDAV
+@deftypefnx {Method on @code{mglData}} @code{mglData} Conts (@code{mreal} val) @code{const}
+@deftypefnx {C function} @code{HMDT} mgl_data_conts (@code{mreal} val, @code{HCDT} dat)
+@end ifclear
+Gets coordinates of contour lines for dat[i,j]=val. NAN values separate the the curves. Function return NULL or create empty data if there is contour lines.
+@end deftypefn
+
 @anchor{combine}
 @deftypefn {MGL command} {} combine @sc{res} adat bdat
 @ifclear UDAV

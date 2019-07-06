@@ -832,7 +832,7 @@ int mglParser::Parse(mglGraph *gr, std::wstring str, long pos)
 			if(arg[1][1]==0 && (r>=0 && r<40))
 			{
 				if(a[1].type==0)	{	st.v = *(a[1].d);	n=0;	}
-				else if(a[1].type==2 && a[2].type==2 && a[2].v>a[1].v)
+				else if(a[1].type==2 && a[2].type==2 && a[2].v>=a[1].v)
 				{
 					mreal step = a[3].type==2?a[3].v:1;
 					mm = int(step>0 ? (a[2].v-a[1].v)/step : 0);

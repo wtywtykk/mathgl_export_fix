@@ -392,6 +392,7 @@ HMDT mgl_data_conts(mreal val, HCDT dat)
 	mglDataV z(dat->GetNx(),dat->GetNy(),dat->GetNz(),0,1,'z');
 	std::vector<mglSegment> curvs = mgl_get_curvs(Min,Max,mgl_get_lines(val,dat,&x,&y,&z,0));
 	long pc=curvs.size(), m=0;
+	if(pc==0)	return NULL;
 	for(size_t i=0;i<curvs.size();i++)	pc += curvs[i].pp.size();
 	// fill arguments for other functions
 	HMDT res = new mglData(3,pc);

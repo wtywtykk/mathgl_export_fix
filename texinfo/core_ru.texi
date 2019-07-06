@@ -2837,6 +2837,14 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 Как предыдущий с вектором @var{v} из @var{num} элементов равно распределенных в диапазоне изменения цвета. Здесь @var{num} равен значению параметра @code{value} в опциях @var{opt} (по умолчанию 7). Если @var{sch} содержит @samp{.}, то будут строится только контуры по уровням седловых точек.
 @end deftypefn
 
+@deftypefn  {Команда MGL} {} cont @code{val} adat xdat ydat zdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} ContGen (@code{mreal} val, @code{const mglDataA &}a, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_cont_gen (@code{HMGL} gr, @code{mreal} val, @code{HCDT} a, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Рисует линии уровня для параметрически заданной поверхности @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} при @var{a}[i,j]=@var{val}. Если @var{sch} содержит @samp{t} или @samp{T}, то значения @var{v}[k] будут выведены вдоль контуров над (или под) кривой. 
+@end deftypefn
+
 @anchor{contf}
 @deftypefn {Команда MGL} {} contf vdat zdat ['sch'='']
 @deftypefnx {Команда MGL} {} contf vdat xdat ydat zdat ['sch'='']
@@ -2858,6 +2866,14 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefnx {Функция С} @code{void} mgl_contf_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
 @end ifclear
 Как предыдущий с вектором @var{v} из @var{num} элементов равно распределенных в диапазоне изменения цвета. Здесь @var{num} равен значению параметра @code{value} в опциях @var{opt} (по умолчанию 7).
+@end deftypefn
+
+@deftypefn  {Команда MGL} {} contf @code{v1 v2} adat xdat ydat zdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} ContFGen (@code{mreal} v1, @code{mreal} v2, @code{const mglDataA &}a, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_contf_gen (@code{HMGL} gr, @code{mreal} v1, @code{mreal} v2, @code{HCDT} a, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Рисует закрашенные линии (контуры) уровня для параметрически заданной поверхности @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} между @var{a}[i,j]=@var{v1} и @var{a}[i,j]=@var{v2}.
 @end deftypefn
 
 @anchor{contd}
@@ -3428,13 +3444,13 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @end deftypefn
 
 @anchor{flow3}
-@deftypefn {MGL command} {} flow3 udat vdat wdat ['sch'='']
-@deftypefnx {MGL command} {} flow3 xdat ydat zdat udat vdat ['sch'='']
+@deftypefn {Команда MGL} {} flow3 udat vdat wdat ['sch'='']
+@deftypefnx {Команда MGL} {} flow3 xdat ydat zdat udat vdat ['sch'='']
 @ifclear UDAV
-@deftypefnx {Method on @code{mglGraph}} @code{void} Flow3 (@code{const mglDataA &}ax, @code{const mglDataA &}ay, @code{const mglDataA &}az, @code{const char *}sch=@code{""}, @code{double} sVal=@code{-1}, @code{const char *}opt=@code{""})
-@deftypefnx {Method on @code{mglGraph}} @code{void} Flow3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}ax, @code{const mglDataA &}ay, @code{const mglDataA &}az, @code{const char *}sch=@code{""}, @code{double} sVal=@code{-1}, @code{const char *}opt=@code{""})
-@deftypefnx {C function} @code{void} mgl_flow3 (@code{HMGL} gr, @code{HCDT} ax, @code{HCDT} ay, @code{HCDT} az, @code{const char *}sch, @code{double} sVal, @code{const char *}opt)
-@deftypefnx {C function} @code{void} mgl_flow3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} ax, @code{HCDT} ay, @code{HCDT} az, @code{const char *}sch, @code{double} sVal, @code{const char *}opt)
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Flow3 (@code{const mglDataA &}ax, @code{const mglDataA &}ay, @code{const mglDataA &}az, @code{const char *}sch=@code{""}, @code{double} sVal=@code{-1}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Flow3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}ax, @code{const mglDataA &}ay, @code{const mglDataA &}az, @code{const char *}sch=@code{""}, @code{double} sVal=@code{-1}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_flow3 (@code{HMGL} gr, @code{HCDT} ax, @code{HCDT} ay, @code{HCDT} az, @code{const char *}sch, @code{double} sVal, @code{const char *}opt)
+@deftypefnx {Функция С} @code{void} mgl_flow3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} ax, @code{HCDT} ay, @code{HCDT} az, @code{const char *}sch, @code{double} sVal, @code{const char *}opt)
 @end ifclear
 The function draws flow threads for the 3D vector field @{@var{ax}, @var{ay}, @var{az}@} parametrically depending on coordinates @var{x}, @var{y}, @var{z}. Flow threads starts from given plane. Option @code{value} set the approximate number of threads (default is 5). String @var{sch} may contain:
 @itemize @bullet

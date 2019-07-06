@@ -489,8 +489,9 @@ HMDT MGL_EXPORT mgl_data_minmax(HCDT dat)
 			if(v < dat->v(i-1) && v <= dat->v(i+1))	imax.push_back(i);
 		}
 		size_t nn = imax.size();
-		res = new mglData(nn);
-		for(size_t i=0;i<nn;i++)	res->a[i] = imax[i]/(n-1.);
+		if(nn>0)
+		{	res = new mglData(nn);
+			for(size_t i=0;i<nn;i++)	res->a[i] = imax[i]/(n-1.);	}
 	}
 	else if(n>3 && m>3 && l==1)
 	{
@@ -510,9 +511,12 @@ HMDT MGL_EXPORT mgl_data_minmax(HCDT dat)
 			if(vmax>0 && vmin==0)	{	imax.push_back(i);	jmax.push_back(j);	}
 		}
 		size_t nn = imax.size();
-		res = new mglData(2,nn);
-		for(size_t i=0;i<nn;i++)
-		{	res->a[2*i] = imax[i]/(n-1.);	res->a[2*i+1] = jmax[i]/(m-1.);	}
+		if(nn>0)
+		{
+			res = new mglData(2,nn);
+			for(size_t i=0;i<nn;i++)
+			{	res->a[2*i] = imax[i]/(n-1.);	res->a[2*i+1] = jmax[i]/(m-1.);	}
+		}
 	}
 	else if(n>3 && m>3 && l>3)
 	{
@@ -534,9 +538,12 @@ HMDT MGL_EXPORT mgl_data_minmax(HCDT dat)
 			if(vmax>0 && vmin==0)	{	imax.push_back(i);	jmax.push_back(j);	kmax.push_back(k);	}
 		}
 		size_t nn = imax.size();
-		res = new mglData(3,nn);
-		for(size_t i=0;i<nn;i++)
-		{	res->a[3*i] = imax[i]/(n-1.);	res->a[3*i+1] = jmax[i]/(m-1.);	res->a[3*i+2] = kmax[i]/(l-1.);	}
+		if(nn>0)
+		{	
+			res = new mglData(3,nn);
+			for(size_t i=0;i<nn;i++)
+			{	res->a[3*i] = imax[i]/(n-1.);	res->a[3*i+1] = jmax[i]/(m-1.);	res->a[3*i+2] = kmax[i]/(l-1.);	}
+		}
 	}
 	return res;
 }
