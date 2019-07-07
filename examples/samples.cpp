@@ -3363,7 +3363,7 @@ void smgl_conts(mglGraph *gr)	// test conts
 	mglData v, r=a.Conts(0);
 	gr->Rotate(40,60);	gr->Dens(a,"#");	gr->Cont(v,a,"r");
 	mglData x(r.ny),y(r.ny),z(r.ny);
-	for(long i=0;i<x.nx;i++)	{	x[i]=r[2*i]*2-1;	y[i]=r[2*i+1]*2-1;	z[i]=1;	}
+	for(long i=0;i<x.nx;i++)	{	x[i]=r[r.nx*i]*2-1;	y[i]=r[r.nx*i+1]*2-1;	z[i]=1;	}
 	gr->Plot(x,y,z,"2c");
 }
 //-----------------------------------------------------------------------------
