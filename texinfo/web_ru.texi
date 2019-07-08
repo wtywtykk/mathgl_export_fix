@@ -53,8 +53,8 @@ Generally, MathGL is GPL library. However, you can use LGPL license for MathGL c
 @strong{Latest news}
 @itemize
 
-@item @strong{14 March 2018.}
-New version (v.2.4.3) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are new @ref{clabel} command for drawing colorbar labels, EPS output now may have @ref{mask}, compatibility changes for complex numbers, and many other improvements.
+@item @strong{8 July 2019.}
+New version (v.2.4.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are new @ref{minmax} for positions of local minimums and maximums, add @ref{conts} for coordinates of contour lines, extend formula evaluation to read and interpolate data files.
 
 @item @emph{17 May 2017.}
 New version (v.2.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are @code{mgllab} executable, string manipulation in MGL, new functions, plot types and styles, translation to Russian using @code{gettext} and bugfixes, which denoted @ref{News, here}.
@@ -76,6 +76,19 @@ Javascript interface was developed with support of @url{http://www.datadvance.ne
 @nav{}
 
 @itemize
+
+@item @strong{8 July 2019}
+New version (v.2.4.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
+@itemize @bullet
+
+@item Add @ref{minmax} for positions of local maximums and minimums.
+@item Add ContGen() and ContFGen() to draw contour lines manually. Correspondingly @ref{cont} and @ref{contf} commands are extended.
+@item Add @ref{conts} for coordinate of contour lines.
+@item Extend @ref{put} for partial filling if data size(s) are smaller as destination.
+@item Classes mglFormula and mglFormulaC now can read file with given sizes if string have the format ":fname:x1:x2:y1:y2:z1:z2". Here data is supposed in range [x1,x2]*[y1,y2]*[z1,z2] (by default [0,1]*[0,1]*[0,1]). Calc() in this case return the interpolated values.
+@item mglData now have operator() which work as SubData() function.
+@item Minor bugfixes.
+@end itemize
 
 @item @strong{14 March 2019}
 New version (v.2.4.3) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
