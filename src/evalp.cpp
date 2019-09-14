@@ -348,6 +348,106 @@ mreal mgl_gettime(const std::wstring &s)
 	return t;
 }
 //-----------------------------------------------------------------------------
+double mgl_jac_sn(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return sn;
+}
+double mgl_jac_sc(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return sn/cn;
+}
+double mgl_jac_sd(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return sn/dn;
+}
+
+double mgl_jac_cn(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return cn;
+}
+double mgl_jac_cs(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return cn/sn;
+}
+double mgl_jac_cd(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return cn/dn;
+}
+
+double mgl_jac_dn(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return dn;
+}
+double mgl_jac_ds(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return dn/sn;
+}
+double mgl_jac_dc(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return dn/cn;
+}
+
+double mgl_jac_nd(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return 1./dn;
+}
+double mgl_jac_ns(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return 1./sn;
+}
+double mgl_jac_nc(double a, double m)
+{
+	double sn=0, cn=0, dn=0;
+#if MGL_HAVE_GSL
+	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
+#endif
+	return 1./cn;
+}
+//-----------------------------------------------------------------------------
 /// Parse string and substitute the script argument
 // All numbers are presented as mglData(1). Do boundary checking.
 // NOTE: In any case where number is required the mglData::a[0] is used.
@@ -670,6 +770,12 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 			}
 #if MGL_HAVE_GSL
 			else if(!nm.compare(L"ci"))	return mglApplyFunc(str, arg, head, gsl_sf_Ci);
+			else if(!nm.compare(L"cn") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cn);
+			else if(!nm.compare(L"cs") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cs);
+			else if(!nm.compare(L"cd") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cd);
 #endif
 		}
 		else if(nm[0]=='e')
@@ -715,6 +821,12 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 #if MGL_HAVE_GSL
 			else if(!nm.compare(L"si"))		return mglApplyFunc(str, arg, head, gsl_sf_Si);
 			else if(!nm.compare(L"sinc"))	return mglApplyFunc(str, arg, head, gsl_sf_sinc);
+			else if(!nm.compare(L"sn") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sn);
+			else if(!nm.compare(L"sc") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sc);
+			else if(!nm.compare(L"sd") && n>0)
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sd);
 #endif
 		}
 		else if(nm[0]=='t')
@@ -759,6 +871,18 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 			mgl_delete_datac(a1);	return res;
 		}
 #if MGL_HAVE_GSL
+		else if(!nm.compare(L"dn") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dn);
+		else if(!nm.compare(L"ds") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ds);
+		else if(!nm.compare(L"dc") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dc);
+		else if(!nm.compare(L"nc") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nc);
+		else if(!nm.compare(L"ns") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ns);
+		else if(!nm.compare(L"nd") && n>0)
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nd);
 		else if(!nm.compare(L"i") && n>0)
 			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Inu);
 		else if(!nm.compare(L"j") && n>0)

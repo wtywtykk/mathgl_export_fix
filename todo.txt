@@ -43,6 +43,9 @@
 15. Voronoi diagram ??? -- triangulation + coloring by point
 16. Sankey diagram ???
 
+17. Global mglDataA* collection (like in mglParser) for viewing/changing in GUI data from external languages (like, Python, ...). It should have: new(), add(), del(), get(). 
+18. Provide the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
+
 * Add 'connect' for connecting points to set of surfaces
 
 
