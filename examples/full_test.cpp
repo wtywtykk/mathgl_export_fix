@@ -74,6 +74,10 @@ void mgls_prepare3v(mglData *ex, mglData *ey, mglData *ez);
 void save(mglGraph *gr,const char *name,const char *suf);
 void test(mglGraph *gr)
 {
+	mglData d(3,100);	gr->Fill(d,"cos(2*pi*i*y)");
+	gr->Rotate(40,60);	gr->Fall(d,"2kx");
+	return;
+	
 	mglParse par;
 	par.Execute(gr,"new f 100 'x^3':save f 'test.dat':axis:box:fplot ':test.dat:-1:1'");
 	par.Execute(gr,"text 0 0 'ab' '@'");

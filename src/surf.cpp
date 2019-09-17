@@ -40,7 +40,7 @@ void static mgl_mesh_plot(mglBase *gr, long kq, long n, long m, int how)
 		long s=0;
 		for(long j=0;j<m-1;j++)
 		{	long iq=kq+i+n*j;	if(gr->ValidPnt(iq) && gr->ValidPnt(iq+n))	s++;	}
-		d = gr->FaceNum>0 ? gr->FaceNum+1 : n;	s = s>d?s/d:1;
+		d = gr->FaceNum>0 ? gr->FaceNum+1 : m;	s = s>d?s/d:1;
 		gr->curve_plot(1+(m-1)/s,kq+i,n*s);
 	}
 }
