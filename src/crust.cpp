@@ -530,7 +530,6 @@ HMDT MGL_EXPORT mgl_triangulation_2d(HCDT x, HCDT y)
 	if(y->GetNN()!=n)	return nums;
 	// use s-hull here
 	std::vector<Shx> pts;
-	Shx pt;
 
 	double x1=mglInf, x2=-mglInf, y1=mglInf, y2=-mglInf;
 	for(long i=0;i<n;i++)
@@ -545,6 +544,7 @@ HMDT MGL_EXPORT mgl_triangulation_2d(HCDT x, HCDT y)
 	if(dx==0 || dy==0)	return nums;
 	for(long i=0;i<n;i++)	// Filter NaNs and Infs
 	{
+		Shx pt;
 		pt.r = (x->vthr(i)-x1)/dx;	pt.c = (y->vthr(i)-y1)/dy;
 		if(mgl_isbad(pt.r) || mgl_isbad(pt.c))	continue;
 		pt.id = i;    pts.push_back(pt);

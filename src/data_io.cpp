@@ -309,6 +309,33 @@ std::string MGL_EXPORT mgl_str_arg(const std::string &str, char ch, int n1, int 
 	return res;
 }
 //-----------------------------------------------------------------------------
+/// Get section separated by symbol ch. This is analog of QString::section().
+std::vector<std::wstring> MGL_EXPORT mgl_wcs_args(const std::wstring &str, wchar_t ch)
+{
+	std::vector<size_t> pos;	pos.push_back(0);
+	for(size_t p=0; p != std::string::npos;)
+	{	p=str.find(ch,p+1);	pos.push_back(p?p+1:0);	}
+	std::vector<std::wstring> res;
+	for(size_t i=0;i<pos.size()-1;i++)
+		res.push_back(str.substr(pos[i],pos[i+1]-pos[i]-1));
+	return res;
+}
+//-----------------------------------------------------------------------------
+/// Get section separated by symbol ch. This is analog of QString::section().
+std::wstring MGL_EXPORT mgl_wcs_arg(const std::wstring &str, wchar_t ch, int n1, int n2)
+{
+	std::vector<size_t> pos;	pos.push_back(0);
+	for(size_t p=0; p != std::string::npos;)
+	{	p=str.find(ch,p+1);	pos.push_back(p?p+1:0);	}
+	std::wstring res;
+	if(n2<0)	n2=n1;
+	if(n1<0 || n1>=long(pos.size())-1 || n2<n1)	return res;
+	if(n2>=long(pos.size()))	n2=pos.size()-1;
+	res = str.substr(pos[n1],pos[n2+1]-pos[n1]-1);
+	if(res.size()==1 && res[0]==ch)	res.clear();
+	return res;
+}
+//-----------------------------------------------------------------------------
 /// Get string from number.
 std::string MGL_EXPORT mgl_str_num(double val)
 {	char buf[32];	snprintf(buf,32,"%g",val);	return std::string(buf);	}

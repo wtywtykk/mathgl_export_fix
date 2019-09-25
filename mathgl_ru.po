@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-06 19:59+0300\n"
+"POT-Creation-Date: 2019-09-25 17:42+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2424,7 +2424,9 @@ msgstr "Загрузить форматированные данные из фа
 #: src/exec_dat.cpp:1672
 msgid ""
 "Get indexes or resort data for found connected surfaces dependent on j,k"
-msgstr "Найти индексы или пересортировать данные для поиска связанных поверхностей, зависящих от j,k"
+msgstr ""
+"Найти индексы или пересортировать данные для поиска связанных поверхностей, "
+"зависящих от j,k"
 
 #: src/exec_dat.cpp:1715
 msgid "Get momentum along direction"
@@ -2647,12 +2649,12 @@ msgstr "Группы команд MGL"
 msgid "H - darkgray"
 msgstr "H - темно-серый"
 
-#: src/data_io.cpp:1092
+#: src/data_io.cpp:1119
 msgid "HDF4 support was disabled. Please, enable it and rebuild MathGL."
 msgstr "HDF4 поддержка отключена. Включите ее и пересоберите MathGL."
 
-#: src/complex_io.cpp:924 src/complex_io.cpp:926 src/data_io.cpp:1191
-#: src/data_io.cpp:1193 src/data_io.cpp:1195 src/data_io.cpp:1197
+#: src/complex_io.cpp:924 src/complex_io.cpp:926 src/data_io.cpp:1218
+#: src/data_io.cpp:1220 src/data_io.cpp:1222 src/data_io.cpp:1224
 msgid "HDF5 support was disabled. Please, enable it and rebuild MathGL."
 msgstr "HDF5 поддержка отключена. Включите ее и пересоберите MathGL."
 

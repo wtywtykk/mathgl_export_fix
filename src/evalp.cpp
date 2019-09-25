@@ -30,6 +30,8 @@
 std::wstring mgl_trim_ws(const std::wstring &str);
 HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
 HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
+HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns);
+HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns);
 //-----------------------------------------------------------------------------
 HMDT MGL_NO_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head)
 {
@@ -45,9 +47,9 @@ HADT MGL_NO_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*>
 	return mglFormulaCalcC(s,0,head);
 }
 //-----------------------------------------------------------------------------
-HMDT mglApplyFunc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double))
+HMDT mglApplyFunc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double), const std::vector<std::wstring> fns)
 {
-	HMDT d = mglFormulaCalc(str, arg, head);
+	HMDT d = mglFormulaCalcA(str, arg, head, fns);
 	long n = d->GetNN();	mreal *dd=d->a;
 #pragma omp parallel for
 	for(long i=0;i<n;i++)	dd[i] = func(dd[i]);
@@ -55,9 +57,9 @@ HMDT mglApplyFunc(std::wstring str, mglParser *arg, const std::vector<mglDataA*>
 }
 //-----------------------------------------------------------------------------
 #if MGL_HAVE_GSL
-HMDT mglApplyFuncGSL(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double, gsl_mode_t))
+HMDT mglApplyFuncGSL(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double, gsl_mode_t), const std::vector<std::wstring> fns)
 {
-	HMDT d = mglFormulaCalc(str, arg, head);
+	HMDT d = mglFormulaCalcA(str, arg, head, fns);
 	long n = d->GetNN();	mreal *dd=d->a;
 #pragma omp parallel for
 	for(long i=0;i<n;i++)	dd[i] = func(dd[i],GSL_PREC_SINGLE);
@@ -65,9 +67,9 @@ HMDT mglApplyFuncGSL(std::wstring str, mglParser *arg, const std::vector<mglData
 }
 #endif
 //-----------------------------------------------------------------------------
-HMDT mglApplyOper(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double,double))
+HMDT mglApplyOper(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double,double), const std::vector<std::wstring> fns)
 {
-	HMDT a = mglFormulaCalc(a1,arg,head), b = mglFormulaCalc(a2,arg,head), r,d;
+	HMDT a = mglFormulaCalcA(a1,arg,head, fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -84,9 +86,9 @@ HMDT mglApplyOper(std::wstring a1, std::wstring a2, mglParser *arg, const std::v
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT mglApplyOperAdd(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HMDT mglApplyOperAdd(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HMDT a = mglFormulaCalc(a1,arg,head), b = mglFormulaCalc(a2,arg,head), r,d;
+	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -100,9 +102,9 @@ HMDT mglApplyOperAdd(std::wstring a1, std::wstring a2, mglParser *arg, const std
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT mglApplyOperSub(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HMDT mglApplyOperSub(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HMDT a = mglFormulaCalc(a1,arg,head), b = mglFormulaCalc(a2,arg,head), r,d;
+	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -119,9 +121,9 @@ HMDT mglApplyOperSub(std::wstring a1, std::wstring a2, mglParser *arg, const std
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT mglApplyOperMul(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HMDT mglApplyOperMul(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HMDT a = mglFormulaCalc(a1,arg,head), b = mglFormulaCalc(a2,arg,head), r,d;
+	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -135,9 +137,9 @@ HMDT mglApplyOperMul(std::wstring a1, std::wstring a2, mglParser *arg, const std
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT mglApplyOperDiv(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HMDT mglApplyOperDiv(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HMDT a = mglFormulaCalc(a1,arg,head), b = mglFormulaCalc(a2,arg,head), r,d;
+	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -157,18 +159,18 @@ HMDT mglApplyOperDiv(std::wstring a1, std::wstring a2, mglParser *arg, const std
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyFuncC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual))
+HADT mglApplyFuncC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual), const std::vector<std::wstring> fns)
 {
-	HADT d = mglFormulaCalcC(str, arg, head);
+	HADT d = mglFormulaCalcAC(str, arg, head,fns);
 	long n = d->GetNN();	dual *dd=d->a;
 #pragma omp parallel for
 	for(long i=0;i<n;i++)	dd[i] = func(dd[i]);
 	return d;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyOperC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual,dual))
+HADT mglApplyOperC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual,dual), const std::vector<std::wstring> fns)
 {
-	HADT a = mglFormulaCalcC(a1,arg,head), b = mglFormulaCalcC(a2,arg,head), r,d;
+	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -185,9 +187,9 @@ HADT mglApplyOperC(std::wstring a1, std::wstring a2, mglParser *arg, const std::
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyOperAddC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HADT mglApplyOperAddC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HADT a = mglFormulaCalcC(a1,arg,head), b = mglFormulaCalcC(a2,arg,head), r,d;
+	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -201,9 +203,9 @@ HADT mglApplyOperAddC(std::wstring a1, std::wstring a2, mglParser *arg, const st
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyOperSubC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HADT mglApplyOperSubC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HADT a = mglFormulaCalcC(a1,arg,head), b = mglFormulaCalcC(a2,arg,head), r,d;
+	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -220,9 +222,9 @@ HADT mglApplyOperSubC(std::wstring a1, std::wstring a2, mglParser *arg, const st
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyOperMulC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HADT mglApplyOperMulC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HADT a = mglFormulaCalcC(a1,arg,head), b = mglFormulaCalcC(a2,arg,head), r,d;
+	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -236,9 +238,9 @@ HADT mglApplyOperMulC(std::wstring a1, std::wstring a2, mglParser *arg, const st
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT mglApplyOperDivC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head)
+HADT mglApplyOperDivC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
-	HADT a = mglFormulaCalcC(a1,arg,head), b = mglFormulaCalcC(a2,arg,head), r,d;
+	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
 	if(na!=1)	{	r=a;	d=b;	nn=na;	}
 	else		{	r=b;	d=a;	nn=nb;	}
@@ -454,6 +456,11 @@ double mgl_jac_nc(double a, double m)
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
+	std::vector<std::wstring> fns = mgl_wcs_args(str,'"');
+	return mglFormulaCalcA(str,arg,head,fns);
+}
+HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+{
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();
 #endif
@@ -519,18 +526,19 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 
 	n=mglFindInText(str,"&|");	// lowest priority -- logical
 	if(n>=0)
-		return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='|'?cor:cand);
+		return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='|'?cor:cand,fns);
 	n=mglFindInText(str,"<>=");	// low priority -- conditions
 	if(n>=0)
-		return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?clt:(str[n]=='>'?cgt:ceq));
+		return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?clt:(str[n]=='>'?cgt:ceq),fns);
 	n=mglFindInText(str,"+-");	// normal priority -- additions
 	if(n>=0 && (n<2 || str[n-1]!='e' || (str[n-2]!='.' && !isdigit(str[n-2])) ))
-		return str[n]=='+'? mglApplyOperAdd(str.substr(0,n),str.substr(n+1),arg, head) : mglApplyOperSub(str.substr(0,n),str.substr(n+1),arg, head);
+		return str[n]=='+'? mglApplyOperAdd(str.substr(0,n),str.substr(n+1),arg, head,fns) : 
+				mglApplyOperSub(str.substr(0,n),str.substr(n+1),arg, head,fns);
 	n=mglFindInText(str,"*/%");	// high priority -- multiplications
 	if(n>=0)
-		return str[n]=='*'? mglApplyOperMul(str.substr(0,n),str.substr(n+1),arg, head) : 
-			(str[n]=='/'? mglApplyOperDiv(str.substr(0,n),str.substr(n+1),arg, head) :
-				mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod));
+		return str[n]=='*'? mglApplyOperMul(str.substr(0,n),str.substr(n+1),arg, head,fns) : 
+			(str[n]=='/'? mglApplyOperDiv(str.substr(0,n),str.substr(n+1),arg, head,fns) :
+				mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod,fns));
 	n=mglFindInText(str,"@");	// high priority -- combine
 	if(n>=0)
 	{
@@ -541,7 +549,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 		return res?res:new mglData;
 	}
 	n=mglFindInText(str,"^");	// highest priority -- power
-	if(n>=0)	return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, ipw);
+	if(n>=0)	return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, ipw,fns);
 	n=mglFindInText(str,":");	// highest priority -- array
 	if(n>=0 && str.compare(L":"))
 	{
@@ -706,15 +714,15 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 		}
 		else if(nm[0]=='a')	// function
 		{
-			if(!nm.compare(L"asin"))		return mglApplyFunc(str, arg, head, asin);
-			else if(!nm.compare(L"acos"))	return mglApplyFunc(str, arg, head, acos);
-			else if(!nm.compare(L"atan"))	return mglApplyFunc(str, arg, head, atan);
-			else if(!nm.compare(L"asinh"))	return mglApplyFunc(str, arg, head, mgl_asinh);
-			else if(!nm.compare(L"acosh"))	return mglApplyFunc(str, arg, head, mgl_acosh);
-			else if(!nm.compare(L"atanh"))	return mglApplyFunc(str, arg, head, mgl_atanh);
+			if(!nm.compare(L"asin"))		return mglApplyFunc(str, arg, head, asin,fns);
+			else if(!nm.compare(L"acos"))	return mglApplyFunc(str, arg, head, acos,fns);
+			else if(!nm.compare(L"atan"))	return mglApplyFunc(str, arg, head, atan,fns);
+			else if(!nm.compare(L"asinh"))	return mglApplyFunc(str, arg, head, mgl_asinh,fns);
+			else if(!nm.compare(L"acosh"))	return mglApplyFunc(str, arg, head, mgl_acosh,fns);
+			else if(!nm.compare(L"atanh"))	return mglApplyFunc(str, arg, head, mgl_atanh,fns);
 			else if(!nm.compare(L"arg"))
 			{
-				if(n>0)	return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, atan2);
+				if(n>0)	return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, atan2,fns);
 				else
 				{
 					HADT a1 = mglFormulaCalcC(str, arg, head);
@@ -724,7 +732,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 			}
 			else if(!nm.compare(L"abs"))
 			{
-				if(n>0)	return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, hypot);
+				if(n>0)	return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, hypot,fns);
 				else
 				{
 					HADT a1 = mglFormulaCalcC(str, arg, head);
@@ -734,34 +742,34 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 			}
 #if MGL_HAVE_GSL
 			else if(!nm.compare(L"ai") || !nm.compare(L"airy_ai"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Ai);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Ai,fns);
 			else if(!nm.compare(L"airy_dai"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Ai_deriv);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Ai_deriv,fns);
 			else if(!nm.compare(L"airy_bi"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi,fns);
 			else if(!nm.compare(L"airy_dbi"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi_deriv);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi_deriv,fns);
 		}
 		else if(nm[0]=='b')
 		{
 			if(!nm.compare(L"beta") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_beta);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_beta,fns);
 			else if(!nm.compare(L"bi"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_airy_Bi,fns);
 			else if(!nm.compare(L"bessel_i") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Inu);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Inu,fns);
 			else if(!nm.compare(L"bessel_j") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Jnu);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Jnu,fns);
 			else if(!nm.compare(L"bessel_k") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Knu);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Knu,fns);
 			else if(!nm.compare(L"bessel_y") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Ynu);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Ynu,fns);
 #endif
 		}
 		else if(nm[0]=='c')
 		{
-			if(!nm.compare(L"cos"))	return mglApplyFunc(str, arg, head, cos);
-			else if(!nm.compare(L"cosh") || !nm.compare(L"ch"))	return mglApplyFunc(str, arg, head, cosh);
+			if(!nm.compare(L"cos"))	return mglApplyFunc(str, arg, head, cos,fns);
+			else if(!nm.compare(L"cosh") || !nm.compare(L"ch"))	return mglApplyFunc(str, arg, head, cosh,fns);
 			else if(!nm.compare(L"conj"))
 			{
 				HADT a1 = mglFormulaCalcC(str, arg, head);
@@ -769,85 +777,85 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 				mgl_delete_datac(a1);	return res;
 			}
 #if MGL_HAVE_GSL
-			else if(!nm.compare(L"ci"))	return mglApplyFunc(str, arg, head, gsl_sf_Ci);
+			else if(!nm.compare(L"ci"))	return mglApplyFunc(str, arg, head, gsl_sf_Ci,fns);
 			else if(!nm.compare(L"cn") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cn);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cn,fns);
 			else if(!nm.compare(L"cs") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cs);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cs,fns);
 			else if(!nm.compare(L"cd") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cd);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_cd,fns);
 #endif
 		}
 		else if(nm[0]=='e')
 		{
-			if(!nm.compare(L"exp"))	return mglApplyFunc(str, arg, head, exp);
+			if(!nm.compare(L"exp"))	return mglApplyFunc(str, arg, head, exp,fns);
 #if MGL_HAVE_GSL
-			else if(!nm.compare(L"erf"))	return mglApplyFunc(str, arg, head, gsl_sf_erf);
+			else if(!nm.compare(L"erf"))	return mglApplyFunc(str, arg, head, gsl_sf_erf,fns);
 			else if(!nm.compare(L"ee") || !nm.compare(L"elliptic_ec"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_ellint_Ecomp);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_ellint_Ecomp,fns);
 			else if(!nm.compare(L"ek") || !nm.compare(L"elliptic_kc"))
-				return mglApplyFuncGSL(str, arg, head, gsl_sf_ellint_Kcomp);
+				return mglApplyFuncGSL(str, arg, head, gsl_sf_ellint_Kcomp,fns);
 			else if((!nm.compare(L"e") || !nm.compare(L"elliptic_e")) && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllE);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllE,fns);
 			else if(!nm.compare(L"elliptic_f"))
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllF);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllF,fns);
 
-			else if(!nm.compare(L"ei"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_Ei);
-			else if(!nm.compare(L"e1"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_E1);
-			else if(!nm.compare(L"e2"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_E2);
-			else if(!nm.compare(L"eta"))	return mglApplyFunc(str, arg, head, gsl_sf_eta);
-			else if(!nm.compare(L"ei3"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_3);
+			else if(!nm.compare(L"ei"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_Ei,fns);
+			else if(!nm.compare(L"e1"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_E1,fns);
+			else if(!nm.compare(L"e2"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_E2,fns);
+			else if(!nm.compare(L"eta"))	return mglApplyFunc(str, arg, head, gsl_sf_eta,fns);
+			else if(!nm.compare(L"ei3"))	return mglApplyFunc(str, arg, head, gsl_sf_expint_3,fns);
 #endif
 		}
 		else if(nm[0]=='l')
 		{
 			if(!nm.compare(L"log") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, llg);
-			else if(!nm.compare(L"lg"))	return mglApplyFunc(str, arg, head, log10);
-			else if(!nm.compare(L"ln"))	return mglApplyFunc(str, arg, head, log);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, llg,fns);
+			else if(!nm.compare(L"lg"))	return mglApplyFunc(str, arg, head, log10,fns);
+			else if(!nm.compare(L"ln"))	return mglApplyFunc(str, arg, head, log,fns);
 #if MGL_HAVE_GSL
-			else if(!nm.compare(L"li2"))	return mglApplyFunc(str, arg, head, gsl_sf_dilog);
+			else if(!nm.compare(L"li2"))	return mglApplyFunc(str, arg, head, gsl_sf_dilog,fns);
 			else if(!nm.compare(L"legendre") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslLegP);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslLegP,fns);
 #endif
 		}
 		else if(nm[0]=='s')
 		{
-			if(!nm.compare(L"sqrt"))	return mglApplyFunc(str, arg, head, sqrt);
-			else if(!nm.compare(L"sin"))	return mglApplyFunc(str, arg, head, sin);
-			else if(!nm.compare(L"step"))	return mglApplyFunc(str, arg, head, stp);
-			else if(!nm.compare(L"sign"))	return mglApplyFunc(str, arg, head, sgn);
-			else if(!nm.compare(L"sinh") || !nm.compare(L"sh"))	return mglApplyFunc(str, arg, head, sinh);
+			if(!nm.compare(L"sqrt"))	return mglApplyFunc(str, arg, head, sqrt,fns);
+			else if(!nm.compare(L"sin"))	return mglApplyFunc(str, arg, head, sin,fns);
+			else if(!nm.compare(L"step"))	return mglApplyFunc(str, arg, head, stp,fns);
+			else if(!nm.compare(L"sign"))	return mglApplyFunc(str, arg, head, sgn,fns);
+			else if(!nm.compare(L"sinh") || !nm.compare(L"sh"))	return mglApplyFunc(str, arg, head, sinh,fns);
 #if MGL_HAVE_GSL
-			else if(!nm.compare(L"si"))		return mglApplyFunc(str, arg, head, gsl_sf_Si);
-			else if(!nm.compare(L"sinc"))	return mglApplyFunc(str, arg, head, gsl_sf_sinc);
+			else if(!nm.compare(L"si"))		return mglApplyFunc(str, arg, head, gsl_sf_Si,fns);
+			else if(!nm.compare(L"sinc"))	return mglApplyFunc(str, arg, head, gsl_sf_sinc,fns);
 			else if(!nm.compare(L"sn") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sn);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sn,fns);
 			else if(!nm.compare(L"sc") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sc);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sc,fns);
 			else if(!nm.compare(L"sd") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sd);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sd,fns);
 #endif
 		}
 		else if(nm[0]=='t')
 		{
 			if(!nm.compare(L"tg") || !nm.compare(L"tan"))
-				return mglApplyFunc(str, arg, head, tan);
+				return mglApplyFunc(str, arg, head, tan,fns);
 			else if(!nm.compare(L"tanh") || !nm.compare(L"th"))
-				return mglApplyFunc(str, arg, head, tanh);
+				return mglApplyFunc(str, arg, head, tanh,fns);
 		}
 		else if(!nm.compare(L"pow") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, pow);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, pow,fns);
 		else if(nm[0]=='m')
 		{
 			if(!nm.compare(L"mod") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod,fns);
 			else if(!nm.compare(L"min") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmin);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmin,fns);
 			else if(!nm.compare(L"max") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmax);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmax,fns);
 		}
-		else if(!nm.compare(L"int"))	return mglApplyFunc(str, arg, head, floor);
+		else if(!nm.compare(L"int"))	return mglApplyFunc(str, arg, head, floor,fns);
 		else if(!nm.compare(L"random"))
 		{	HMDT res=mglFormulaCalc(str, arg, head);	mreal *a = res->a;
 			for(long i=0;i<res->GetNN();i++)	a[i] = mgl_rnd();
@@ -872,38 +880,69 @@ HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::v
 		}
 #if MGL_HAVE_GSL
 		else if(!nm.compare(L"dn") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dn);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dn,fns);
 		else if(!nm.compare(L"ds") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ds);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ds,fns);
 		else if(!nm.compare(L"dc") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dc);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_dc,fns);
 		else if(!nm.compare(L"nc") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nc);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nc,fns);
 		else if(!nm.compare(L"ns") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ns);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_ns,fns);
 		else if(!nm.compare(L"nd") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nd);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_nd,fns);
 		else if(!nm.compare(L"i") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Inu);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Inu,fns);
 		else if(!nm.compare(L"j") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Jnu);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Jnu,fns);
 		else if(!nm.compare(L"k") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Knu);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Knu,fns);
 		else if(!nm.compare(L"y") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Ynu);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_bessel_Ynu,fns);
 		else if(!nm.compare(L"f") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllF);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gslEllF,fns);
 		else if(!nm.compare(L"hypot") && n>0)
-			return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, hypot);
-		else if(!nm.compare(L"gamma"))	return mglApplyFunc(str, arg, head, gsl_sf_gamma);
+			return mglApplyOper(str.substr(n+1),str.substr(0,n),arg, head, hypot,fns);
+		else if(!nm.compare(L"gamma"))	return mglApplyFunc(str, arg, head, gsl_sf_gamma,fns);
 		else if(!nm.compare(L"gamma_inc") && n>0)
-			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_gamma_inc);
-		else if(!nm.compare(L"w0"))	return mglApplyFunc(str, arg, head, gsl_sf_lambert_W0);
-		else if(!nm.compare(L"w1"))	return mglApplyFunc(str, arg, head, gsl_sf_lambert_Wm1);
-		else if(!nm.compare(L"psi"))	return mglApplyFunc(str, arg, head, gsl_sf_psi);
-		else if(!nm.compare(L"zeta"))	return mglApplyFunc(str, arg, head, gsl_sf_zeta);
-		else if(!nm.compare(L"z"))	return mglApplyFunc(str, arg, head, gsl_sf_dawson);
+			return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, gsl_sf_gamma_inc,fns);
+		else if(!nm.compare(L"w0"))	return mglApplyFunc(str, arg, head, gsl_sf_lambert_W0,fns);
+		else if(!nm.compare(L"w1"))	return mglApplyFunc(str, arg, head, gsl_sf_lambert_Wm1,fns);
+		else if(!nm.compare(L"psi"))	return mglApplyFunc(str, arg, head, gsl_sf_psi,fns);
+		else if(!nm.compare(L"zeta"))	return mglApplyFunc(str, arg, head, gsl_sf_zeta,fns);
+		else if(!nm.compare(L"z"))	return mglApplyFunc(str, arg, head, gsl_sf_dawson,fns);
 #endif
+		else if(nm[0]=='f' && nm[1]=='n')
+		{
+			HMDT a=NULL, b=NULL, r=NULL;
+			std::vector<mglDataA*> hh = head;
+			if(n>0)
+			{
+				a = mglFormulaCalcA(str.substr(0,n), arg, head, fns);
+				if(a)	{	a->s = "_1";	hh.push_back(a);	}
+				b = mglFormulaCalcA(str.substr(n+1), arg, head, fns);
+				if(b)	{	b->s = "_2";	hh.push_back(b);	}
+			}
+			else
+			{
+				a = mglFormulaCalcA(str, arg, head, fns);
+				if(a)	{	a->s = "_1";	hh.push_back(a);	}
+			}
+			if(!nm.compare(L"fn1") && fns.size()>1)
+				r = mglFormulaCalcA(fns[1], arg, hh, fns);
+			if(!nm.compare(L"fn2") && fns.size()>3)	r = mglFormulaCalcA(fns[2], arg, hh, fns);
+			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcA(fns[3], arg, hh, fns);
+			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcA(fns[4], arg, hh, fns);
+			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcA(fns[5], arg, hh, fns);
+			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcA(fns[6], arg, hh, fns);
+			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcA(fns[7], arg, hh, fns);
+			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcA(fns[8], arg, hh, fns);
+			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcA(fns[9], arg, hh, fns);
+			if(a)	mgl_delete_data(a);
+			if(b)	mgl_delete_data(b);
+			if(!r)	{	r = new mglData;	r->a[0]=NAN;	}
+			return r;
+		}
 	}
 	HMDT res = new mglData;	res->a[0]=NAN;	return res;
 }
@@ -947,6 +986,11 @@ dual MGL_LOCAL_CONST normc(dual x);	//{	return norm(x);	}
 // NOTE: In any case where number is required the mglData::a[0] is used.
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
+{
+	std::vector<std::wstring> fns = mgl_wcs_args(str,'"');
+	return mglFormulaCalcAC(str,arg,head,fns);
+}
+HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();
@@ -1005,13 +1049,13 @@ HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::
 
 	n=mglFindInText(str,"<>=");	// low priority -- conditions
 	if(n>=0)
-		return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?cltc:(str[n]=='>'?cgtc:ceqc));
+		return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?cltc:(str[n]=='>'?cgtc:ceqc),fns);
 	n=mglFindInText(str,"+-");	// normal priority -- additions
 	if(n>=0 && (n<2 || str[n-1]!='e' || (str[n-2]!='.' && !isdigit(str[n-2]))))
-		return str[n]=='+'? mglApplyOperAddC(str.substr(0,n),str.substr(n+1),arg, head) : mglApplyOperSubC(str.substr(0,n),str.substr(n+1),arg, head);
+		return str[n]=='+'? mglApplyOperAddC(str.substr(0,n),str.substr(n+1),arg, head,fns) : mglApplyOperSubC(str.substr(0,n),str.substr(n+1),arg, head,fns);
 	n=mglFindInText(str,"*/");	// high priority -- multiplications
 	if(n>=0)
-		return str[n]=='*'? mglApplyOperMulC(str.substr(0,n),str.substr(n+1),arg, head) : mglApplyOperDivC(str.substr(0,n),str.substr(n+1),arg, head);
+		return str[n]=='*'? mglApplyOperMulC(str.substr(0,n),str.substr(n+1),arg, head,fns) : mglApplyOperDivC(str.substr(0,n),str.substr(n+1),arg, head,fns);
 	n=mglFindInText(str,"@");	// high priority -- combine
 	if(n>=0)
 	{
@@ -1023,7 +1067,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::
 	}
 	n=mglFindInText(str,"^");				// highest priority -- power
 	if(n>=0)
-		return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, ipwc);
+		return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, ipwc,fns);
 	n=mglFindInText(str,":");				// highest priority -- array
 	if(n>=0 && str.compare(L":"))
 	{
@@ -1190,51 +1234,81 @@ HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::
 		}
 		else if(nm[0]=='a')	// function
 		{
-			if(!nm.compare(L"asin"))	return mglApplyFuncC(str, arg, head, asinc);
-			else if(!nm.compare(L"acos"))	return mglApplyFuncC(str, arg, head, acosc);
-			else if(!nm.compare(L"atan"))	return mglApplyFuncC(str, arg, head, atanc);
-			else if(!nm.compare(L"asinh"))	return mglApplyFuncC(str, arg, head, asinhc);
-			else if(!nm.compare(L"acosh"))	return mglApplyFuncC(str, arg, head, acoshc);
-			else if(!nm.compare(L"atanh"))	return mglApplyFuncC(str, arg, head, atanhc);
-			else if(!nm.compare(L"arg"))	return mglApplyFuncC(str, arg, head, argc);
-			else if(!nm.compare(L"abs"))	return mglApplyFuncC(str, arg, head, absc);
+			if(!nm.compare(L"asin"))	return mglApplyFuncC(str, arg, head, asinc,fns);
+			else if(!nm.compare(L"acos"))	return mglApplyFuncC(str, arg, head, acosc,fns);
+			else if(!nm.compare(L"atan"))	return mglApplyFuncC(str, arg, head, atanc,fns);
+			else if(!nm.compare(L"asinh"))	return mglApplyFuncC(str, arg, head, asinhc,fns);
+			else if(!nm.compare(L"acosh"))	return mglApplyFuncC(str, arg, head, acoshc,fns);
+			else if(!nm.compare(L"atanh"))	return mglApplyFuncC(str, arg, head, atanhc,fns);
+			else if(!nm.compare(L"arg"))	return mglApplyFuncC(str, arg, head, argc,fns);
+			else if(!nm.compare(L"abs"))	return mglApplyFuncC(str, arg, head, absc,fns);
 		}
 		else if(nm[0]=='c')
 		{
-			if(!nm.compare(L"cos"))	return mglApplyFuncC(str, arg, head, cosc);
-			else if(!nm.compare(L"cosh") || !nm.compare(L"ch"))	return mglApplyFuncC(str, arg, head, coshc);
-			else if(!nm.compare(L"conj"))	return mglApplyFuncC(str, arg, head, conjc);
+			if(!nm.compare(L"cos"))	return mglApplyFuncC(str, arg, head, cosc,fns);
+			else if(!nm.compare(L"cosh") || !nm.compare(L"ch"))	return mglApplyFuncC(str, arg, head, coshc,fns);
+			else if(!nm.compare(L"conj"))	return mglApplyFuncC(str, arg, head, conjc,fns);
 			else if(!nm.compare(L"cmplx") && n>0)
-				return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, cmplxc);
+				return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, cmplxc,fns);
 		}
-		else if(!nm.compare(L"exp"))	return mglApplyFuncC(str, arg, head, expc);
+		else if(!nm.compare(L"exp"))	return mglApplyFuncC(str, arg, head, expc,fns);
 		else if(nm[0]=='l')
 		{
-			if(!nm.compare(L"log") || !nm.compare(L"ln"))	return mglApplyFuncC(str, arg, head, logc);
-			else if(!nm.compare(L"lg"))	return mglApplyFuncC(str, arg, head, lgc);
+			if(!nm.compare(L"log") || !nm.compare(L"ln"))	return mglApplyFuncC(str, arg, head, logc,fns);
+			else if(!nm.compare(L"lg"))	return mglApplyFuncC(str, arg, head, lgc,fns);
 		}
 		else if(nm[0]=='s')
 		{
-			if(!nm.compare(L"sqrt"))	return mglApplyFuncC(str, arg, head, sqrtc);
-			else if(!nm.compare(L"sin"))	return mglApplyFuncC(str, arg, head, sinc);
-			else if(!nm.compare(L"sinh") || !nm.compare(L"sh"))	return mglApplyFuncC(str, arg, head, sinhc);
+			if(!nm.compare(L"sqrt"))	return mglApplyFuncC(str, arg, head, sqrtc,fns);
+			else if(!nm.compare(L"sin"))	return mglApplyFuncC(str, arg, head, sinc,fns);
+			else if(!nm.compare(L"sinh") || !nm.compare(L"sh"))	return mglApplyFuncC(str, arg, head, sinhc,fns);
 		}
 		else if(nm[0]=='t')
 		{
-			if(!nm.compare(L"tg") || !nm.compare(L"tan"))	return mglApplyFuncC(str, arg, head, tanc);
-			else if(!nm.compare(L"tanh") || !nm.compare(L"th"))	return mglApplyFuncC(str, arg, head, tanhc);
+			if(!nm.compare(L"tg") || !nm.compare(L"tan"))	return mglApplyFuncC(str, arg, head, tanc,fns);
+			else if(!nm.compare(L"tanh") || !nm.compare(L"th"))	return mglApplyFuncC(str, arg, head, tanhc,fns);
 		}
 		else if(!nm.compare(L"pow") && n>0)
-			return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, powc);
+			return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, powc,fns);
 		else if(!nm.compare(L"random"))
 		{	HADT res=mglFormulaCalcC(str, arg, head);	dual *a = res->a;
 			for(long i=0;i<res->GetNN();i++)	a[i] = dual(mgl_rnd(), mgl_rnd());
 			return res;	}
 		else if(!nm.compare(L"hypot"))
-			return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, hypotc);
-		else if(!nm.compare(L"real"))	return mglApplyFuncC(str, arg, head, realc);
-		else if(!nm.compare(L"imag"))	return mglApplyFuncC(str, arg, head, imagc);
-		else if(!nm.compare(L"norm"))	return mglApplyFuncC(str, arg, head, normc);
+			return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, hypotc,fns);
+		else if(!nm.compare(L"real"))	return mglApplyFuncC(str, arg, head, realc,fns);
+		else if(!nm.compare(L"imag"))	return mglApplyFuncC(str, arg, head, imagc,fns);
+		else if(!nm.compare(L"norm"))	return mglApplyFuncC(str, arg, head, normc,fns);
+		else if(nm[0]=='f' && nm[1]=='n')
+		{
+			HADT a=NULL, b=NULL, r=NULL;
+			std::vector<mglDataA*> hh = head;
+			if(n>0)
+			{
+				a = mglFormulaCalcAC(str.substr(0,n), arg, head, fns);
+				if(a)	{	a->s = "_1";	hh.push_back(a);	}
+				b = mglFormulaCalcAC(str.substr(n+1), arg, head, fns);
+				if(b)	{	b->s = "_2";	hh.push_back(b);	}
+			}
+			else
+			{
+				a = mglFormulaCalcAC(str, arg, head, fns);
+				if(a)	{	a->s = "_1";	hh.push_back(a);	}
+			}
+			if(!nm.compare(L"fn1") && fns.size()>1)	r = mglFormulaCalcAC(fns[1], arg, hh, fns);
+			if(!nm.compare(L"fn2") && fns.size()>3)	r = mglFormulaCalcAC(fns[2], arg, hh, fns);
+			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcAC(fns[3], arg, hh, fns);
+			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcAC(fns[4], arg, hh, fns);
+			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcAC(fns[5], arg, hh, fns);
+			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcAC(fns[6], arg, hh, fns);
+			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcAC(fns[7], arg, hh, fns);
+			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcAC(fns[8], arg, hh, fns);
+			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcAC(fns[9], arg, hh, fns);
+			if(a)	mgl_delete_datac(a);
+			if(b)	mgl_delete_datac(b);
+			if(!r)	{	r = new mglDataC;	r->a[0]=NAN;	}
+			return r;
+		}
 	}
 	HADT res = new mglDataC;	res->a[0]=NAN;	return res;
 }

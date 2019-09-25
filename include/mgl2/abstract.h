@@ -46,8 +46,10 @@ std::string MGL_EXPORT mgl_data_to_string(HCDT d, long ns);
 std::string MGL_EXPORT mgl_datac_to_string(HCDT d, long ns);
 /// Get section separated by symbol ch. This is analog of QString::section().
 std::string MGL_EXPORT mgl_str_arg(const std::string &str, char ch, int n1, int n2=-1);
+std::wstring MGL_EXPORT mgl_wcs_arg(const std::wstring &str, wchar_t ch, int n1, int n2);
 /// Get sections separated by symbol ch
 std::vector<std::string> MGL_EXPORT mgl_str_args(const std::string &str, char ch);
+std::vector<std::wstring> MGL_EXPORT mgl_wcs_args(const std::wstring &str, wchar_t ch);
 /// Get string from real number
 std::string MGL_EXPORT mgl_str_num(double val);
 /// Get string from complex number
