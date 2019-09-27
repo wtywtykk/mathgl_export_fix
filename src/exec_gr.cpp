@@ -187,6 +187,19 @@ int static mgls_lamerey(mglGraph *gr, long , mglArg *a, const char *k, const cha
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_lines(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
+{
+	int res=0;
+	if(!strcmp(k,"dd"))	gr->Lines(*(a[0].d),*(a[1].d),"",opt);
+	else if(!strcmp(k,"dds"))	gr->Lines(*(a[0].d),*(a[1].d),a[2].s.s,opt);
+	else if(!strcmp(k,"dddd"))	gr->Lines(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),"",opt);
+	else if(!strcmp(k,"dddds"))	gr->Lines(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),a[4].s.s,opt);
+	else if(!strcmp(k,"dddddd"))	gr->Lines(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),"",opt);
+	else if(!strcmp(k,"dddddds"))	gr->Lines(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),a[6].s.s,opt);
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_mark(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
@@ -1177,6 +1190,7 @@ mglCommand mgls_grf_cmd[] = {
 	{"iris",_("Draw Iris plots"),"iris Dats 'ids' ['fmt']|Dats Ranges 'ids' ['fmt']", mgls_iris,13},
 	{"label",_("Draw label at arbitrary position"),"label Ydat 'txt' ['fmt'='']|Xdat Ydat 'txt' ['fmt'='']|Xdat Ydat Zdat 'txt' ['fmt'='']", mgls_label ,7},
 	{"lamerey",_("Draw Lamerey diagram"),"lamerey x0 Func ['fmt']|x0 'func' ['fmt']", mgls_lamerey ,13},
+	{"lines",_("Draw lines with arrows for 1D data"),"lines Y1dat Y2dat ['fmt']|X1dat Y1dat X2dat Y2dat ['fmt']|X1dat Y1dat Z1dat X2dat Y2dat Z2dat ['fmt']", mgls_lines ,7},
 	{"map",_("Draw mapping plot"),"map Udat Vdat ['fmt']|Xdat Ydat Udat Vdat ['fmt']", mgls_map ,10},
 	{"mark",_("Draw mark plot for 1D data"),"mark Ydat Rdat ['fmt']|Xdat Ydat Rdat ['fmt']|Xdat Ydat Zdat Rdat ['fmt']", mgls_mark ,7},
 	{"mesh",_("Draw mesh surface"),"mesh Zdat ['fmt']|Xdat Ydat Zdat ['fmt']", mgls_mesh ,8},

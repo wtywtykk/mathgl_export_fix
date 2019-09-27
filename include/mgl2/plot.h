@@ -253,6 +253,19 @@ void MGL_EXPORT mgl_candle_yv_(uintptr_t *gr, uintptr_t *v1, uintptr_t *v2, uint
 void MGL_EXPORT mgl_candle(HMGL gr, HCDT v, HCDT y1, HCDT y2, const char *pen, const char *opt);
 void MGL_EXPORT mgl_candle_(uintptr_t *gr, uintptr_t *y, uintptr_t *y1, uintptr_t *y2, const char *pen, const char *opt,int,int);
 
+/// Draw lines with arrows between points {x1,y1,z1} and {x2,y2,z2}
+void MGL_EXPORT mgl_lines_xyz(HMGL gr, HCDT x1, HCDT y1, HCDT z1, HCDT x2, HCDT y2, HCDT z2, const char *pen, const char *opt);
+void MGL_EXPORT mgl_lines_xyz_(uintptr_t *gr, uintptr_t *x1, uintptr_t *y1, uintptr_t *z1, uintptr_t *x2, uintptr_t *y2, uintptr_t *z2, const char *pen, const char *opt,int,int);
+/// Draw lines with arrows between points {x1,y1,zMin} and {x2,y2,zMin}
+void MGL_EXPORT mgl_lines_xy(HMGL gr, HCDT x1, HCDT y1, HCDT x2, HCDT y2, const char *pen, const char *opt);
+void MGL_EXPORT mgl_lines_xy_(uintptr_t *gr, uintptr_t *x1, uintptr_t *y1, uintptr_t *x2, uintptr_t *y2, const char *pen, const char *opt,int,int);
+/// Draw lines with arrows between points {x1,y} and {x2,y} with y in y-axis range
+void MGL_EXPORT mgl_lines_x(HMGL gr, HCDT x1, HCDT x2, const char *pen, const char *opt);
+void MGL_EXPORT mgl_lines_x_(uintptr_t *gr, uintptr_t *x1, uintptr_t *x2, const char *pen, const char *opt,int,int);
+/// Draw lines lines with arrows between {x,y1} and {x,y2} with x in x-axis range
+void MGL_EXPORT mgl_lines(HMGL gr, HCDT y1, HCDT y2 ,const char *pen, const char *opt);
+void MGL_EXPORT mgl_lines_(uintptr_t *gr, uintptr_t *y1, uintptr_t *y2, const char *pen, const char *opt,int,int);
+
 #ifdef __cplusplus
 }
 #endif

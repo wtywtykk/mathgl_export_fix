@@ -103,7 +103,9 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
-8. 'connect'
+8. Docs about 'connect'
+9. user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
+10. Docs about 'lines'
 
 
 ZZ. Update time.texi {before release!!!}

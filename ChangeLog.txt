@@ -1,3 +1,8 @@
+2.4.5 Released ?? October 2019
+
+* Add user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
+* Add 'lines' to draw a set of lines with arrows between points.
+
 2.4.4 Released 8 July 2019
 
 * mglData now have operator() which work as SubData() function.

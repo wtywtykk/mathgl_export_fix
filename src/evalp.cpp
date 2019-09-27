@@ -456,8 +456,8 @@ double mgl_jac_nc(double a, double m)
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
-	std::vector<std::wstring> fns = mgl_wcs_args(str,'"');
-	return mglFormulaCalcA(str,arg,head,fns);
+	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
+	return mglFormulaCalcA(fns[0],arg,head,fns);
 }
 HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
@@ -912,10 +912,11 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		else if(!nm.compare(L"zeta"))	return mglApplyFunc(str, arg, head, gsl_sf_zeta,fns);
 		else if(!nm.compare(L"z"))	return mglApplyFunc(str, arg, head, gsl_sf_dawson,fns);
 #endif
-		else if(nm[0]=='f' && nm[1]=='n')
+		else if(nm[0]=='f' && nm[1]=='n' && fns.size()>1)
 		{
 			HMDT a=NULL, b=NULL, r=NULL;
-			std::vector<mglDataA*> hh = head;
+			std::vector<mglDataA*> hh(head);
+			std::vector<std::wstring> tmp;	// disable recursion
 			if(n>0)
 			{
 				a = mglFormulaCalcA(str.substr(0,n), arg, head, fns);
@@ -928,16 +929,15 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 				a = mglFormulaCalcA(str, arg, head, fns);
 				if(a)	{	a->s = "_1";	hh.push_back(a);	}
 			}
-			if(!nm.compare(L"fn1") && fns.size()>1)
-				r = mglFormulaCalcA(fns[1], arg, hh, fns);
-			if(!nm.compare(L"fn2") && fns.size()>3)	r = mglFormulaCalcA(fns[2], arg, hh, fns);
-			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcA(fns[3], arg, hh, fns);
-			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcA(fns[4], arg, hh, fns);
-			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcA(fns[5], arg, hh, fns);
-			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcA(fns[6], arg, hh, fns);
-			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcA(fns[7], arg, hh, fns);
-			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcA(fns[8], arg, hh, fns);
-			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcA(fns[9], arg, hh, fns);
+			if(!nm.compare(L"fn1") && fns.size()>1)	r = mglFormulaCalcA(fns[1], arg, hh, tmp);
+			if(!nm.compare(L"fn2") && fns.size()>2)	r = mglFormulaCalcA(fns[2], arg, hh, tmp);
+			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcA(fns[3], arg, hh, tmp);
+			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcA(fns[4], arg, hh, tmp);
+			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcA(fns[5], arg, hh, tmp);
+			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcA(fns[6], arg, hh, tmp);
+			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcA(fns[7], arg, hh, tmp);
+			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcA(fns[8], arg, hh, tmp);
+			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcA(fns[9], arg, hh, tmp);
 			if(a)	mgl_delete_data(a);
 			if(b)	mgl_delete_data(b);
 			if(!r)	{	r = new mglData;	r->a[0]=NAN;	}
@@ -987,8 +987,8 @@ dual MGL_LOCAL_CONST normc(dual x);	//{	return norm(x);	}
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
-	std::vector<std::wstring> fns = mgl_wcs_args(str,'"');
-	return mglFormulaCalcAC(str,arg,head,fns);
+	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
+	return mglFormulaCalcAC(fns[0],arg,head,fns);
 }
 HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
 {
@@ -1279,10 +1279,11 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 		else if(!nm.compare(L"real"))	return mglApplyFuncC(str, arg, head, realc,fns);
 		else if(!nm.compare(L"imag"))	return mglApplyFuncC(str, arg, head, imagc,fns);
 		else if(!nm.compare(L"norm"))	return mglApplyFuncC(str, arg, head, normc,fns);
-		else if(nm[0]=='f' && nm[1]=='n')
+		else if(nm[0]=='f' && nm[1]=='n' && fns.size()>1)
 		{
 			HADT a=NULL, b=NULL, r=NULL;
-			std::vector<mglDataA*> hh = head;
+			std::vector<mglDataA*> hh(head);
+			std::vector<std::wstring> tmp;	// disable recursion
 			if(n>0)
 			{
 				a = mglFormulaCalcAC(str.substr(0,n), arg, head, fns);
@@ -1295,15 +1296,15 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 				a = mglFormulaCalcAC(str, arg, head, fns);
 				if(a)	{	a->s = "_1";	hh.push_back(a);	}
 			}
-			if(!nm.compare(L"fn1") && fns.size()>1)	r = mglFormulaCalcAC(fns[1], arg, hh, fns);
-			if(!nm.compare(L"fn2") && fns.size()>3)	r = mglFormulaCalcAC(fns[2], arg, hh, fns);
-			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcAC(fns[3], arg, hh, fns);
-			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcAC(fns[4], arg, hh, fns);
-			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcAC(fns[5], arg, hh, fns);
-			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcAC(fns[6], arg, hh, fns);
-			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcAC(fns[7], arg, hh, fns);
-			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcAC(fns[8], arg, hh, fns);
-			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcAC(fns[9], arg, hh, fns);
+			if(!nm.compare(L"fn1") && fns.size()>1)	r = mglFormulaCalcAC(fns[1], arg, hh, tmp);
+			if(!nm.compare(L"fn2") && fns.size()>3)	r = mglFormulaCalcAC(fns[2], arg, hh, tmp);
+			if(!nm.compare(L"fn3") && fns.size()>3)	r = mglFormulaCalcAC(fns[3], arg, hh, tmp);
+			if(!nm.compare(L"fn4") && fns.size()>4)	r = mglFormulaCalcAC(fns[4], arg, hh, tmp);
+			if(!nm.compare(L"fn5") && fns.size()>5)	r = mglFormulaCalcAC(fns[5], arg, hh, tmp);
+			if(!nm.compare(L"fn6") && fns.size()>6)	r = mglFormulaCalcAC(fns[6], arg, hh, tmp);
+			if(!nm.compare(L"fn7") && fns.size()>7)	r = mglFormulaCalcAC(fns[7], arg, hh, tmp);
+			if(!nm.compare(L"fn8") && fns.size()>8)	r = mglFormulaCalcAC(fns[8], arg, hh, tmp);
+			if(!nm.compare(L"fn9") && fns.size()>9)	r = mglFormulaCalcAC(fns[9], arg, hh, tmp);
 			if(a)	mgl_delete_datac(a);
 			if(b)	mgl_delete_datac(b);
 			if(!r)	{	r = new mglDataC;	r->a[0]=NAN;	}

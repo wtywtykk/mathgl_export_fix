@@ -969,6 +969,92 @@ void MGL_EXPORT mgl_step_(uintptr_t *gr, uintptr_t *y,	const char *pen, const ch
 //	Stem series
 //
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_xyz(HMGL gr, HCDT x1, HCDT y1, HCDT z1, HCDT x2, HCDT y2, HCDT z2, const char *pen, const char *opt)
+{
+	long m,n=y1->GetNx(), pal;
+	if(mgl_check_dim1(gr,x1,y1,z1,x2,"Lines"))	return;
+	if(mgl_check_dim1(gr,x2,y2,z2,NULL,"Lines"))	return;
+	if(x1->GetNy()!=x2->GetNy() || y1->GetNy()!=y2->GetNy() || z1->GetNy()!=z2->GetNy())	return;
+
+	gr->SaveState(opt);
+	static int cgid=1;	gr->StartGroup("Lines",cgid++);
+	m = x1->GetNy() > y1->GetNy() ? x1->GetNy() : y1->GetNy();	m = z1->GetNy() > m ? z1->GetNy() : m;
+	bool sh = mglchr(pen,'!');
+
+	gr->SetPenPal(pen,&pal);	gr->Reserve(2*n*m);
+	for(long j=0;j<m;j++)
+	{
+		if(gr->NeedStop())	break;
+		long mx = j<x1->GetNy() ? j:0, my = j<y1->GetNy() ? j:0, mz = j<z1->GetNy() ? j:0;
+		double c1=gr->NextColor(pal), c2=c1;
+		if(gr->GetNumPal(pal)==2*m && !sh)	c2=gr->NextColor(pal);
+		long kq = gr->AllocPnts(2*n);
+#pragma omp parallel for
+		for(long i=0;i<n;i++)
+		{
+			double cc=gr->NextColor(pal,i);
+			gr->AddPntQ(kq+2*i,mglPoint(x1->v(i,mx), y1->v(i,my), z1->v(i,mz)),sh?cc:c1);
+			gr->AddPntQ(kq+2*i+1,mglPoint(x2->v(i,mx), y2->v(i,my), z2->v(i,mz)),sh?cc:c2);
+		}
+		for(long i=0;i<n;i++)
+		{
+			long iq = kq+2*i;	gr->line_plot(iq,iq+1);
+			gr->arrow_plot(iq,iq+1,gr->Arrow2);
+			gr->arrow_plot(iq+1,iq,gr->Arrow1);
+		}
+	}
+	gr->EndGroup();
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_xy(HMGL gr, HCDT x1, HCDT y1, HCDT x2, HCDT y2, const char *pen, const char *opt)
+{
+	gr->SaveState(opt);
+	mglDataV z(y1->GetNx());	z.Fill(gr->Min.z,gr->Min.z);
+	mgl_lines_xyz(gr,x1,y1,&z,x2,y2,&z,pen,0);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_x(HMGL gr, HCDT x1, HCDT x2, const char *pen, const char *opt)
+{
+	gr->SaveState(opt);
+	mglDataV y(x1->GetNx()), z(x1->GetNx());
+	y.Fill(gr->Min.y,gr->Max.y);
+	z.Fill(gr->Min.z,gr->Min.z);
+	mgl_lines_xyz(gr,x1,&y,&z,x2,&y,&z,pen,0);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines(HMGL gr, HCDT y1, HCDT y2, const char *pen, const char *opt)
+{
+	gr->SaveState(opt);
+	mglDataV x(y1->GetNx()), z(y1->GetNx());
+	x.Fill(gr->Min.x,gr->Max.x);
+	z.Fill(gr->Min.z,gr->Min.z);
+	mgl_lines_xyz(gr,&x,y1,&z,&x,y2,&z,pen,0);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_xyz_(uintptr_t *gr, uintptr_t *x1, uintptr_t *y1, uintptr_t *z1, uintptr_t *x2, uintptr_t *y2, uintptr_t *z2, const char *pen, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,pen,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_lines_xyz(_GR_,_DA_(x1),_DA_(y1),_DA_(z1),_DA_(x2),_DA_(y2),_DA_(z2),s,o);	delete []o;	delete []s;	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_xy_(uintptr_t *gr, uintptr_t *x1, uintptr_t *y1, uintptr_t *x2, uintptr_t *y2, const char *pen, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,pen,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_lines_xy(_GR_,_DA_(x1),_DA_(y1),_DA_(x2),_DA_(y2),s,o);	delete []o;	delete []s;	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_x_(uintptr_t *gr, uintptr_t *x1,	uintptr_t *x2,	const char *pen, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,pen,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_lines_x(_GR_,_DA_(x1),_DA_(x2),s,o);	delete []o;	delete []s;	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_lines_(uintptr_t *gr, uintptr_t *y1,	uintptr_t *y2,	const char *pen, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,pen,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_lines(_GR_,_DA_(y1),_DA_(y2),s,o);	delete []o;	delete []s;	}
+//-----------------------------------------------------------------------------
+//
+//	Stem series
+//
+//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_stem_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, const char *pen, const char *opt)
 {
 	long m,n=y->GetNx(), pal;

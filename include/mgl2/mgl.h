@@ -940,6 +940,17 @@ public:
 	inline void Region(const mglDataA &x1, const mglDataA &y1, const mglDataA &x2, const mglDataA &y2, const char *pen="", const char *opt="")
 	{	mgl_region_3d(gr, &x1, &y1, NULL, &x2, &y2, NULL, pen, opt);	}
 
+	/// Draw lines with arrows between points {x1,y1,z1} and {x2,y2,z2}
+	inline void Lines(const mglDataA &x1, const mglDataA &y1, const mglDataA &z1, const mglDataA &x2, const mglDataA &y2, const mglDataA &z2, const char *pen="", const char *opt="")
+	{	mgl_lines_xyz(gr, &x1, &y1, &z1, &x2, &y2, &z2, pen, opt);	}
+	/// Draw lines with arrows between points {x1,y1,zMin} and {x2,y2,zMin}
+	inline void Lines(const mglDataA &x1, const mglDataA &y1, const mglDataA &x2, const mglDataA &y2, const char *pen="", const char *opt="")
+	{	mgl_lines_xy(gr, &x1, &y1, &x2, &y2, pen, opt);	}
+	/// Draw lines with arrows between: points {x1,y} and {x2,y} with y in y-axis range if \a pen contain 'x'; or points {x,y1} and {x,y2} with x in x-axis range.
+	inline void Lines(const mglDataA &y1, const mglDataA &y2, const char *pen="", const char *opt="")
+	{	if(mglchr(pen,'x'))	mgl_lines_x(gr, &y1, &y2, pen, opt);
+		else	mgl_lines(gr, &y1, &y2, pen, opt);	}
+
 	/// Draw vertical lines from points {x,y,z} to axis plane
 	inline void Stem(const mglDataA &x, const mglDataA &y, const mglDataA &z, const char *pen="", const char *opt="")
 	{	mgl_stem_xyz(gr, &x, &y, &z, pen, opt);	}
