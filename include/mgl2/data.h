@@ -22,6 +22,10 @@
 
 #include "mgl2/data_cf.h"
 #include "mgl2/pde.h"
+
+#if MGL_HAVE_ARMA
+#include <armadillo>
+#endif
 //-----------------------------------------------------------------------------
 #include <stdarg.h>
 //-----------------------------------------------------------------------------
@@ -143,6 +147,17 @@ using mglDataA::Momentum;
 		for(long i=0;i<n;i++)	a[i] = va_arg(vl,double);
 		va_end(vl);
 	}
+
+#if MGL_HAVE_ARMA
+	inline void Set(const arma::vec &d)
+	{	Create(d.n_elem);	for(long i=0;i<nx;i++)	a[i] = d[i];	}
+	inline void Set(const arma::mat &d)
+	{	Create(d.n_rows,d.n_cols);	for(long i=0;i<nx*ny;i++)	a[i] = d[i];	}
+	inline void Set(const arma::cube &d)
+	{	Create(d.n_rows,d.n_cols,d.n_slices);	for(long i=0;i<nx*ny*nz;i++)	a[i] = d[i];	}
+	inline arma::mat arma_mat(long k=0) const { return arma::mat(a+k*nx*ny,ny,nx);  }
+	inline arma::cube arma_cube() const {return arma::cube(a,nx,ny,nz);}
+#endif
 
 	/// Create or recreate the array with specified size and fill it by zero
 	inline void Create(long mx,long my=1,long mz=1)

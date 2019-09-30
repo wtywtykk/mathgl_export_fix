@@ -22,6 +22,10 @@
 
 #include "mgl2/data.h"
 #include "mgl2/datac_cf.h"
+
+#if MGL_HAVE_ARMA
+#include <armadillo>
+#endif
 //-----------------------------------------------------------------------------
 #include <vector>
 #include <string>
@@ -145,6 +149,23 @@ using mglDataA::Momentum;
 	inline void Set(const std::vector<std::complex<float> > &d)
 	{	if(d.size()>0)	{	Create(d.size());	for(long i=0;i<nx;i++)	a[i] = d[i];	}
 		else	Create(1);	}
+
+#if MGL_HAVE_ARMA
+	inline void Set(const arma::cx_mat &d)
+	{	Create(d.n_rows,d.n_cols);	for(long i=0;i<nx*ny;i++)	a[i] = d[i];	}
+	inline void Set(const arma::mat &d)
+	{	Create(d.n_rows,d.n_cols);	for(long i=0;i<nx*ny;i++)	a[i] = d[i];	}
+	inline void Set(const arma::cx_cube &d)
+	{	Create(d.n_rows,d.n_cols,d.n_slices);	for(long i=0;i<nx*ny*nz;i++)	a[i] = d[i];	}
+	inline void Set(const arma::cube &d)
+	{	Create(d.n_rows,d.n_cols,d.n_slices);	for(long i=0;i<nx*ny*nz;i++)	a[i] = d[i];	}
+	inline void Set(const arma::cx_vec &d)
+	{	Create(d.n_elem);	for(long i=0;i<nx;i++)	a[i] = d[i];	}
+	inline void Set(const arma::vec &d)
+	{	Create(d.n_elem);	for(long i=0;i<nx;i++)	a[i] = d[i];	}
+	inline arma::cx_mat arma_mat(long k=0) const { return arma::cx_mat(a+k*nx*ny,ny,nx);  }
+	inline arma::cx_cube arma_cube() const {return arma::cx_cube(a,nx,ny,nz);}
+#endif
 
 	/// Create or recreate the array with specified size and fill it by zero
 	inline void Create(long mx,long my=1,long mz=1)
@@ -384,6 +405,9 @@ using mglDataA::Momentum;
 	/// Fourier transform
 	inline void FFT(const char *dir)	{	mgl_datac_fft(this,dir);	}
 	/// Calculate one step of diffraction by finite-difference method with parameter q
+	/** Parameter \a how may contain:
+	 * ‘x‘,‘y‘,‘z‘ or ‘r‘  for directions or axial along x,
+	 * ‘e‘,‘g‘,‘0‘,‘1‘,‘2‘,‘3‘ for boundary conditions: exponential, Gaussian, zero, constant, linear, quadratic.*/
 	inline void Diffraction(const char *how, mreal q)	{	mgl_datac_diffr(this,how,q);	}
 	/// Apply wavelet transform
 	/** Parameter \a dir may contain:
