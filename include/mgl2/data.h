@@ -38,6 +38,7 @@ class MGL_EXPORT mglData : public mglDataA
 {
 public:
 using mglDataA::Momentum;
+using mglDataA::Last;
 	long nx;		///< number of points in 1st dimensions ('x' dimension)
 	long ny;		///< number of points in 2nd dimensions ('y' dimension)
 	long nz;		///< number of points in 3d dimensions ('z' dimension)
@@ -310,6 +311,13 @@ using mglDataA::Momentum;
 	/// Get array which is result of summation in given direction or directions
 	inline mglData Sum(const char *dir) const
 	{	return mglData(true,mgl_data_sum(this,dir));	}
+	/// Get array of positions of first value large val
+	inline mglData First(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_first_dir(this,dir,val));	}
+	/// Get array of positions of last value large val
+	inline mglData Last(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_last_dir(this,dir,val));	}
+
 	/// Get array which is result of maximal values in given direction or directions
 	inline mglData Max(const char *dir) const
 	{	return mglData(true,mgl_data_max_dir(this,dir));	}

@@ -719,6 +719,26 @@ int static mgls_limit(mglGraph *, long , mglArg *a, const char *k, const char *)
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_first(mglGraph *, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData *>(a[0].d);
+	if(d && !strcmp(k,"ddsn"))	*d = mglData(true,mgl_data_first_dir(a[1].d,a[2].s.s,a[3].v));
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
+int static mgls_last(mglGraph *, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData *>(a[0].d);
+	if(d && !strcmp(k,"ddsn"))	*d = mglData(true,mgl_data_last_dir(a[1].d,a[2].s.s,a[3].v));
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_max(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
@@ -1694,6 +1714,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"minmax",_("Get positions of local maximums and minimums"),"minmax Res Dat", mgls_minmax ,4},
 	{"fill",_("Fill data linearly in range [v1, v2]"),"fill Var v1 v2 ['dir']|Var 'eq' [Vdat Wdat]", mgls_fill ,3},
 	{"fillsample",_("Fill x-,k-samples for transforms"),"fillsample Var 'how'", mgls_fillsample ,3},
+	{"first",_("Find first indexes of values larger val over direction"),"first Res Dat 'dir' val", mgls_first ,4},
 	{"fit",_("Fit data to formula"),"fit Res A 'eq' 'var' [Ini]|Res X A 'eq' 'var' [Ini]|Res X Y A 'eq' 'var' [Ini]|Res X Y Z A 'eq' 'var' [Ini]", mgls_fit ,4},
 	{"fits",_("Fit data to formula"),"fits Res A S 'eq' 'var' [Ini]|Res X A S 'eq' 'var' [Ini]|Res X Y A S 'eq' 'var' [Ini]|Res X Y Z A S 'eq' 'var' [Ini]", mgls_fits ,4},
 	{"fourier",_("In-place Fourier transform"),"fourier ReDat ImDat 'dir'|Cmplx 'dir'", mgls_fourier , 16},
@@ -1707,6 +1728,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"integrate",_("Integrate data along direction(s)"),"integrate Dat 'dir'", mgls_integrate ,16},
 	{"jacobian",_("Get Jacobian"),"jacobian Res Xdat Ydat [Zdat]", mgls_jacobian ,4},
 	{"join",_("Join data arrays"),"join Dat Add1 ...", mgls_join ,3},
+	{"last",_("Find last indexes of values larger val over direction"),"last Res Dat 'dir' val", mgls_last ,4},
 	{"limit",_("Limit data to be inside [-v,v]"),"limit Dat v", mgls_limit ,16},
 	{"max",_("Find maximal value over direction"),"max Res Dat 'dir'", mgls_max ,4},
 	{"min",_("Find minimal value over direction"),"min Res Dat 'dir'", mgls_min ,4},

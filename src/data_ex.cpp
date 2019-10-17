@@ -388,6 +388,94 @@ uintptr_t MGL_EXPORT mgl_data_max_dir_(uintptr_t *d, const char *dir,int l)
 {	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
 	uintptr_t r=uintptr_t(mgl_data_max_dir(_DT_,s));	delete []s;	return r;	}
 //-----------------------------------------------------------------------------
+HMDT MGL_EXPORT mgl_data_first_dir(HCDT dat, const char *dir, double val)
+{
+	if(!dir || *dir==0)	return 0;
+	const long nx=dat->GetNx(),ny=dat->GetNy(),nz=dat->GetNz(), nn=nx*ny;
+	mglData *r=NULL;
+	if(mglchr(dir,'z') && nz>1)
+	{
+		r = new mglData(nx,ny);
+#pragma omp parallel for
+		for(long j=0;j<nn;j++)
+		{
+			long i;
+			for(i=0;i<nz;i++)	if(dat->vthr(j+nn*i)>val)	break;
+			r->a[j] = i/mreal(nz-1);
+		}
+	}
+	else if(mglchr(dir,'y') && ny>1)
+	{
+		r = new mglData(nx,nz);
+#pragma omp parallel for
+		for(long j=0;j<nx*nz;j++)
+		{
+			long i, i0 = (j%nx)+nn*(j/nx);
+			for(i=0;i<ny;i++)	if(dat->vthr(i0+nx*i)>val)	break;
+			r->a[j] = i/mreal(ny-1);
+		}
+	}
+	else if(mglchr(dir,'x') && nx>1)
+	{
+		r = new mglData(ny,nz);
+#pragma omp parallel for
+		for(long j=0;j<ny*nz;j++)
+		{
+			long i, i0 = j*nx;
+			for(i=0;i<nx;i++)	if(dat->vthr(i0+i)>val)	break;
+			r->a[j] = i/mreal(nx-1);
+		}
+	}
+	return r;
+}
+uintptr_t MGL_EXPORT mgl_data_first_dir_(uintptr_t *d, const char *dir, double *val,int l)
+{	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
+	uintptr_t r=uintptr_t(mgl_data_first_dir(_DT_,s,*val));	delete []s;	return r;	}
+//-----------------------------------------------------------------------------
+HMDT MGL_EXPORT mgl_data_last_dir(HCDT dat, const char *dir, double val)
+{
+	if(!dir || *dir==0)	return 0;
+	const long nx=dat->GetNx(),ny=dat->GetNy(),nz=dat->GetNz(), nn=nx*ny;
+	mglData *r=NULL;
+	if(mglchr(dir,'z') && nz>1)
+	{
+		r = new mglData(nx,ny);
+#pragma omp parallel for
+		for(long j=0;j<nn;j++)
+		{
+			long i;
+			for(i=nz-1;i>=0;i++)	if(dat->vthr(j+nn*i)>val)	break;
+			r->a[j] = i/mreal(nz-1);
+		}
+	}
+	else if(mglchr(dir,'y') && ny>1)
+	{
+		r = new mglData(nx,nz);
+#pragma omp parallel for
+		for(long j=0;j<nx*nz;j++)
+		{
+			long i, i0 = (j%nx)+nn*(j/nx);
+			for(i=ny-1;i>=0;i++)	if(dat->vthr(i0+nx*i)>val)	break;
+			r->a[j] = i/mreal(ny-1);
+		}
+	}
+	else if(mglchr(dir,'x') && nx>1)
+	{
+		r = new mglData(ny,nz);
+#pragma omp parallel for
+		for(long j=0;j<ny*nz;j++)
+		{
+			long i, i0 = j*nx;
+			for(i=nx-1;i>=0;i++)	if(dat->vthr(i0+i)>val)	break;
+			r->a[j] = i/mreal(nx-1);
+		}
+	}
+	return r;
+}
+uintptr_t MGL_EXPORT mgl_data_last_dir_(uintptr_t *d, const char *dir, double *val,int l)
+{	char *s=new char[l+1];	memcpy(s,dir,l);	s[l]=0;
+	uintptr_t r=uintptr_t(mgl_data_last_dir(_DT_,s,*val));	delete []s;	return r;	}
+//-----------------------------------------------------------------------------
 static void *mgl_min_z(void *par)
 {
 	mglThreadD *t=(mglThreadD *)par;

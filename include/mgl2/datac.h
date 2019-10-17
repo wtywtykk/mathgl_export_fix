@@ -40,6 +40,7 @@ class MGL_EXPORT mglDataC : public mglDataA
 {
 public:
 using mglDataA::Momentum;
+using mglDataA::Last;
 	long nx;		///< number of points in 1st dimensions ('x' dimension)
 	long ny;		///< number of points in 2nd dimensions ('y' dimension)
 	long nz;		///< number of points in 3d dimensions ('z' dimension)
@@ -347,6 +348,13 @@ using mglDataA::Momentum;
 	/// Create n-th points distribution of this data values in range [v1, v2] with weight w
 	inline mglData Hist(const mglDataA &w, long n,mreal v1=0,mreal v2=1, long nsub=0) const
 	{	return mglData(true,mgl_data_hist_w(this,&w,n,v1,v2,nsub));	}
+	/// Get array of positions of first value, which abs() is  large val
+	inline mglData First(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_first_dir(this,dir,val));	}
+	/// Get array of positions of last value, which abs() is large val
+	inline mglData Last(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_last_dir(this,dir,val));	}
+
 	/// Get array which is result of maximal values in given direction or directions
 	inline mglData Max(const char *dir) const
 	{	return mglData(true,mgl_data_max_dir(this,dir));	}
@@ -498,7 +506,7 @@ using mglDataA::Momentum;
 	void set_v(mreal val, long i,long j=0,long k=0)	{	a[i+nx*(j+ny*k)]=val;	}
 #else
 	/// Get the value in given cell of the data with border checking
-	mreal v(long i,long j=0,long k=0) const	{	return mgl_abs(mgl_datac_get_value(this,i,j,k));	}
+	mreal v(long i,long j=0,long k=0) const	{	return abs(mgl_datac_get_value(this,i,j,k));	}
 	/// Set the value in given cell of the data
 	void set_v(mreal val, long i,long j=0,long k=0)	{	mgl_datac_set_value(this,val,i,j,k);	}
 #endif

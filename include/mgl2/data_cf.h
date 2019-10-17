@@ -315,6 +315,12 @@ void MGL_EXPORT mgl_data_smooth_(uintptr_t *dat, const char *dirs, mreal *delta,
 /// Get array which is result of summation in given direction or directions
 HMDT MGL_EXPORT mgl_data_sum(HCDT dat, const char *dir);
 uintptr_t MGL_EXPORT mgl_data_sum_(uintptr_t *dat, const char *dir,int);
+/// Get array of positions of first value large val
+HMDT MGL_EXPORT mgl_data_first_dir(HCDT dat, const char *dir, double val);
+uintptr_t MGL_EXPORT mgl_data_first_dir_(uintptr_t *d, const char *dir, double *val,int l);
+/// Get array of positions of last value large val
+HMDT MGL_EXPORT mgl_data_last_dir(HCDT dat, const char *dir, double val);
+uintptr_t MGL_EXPORT mgl_data_last_dir_(uintptr_t *d, const char *dir, double *val,int l);
 /// Get array which is result of maximal values in given direction or directions
 HMDT MGL_EXPORT mgl_data_max_dir(HCDT dat, const char *dir);
 uintptr_t MGL_EXPORT mgl_data_max_dir_(uintptr_t *dat, const char *dir,int);
