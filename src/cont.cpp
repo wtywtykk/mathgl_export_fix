@@ -34,6 +34,9 @@
 #include "mgl2/font.h"
 #include "mgl2/base.h"
 //-----------------------------------------------------------------------------
+#include "cont.hpp"
+#include <math.h>
+//-----------------------------------------------------------------------------
 //
 //	Text printing along a curve
 //
@@ -195,10 +198,177 @@ char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
 mgl_text_y(_GR_, _DA_(y),s,f,o);	delete []o;	delete []s;	delete []f;	}
 //-----------------------------------------------------------------------------
 //
-//	Cont series
+//	DCont series
 //
 //-----------------------------------------------------------------------------
-#include "cont.hpp"
+bool mglSegment::set(mreal u1,mreal v1,mreal u2,mreal v2,long i,long j,long k,HCDT x, HCDT y, HCDT z)
+{
+	bool res=(v1>=0 && v1<=MGL_FEPSILON && u1>=0 && u1<=MGL_FEPSILON && v2>=0 && v2<=MGL_FEPSILON && u2>=0 && u2<=MGL_FEPSILON);
+	if(v1==v2 && u1==u2)	res=false;	// NOTE: shouldn't be here never
+	if(res)
+	{
+		p1.Set(mgl_data_linear(x,i+u1,j+v1,k), mgl_data_linear(y,i+u1,j+v1,k), mgl_data_linear(z,i+u1,j+v1,k));
+		p2.Set(mgl_data_linear(x,i+u2,j+v2,k), mgl_data_linear(y,i+u2,j+v2,k), mgl_data_linear(z,i+u2,j+v2,k));
+	}
+	return res;
+}
+//-----------------------------------------------------------------------------
+void mglSegment::set(const mglPoint &q1, const mglPoint &q2,HCDT x, HCDT y, HCDT z, bool nboth)
+{
+	if(nboth)
+	{
+		p1.Set(mgl_data_linear(x,q1.x,0,0), mgl_data_linear(y,q1.y,0,0), mgl_data_linear(z,q1.z,0,0));
+		p2.Set(mgl_data_linear(x,q2.x,0,0), mgl_data_linear(y,q2.y,0,0), mgl_data_linear(z,q2.z,0,0));
+	}
+	else
+	{
+		p1.Set(mgl_data_linear(x,q1.x,q1.y,q1.z), mgl_data_linear(y,q1.x,q1.y,q1.z), mgl_data_linear(z,q1.x,q1.y,q1.z));
+		p2.Set(mgl_data_linear(x,q2.x,q2.y,q2.z), mgl_data_linear(y,q2.x,q2.y,q2.z), mgl_data_linear(z,q2.x,q2.y,q2.z));
+	}
+}
+//-----------------------------------------------------------------------------
+void MGL_NO_EXPORT mgl_dcont_add_pnt(mglPoint p1, mglPoint p2, HCDT b, mreal val, std::vector<mglPoint> &pp)
+{
+	mreal b1=b->Linear(p1.x,p1.y,p1.z), b2=b->Linear(p2.x,p2.y,p2.z);
+	mreal d = (val-b1)/(b2-b1);
+	if(d>=0 && d<=1)	pp.push_back(p2*d+p1*(1-d));
+}
+//-----------------------------------------------------------------------------
+std::vector<mglSegment> MGL_EXPORT mgl_get_dlines(mreal val, HCDT a, HCDT b, HCDT x, HCDT y, HCDT z)
+{
+	long nx=a->GetNx(), ny=a->GetNy(), nz=a->GetNz(), nn=nx*ny;
+	bool nboth = mgl_isnboth(x,y,z,a);
+	std::vector<mglSegment> lines;
+	for(long k=0;k<nz-1;k++)	for(long j=0;j<ny-1;j++)	for(long i=0;i<nx-1;i++)
+	{
+		std::vector<mglPoint> pp;
+		long i0 = i+nx*(j+ny*k);
+		mreal v1=a->vthr(i0), v2=a->vthr(i0+1), v3=a->vthr(i0+nx), v4=a->vthr(i0+1+nx);
+		mreal v5=a->vthr(i0+nn), v6=a->vthr(i0+1+nn), v7=a->vthr(i0+nx+nn), v8=a->vthr(i0+1+nx+nn);
+		// first find isosurface for a
+		mreal d1,d2,d3,d4,d5,d6,d7,d8,dA,dB,dC,dD;
+		d1=(val-v1)/(v2-v1);	d1=(d1>=0&&d1<=1)?d1:NAN;
+		d2=(val-v2)/(v4-v2);	d2=(d2>=0&&d2<=1)?d2:NAN;
+		d3=(val-v3)/(v4-v3);	d3=(d3>=0&&d3<=1)?d3:NAN;
+		d4=(val-v1)/(v3-v1);	d4=(d4>=0&&d4<=1)?d4:NAN;
+		mglPoint p1(i+d1,j,k), p2(i+1,j+d2,k), p3(i+d3,j+1,k), p4(i,j+d4,k);
+		d5=(val-v5)/(v6-v5);	d5=(d5>=0&&d5<=1)?d5:NAN;
+		d6=(val-v6)/(v8-v6);	d6=(d6>=0&&d6<=1)?d6:NAN;
+		d7=(val-v7)/(v8-v7);	d7=(d7>=0&&d7<=1)?d7:NAN;
+		d8=(val-v5)/(v7-v5);	d8=(d8>=0&&d8<=1)?d8:NAN;
+		mglPoint p5(i+d5,j,k+1), p6(i+1,j+d6,k+1), p7(i+d7,j+1,k+1), p8(i,j+d8,k+1);
+		dA=(val-v1)/(v5-v1);	dA=(dA>=0&&dA<=1)?dA:NAN;
+		dB=(val-v2)/(v6-v2);	dB=(dB>=0&&dB<=1)?dB:NAN;
+		dC=(val-v3)/(v7-v3);	dC=(dC>=0&&dC<=1)?dC:NAN;
+		dD=(val-v4)/(v8-v4);	dD=(dD>=0&&dD<=1)?dD:NAN;
+		mglPoint pA(i,j,k+dA),	pB(i+1,j,k+dB),	pC(i,j+1,k+dC),	pD(i+1,j+1,k+dD);
+		// next find its cross-section with isosurface of b at faces
+		mgl_dcont_add_pnt(p1,p2,b,val,pp);	mgl_dcont_add_pnt(p1,p4,b,val,pp);
+		mgl_dcont_add_pnt(p1,p3,b,val,pp);	mgl_dcont_add_pnt(p1,p5,b,val,pp);
+		mgl_dcont_add_pnt(p1,pA,b,val,pp);	mgl_dcont_add_pnt(p1,pB,b,val,pp);
+		mgl_dcont_add_pnt(p2,p4,b,val,pp);	mgl_dcont_add_pnt(p2,p3,b,val,pp);
+		mgl_dcont_add_pnt(p2,p6,b,val,pp);	mgl_dcont_add_pnt(p2,pD,b,val,pp);
+		mgl_dcont_add_pnt(p2,pB,b,val,pp);	mgl_dcont_add_pnt(p4,p3,b,val,pp);
+		mgl_dcont_add_pnt(p4,p8,b,val,pp);	mgl_dcont_add_pnt(p4,pA,b,val,pp);
+		mgl_dcont_add_pnt(p4,pC,b,val,pp);	mgl_dcont_add_pnt(p5,p6,b,val,pp);
+		mgl_dcont_add_pnt(p5,p8,b,val,pp);	mgl_dcont_add_pnt(p5,p7,b,val,pp);
+		mgl_dcont_add_pnt(p5,pA,b,val,pp);	mgl_dcont_add_pnt(p5,pB,b,val,pp);
+		mgl_dcont_add_pnt(p6,p8,b,val,pp);	mgl_dcont_add_pnt(p6,p7,b,val,pp);
+		mgl_dcont_add_pnt(p6,pD,b,val,pp);	mgl_dcont_add_pnt(p6,pB,b,val,pp);
+		mgl_dcont_add_pnt(p3,p7,b,val,pp);	mgl_dcont_add_pnt(p8,p7,b,val,pp);
+		mgl_dcont_add_pnt(p7,pD,b,val,pp);	mgl_dcont_add_pnt(p7,pC,b,val,pp);
+		mgl_dcont_add_pnt(p8,pA,b,val,pp);	mgl_dcont_add_pnt(pA,pB,b,val,pp);
+		mgl_dcont_add_pnt(pA,pC,b,val,pp);	mgl_dcont_add_pnt(p3,pC,b,val,pp);
+		mgl_dcont_add_pnt(p8,pC,b,val,pp);	mgl_dcont_add_pnt(pD,pC,b,val,pp);
+		mgl_dcont_add_pnt(pD,pB,b,val,pp);	mgl_dcont_add_pnt(p3,pD,b,val,pp);
+		// now connect points
+		if(pp.size()<2)	continue;
+		else if(pp.size()==2)
+		{	mglSegment line;	line.set(pp[0],pp[1],x,y,z,nboth);	lines.push_back(line);	}
+		else
+		{
+			mglSegment line;
+			size_t n = pp.size();	// TODO sort by closest in future
+			for(size_t ii=0;ii<n-1;ii++)
+			{	line.set(pp[ii],pp[ii+1],x,y,z,nboth);	lines.push_back(line);	}
+		}
+	}
+	return lines;
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_dcont_gen(HMGL gr, double val, HCDT x, HCDT y, HCDT z, HCDT a, HCDT b, const char *sch, const char *opt)
+{
+	if(mgl_check_dim3(gr,!mgl_isnboth(x,y,z,a),x,y,z,a,b,"DCont"))	return;
+	gr->SaveState(opt);
+	static int cgid=1;	gr->StartGroup("DContGen",cgid++);
+
+	int text=0;
+	if(mglchr(sch,'t'))	text=1;
+	if(mglchr(sch,'T'))	text=2;
+	gr->SetPenPal(sch);
+	mgl_draw_curvs(gr,val,gr->CDef,text,mgl_get_curvs(gr,mgl_get_dlines(val,a,b,x,y,z)));
+	gr->EndGroup();
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_dcont_xyz(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT a, HCDT b, const char *sch, const char *opt)
+{
+	long n=z->GetNx(),m=z->GetNy();
+	if(mgl_check_dim3(gr,!mgl_isnboth(x,y,z,a),x,y,z,a,b,"DCont"))	return;
+
+	mreal r = gr->SaveState(opt);
+	static int cgid=1;	gr->StartGroup("DCont",cgid++);
+
+	int text=0;
+	if(mglchr(sch,'t'))	text=1;
+	if(mglchr(sch,'T'))	text=2;
+	long s=gr->AddTexture(sch);
+	gr->SetPenPal(sch);
+
+	long Num = mgl_isnan(r)?7:long(r+0.5);
+	if(!v && Num<1)	{	gr->SetWarn(mglWarnCnt,"Cont");	return;	}
+	mglData vv(Num);
+	for(long i=0;i<Num;i++)	vv.a[i] = gr->Min.c + (gr->Max.c-gr->Min.c)*mreal(i+1)/(Num+1);
+	if(!v) v = &vv;
+
+#pragma omp parallel for
+	for(long i=0;i<v->GetNx();i++)
+	{
+		mreal val = v->v(i);
+		mgl_draw_curvs(gr,val,gr->GetC(s,val),text, mgl_get_curvs(gr, mgl_get_dlines(val,a,b,x,y,z)));
+	}
+	gr->EndGroup();
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_dcont(HMGL gr, HCDT v, HCDT a, HCDT b, const char *sch, const char *opt)
+{
+	long n = a->GetNx(), m = a->GetNy(), l = a->GetNz();
+	if(m<2 || n<2 || l<2 || n*m*l!=b->GetNN())	{	gr->SetWarn(mglWarnLow,"DCont");	return;	}
+	mreal r = gr->SaveState(opt);
+	mglDataV x(n,m,l), y(n,m,l), z(n,m,l);
+	x.Fill(gr->Min.x,gr->Max.x,'x');
+	y.Fill(gr->Min.y,gr->Max.y,'y');
+	z.Fill(gr->Min.z,gr->Max.z,'z');
+	long Num = mgl_isnan(r)?7:long(r+0.5);
+	if(!v && Num<1)	{	gr->SetWarn(mglWarnCnt,"Cont");	return;	}
+	mglData vv(Num);
+	for(long i=0;i<Num;i++)	vv.a[i] = gr->Min.c + (gr->Max.c-gr->Min.c)*mreal(i+1)/(Num+1);
+	mgl_dcont_xyz(gr,v?v:&vv,&x,&y,&z,a,b,sch,0);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_dcont_xyz_(uintptr_t *gr, uintptr_t *v, uintptr_t *x, uintptr_t *y, uintptr_t *z, uintptr_t *a, uintptr_t *b, const char *sch, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,sch,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_dcont_xyz(_GR_, _DA_(v), _DA_(x), _DA_(y), _DA_(z), _DA_(a), _DA_(b), s, o);
+	delete []o;	delete []s;	}
+void MGL_EXPORT mgl_dcont_(uintptr_t *gr, uintptr_t *v, uintptr_t *a, uintptr_t *b, const char *sch, const char *opt,int l,int lo)
+{	char *s=new char[l+1];	memcpy(s,sch,l);	s[l]=0;
+	char *o=new char[lo+1];	memcpy(o,opt,lo);	o[lo]=0;
+	mgl_dcont(_GR_, _DA_(v), _DA_(a), _DA_(b), s, o);
+	delete []o;	delete []s;	}
+//-----------------------------------------------------------------------------
+//
+//	Cont series
+//
 //-----------------------------------------------------------------------------
 std::vector<mglSegment> MGL_EXPORT mgl_get_lines(mreal val, HCDT a, HCDT x, HCDT y, HCDT z, long ak)
 {

@@ -1485,6 +1485,25 @@ public:
 	inline void Axial(const mglDataA &z, const char *sch="", const char *opt="")
 	{	mgl_axial(gr, &z, sch, opt);	}
 
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data specified parametrically
+	/** Style ‘t’/‘T’ draw contour labels below/above contours. */
+	inline void DCont(const mglDataA &v, const mglDataA &x, const mglDataA &y, const mglDataA &z, const mglDataA &a, const mglDataA &b, const char *sch="", const char *opt="")
+	{	mgl_dcont_xyz(gr, &v, &x, &y, &z, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data
+	/** Style ‘t’/‘T’ draw contour labels below/above contours. */
+	inline void DCont(const mglDataA &v, const mglDataA &a, const mglDataA &b, const char *sch="", const char *opt="")
+	{	mgl_dcont(gr, &v, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data specified parametrically
+	/** Style ‘t’/‘T’ draw contour labels below/above contours.
+	 * Option "value" set the number of isosurfaces (default is 3). */
+	inline void DCont(const mglDataA &x, const mglDataA &y, const mglDataA &z, const mglDataA &a, const mglDataA &b, const char *sch="", const char *opt="")
+	{	mgl_dcont_xyz(gr, NULL, &x, &y, &z, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data
+	/** Style ‘t’/‘T’ draw contour labels below/above contours.
+	 * Option "value" set the number of isosurfaces (default is 3). */
+	inline void DCont(const mglDataA &a, const mglDataA &b, const char *sch="", const char *opt="")
+	{	mgl_dcont(gr, NULL, &a, &b, sch, opt);	}
+
 	/// Draw grid lines for density plot at slice for 3d data specified parametrically
 	/** Style ‘x’ or ‘z’ produce plot perpendicular to x- or z-direction correspondingly.*/
 	inline void Grid3(const mglDataA &x, const mglDataA &y, const mglDataA &z, const mglDataA &a, const char *stl="", double sVal=-1, const char *opt="")

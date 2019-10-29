@@ -74,13 +74,11 @@ void mgls_prepare3v(mglData *ex, mglData *ey, mglData *ez);
 void save(mglGraph *gr,const char *name,const char *suf);
 void test(mglGraph *gr)
 {
-	mglData d(3,100);	gr->Fill(d,"cos(2*pi*i*y)");
-	gr->Rotate(40,60);	gr->Fall(d,"2kx");
-	return;
-	
 	mglParse par;
-	par.Execute(gr,"new f 100 'x^3':save f 'test.dat':axis:box:fplot ':test.dat:-1:1'");
-	par.Execute(gr,"text 0 0 'ab' '@'");
+	par.Execute(gr,"define n 30\nnew a n n n 'x^2+y^2'\nnew b n n n 'z^4+2*x^4-2*y^4'\nrotate 40 60:box:axis\n"
+	"dcont [0.5,0.5] a b '2k'\nlight on:alpha on\nsurf3 a 0.5 'r':surf3 b 0.5 'g'");
+//	par.Execute(gr,"new f 100 'x^3':save f 'test.dat':axis:box:fplot ':test.dat:-1:1'");
+//	par.Execute(gr,"text 0 0 'ab' '@'");
 //	par.Execute(gr,"new a 3 3 'x*y'\nsubplot 2 1 0 '':dens a:dens a 'k+/'\n"
 //	"subplot 2 1 1 '':mask '+' 'ff00182424f800' 30:dens a '3+'");
 	return;

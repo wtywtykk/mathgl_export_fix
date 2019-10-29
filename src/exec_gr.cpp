@@ -850,6 +850,21 @@ int static mgls_crust(mglGraph *gr, long , mglArg *a, const char *k, const char 
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_dcont(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
+{
+	int res=0;
+	if(!strcmp(k,"dd"))	gr->DCont(*(a[0].d), *(a[1].d), "", opt);
+	else if(!strcmp(k,"dds"))	gr->DCont(*(a[0].d), *(a[1].d), a[2].s.s, opt);
+	else if(!strcmp(k,"ddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), "", opt);
+	else if(!strcmp(k,"ddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s, opt);
+	else if(!strcmp(k,"ddddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "", opt);
+	else if(!strcmp(k,"ddddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s, opt);
+	else if(!strcmp(k,"dddddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), "", opt);
+	else if(!strcmp(k,"dddddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), a[6].s.s, opt);
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_dens3(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
@@ -1172,6 +1187,7 @@ mglCommand mgls_grf_cmd[] = {
 	{"conty",_("Draw contour lines at y-slice (or y-plane)"),"conty Dat ['fmt' pos num]", mgls_conty ,0},
 	{"contz",_("Draw contour lines at z-slice (or z-plane)"),"contz Dat ['fmt' pos num]", mgls_contz ,0},
 	{"crust",_("Draw reconstructed surface for arbitrary data points"),"crust Xdat Ydat Zdat ['fmt']", mgls_crust ,0},
+	{"dcont",_("Draw curves of cross-section of isosurfaces a,b for 3D data"),"dcont Adat Bdat ['fmt']|Vdat Adat Bdat ['fmt']|Xdat Ydat Zdat Adat Bdat ['fmt']|Vdat Xdat Ydat Zdar Adat Bdat ['fmt']", mgls_dcont ,9},
 	{"dens",_("Draw density plot"),"dens Zdat ['fmt' zpos]|Xdat Ydat Zdat ['fmt' zpos]", mgls_dens ,8},
 	{"dens3",_("Draw density plot at slices of 3D data"),"dens3 Adat 'dir' [pos 'fmt']|Xdat Ydat Zdat Adat 'dir' [pos 'fmt']", mgls_dens3 ,9},
 	{"densx",_("Draw density plot at x-slice (or x-plane)"),"densx Dat ['fmt' pos]", mgls_densx ,0},

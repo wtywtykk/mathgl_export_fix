@@ -3351,7 +3351,6 @@ void smgl_minmax(mglGraph *gr)	// test minmax
 	gr->SetRange('c',h);	gr->Dens(h);	gr->Box();
 	gr->FPlot("sin(2*pi*t)","cos(2*pi*t)","0","k");
 	e*=2;	e-=1;
-//	for(long i=0;i<x.nx;i++)	{	x.a[i]=e.a[2*i]*2-1;	y.a[i]=e.a[2*i+1]*2-1;	}
 	gr->Plot(e(0),e(1),". c");
 }
 //-----------------------------------------------------------------------------

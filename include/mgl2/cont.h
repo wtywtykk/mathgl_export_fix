@@ -38,10 +38,23 @@ void MGL_EXPORT mgl_text_y(HMGL gr, HCDT y, const char *text, const char *font, 
 void MGL_EXPORT mgl_text_y_(uintptr_t *gr, uintptr_t *y, const char *text, const char *font, const char *opt,int, int l,int n);
 void MGL_EXPORT mgl_textw_y(HMGL gr, HCDT y, const wchar_t *text, const char *font, const char *opt);
 
+
+void MGL_EXPORT mgl_dcont_gen(HMGL gr, double val, HCDT x, HCDT y, HCDT z, HCDT a, HCDT b, const char *sch, const char *opt);
 void MGL_EXPORT mgl_cont_gen(HMGL gr, double val, HCDT a, HCDT x, HCDT y, HCDT z, const char *stl, const char *opt);
 void MGL_EXPORT mgl_contf_gen(HMGL gr, double v1, double v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *stl, const char *opt);
 //void MGL_EXPORT mgl_contv_gen(HMGL gr, double v1, double v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *stl);
 //void MGL_EXPORT mgl_axial_gen(HMGL gr, double v1, double v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *stl);
+
+/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data specified parametrically
+/** Style ‘t’/‘T’ draw contour labels below/above contours.
+ *  If v==NULL then curve levels is selected equidistantly in color range. */
+void MGL_EXPORT mgl_dcont_xyz(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT a, HCDT b, const char *sch, const char *opt);
+void MGL_EXPORT mgl_dcont_xyz_(uintptr_t *gr, uintptr_t *v, uintptr_t *x, uintptr_t *y, uintptr_t *z, uintptr_t *a, uintptr_t *b, const char *sch, const char *opt,int,int);
+/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data
+/** Style ‘t’/‘T’ draw contour labels below/above contours.
+ *  If v==NULL then curve levels is selected equidistantly in color range. */
+void MGL_EXPORT mgl_dcont(HMGL gr, HCDT v, HCDT a, HCDT b, const char *sch, const char *opt);
+void MGL_EXPORT mgl_dcont_(uintptr_t *gr, uintptr_t *v, uintptr_t *a, uintptr_t *b, const char *sch, const char *opt,int,int);
 
 /// Draw contour lines at manual levels for 2d data specified parametrically
 /** Style ‘_’ to draw contours at bottom of axis box.

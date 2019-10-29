@@ -1,5 +1,5 @@
 /***************************************************************************
- * cont.cpp is part of Math Graphic Library
+ * cont.hpp is part of Math Graphic Library
  * Copyright (C) 2007-2014 Alexey Balakin <mathgl.abalakin@gmail.ru>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -22,17 +22,8 @@ struct mglSegment
 {
 	mglPoint p1,p2;	// edges
 	std::list<mglPoint> pp;
-	bool set(mreal u1,mreal v1,mreal u2,mreal v2,long i,long j,long k,HCDT x, HCDT y, HCDT z)
-	{
-		bool res=(v1>=0 && v1<=MGL_FEPSILON && u1>=0 && u1<=MGL_FEPSILON && v2>=0 && v2<=MGL_FEPSILON && u2>=0 && u2<=MGL_FEPSILON);
-		if(v1==v2 && u1==u2)	res=false;	// NOTE: shouldn't be here never
-		if(res)
-		{
-			p1.Set(mgl_data_linear(x,i+u1,j+v1,k), mgl_data_linear(y,i+u1,j+v1,k), mgl_data_linear(z,i+u1,j+v1,k));
-			p2.Set(mgl_data_linear(x,i+u2,j+v2,k), mgl_data_linear(y,i+u2,j+v2,k), mgl_data_linear(z,i+u2,j+v2,k));
-		}
-		return res;
-	}
+	bool set(mreal u1,mreal v1,mreal u2,mreal v2,long i,long j,long k,HCDT x, HCDT y, HCDT z);
+	void set(const mglPoint &p1, const mglPoint &p2,HCDT x, HCDT y, HCDT z, bool nboth);
 	void before(const mglPoint &p)	{	p1 = p;	pp.push_front(p);	}
 	void after(const mglPoint &p)	{	p2 = p;	pp.push_back(p);	}
 };

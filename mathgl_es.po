@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-17 17:56+0300\n"
+"POT-Creation-Date: 2019-10-28 23:32+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -1499,32 +1499,32 @@ msgstr "No guardar"
 msgid "Double diff."
 msgstr "Doble dif."
 
-#: src/exec_gr.cpp:1154
+#: src/exec_gr.cpp:1169
 msgid "Draw Bifurcation diagram"
 msgstr "Diagrama de bifurcación"
 
-#: src/exec_gr.cpp:1190
+#: src/exec_gr.cpp:1206
 msgid "Draw Iris plots"
 msgstr "Gráfica de Iris"
 
-#: src/exec_gr.cpp:1192
+#: src/exec_gr.cpp:1208
 msgid "Draw Lamerey diagram"
 msgstr "Diagrama de Lamerey"
 
 # apertura-alto-bajo-clausura?
-#: src/exec_gr.cpp:1197
+#: src/exec_gr.cpp:1213
 msgid "Draw Open-High-Low-Close (OHLC) diagram"
 msgstr "Diagrama OHLC"
 
-#: src/exec_gr.cpp:1200
+#: src/exec_gr.cpp:1216
 msgid "Draw Poincare map"
 msgstr "Mapa de Poincaré"
 
-#: src/exec_gr.cpp:1206
+#: src/exec_gr.cpp:1222
 msgid "Draw STFA diagram"
 msgstr "Diagrama STFA"
 
-#: src/exec_gr.cpp:1218
+#: src/exec_gr.cpp:1234
 msgid "Draw TeX mark at point position"
 msgstr "Graficar marca de TeX en posición"
 
@@ -1532,23 +1532,23 @@ msgstr "Graficar marca de TeX en posición"
 msgid "Draw angle arc"
 msgstr "Graficar arco"
 
-#: src/exec_gr.cpp:1147
+#: src/exec_gr.cpp:1162
 msgid "Draw area plot for 1D data"
 msgstr "Gráfica de área para datos 1D"
 
-#: src/exec_gr.cpp:1150
+#: src/exec_gr.cpp:1165
 msgid "Draw bars for 1D data"
 msgstr "Gráfica de barras para 1D"
 
-#: src/exec_gr.cpp:1152
+#: src/exec_gr.cpp:1167
 msgid "Draw belts"
 msgstr "Gráfica de correas"
 
-#: src/exec_gr.cpp:1153
+#: src/exec_gr.cpp:1168
 msgid "Draw belts colored by other data"
 msgstr "Gráfica de correas coloreada por otros datos"
 
-#: src/exec_gr.cpp:1216
+#: src/exec_gr.cpp:1232
 msgid "Draw binormales for 1D data"
 msgstr "Gráfica de binormales para datos 1D"
 
@@ -1560,19 +1560,19 @@ msgstr "Graficar imagen (logo) en el rango de ejes"
 msgid "Draw bounding box"
 msgstr "Graficar bordes"
 
-#: src/exec_gr.cpp:1156
+#: src/exec_gr.cpp:1171
 msgid "Draw boxes"
 msgstr "Diagrama de cajas"
 
-#: src/exec_gr.cpp:1155
+#: src/exec_gr.cpp:1170
 msgid "Draw boxplot for 2D data"
 msgstr "Diagrama de cajas para datos 2D"
 
-#: src/exec_gr.cpp:1157
+#: src/exec_gr.cpp:1172
 msgid "Draw candlestick chart"
 msgstr "Diagrama de velas"
 
-#: src/exec_gr.cpp:1158
+#: src/exec_gr.cpp:1173
 msgid "Draw chart"
 msgstr "Gráfica de cuadros"
 
@@ -1580,7 +1580,7 @@ msgstr "Gráfica de cuadros"
 msgid "Draw circle"
 msgstr "Graficar círculo"
 
-#: src/exec_gr.cpp:1159
+#: src/exec_gr.cpp:1174
 msgid "Draw cloud"
 msgstr "Gráfica de nube"
 
@@ -1592,43 +1592,43 @@ msgstr "Graficar barra de colores"
 msgid "Draw cone"
 msgstr "Dibujar cono"
 
-#: src/exec_gr.cpp:1160
+#: src/exec_gr.cpp:1175
 msgid "Draw cones for 1D data"
 msgstr "Gráfica de conos para datos 1D"
 
-#: src/exec_gr.cpp:1161
+#: src/exec_gr.cpp:1176
 msgid "Draw contour lines"
 msgstr "Gráfica de curvas de nivel"
 
-#: src/exec_gr.cpp:1171
+#: src/exec_gr.cpp:1186
 msgid "Draw contour lines at x-slice (or x-plane)"
 msgstr "Curvas de nivel en el plano x"
 
-#: src/exec_gr.cpp:1172
+#: src/exec_gr.cpp:1187
 msgid "Draw contour lines at y-slice (or y-plane)"
 msgstr "Curvas de nivel en el plano y"
 
-#: src/exec_gr.cpp:1173
+#: src/exec_gr.cpp:1188
 msgid "Draw contour lines at z-slice (or z-plane)"
 msgstr "Curvas de nivel en el plano z"
 
-#: src/exec_gr.cpp:1162
+#: src/exec_gr.cpp:1177
 msgid "Draw contour lines for 3D data"
 msgstr "Gráfica de curvas de nivel para datos 3D"
 
-#: src/exec_gr.cpp:1223
+#: src/exec_gr.cpp:1239
 msgid "Draw contour lines for surface of triangles"
 msgstr "Curvas de nivel para superficie de triángulos"
 
-#: src/exec_gr.cpp:1169
+#: src/exec_gr.cpp:1184
 msgid "Draw contour lines on parametric surface"
 msgstr "Curvas de nivel sobre superficie paramétrica"
 
-#: src/exec_gr.cpp:1170
+#: src/exec_gr.cpp:1185
 msgid "Draw contour tubes"
 msgstr "Cilindros de nivel"
 
-#: src/exec_gr.cpp:1224
+#: src/exec_gr.cpp:1240
 msgid "Draw contour tubes for surface of triangles"
 msgstr "Cilindros de nivel para superficie de triángulos"
 
@@ -1636,36 +1636,41 @@ msgstr "Cilindros de nivel para superficie de triángulos"
 msgid "Draw curve"
 msgstr "Graficar curva"
 
-#: src/exec_gr.cpp:1226
+#: src/exec_gr.cpp:1242
 msgid "Draw curve by tube"
 msgstr "Graficar curva tubular"
 
-#: src/exec_gr.cpp:1175
+#: src/exec_gr.cpp:1190
+#, fuzzy
+msgid "Draw curves of cross-section of isosurfaces a,b for 3D data"
+msgstr "Isosuperficie para datos 3D"
+
+#: src/exec_gr.cpp:1191
 msgid "Draw density plot"
 msgstr "Gráfica de densidad"
 
-#: src/exec_gr.cpp:1176
+#: src/exec_gr.cpp:1192
 msgid "Draw density plot at slices of 3D data"
 msgstr "Gráfica de densidad para secciones de datos 3D data"
 
-#: src/exec_gr.cpp:1177
+#: src/exec_gr.cpp:1193
 msgid "Draw density plot at x-slice (or x-plane)"
 msgstr "Gráfica de densidad en el plano x"
 
-#: src/exec_gr.cpp:1178
+#: src/exec_gr.cpp:1194
 msgid "Draw density plot at y-slice (or y-plane)"
 msgstr "Gráfica de densidad en el plano y"
 
-#: src/exec_gr.cpp:1179
+#: src/exec_gr.cpp:1195
 msgid "Draw density plot at z-slice (or z-plane)"
 msgstr "Gráfica de densidad en el plano z"
 
 # Esquema de gotas?
-#: src/exec_gr.cpp:1180
+#: src/exec_gr.cpp:1196
 msgid "Draw dew plot"
 msgstr "Gráfica de gotas"
 
-#: src/exec_gr.cpp:1181
+#: src/exec_gr.cpp:1197
 msgid "Draw dots for arbitrary data points"
 msgstr "Diagrama de puntos para datos arbitrarios"
 
@@ -1681,7 +1686,7 @@ msgstr "Graficar elipse"
 msgid "Draw error box"
 msgstr "Graficar caja de error"
 
-#: src/exec_gr.cpp:1182
+#: src/exec_gr.cpp:1198
 msgid "Draw error boxes"
 msgstr "Graficar cajas de error"
 
@@ -1701,23 +1706,23 @@ msgstr "Graficar faceta perpendicular al eje y"
 msgid "Draw face perpendicular to z-axis"
 msgstr "Graficar faceta perpendicular al eje z"
 
-#: src/exec_gr.cpp:1203
+#: src/exec_gr.cpp:1219
 msgid "Draw filled region (ribbon) between 2 curves"
 msgstr "Graficar región rellena (banda) entre dos curbas"
 
-#: src/exec_gr.cpp:1198
+#: src/exec_gr.cpp:1214
 msgid "Draw flow pipes for vector field"
 msgstr "Graficar tubos de flujo de campo vectorial"
 
-#: src/exec_gr.cpp:1184
+#: src/exec_gr.cpp:1200
 msgid "Draw flow threads for vector field"
 msgstr "Graficar líneas de flujo para campo vectorial"
 
-#: src/exec_gr.cpp:1186
+#: src/exec_gr.cpp:1202
 msgid "Draw flow threads from plain for vector field"
 msgstr "Graficar de líneas de flujo desde plano para campo vectorial"
 
-#: src/exec_gr.cpp:1187
+#: src/exec_gr.cpp:1203
 msgid "Draw gradient lines for scalar field"
 msgstr "Graficar líneas de gradiente para campo escalar"
 
@@ -1725,44 +1730,44 @@ msgstr "Graficar líneas de gradiente para campo escalar"
 msgid "Draw grid"
 msgstr "Graficar grilla"
 
-#: src/exec_gr.cpp:1189
+#: src/exec_gr.cpp:1205
 msgid "Draw grid at slices of 3D data"
 msgstr "Graficar grilla para cortes de datos 3D"
 
-#: src/exec_gr.cpp:1188
+#: src/exec_gr.cpp:1204
 msgid "Draw grid for data array(s)"
 msgstr "Graficar grilla para arreglo(s) de datos"
 
-#: src/exec_gr.cpp:1149
+#: src/exec_gr.cpp:1164
 msgid "Draw horizontal bars for 1D data"
 msgstr "Graficar barras horizontales pata datos 1D"
 
-#: src/exec_gr.cpp:1219
+#: src/exec_gr.cpp:1235
 msgid "Draw horizontal tiles"
 msgstr "Graficar baldosas horizontales"
 
-#: src/exec_gr.cpp:1220
+#: src/exec_gr.cpp:1236
 msgid "Draw horizontal tiles with variable size"
 msgstr "Baldosas horizontales con tamaño variable"
 
-#: src/exec_gr.cpp:1208
+#: src/exec_gr.cpp:1224
 msgid "Draw isosurface for 3D data"
 msgstr "Isosuperficie para datos 3D"
 
-#: src/exec_gr.cpp:1211
+#: src/exec_gr.cpp:1227
 msgid "Draw isosurface for 3D data colored and transpared by other data"
 msgstr ""
 "Isosuperficie para datos 3D coloreados y con transparencia de otros datos"
 
-#: src/exec_gr.cpp:1210
+#: src/exec_gr.cpp:1226
 msgid "Draw isosurface for 3D data colored by other data"
 msgstr "Isosuperficie para datos 3D coloreada por otros datos"
 
-#: src/exec_gr.cpp:1209
+#: src/exec_gr.cpp:1225
 msgid "Draw isosurface for 3D data transpared by other data"
 msgstr "Isosuperficie para datos 3D con transparencia de otros datos"
 
-#: src/exec_gr.cpp:1191
+#: src/exec_gr.cpp:1207
 msgid "Draw label at arbitrary position"
 msgstr "Etiqueta en posición arbitraria"
 
@@ -1795,20 +1800,20 @@ msgstr "Graficar leyenda"
 msgid "Draw line"
 msgstr "Graficar recta"
 
-#: src/exec_gr.cpp:1193
+#: src/exec_gr.cpp:1209
 #, fuzzy
 msgid "Draw lines with arrows for 1D data"
 msgstr "Gráfica de barras para 1D"
 
-#: src/exec_gr.cpp:1194
+#: src/exec_gr.cpp:1210
 msgid "Draw mapping plot"
 msgstr "Gráfica de mapeo"
 
-#: src/exec_gr.cpp:1195
+#: src/exec_gr.cpp:1211
 msgid "Draw mark plot for 1D data"
 msgstr "Gráfica de marcas para datos 1D"
 
-#: src/exec_gr.cpp:1196
+#: src/exec_gr.cpp:1212
 msgid "Draw mesh surface"
 msgstr "Graficar grilla de superficie"
 
@@ -1820,15 +1825,15 @@ msgstr "Graficar punto (esfera)"
 msgid "Draw polygon"
 msgstr "Graficar polígono"
 
-#: src/exec_gr.cpp:1151
+#: src/exec_gr.cpp:1166
 msgid "Draw quasi-optical beam"
 msgstr "Graficar haz cuasióptico"
 
-#: src/exec_gr.cpp:1202
+#: src/exec_gr.cpp:1218
 msgid "Draw radar chart"
 msgstr "Diagrama de radar"
 
-#: src/exec_gr.cpp:1174
+#: src/exec_gr.cpp:1189
 msgid "Draw reconstructed surface for arbitrary data points"
 msgstr "Graficar superficie reconstruida para puntos arbitrarios"
 
@@ -1840,43 +1845,43 @@ msgstr "Graficar rectángulo"
 msgid "Draw rhombus"
 msgstr "Graficar rombo"
 
-#: src/exec_gr.cpp:1166
+#: src/exec_gr.cpp:1181
 msgid "Draw solid contour lines at x-slice (or x-plane)"
 msgstr "Curvas de nivel rellenas en el plano x"
 
-#: src/exec_gr.cpp:1167
+#: src/exec_gr.cpp:1182
 msgid "Draw solid contour lines at y-slice (or y-plane)"
 msgstr "Curvas de nivel rellenas en el plano y"
 
-#: src/exec_gr.cpp:1168
+#: src/exec_gr.cpp:1183
 msgid "Draw solid contour lines at z-slice (or z-plane)"
 msgstr "Curvas de nivel rellenas en el plano z"
 
-#: src/exec_gr.cpp:1165
+#: src/exec_gr.cpp:1180
 msgid "Draw solid contour lines for 3D data"
 msgstr "Isosuperficies rellenas para datos 3D"
 
-#: src/exec_gr.cpp:1164
+#: src/exec_gr.cpp:1179
 msgid "Draw solid contours"
 msgstr "Curvas de nivel rellenas"
 
-#: src/exec_gr.cpp:1163
+#: src/exec_gr.cpp:1178
 msgid "Draw solid contours with manual colors"
 msgstr "Curvas de nivel rellenas con coloración manual"
 
-#: src/exec_gr.cpp:1207
+#: src/exec_gr.cpp:1223
 msgid "Draw solid surface"
 msgstr "Graficar superficie sólida"
 
-#: src/exec_gr.cpp:1214
+#: src/exec_gr.cpp:1230
 msgid "Draw solid surface colored and transpared by other data"
 msgstr "Superficie sólida con color y transparencia de otros datos"
 
-#: src/exec_gr.cpp:1213
+#: src/exec_gr.cpp:1229
 msgid "Draw solid surface colored by other data"
 msgstr "Superficie sólida con coloración de otros datos"
 
-#: src/exec_gr.cpp:1212
+#: src/exec_gr.cpp:1228
 msgid "Draw solid surface transpared by other data"
 msgstr "Superficie sólida con transparencia de otros datos"
 
@@ -1884,35 +1889,35 @@ msgstr "Superficie sólida con transparencia de otros datos"
 msgid "Draw sphere"
 msgstr "Graficar esfera"
 
-#: src/exec_gr.cpp:1204
+#: src/exec_gr.cpp:1220
 msgid "Draw stem plot for 1D data"
 msgstr "Gráfica de tallos para datos 1D"
 
-#: src/exec_gr.cpp:1205
+#: src/exec_gr.cpp:1221
 msgid "Draw step plot for 1D data"
 msgstr "Gráfica escalonada para datos 1D"
 
-#: src/exec_gr.cpp:1221
+#: src/exec_gr.cpp:1237
 msgid "Draw surface of curve rotation"
 msgstr "Graficar superficie de rotación"
 
-#: src/exec_gr.cpp:1201
+#: src/exec_gr.cpp:1217
 msgid "Draw surface of quadrangles"
 msgstr "Graficar superficie de cuadrángulos"
 
-#: src/exec_gr.cpp:1225
+#: src/exec_gr.cpp:1241
 msgid "Draw surface of triangles"
 msgstr "Graficar superficie de triángulos"
 
-#: src/exec_gr.cpp:1148
+#: src/exec_gr.cpp:1163
 msgid "Draw surfaces of contour lines rotation"
 msgstr "Superficie de rotación de curvas de nivel"
 
-#: src/exec_gr.cpp:1215
+#: src/exec_gr.cpp:1231
 msgid "Draw table with data values"
 msgstr "Graficar tabla de valores"
 
-#: src/exec_gr.cpp:1217
+#: src/exec_gr.cpp:1233
 msgid "Draw tension plot for 1D data"
 msgstr "Gráfica de tensión para datos 1D"
 
@@ -1924,23 +1929,23 @@ msgstr "Texto en posición especifica o curva"
 msgid "Draw user-defined symbol at given position and direction"
 msgstr "Símbolo personalizado en posición y dirección dadas"
 
-#: src/exec_gr.cpp:1199
+#: src/exec_gr.cpp:1215
 msgid "Draw usual plot for 1D data"
 msgstr "Gráfica estándar para datos 1D"
 
-#: src/exec_gr.cpp:1227
+#: src/exec_gr.cpp:1243
 msgid "Draw vector field"
 msgstr "Campo vectorial"
 
-#: src/exec_gr.cpp:1228
+#: src/exec_gr.cpp:1244
 msgid "Draw vector field at slices of 3D data"
 msgstr "Campo vectorial de cortes de datos 3D"
 
-#: src/exec_gr.cpp:1222
+#: src/exec_gr.cpp:1238
 msgid "Draw vectors along a curve"
 msgstr "Vectores a lo largo de curva"
 
-#: src/exec_gr.cpp:1183
+#: src/exec_gr.cpp:1199
 msgid "Draw waterfalls"
 msgstr "Gráfica de cascadas"
 
