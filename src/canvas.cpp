@@ -1189,7 +1189,7 @@ void mglCanvas::StartAutoGroup (const char *lbl)
 //-----------------------------------------------------------------------------
 void mglCanvas::EndGroup()
 {
-	LoadState();
+	LoadState();	SetMask("");
 	if(Quality&MGL_DRAW_LMEM)
 	{
 		Pnt.clear();	Prm.clear();	Ptx.clear();	ClearPrmInd();

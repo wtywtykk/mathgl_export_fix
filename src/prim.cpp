@@ -139,7 +139,7 @@ void MGL_EXPORT mgl_face(HMGL gr, double x0, double y0, double z0, double x1, do
 {
 	static int cgid=1;	gr->StartGroup("Face",cgid++);
 	long pal;
-	gr->SetPenPal(stl,&pal);
+	gr->SetPenPal(stl,&pal);	gr->SetMask(stl);
 //	mreal c1,c2,c3,c4,zz=(gr->Min.z+gr->Max.z)/2;
 	mreal c1,c2,c3,c4,zz=2*gr->Max.z-gr->Min.z;
 	c1=c2=c3=c4=gr->CDef;
@@ -383,7 +383,7 @@ void MGL_EXPORT mgl_polygon(HMGL gr, double x1, double y1, double z1, double x2,
 	if(n<3)	return;
 	long pal=0, n0;
 	static int cgid=1;	gr->StartGroup("Polygon",cgid++);
-	gr->SetPenPal(stl,&pal);
+	gr->SetPenPal(stl,&pal);	gr->SetMask(stl);
 	mreal c=gr->NextColor(pal);
 	mreal k=(gr->GetNumPal(pal)>1)?gr->NextColor(pal):gr->AddTexture('k');
 	bool fill = !mglchr(stl,'#'), box = mglchr(stl,'@') || !fill;
@@ -465,7 +465,7 @@ void MGL_EXPORT mgl_ellipse(HMGL gr, double x1, double y1, double z1, double x2,
 	const int n = 41;
 	long pal=0,n0;
 	static int cgid=1;	gr->StartGroup("Ellipse",cgid++);
-	gr->SetPenPal(stl,&pal);
+	gr->SetPenPal(stl,&pal);	gr->SetMask(stl);
 	mreal c=gr->NextColor(pal), d;
 	mreal k=(gr->GetNumPal(pal)>1)?gr->NextColor(pal):gr->AddTexture('k');
 	bool fill = !mglchr(stl,'#'), box = mglchr(stl,'@') || !fill;
@@ -513,7 +513,7 @@ void MGL_EXPORT mgl_rhomb(HMGL gr, double x1, double y1, double z1, double x2, d
 {
 	long pal=0;
 	static int cgid=1;	gr->StartGroup("Rhomb",cgid++);
-	gr->SetPenPal(stl,&pal);
+	gr->SetPenPal(stl,&pal);	gr->SetMask(stl);
 	mreal c=gr->NextColor(pal);
 	mreal k=(gr->GetNumPal(pal)>1)?gr->NextColor(pal):gr->AddTexture('k');
 	mreal b=(gr->GetNumPal(pal)>2)?gr->NextColor(pal):c;

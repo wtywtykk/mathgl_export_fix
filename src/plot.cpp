@@ -212,7 +212,7 @@ void MGL_EXPORT mgl_candle_xyv(HMGL gr, HCDT x, HCDT v1, HCDT v2, HCDT y1, HCDT 
 	{	if(d1)	delete y1;	if(d2)	delete y2;
 		gr->SetWarn(mglWarnDim,"Candle");	return;	}
 	static int cgid=1;	gr->StartGroup("Candle",cgid++);
-	gr->SaveState(opt);	gr->SetPenPal(pen,&pal);
+	gr->SaveState(opt);	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);
 	long kq = gr->AllocPnts(8*n);
 	bool sh = mglchr(pen,'!');
 	bool wire = mglchr(pen,'#');
@@ -505,7 +505,8 @@ void MGL_EXPORT mgl_area_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, const char *pen, c
 	bool sh = mglchr(pen,'!'), wire = mglchr(pen,'#'), orig = !mglchr(pen,'a');
 
 	double z0=gr->GetOrgZ('x');
-	gr->SetPenPal(pen,&pal);	gr->Reserve(2*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(2*n*m);
+
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -556,7 +557,7 @@ void MGL_EXPORT mgl_area_xy(HMGL gr, HCDT x, HCDT y, const char *pen, const char
 	mglPoint nn(0,0,1);
 	bool sh = mglchr(pen,'!'), wire = mglchr(pen,'#'), orig = !mglchr(pen,'a');
 
-	gr->SetPenPal(pen,&pal);	gr->Reserve(2*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(2*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -697,7 +698,7 @@ void MGL_EXPORT mgl_region_3d(HMGL gr, HCDT x1, HCDT y1, HCDT z1, HCDT x2, HCDT 
 //	bool inside = (mglchr(pen,'i'));	// NOTE: check if 'i' is free (used here for inside flag)
 	bool sh = mglchr(pen,'!'), wire = mglchr(pen,'#'), orig = !mglchr(pen,'a');
 
-	gr->SetPenPal(pen,&pal);	gr->Reserve(2*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(2*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -761,7 +762,7 @@ void MGL_EXPORT mgl_region_xy(HMGL gr, HCDT x, HCDT y1, HCDT y2, const char *pen
 	bool inside = mglchr(pen,'i');	// NOTE: check if 'i' is free (used here for inside flag)
 	bool sh = mglchr(pen,'!'), wire = mglchr(pen,'#'), orig = !mglchr(pen,'a');
 
-	gr->SetPenPal(pen,&pal);	gr->Reserve(2*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(2*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -1182,8 +1183,7 @@ void MGL_EXPORT mgl_bars_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, const char *pen, c
 	}
 	if(dc==0)	fixed=false;	// NOTE: disable fixed width if it is zero
 
-	gr->SetPenPal(pen,&pal);
-	gr->Reserve(4*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(4*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -1267,8 +1267,7 @@ void MGL_EXPORT mgl_bars_xy(HMGL gr, HCDT x, HCDT y, const char *pen, const char
 	}
 	if(dx==0)	fixed=false;	// NOTE: disable fixed width if it is zero
 
-	gr->SetPenPal(pen,&pal);
-	gr->Reserve(4*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(4*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -1373,8 +1372,7 @@ void MGL_EXPORT mgl_barh_yx(HMGL gr, HCDT y, HCDT v, const char *pen, const char
 	}
 	if(dy==0)	fixed=false;	// NOTE: disable fixed width if it is zero
 
-	gr->SetPenPal(pen,&pal);
-	gr->Reserve(4*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(4*n*m);
 	for(long j=0;j<m;j++)
 	{
 		if(gr->NeedStop())	break;
@@ -1904,6 +1902,7 @@ void MGL_EXPORT mgl_chart(HMGL gr, HCDT a, const char *cols, const char *opt)
 
 	double dy = (gr->Max.y-gr->Min.y)/a->GetNy(), dx, ss, cs, x1, y1, dz=gr->Max.z-gr->Min.z, vv;
 	mglPoint d1,d2,o;
+	gr->SetMask(cols);
 
 	for(j=0;j<a->GetNy();j++)
 	{
@@ -2150,7 +2149,7 @@ void MGL_EXPORT mgl_tape_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, const char *pen, c
 	double rr = gr->SaveState(opt);
 	if(rr==0 || mgl_isnan(rr))	rr = mgl_norm(gr->Max-gr->Min)*gr->BarWidth/25;
 	m = x->GetNy() > y->GetNy() ? x->GetNy() : y->GetNy();	m = z->GetNy() > m ? z->GetNy() : m;
-	gr->SetPenPal(pen,&pal);	gr->Reserve(4*n*m);
+	gr->SetPenPal(pen,&pal);	gr->SetMask(pen);	gr->Reserve(4*n*m);
 	mglPoint qn(NAN,NAN);
 	bool sh = mglchr(pen,'!'), xo = mglchr(pen,'x'), zo = mglchr(pen,'z'), wire = mglchr(pen,'#');
 	if(!xo && !zo)	xo = zo = true;

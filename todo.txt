@@ -102,6 +102,7 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
+6. Update about possible mask usage for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'
 7. Docs about 'dcont'
 8. Docs about 'connect'
 9. user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".

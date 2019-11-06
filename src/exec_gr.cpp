@@ -420,16 +420,21 @@ int static mgls_boxs(mglGraph *gr, long , mglArg *a, const char *k, const char *
 int static mgls_cont(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"d"))	gr->Cont(*(a[0].d),"",opt);
 	else if(!strcmp(k,"ds"))	gr->Cont(*(a[0].d),a[1].s.s,opt);
 	else if(!strcmp(k,"dd"))	gr->Cont(*(a[0].d), *(a[1].d), "",opt);
 	else if(!strcmp(k,"dds"))	gr->Cont(*(a[0].d), *(a[1].d), a[2].s.s,opt);
+	else if(!strcmp(k,"nd"))	gr->Cont(v, *(a[1].d), "",opt);
+	else if(!strcmp(k,"nds"))	gr->Cont(v, *(a[1].d), a[2].s.s,opt);
 	else if(!strcmp(k,"ddd"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), "",opt);
 	else if(!strcmp(k,"ddds"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s,opt);
 	else if(!strcmp(k,"dddd"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->Cont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
+	else if(!strcmp(k,"nddd"))	gr->Cont(v, *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
+	else if(!strcmp(k,"nddds"))	gr->Cont(v, *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
 	else if(!strcmp(k,"ndddd"))	gr->ContGen(a[0].v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d),"",opt);
-	else if(!strcmp(k,"ndddds"))	gr->ContGen(a[0].v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,opt);
+	else if(!strcmp(k,"ndddds"))gr->ContGen(a[0].v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -437,14 +442,19 @@ int static mgls_cont(mglGraph *gr, long , mglArg *a, const char *k, const char *
 int static mgls_contd(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"d"))	gr->ContD(*(a[0].d),"",opt);
 	else if(!strcmp(k,"ds"))	gr->ContD(*(a[0].d),a[1].s.s,opt);
 	else if(!strcmp(k,"dd"))	gr->ContD(*(a[0].d), *(a[1].d), "",opt);
 	else if(!strcmp(k,"dds"))	gr->ContD(*(a[0].d), *(a[1].d), a[2].s.s,opt);
+	else if(!strcmp(k,"nd"))	gr->ContD(v, *(a[1].d), "",opt);
+	else if(!strcmp(k,"nds"))	gr->ContD(v, *(a[1].d), a[2].s.s,opt);
 	else if(!strcmp(k,"ddd"))	gr->ContD(*(a[0].d), *(a[1].d), *(a[2].d), "",opt);
 	else if(!strcmp(k,"ddds"))	gr->ContD(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s,opt);
 	else if(!strcmp(k,"dddd"))	gr->ContD(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->ContD(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
+	else if(!strcmp(k,"nddd"))	gr->ContD(v, *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
+	else if(!strcmp(k,"nddds"))	gr->ContD(v, *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -469,10 +479,13 @@ int static mgls_contf(mglGraph *gr, long , mglArg *a, const char *k, const char 
 int static mgls_contp(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"dddd"))	gr->ContP(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->ContP(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
 	else if(!strcmp(k,"ddddd"))	gr->ContP(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "",opt);
 	else if(!strcmp(k,"ddddds"))	gr->ContP(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,opt);
+	else if(!strcmp(k,"ndddd"))		gr->ContP(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "",opt);
+	else if(!strcmp(k,"ndddds"))	gr->ContP(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -480,14 +493,19 @@ int static mgls_contp(mglGraph *gr, long , mglArg *a, const char *k, const char 
 int static mgls_contv(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"d"))	gr->ContV(*(a[0].d),"",opt);
 	else if(!strcmp(k,"ds"))	gr->ContV(*(a[0].d),a[1].s.s,opt);
 	else if(!strcmp(k,"dd"))	gr->ContV(*(a[0].d), *(a[1].d), "",opt);
 	else if(!strcmp(k,"dds"))	gr->ContV(*(a[0].d), *(a[1].d), a[2].s.s,opt);
+	else if(!strcmp(k,"nd"))	gr->ContV(v, *(a[1].d), "",opt);
+	else if(!strcmp(k,"nds"))	gr->ContV(v, *(a[1].d), a[2].s.s,opt);
 	else if(!strcmp(k,"ddd"))	gr->ContV(*(a[0].d), *(a[1].d), *(a[2].d), "",opt);
 	else if(!strcmp(k,"ddds"))	gr->ContV(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s,opt);
 	else if(!strcmp(k,"dddd"))	gr->ContV(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
 	else if(!strcmp(k,"dddds"))	gr->ContV(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
+	else if(!strcmp(k,"nddd"))	gr->ContV(v, *(a[1].d), *(a[2].d), *(a[3].d), "",opt);
+	else if(!strcmp(k,"nddds"))	gr->ContV(v, *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -674,6 +692,7 @@ int static mgls_quadplot(mglGraph *gr, long , mglArg *a, const char *k, const ch
 int static mgls_tricont(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"dddd"))
 		gr->TriCont(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),"",opt);
 	else if(!strcmp(k,"dddds"))
@@ -686,6 +705,14 @@ int static mgls_tricont(mglGraph *gr, long , mglArg *a, const char *k, const cha
 		gr->TriCont(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),"",opt);
 	else if(!strcmp(k,"dddddds"))
 		gr->TriCont(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),a[6].s.s,opt);
+	else if(!strcmp(k,"ndddd"))
+		gr->TriContV(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),"",opt);
+	else if(!strcmp(k,"ndddds"))
+		gr->TriContV(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),a[5].s.s,opt);
+	else if(!strcmp(k,"nddddd"))
+		gr->TriCont(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),"",opt);
+	else if(!strcmp(k,"nddddds"))
+		gr->TriCont(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),a[6].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -693,6 +720,7 @@ int static mgls_tricont(mglGraph *gr, long , mglArg *a, const char *k, const cha
 int static mgls_tricontv(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"dddd"))
 		gr->TriContVt(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),"",opt);
 	else if(!strcmp(k,"dddds"))
@@ -705,6 +733,10 @@ int static mgls_tricontv(mglGraph *gr, long , mglArg *a, const char *k, const ch
 		gr->TriContVt(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),"",opt);
 	else if(!strcmp(k,"dddddds"))
 		gr->TriContVt(*(a[0].d),*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),a[6].s.s,opt);
+	else if(!strcmp(k,"nddddd"))
+		gr->TriContVt(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),"",opt);
+	else if(!strcmp(k,"nddddds"))
+		gr->TriContVt(v,*(a[1].d),*(a[2].d),*(a[3].d),*(a[4].d),*(a[5].d),a[6].s.s,opt);
 	else res = 1;
 	return res;
 }
@@ -746,18 +778,25 @@ int static mgls_cloud(mglGraph *gr, long , mglArg *a, const char *k, const char 
 int static mgls_cont3(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"d"))	gr->Cont3(*(a[0].d), "", -1,opt);
 	else if(!strcmp(k,"ds"))	gr->Cont3(*(a[0].d), a[1].s.s, -1,opt);
 	else if(!strcmp(k,"dsn"))	gr->Cont3(*(a[0].d), a[1].s.s, mgl_int(a[2].v),opt);
 	else if(!strcmp(k,"dd"))	gr->Cont3(*(a[0].d), *(a[1].d), "", -1,opt);
 	else if(!strcmp(k,"dds"))	gr->Cont3(*(a[0].d), *(a[1].d), a[2].s.s,-1,opt);
 	else if(!strcmp(k,"ddsn"))	gr->Cont3(*(a[0].d), *(a[1].d), a[2].s.s,mgl_int(a[3].v),opt);
+	else if(!strcmp(k,"nd"))	gr->Cont3(v, *(a[1].d), "", -1,opt);
+	else if(!strcmp(k,"nds"))	gr->Cont3(v, *(a[1].d), a[2].s.s,-1,opt);
+	else if(!strcmp(k,"ndsn"))	gr->Cont3(v, *(a[1].d), a[2].s.s,mgl_int(a[3].v),opt);
 	else if(!strcmp(k,"dddd"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), "", -1,opt);
 	else if(!strcmp(k,"dddds"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,-1,opt);
-	else if(!strcmp(k,"ddddsn"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,mgl_int(a[5].v),opt);
-	else if(!strcmp(k,"ddddd"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "", -1,opt);
+	else if(!strcmp(k,"ddddsn"))gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), a[4].s.s,mgl_int(a[5].v),opt);
+	else if(!strcmp(k,"ddddd"))		gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "", -1,opt);
 	else if(!strcmp(k,"ddddds"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,-1,opt);
-	else if(!strcmp(k,"dddddsn"))gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,mgl_int(a[6].v),opt);
+	else if(!strcmp(k,"dddddsn"))	gr->Cont3(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,mgl_int(a[6].v),opt);
+	else if(!strcmp(k,"ndddd"))		gr->Cont3(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "", -1,opt);
+	else if(!strcmp(k,"ndddds"))	gr->Cont3(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,-1,opt);
+	else if(!strcmp(k,"nddddsn"))	gr->Cont3(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s,mgl_int(a[6].v),opt);
 	else res = 1;
 	return res;
 }
@@ -853,14 +892,19 @@ int static mgls_crust(mglGraph *gr, long , mglArg *a, const char *k, const char 
 int static mgls_dcont(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
 	int res=0;
+	mglData v;	v.a[0]=a[0].v;
 	if(!strcmp(k,"dd"))	gr->DCont(*(a[0].d), *(a[1].d), "", opt);
 	else if(!strcmp(k,"dds"))	gr->DCont(*(a[0].d), *(a[1].d), a[2].s.s, opt);
 	else if(!strcmp(k,"ddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), "", opt);
 	else if(!strcmp(k,"ddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), a[3].s.s, opt);
+	else if(!strcmp(k,"ndd"))	gr->DCont(v, *(a[1].d), *(a[2].d), "", opt);
+	else if(!strcmp(k,"ndds"))	gr->DCont(v, *(a[1].d), *(a[2].d), a[3].s.s, opt);
 	else if(!strcmp(k,"ddddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), "", opt);
 	else if(!strcmp(k,"ddddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), a[5].s.s, opt);
 	else if(!strcmp(k,"dddddd"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), "", opt);
 	else if(!strcmp(k,"dddddds"))	gr->DCont(*(a[0].d), *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), a[6].s.s, opt);
+	else if(!strcmp(k,"nddddd"))	gr->DCont(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), "", opt);
+	else if(!strcmp(k,"nddddds"))	gr->DCont(v, *(a[1].d), *(a[2].d), *(a[3].d), *(a[4].d), *(a[5].d), a[6].s.s, opt);
 	else res = 1;
 	return res;
 }
