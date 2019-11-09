@@ -293,6 +293,7 @@ extern MGL_EXPORT uint64_t mgl_mask_val[16];
 #include <vector>
 #include <complex>
 typedef std::complex<mreal> dual;
+typedef std::complex<double> ddual;
 //-----------------------------------------------------------------------------
 inline bool mgl_isrange(double a, double b)
 {	return fabs(a-b)>MGL_MIN_VAL && a-a==0. && b-b==0.;	}

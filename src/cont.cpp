@@ -584,7 +584,7 @@ HMDT mgl_data_conts(mreal val, HCDT dat)
 }
 //-----------------------------------------------------------------------------
 // NOTE! All data MUST have the same size! Only first slice is used!
-void MGL_EXPORT mgl_cont_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak)
+void MGL_EXPORT mgl_cont_genI(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak)
 {
 	long n=a->GetNx(), m=a->GetNy();
 	if(n<2 || m<2 || x->GetNx()*x->GetNy()!=n*m || y->GetNx()*y->GetNy()!=n*m || z->GetNx()*z->GetNy()!=n*m)
@@ -603,7 +603,7 @@ void MGL_EXPORT mgl_cont_gen(HMGL gr, double val, HCDT a, HCDT x, HCDT y, HCDT z
 	if(mglchr(sch,'t'))	text=1;
 	if(mglchr(sch,'T'))	text=2;
 	gr->SetPenPal(sch);
-	mgl_cont_gen(gr,val,a,x,y,z,gr->CDef,text,0);
+	mgl_cont_genI(gr,val,a,x,y,z,gr->CDef,text,0);
 	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------
@@ -641,7 +641,7 @@ void MGL_EXPORT mgl_cont_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const c
 		if(z->GetNz()>1)
 			z0 = gr->Min.z+(gr->Max.z-gr->Min.z)*mreal(j)/(z->GetNz()-1);
 		mglDataV zz(n, m);	zz.Fill(z0,z0);
-		mgl_cont_gen(gr,v0,z,x,y,&zz,gr->GetC(s,v0),text,j);
+		mgl_cont_genI(gr,v0,z,x,y,&zz,gr->GetC(s,v0),text,j);
 	}
 	gr->EndGroup();
 }
@@ -810,7 +810,7 @@ void static mgl_add_edges(HMGL gr, HCDT a, HCDT x, HCDT y, HCDT z, long i1, long
 	if(f2<=v2 && f2>=v1)	u2 = mgl_add_pnt(gr,1,x,y,z,i1,j1,i2,j2,c,true);
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_contf_gen(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak)
+void MGL_EXPORT mgl_contf_genI(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak)
 {
 	long n=a->GetNx(), m=a->GetNy();
 	if(n<2 || m<2 || x->GetNx()*x->GetNy()!=n*m || y->GetNx()*y->GetNy()!=n*m || z->GetNx()*z->GetNy()!=n*m)
@@ -953,14 +953,14 @@ void MGL_EXPORT mgl_contf_gen(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT 
 	delete []kk;
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_contf_gen(HMGL gr, double v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)
+void MGL_EXPORT mgl_contf_gen(HMGL gr, double v1, double v2, HCDT a, HCDT x, HCDT y, HCDT z, const char *sch, const char *opt)
 {
 	if(mgl_check_dim2(gr,x,y,z,a,"ContFGen"))	return;
 	gr->SaveState(opt);
 	static int cgid=1;	gr->StartGroup("ContFGen",cgid++);
 
 	gr->SetPenPal(sch);
-	mgl_contf_gen(gr,v1,v2,a,x,y,z,gr->CDef,0);
+	mgl_contf_genI(gr,v1,v2,a,x,y,z,gr->CDef,0);
 	gr->EndGroup();
 }
 //-----------------------------------------------------------------------------
@@ -993,7 +993,7 @@ void MGL_EXPORT mgl_contf_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const 
 		if(z->GetNz()>1)
 			z0 = gr->Min.z+(gr->Max.z-gr->Min.z)*mreal(j)/(z->GetNz()-1);
 		mglDataV zz(n, m);	zz.Fill(z0,z0);
-		mgl_contf_gen(gr,v0,v->v(i+1),z,x,y,&zz,gr->GetC(s,v0),j);
+		mgl_contf_genI(gr,v0,v->v(i+1),z,x,y,&zz,gr->GetC(s,v0),j);
 	}
 	gr->EndGroup();
 }
@@ -1084,9 +1084,9 @@ void MGL_EXPORT mgl_contp_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT a, c
 	{
 		if(gr->NeedStop())	continue;
 		if(fill)
-			mgl_contf_gen(gr,v->v(i),v->v(i+1),a,x,y,z,gr->GetC(s,v->v(i)),j);
+			mgl_contf_genI(gr,v->v(i),v->v(i+1),a,x,y,z,gr->GetC(s,v->v(i)),j);
 		else
-			mgl_cont_gen(gr,v->v(i),a,x,y,z,gr->GetC(s,v->v(i)),text,j);
+			mgl_cont_genI(gr,v->v(i),a,x,y,z,gr->GetC(s,v->v(i)),text,j);
 	}
 	gr->EndGroup();
 }
@@ -1158,7 +1158,7 @@ void MGL_EXPORT mgl_contd_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const 
 		if(z->GetNz()>1)
 			z0 = gr->Min.z+(gr->Max.z-gr->Min.z)*mreal(j)/(z->GetNz()-1);
 		mglDataV zz(n, m);	zz.Fill(z0,z0);
-		mgl_contf_gen(gr,v0,v->v(i+1),z,x,y,&zz,s+(i%nc)*dc,j);
+		mgl_contf_genI(gr,v0,v->v(i+1),z,x,y,&zz,s+(i%nc)*dc,j);
 	}
 	gr->EndGroup();
 }
@@ -1216,7 +1216,7 @@ void MGL_EXPORT mgl_contd_(uintptr_t *gr, uintptr_t *a, const char *sch, const c
 //
 //-----------------------------------------------------------------------------
 // NOTE! All data MUST have the same size! Only first slice is used!
-void MGL_EXPORT mgl_contv_gen(HMGL gr, mreal val, mreal dval, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak)
+void MGL_EXPORT mgl_contv_genI(HMGL gr, mreal val, mreal dval, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak)
 {
 	long n=a->GetNx(), m=a->GetNy();
 	if(n<2 || m<2 || x->GetNx()*x->GetNy()!=n*m || y->GetNx()*y->GetNy()!=n*m || z->GetNx()*z->GetNy()!=n*m)
@@ -1270,7 +1270,7 @@ void MGL_EXPORT mgl_contv_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const 
 		if(i>0)	dv = v->v(i-1)-v->v(i);
 		else if(i<v->GetNx()-1)	dv = v->v(i)-v->v(i+1);
 		if(fixed)	dv=-dv;
-		mgl_contv_gen(gr,v0,dv,z,x,y,&zz,gr->GetC(s,v0),j);
+		mgl_contv_genI(gr,v0,dv,z,x,y,&zz,gr->GetC(s,v0),j);
 	}
 	gr->EndGroup();
 }
@@ -1442,7 +1442,7 @@ void MGL_EXPORT mgl_cont3_xyz_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT 
 	for(long i=0;i<v->GetNx();i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_cont_gen(gr,v0,&s.a,&s.x,&s.y,&s.z,gr->GetC(ss,v0),text,0);
+		mgl_cont_genI(gr,v0,&s.a,&s.x,&s.y,&s.z,gr->GetC(ss,v0),text,0);
 	}
 	gr->EndGroup();
 }
@@ -1607,7 +1607,7 @@ void MGL_EXPORT mgl_contf3_xyz_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT
 	for(long i=0;i<v->GetNx()-1;i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_contf_gen(gr,v0,v->v(i+1),&s.a,&s.x,&s.y,&s.z,gr->GetC(ss,v0),0);
+		mgl_contf_genI(gr,v0,v->v(i+1),&s.a,&s.x,&s.y,&s.z,gr->GetC(ss,v0),0);
 	}
 	gr->EndGroup();
 }
@@ -1721,7 +1721,7 @@ void static mgl_axial_plot(mglBase *gr,long pc, mglPoint *ff, long *nn,char dir,
 }
 //-----------------------------------------------------------------------------
 // NOTE! All data MUST have the same size! Only first slice is used!
-void MGL_EXPORT mgl_axial_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, mreal c, char dir,long ak,int wire)
+void MGL_EXPORT mgl_axial_genI(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, mreal c, char dir,long ak,int wire)
 {
 	long n=a->GetNx(), m=a->GetNy();
 	if(n<2 || m<2 || x->GetNx()*x->GetNy()!=n*m || y->GetNx()*y->GetNy()!=n*m)
@@ -1839,7 +1839,7 @@ void MGL_EXPORT mgl_axial_xy_val(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, const 
 	{
 		if(gr->NeedStop())	continue;
 		mreal v0 = v->v(i);
-		mgl_axial_gen(gr,v0,z,x,y,gr->GetC(s,v0),dir,j,wire);
+		mgl_axial_genI(gr,v0,z,x,y,gr->GetC(s,v0),dir,j,wire);
 	}
 	gr->EndGroup();
 }

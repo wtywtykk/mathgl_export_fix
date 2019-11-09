@@ -155,7 +155,7 @@ void MGL_EXPORT mgl_dens_z_(uintptr_t *gr, uintptr_t *a, const char *sch, mreal 
 //	ContX, ContY, ContZ series
 //
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_cont_gen(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak);
+void MGL_EXPORT mgl_cont_genI(HMGL gr, mreal val, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, int text,long ak);
 void MGL_EXPORT mgl_cont_x_val(HMGL gr, HCDT v, HCDT a, const char *sch, double sv, const char *opt)
 {
 	long n=a->GetNx(),m=a->GetNy();
@@ -177,7 +177,7 @@ void MGL_EXPORT mgl_cont_x_val(HMGL gr, HCDT v, HCDT a, const char *sch, double 
 	for(long i=0;i<v->GetNx();i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_cont_gen(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
+		mgl_cont_genI(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
 	}
 	gr->EndGroup();
 }
@@ -203,7 +203,7 @@ void MGL_EXPORT mgl_cont_y_val(HMGL gr, HCDT v, HCDT a, const char *sch, double 
 	for(long i=0;i<v->GetNx();i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_cont_gen(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
+		mgl_cont_genI(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
 	}
 	gr->EndGroup();
 }
@@ -229,7 +229,7 @@ void MGL_EXPORT mgl_cont_z_val(HMGL gr, HCDT v, HCDT a, const char *sch, double 
 	for(long i=0;i<v->GetNx();i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_cont_gen(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
+		mgl_cont_genI(gr,v0,a,&xx,&yy,&zz,gr->GetC(ss,v0),text,0);
 	}
 	gr->EndGroup();
 }
@@ -295,7 +295,7 @@ void MGL_EXPORT mgl_cont_z_val_(uintptr_t *gr, uintptr_t *v, uintptr_t *a, const
 //	ContFX, ContFY, ContFZ series
 //
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_contf_gen(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak);
+void MGL_EXPORT mgl_contf_genI(HMGL gr, mreal v1, mreal v2, HCDT a, HCDT x, HCDT y, HCDT z, mreal c, long ak);
 void MGL_EXPORT mgl_contf_x_val(HMGL gr, HCDT v, HCDT a, const char *sch, double sv, const char *opt)
 {
 	long n=a->GetNx(),m=a->GetNy();
@@ -312,7 +312,7 @@ void MGL_EXPORT mgl_contf_x_val(HMGL gr, HCDT v, HCDT a, const char *sch, double
 	for(long i=0;i<v->GetNx()-1;i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_contf_gen(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
+		mgl_contf_genI(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
 	}
 	gr->EndGroup();
 }
@@ -333,7 +333,7 @@ void MGL_EXPORT mgl_contf_y_val(HMGL gr, HCDT v, HCDT a, const char *sch, double
 	for(long i=0;i<v->GetNx()-1;i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_contf_gen(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
+		mgl_contf_genI(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
 	}
 	gr->EndGroup();
 }
@@ -354,7 +354,7 @@ void MGL_EXPORT mgl_contf_z_val(HMGL gr, HCDT v, HCDT a, const char *sch, double
 	for(long i=0;i<v->GetNx()-1;i++)
 	{
 		mreal v0 = v->v(i);
-		mgl_contf_gen(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
+		mgl_contf_genI(gr,v0,v->v(i+1),a,&xx,&yy,&zz,gr->GetC(ss,v0),0);
 	}
 	gr->EndGroup();
 }
