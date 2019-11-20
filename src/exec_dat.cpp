@@ -707,6 +707,20 @@ int static mgls_join(mglGraph *, long , mglArg *a, const char *k, const char *)
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_keep(mglGraph *, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData *>(a[0].d);
+	mglDataC *c = dynamic_cast<mglDataC *>(a[0].d);
+	if(d && !strcmp(k,"dsn"))		d->Keep(a[1].s.s,a[2].v);
+	else if(c && !strcmp(k,"dsn"))	c->Keep(a[1].s.s,a[2].v);
+	else if(d && !strcmp(k,"dsnn"))	d->Keep(a[1].s.s,a[2].v,a[3].v);
+	else if(c && !strcmp(k,"dsnn"))	c->Keep(a[1].s.s,a[2].v,a[3].v);
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_limit(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
@@ -1729,6 +1743,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"jacobian",_("Get Jacobian"),"jacobian Res Xdat Ydat [Zdat]", mgls_jacobian ,4},
 	{"join",_("Join data arrays"),"join Dat Add1 ...", mgls_join ,3},
 	{"last",_("Find last indexes of values larger val over direction"),"last Res Dat 'dir' val", mgls_last ,4},
+	{"keep",_("Keep phase/amplitude along line"),"keep Dat 'dir' i [j]", mgls_keep ,16},
 	{"limit",_("Limit data to be inside [-v,v]"),"limit Dat v", mgls_limit ,16},
 	{"max",_("Find maximal value over direction"),"max Res Dat 'dir'", mgls_max ,4},
 	{"min",_("Find minimal value over direction"),"min Res Dat 'dir'", mgls_min ,4},

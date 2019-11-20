@@ -836,6 +836,33 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 			else if(!nm.compare(L"sd") && n>0)
 				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_jac_sd,fns);
 #endif
+			else if(!nm.compare(L"sum") && n>0)
+			{
+				HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
+				long m = long(b->a[0]+0.5);
+				const char *s = head[head.size()-1]->s.s;
+				if(m>0)
+				{
+					std::vector<mglDataA*> hh(head);
+					int in=0;
+					if(s[0]=='_' && s[1]>='i' && s[1]<'z') in = s[1]-'i'+1;
+					char name[3] = {'_',char('i'+in),0};
+					b->s = name;	b->Create(1,1,1);	hh.push_back(b);
+					a = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+					long nn = a->GetNN();
+					for(long i=1;i<m;i++)
+					{
+						b->a[0] = i;
+						HMDT c = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+						for(long j=0;j<nn;j++)	a->a[j] += c->a[j];
+						mgl_delete_data(c);
+					}
+					mgl_delete_data(b);
+				}
+				else
+				{	a = new mglData;	a->a[0]=NAN;	}
+				return a;
+			}
 		}
 		else if(nm[0]=='t')
 		{
@@ -912,6 +939,60 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		else if(!nm.compare(L"zeta"))	return mglApplyFunc(str, arg, head, gsl_sf_zeta,fns);
 		else if(!nm.compare(L"z"))	return mglApplyFunc(str, arg, head, gsl_sf_dawson,fns);
 #endif
+		else if(!nm.compare(L"dsum") && n>0)
+		{
+			HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
+			long m = long(b->a[0]+0.5);
+			const char *s = head[head.size()-1]->s.s;
+			if(m>0)
+			{
+				std::vector<mglDataA*> hh(head);
+				int in=0, zn=1;
+				if(s[0]=='_' && s[1]>='i' && s[1]<'z') in = s[1]-'i'+1;
+				char name[3] = {'_',char('i'+in),0};
+				b->s = name;	b->Create(1,1,1);	hh.push_back(b);
+				a = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+				long nn = a->GetNN();
+				for(long i=1;i<m;i++)
+				{
+					b->a[0] = i;	zn *= -1;
+					HMDT c = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+					for(long j=0;j<nn;j++)	a->a[j] += zn*c->a[j];
+					mgl_delete_data(c);
+				}
+				mgl_delete_data(b);
+			}
+			else
+			{	a = new mglData;	a->a[0]=NAN;	}
+			return a;
+		}
+		else if(!nm.compare(L"prod") && n>0)
+		{
+			HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
+			long m = long(b->a[0]+0.5);
+			const char *s = head[head.size()-1]->s.s;
+			if(m>0)
+			{
+				std::vector<mglDataA*> hh(head);
+				int in=0;
+				if(s[0]=='_' && s[1]>='i' && s[1]<'z') in = s[1]-'i'+1;
+				char name[3] = {'_',char('i'+in),0};
+				b->s = name;	b->Create(1,1,1);	hh.push_back(b);
+				a = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+				long nn = a->GetNN();
+				for(long i=1;i<m;i++)
+				{
+					b->a[0] = i;
+					HMDT c = mglFormulaCalcA(str.substr(0,n), arg, hh, fns);
+					for(long j=0;j<nn;j++)	a->a[j] *= c->a[j];
+					mgl_delete_data(c);
+				}
+				mgl_delete_data(b);
+			}
+			else
+			{	a = new mglData;	a->a[0]=NAN;	}
+			return a;
+		}
 		else if(nm[0]=='f' && nm[1]=='n' && fns.size()>1)
 		{
 			HMDT a=NULL, b=NULL, r=NULL;

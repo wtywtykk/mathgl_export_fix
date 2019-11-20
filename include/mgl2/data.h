@@ -420,6 +420,10 @@ using mglDataA::Last;
 	/// Project the periodical data to range [v1,v2] (like mod() function). Separate branches by NAN if sep=true.
 	inline void Coil(mreal v1, mreal v2, bool sep=true)
 	{	mgl_data_coil(this, v1, v2, sep);	}
+	/// Keep the data sign/value along line i and j in given direction. 
+	/** Parameter "how" may contain: 'x','y' or 'z' for direction (default is 'y'); 'a' for keeping amplitude instead of sign.*/
+	inline void Keep(const char *how, long i, long j=0)
+	{	mgl_data_keep(this, how, i, j);	}
 
 	/// Apply Hankel transform
 	inline void Hankel(const char *dir)	{	mgl_data_hankel(this,dir);	}

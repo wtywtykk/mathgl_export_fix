@@ -398,9 +398,13 @@ using mglDataA::Last;
 	 *  By default quadratic averaging over 5 points is used. */
 	inline void Smooth(const char *dirs="xyz",mreal delta=0)
 	{	mgl_datac_smooth(this,dirs,delta);	}
-	/// Limit the data to be inside [-v,v], keeping the original sign
+	/// Limit the data to be inside [-v,v], keeping the original phase
 	inline void Limit(mreal v)
 	{	mgl_datac_limit(this, v);	}
+	/// Keep the data phase/value along line i and j in given direction. 
+	/** Parameter "how" may contain: 'x','y' or 'z' for direction (default is 'y'); 'a' for keeping amplitude instead of phase.*/
+	inline void Keep(const char *how, long i, long j=0)
+	{	mgl_datac_keep(this, how, i, j);	}
 
 	/// Set as the data envelop
 	inline void Envelop(char dir='x')	{	mgl_datac_envelop(this,dir);	}

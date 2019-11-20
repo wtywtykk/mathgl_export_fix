@@ -213,9 +213,14 @@ void MGL_EXPORT mgl_datac_modify_(uintptr_t *dat, const char *eq,int *dim,int);
 void MGL_EXPORT mgl_datac_modify_vw(HADT dat, const char *eq,HCDT vdat,HCDT wdat);
 void MGL_EXPORT mgl_datac_modify_vw_(uintptr_t *dat, const char *eq, uintptr_t *vdat, uintptr_t *wdat,int);
 
-/// Limit the data to be inside [-v,v], keeping the original sign
+/// Limit the data to be inside [-v,v], keeping the original phase
 void MGL_EXPORT mgl_datac_limit(HADT dat, mreal v);
 void MGL_EXPORT mgl_datac_limit_(uintptr_t *dat, mreal *v);
+
+/// Keep the data phase/value along line i and j in given direction. 
+/** Parameter "how" may contain: 'x','y' or 'z' for direction (default is 'y'); 'a' for keeping amplitude instead of phase.*/
+void MGL_EXPORT mgl_datac_keep(HADT dat, const char *how, long i, long j);
+void MGL_EXPORT mgl_datac_keep_(uintptr_t *d, const char *how, long *i, long *j, int);
 
 /// Put value to data element(s)
 void MGL_EXPORT mgl_datac_put_val(HADT dat, mdual val, long i, long j, long k);

@@ -75,8 +75,10 @@ void save(mglGraph *gr,const char *name,const char *suf);
 void test(mglGraph *gr)
 {
 	mglParse par;
-	par.Execute(gr,"define n 30\nnew a n n n 'x^2+y^2'\nnew b n n n 'z^4+2*x^4-2*y^4'\nrotate 40 60:box:axis\n"
-	"dcont [0.5,0.5] a b '2k'\nlight on:alpha on\nsurf3 a 0.5 'r':surf3 b 0.5 'g'");
+	par.Execute(gr,"new a 1 'sum(_i^2,5)':echo a:new b 1 'prod(1+_i,5)':echo b\n"
+	"new c 1 'dsum(_i,5)':echo c:new d 1 'sum(sum(_j+_i^2,5),5)':echo d");
+//	par.Execute(gr,"define n 30\nnew a n n n 'x^2+y^2'\nnew b n n n 'z^4+2*x^4-2*y^4'\nrotate 40 60:box:axis\n"
+//		"dcont [0.5,0.5] a b '2k'\nlight on:alpha on\nsurf3 a 0.5 'r':surf3 b 0.5 'g'");
 //	par.Execute(gr,"new f 100 'x^3':save f 'test.dat':axis:box:fplot ':test.dat:-1:1'");
 //	par.Execute(gr,"text 0 0 'ab' '@'");
 //	par.Execute(gr,"new a 3 3 'x*y'\nsubplot 2 1 0 '':dens a:dens a 'k+/'\n"

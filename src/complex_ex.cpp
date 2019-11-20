@@ -723,3 +723,54 @@ uintptr_t MGL_EXPORT mgl_find_roots_txt_c_(const char *func, const char *vars, u
 	uintptr_t r = uintptr_t(mgl_find_roots_txt_c(s,v,_DA_(ini)));
 	delete []s;	delete []v;	return r;	}
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_datac_keep(HADT dat, const char *how, long i, long j)
+{
+	const long nx = dat->GetNx(), ny = dat->GetNy(), nz = dat->GetNz();
+	const bool phase = !mglchr(how, 'a');
+	if(mglchr(how,'z'))
+	{
+		long ix = i, iy = j;
+		if(ix<0 || ix>=nx)	ix = 0;
+		if(iy<0 || iy>=ny)	iy = 0;
+		const long i0 = ix+nx*iy, nn = nx*ny;
+		const dual v0 = dat->a[i0];
+		for(long k=0;k<nz;k++)
+		{
+			dual v = dat->a[i0+nn*k], f = v0/v;
+			if(phase) f /= abs(f);
+			for(long ii=0;ii<nn;ii++)	dat->a[ii+nn*k] *= f;
+		}
+	}
+	else if(mglchr(how,'x'))
+	{
+		long iy = i, iz = j;
+		if(iz<0 || iz>=nz)	iz = 0;
+		if(iy<0 || iy>=ny)	iy = 0;
+		const long i0 = nx*(iy+ny*iz), nn = ny*nz;
+		const dual v0 = dat->a[i0];
+		for(long k=0;k<nx;k++)
+		{
+			dual v = dat->a[i0+k], f = v0/v;
+			if(phase) f /= abs(f);
+			for(long ii=0;ii<nn;ii++)	dat->a[k+nx*ii] *= f;
+		}
+	}
+	else	// default is "y"
+	{
+		long ix = i, iz = j;
+		if(ix<0 || ix>=nx)	ix = 0;
+		if(iz<0 || iz>=nz)	iz = 0;
+		const long i0 = ix+nx*ny*iz;
+		const dual v0 = dat->a[i0];
+		for(long k=0;k<ny;k++)
+		{
+			dual v = dat->a[i0+nx*k], f = v0/v;
+			if(phase) f /= abs(f);
+			for(long ii=0;ii<nz;ii++)	for(long jj=0;jj<nx;jj++)	dat->a[jj+nx*(k+ny*ii)] *= f;
+		}
+	}
+}
+void MGL_EXPORT mgl_datac_keep_(uintptr_t *d, const char *how, long *i, long *j, int l)
+{	char *s=new char[l+1];	memcpy(s,how,l);	s[l]=0;
+	mgl_datac_keep(_DC_, s, *i, *j);	delete []s;	}
+//-----------------------------------------------------------------------------

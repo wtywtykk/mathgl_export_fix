@@ -151,6 +151,10 @@ void MGL_EXPORT mgl_data_limit_(uintptr_t *dat, mreal *v);
 /// Project the periodical data to range [v1,v2] (like mod() function). Separate branches by NAN if sep=true.
 void MGL_EXPORT mgl_data_coil(HMDT dat, mreal v1, mreal v2, int sep);
 void MGL_EXPORT mgl_data_coil_(uintptr_t *dat, mreal *v1, mreal *v2, int *sep);
+/// Keep the data sign/value along line i and j in given direction. 
+/** Parameter "how" may contain: 'x','y' or 'z' for direction (default is 'y'); 'a' for keeping amplitude instead of sign.*/
+void MGL_EXPORT mgl_data_keep(HMDT dat, const char *how, long i, long j);
+void MGL_EXPORT mgl_data_keep_(uintptr_t *d, const char *how, long *i, long *j, int);
 
 /// Get sub-array of the data with given fixed indexes
 HMDT MGL_EXPORT mgl_data_subdata(HCDT dat, long xx,long yy,long zz);

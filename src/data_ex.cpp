@@ -1392,3 +1392,54 @@ void MGL_EXPORT mgl_data_connect_r(HMDT a, HMDT b)
 void MGL_EXPORT mgl_data_connect_r_(uintptr_t *a, uintptr_t *b)
 {	mgl_data_connect_r(_DM_(a),_DM_(b));	}
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_keep(HMDT dat, const char *how, long i, long j)
+{
+	const long nx = dat->GetNx(), ny = dat->GetNy(), nz = dat->GetNz();
+	const bool ampl = mglchr(how, 'a');
+	if(mglchr(how,'z'))
+	{
+		long ix = i, iy = j;
+		if(ix<0 || ix>=nx)	ix = 0;
+		if(iy<0 || iy>=ny)	iy = 0;
+		const long i0 = ix+nx*iy, nn = nx*ny;
+		const mreal v0 = dat->a[i0];
+		for(long k=0;k<nz;k++)
+		{
+			mreal v = dat->a[i0+nn*k];
+			mreal f = ampl? v0/v : (v*v0>0?1:-1);
+			for(long ii=0;ii<nn;ii++)	dat->a[ii+nn*k] *= f;
+		}
+	}
+	else if(mglchr(how,'x'))
+	{
+		long iy = i, iz = j;
+		if(iz<0 || iz>=nz)	iz = 0;
+		if(iy<0 || iy>=ny)	iy = 0;
+		const long i0 = nx*(iy+ny*iz), nn = ny*nz;
+		const mreal v0 = dat->a[i0];
+		for(long k=0;k<nx;k++)
+		{
+			mreal v = dat->a[i0+k];
+			mreal f = ampl? v0/v : (v*v0>0?1:-1);
+			for(long ii=0;ii<nn;ii++)	dat->a[k+nx*ii] *= f;
+		}
+	}
+	else	// default is "y"
+	{
+		long ix = i, iz = j;
+		if(ix<0 || ix>=nx)	ix = 0;
+		if(iz<0 || iz>=nz)	iz = 0;
+		const long i0 = ix+nx*ny*iz;
+		const mreal v0 = dat->a[i0];
+		for(long k=0;k<ny;k++)
+		{
+			mreal v = dat->a[i0+nx*k];
+			mreal f = ampl? v0/v : (v*v0>0?1:-1);
+			for(long ii=0;ii<nz;ii++)	for(long jj=0;jj<nx;jj++)	dat->a[jj+nx*(k+ny*ii)] *= f;
+		}
+	}
+}
+void MGL_EXPORT mgl_data_keep_(uintptr_t *d, const char *how, long *i, long *j, int l)
+{	char *s=new char[l+1];	memcpy(s,how,l);	s[l]=0;
+	mgl_data_keep(_DT_, s, *i, *j);	delete []s;	}
+//-----------------------------------------------------------------------------

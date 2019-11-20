@@ -108,6 +108,8 @@ D. Docs about JS interface
 9. user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
 10. Docs about 'lines'
 11. Docs about Armadillo interface
+12. Docs about 'keep'
+13. Docs about inline function (after '\'); functions 'sum', 'prod'.
 
 
 ZZ. Update time.texi {before release!!!}
