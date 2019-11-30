@@ -1114,20 +1114,20 @@ void MGL_EXPORT mgl_datac_diffr(HADT d, const char *how, mreal q)
 		p[0]=nz;	p[1]=nx*ny;	p[2]=0;
 		mglStartThreadC(mgl_difr,0,nx*ny,d->a,&qq,0,p);
 	}
-	if(mglchr(how,'y') && ny>1 && !axial)
+	if(mglchr(how,'y') && ny>1)
 	{
 		p[0]=ny;	p[1]=nx;	p[2]=0;
 		mglStartThreadC(mgl_difr,0,nx*nz,d->a,&qq,0,p);
 	}
-	if(mglchr(how,'x') && nx>1 && !axial)
-	{
-		p[0]=nx;	p[1]=1;	p[2]=0;
-		mglStartThreadC(mgl_difr,0,ny*nz,d->a,&qq,0,p);
-	}
 	if(axial && nx>1)
 	{
 		p[0]=nx;	p[1]=1;	p[2]=1;
-		mglStartThreadC(mgl_difr,0,ny*nz,0,&qq,0,p);
+		mglStartThreadC(mgl_difr,0,ny*nz,d->a,&qq,0,p);
+	}
+	else if(mglchr(how,'x') && nx>1)
+	{
+		p[0]=nx;	p[1]=1;	p[2]=0;
+		mglStartThreadC(mgl_difr,0,ny*nz,d->a,&qq,0,p);
 	}
 }
 //-----------------------------------------------------------------------------
