@@ -1351,6 +1351,12 @@ int static mgls_save(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
 	if(!strcmp(k,"ds"))	a[0].d->Save(a[1].s.s);
+	else if(!strcmp(k,"ns"))
+	{
+		FILE *fp = fopen(a[1].s.s,"w");
+		fprintf(fp,"%g",double(a[0].v));
+		fclose(fp);
+	}
 	else if(!strcmp(k,"ss"))
 	{
 		FILE *fp = fopen(a[1].s.s,"a");
@@ -1378,6 +1384,8 @@ int static mgls_savehdf(mglGraph *, long , mglArg *a, const char *k, const char 
 	int res=0;
 	if(!strcmp(k,"dss"))	a[0].d->SaveHDF(a[1].s.s, a[2].s.s);
 	else if(!strcmp(k,"dssn"))	a[0].d->SaveHDF(a[1].s.s, a[2].s.s,mgl_int(a[3].v));
+	else if(!strcmp(k,"nss"))	mgl_real_save_hdf(a[0].v, a[1].s.s, a[2].s.s, 0);
+	else if(!strcmp(k,"nssn"))	mgl_real_save_hdf(a[0].v, a[1].s.s, a[2].s.s, mgl_int(a[3].v));
 	else res = 1;
 	return res;
 }
@@ -1775,8 +1783,8 @@ mglCommand mgls_dat_cmd[] = {
 	{"rkstep",_("Perform Runge-Kutta step"),"rkstep 'Diff1;Diff2;...' 'Var1;Var2;...' [dt]", mgls_rkstep, 6},
 	{"roll",_("Roll data along direction(s)"),"roll Dat 'dir' num", mgls_roll ,16},
 	{"roots",_("Find roots using data as initial values"), "roots Res 'func' Ini ['var']|Res 'func' ini ['var']|Res 'func' 'vars' Ini", mgls_roots ,4},
-	{"save",_("Save data to file"),"save Dat 'file'|'str' 'file' ['how']", mgls_save ,3},
-	{"savehdf",_("Save data to HDF5 file"),"savehdf Dat 'file' 'id' [rewrite]", mgls_savehdf ,3},
+	{"save",_("Save data to file"),"save Dat 'file'|val 'file'|'str' 'file' ['how']", mgls_save ,3},
+	{"savehdf",_("Save data to HDF5 file"),"savehdf Dat 'file' 'id' [rewrite]|val 'file' 'id' [rewrite]", mgls_savehdf ,3},
 	{"scanfile",_("Get formated data from file"),"scanfile Dat 'fname 'templ'", mgls_scanfile ,4},
 	{"section",_("Extract sub-array between values"),"section Res Dat id ['dir' val]|Res Dat Ids ['dir' val]", mgls_section ,4},
 	{"sew",_("Remove jump into the data, like phase jumps"),"sew Dat ['dir' da]", mgls_sew ,16},

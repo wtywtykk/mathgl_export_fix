@@ -110,6 +110,8 @@ D. Docs about JS interface
 11. Docs about Armadillo interface
 12. Docs about 'keep'
 13. Docs about inline function (after '\'); functions 'sum', 'prod'.
+14. Update 'save', 'savehdf', 'cont', ...
+15. Docs about  mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf().
 
 
 ZZ. Update time.texi {before release!!!}

@@ -1120,6 +1120,61 @@ int MGL_EXPORT mgl_data_read_hdf4(HMDT ,const char *,const char *)
 #endif
 //-----------------------------------------------------------------------------
 #if MGL_HAVE_HDF5
+void MGL_EXPORT mgl_dual_save_hdf(dual val,const char *fname,const char *data,int rewrite)
+{
+	hid_t hf,hd,hs;
+	hsize_t dims[4]={1,2};
+	long rank = 2, res;
+	H5Eset_auto(0,0);
+	res=H5Fis_hdf5(fname);
+	if(res>0 && !rewrite)	hf = H5Fopen(fname, H5F_ACC_RDWR, H5P_DEFAULT);
+	else	hf = H5Fcreate(fname, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+	if(hf<0)	return;
+	hs = H5Screate_simple(rank, dims, 0);
+#if MGL_USE_DOUBLE
+	hid_t mem_type_id = H5T_NATIVE_DOUBLE;
+#else
+	hid_t mem_type_id = H5T_NATIVE_FLOAT;
+#endif
+	hd = H5Dcreate(hf, data, mem_type_id, hs, H5P_DEFAULT);
+	H5Dwrite(hd, mem_type_id, hs, hs, H5P_DEFAULT, &val);
+	H5Dclose(hd);	H5Sclose(hs);	H5Fclose(hf);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_real_save_hdf(double val,const char *fname,const char *data,int rewrite)
+{
+	hid_t hf,hd,hs;
+	hsize_t dims[3]={1,1,1};
+	long rank = 1, res;
+	H5Eset_auto(0,0);
+	res=H5Fis_hdf5(fname);
+	if(res>0 && !rewrite)	hf = H5Fopen(fname, H5F_ACC_RDWR, H5P_DEFAULT);
+	else	hf = H5Fcreate(fname, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+	if(hf<0)	return;
+	hs = H5Screate_simple(rank, dims, 0);
+	hid_t mem_type_id = H5T_NATIVE_DOUBLE;
+	hd = H5Dcreate(hf, data, mem_type_id, hs, H5P_DEFAULT);
+	H5Dwrite(hd, mem_type_id, hs, hs, H5P_DEFAULT, &val);
+	H5Dclose(hd);	H5Sclose(hs);	H5Fclose(hf);
+}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_int_save_hdf(long val,const char *fname,const char *data,int rewrite)
+{
+	hid_t hf,hd,hs;
+	hsize_t dims[3]={1,1,1};
+	long rank = 1, res;
+	H5Eset_auto(0,0);
+	res=H5Fis_hdf5(fname);
+	if(res>0 && !rewrite)	hf = H5Fopen(fname, H5F_ACC_RDWR, H5P_DEFAULT);
+	else	hf = H5Fcreate(fname, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+	if(hf<0)	return;
+	hs = H5Screate_simple(rank, dims, 0);
+	hid_t mem_type_id = H5T_NATIVE_LONG;
+	hd = H5Dcreate(hf, data, mem_type_id, hs, H5P_DEFAULT);
+	H5Dwrite(hd, mem_type_id, hs, hs, H5P_DEFAULT, &val);
+	H5Dclose(hd);	H5Sclose(hs);	H5Fclose(hf);
+}
+//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_data_save_hdf(HCDT dat,const char *fname,const char *data,int rewrite)
 {
 	const mglData *d = dynamic_cast<const mglData *>(dat);	// NOTE: slow for non-mglData
@@ -1222,6 +1277,12 @@ long MGL_EXPORT mgl_datas_hdf(const char *, char *, long )
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	return 0;}
 int MGL_EXPORT mgl_data_read_hdf(HMDT ,const char *,const char *)
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	return 0;}
+void MGL_EXPORT mgl_dual_save_hdf(dual val,const char *fname,const char *data,int rewrite)
+{	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	}
+void MGL_EXPORT mgl_real_save_hdf(double val,const char *fname,const char *data,int rewrite)
+{	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	}
+void MGL_EXPORT mgl_int_save_hdf(long val,const char *fname,const char *data,int rewrite)
+{	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	}
 #endif
 //-----------------------------------------------------------------------------
 int MGL_EXPORT mgl_data_read_hdf_(uintptr_t *d, const char *fname, const char *data,int l,int n)
@@ -1235,6 +1296,14 @@ void MGL_EXPORT mgl_data_save_hdf_(uintptr_t *d, const char *fname, const char *
 long MGL_EXPORT mgl_datas_hdf_(const char *fname, char *buf, int l, int size)
 {	char *s=new char[l+1];		memcpy(s,fname,l);	s[l]=0;
 	int r = mgl_datas_hdf(s,buf,size);	delete []s;	return r;	}
+void MGL_EXPORT mgl_real_save_hdf_(double *val,const char *fname,const char *data,int *rewrite,int l,int n)
+{	char *s=new char[l+1];		memcpy(s,fname,l);	s[l]=0;
+	char *t=new char[n+1];		memcpy(t,data,n);	t[n]=0;
+	mgl_real_save_hdf(*val,s,t,*rewrite);	delete []s;	delete []t;	}
+void MGL_EXPORT mgl_int_save_hdf_(long *val,const char *fname,const char *data,int *rewrite,int l,int n)
+{	char *s=new char[+1];		memcpy(s,fname,l);	s[l]=0;
+	char *t=new char[+1];		memcpy(t,data,n);	t[n]=0;
+	mgl_int_save_hdf(*val,s,t,*rewrite);	delete []s;	delete []t;	}
 //-----------------------------------------------------------------------------
 bool MGL_EXPORT mgl_add_file(long &kx,long &ky, long &kz, mreal *&b, mglData *d,bool as_slice)
 {

@@ -9,6 +9,8 @@
 * Add 'first', 'last' to get array of first/last indexes of values larger specified one along given direction.
 * Allow masks for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
 * Allow value for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricont', 'tricontv', 'cont3', 'dcont'.
+* Allow value for saving in 'save', 'savehdf'.
+* Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf().
 * Add Armadillo interface for mglData*
 
 2.4.4 Released 8 July 2019
