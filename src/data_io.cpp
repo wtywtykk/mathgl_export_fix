@@ -1037,7 +1037,7 @@ static void *mgl_modify(void *par)
 void MGL_EXPORT mgl_data_modify(HMDT d, const char *eq,long dim)
 {
 	long nx=d->nx, ny=d->ny, nz=d->nz, par[3]={nx,ny,nz};
-	if(dim<=0)	mgl_data_modify_vw(d,eq,0,0);	// fastes variant for whole array
+	if(dim<=0)	mgl_data_modify_vw(d,eq,0,0);	// fastest variant for whole array
 	else if(nz>1)	// 3D array
 	{
 		mglFormula f(eq);

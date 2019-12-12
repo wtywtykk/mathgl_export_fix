@@ -49,6 +49,8 @@
 19. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp).
 20. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
 
+21. UTF8 in legend-option
+
 * Add 'connect' for connecting points to set of surfaces
 
 

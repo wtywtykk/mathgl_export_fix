@@ -312,7 +312,6 @@ void MGL_EXPORT mgl_dcont_gen(HMGL gr, double val, HCDT x, HCDT y, HCDT z, HCDT 
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_dcont_xyz(HMGL gr, HCDT v, HCDT x, HCDT y, HCDT z, HCDT a, HCDT b, const char *sch, const char *opt)
 {
-	long n=z->GetNx(),m=z->GetNy();
 	if(mgl_check_dim3(gr,!mgl_isnboth(x,y,z,a),x,y,z,a,b,"DCont"))	return;
 
 	mreal r = gr->SaveState(opt);
