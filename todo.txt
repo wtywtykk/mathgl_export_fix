@@ -24,18 +24,16 @@
 12. \overline{\overline{a}} ???
 13. Use arrow_plot_3d ???
 14. Mask in SVG ???
+15. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
 
 ============= NEW FEATURES =============
 
 1. Centered curved text (see text2)
-2. Quality=3 for mirror+shadows? Couldn't be in bitmap only mode
-4. "latex on" option ?!?
+2. Quality=3 for mirror+shadows? Could be in bitmap only mode
 5. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
 6. Flag to determine discontinuous surfaces in 'fsurf'
 7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
-8. Check title & rasterize
 
-10. mgltask -- add $3-loop, $R=formula for R=4,...,9,0,A,...,Z
 11. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
 12. Chord diagram
 13. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
@@ -44,10 +42,12 @@
 16. Sankey diagram ???
 
 17. Global mglDataA* collection (like in mglParser) for viewing/changing in GUI data from external languages (like, Python, ...). It should have: new(), add(), del(), get(). 
-18. Provide the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
 
-19. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp).
-20. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
+18. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp). https://www.freetype.org/freetype2/docs/tutorial/step3.html -- add optimization of bezier curves by number of points. Use it as glyph definition or as default source for all/unknown glyphs!?
+
+19. Optimize triangulation in 2d and 3d, rewrite crust (test 2d version too).
+
+20. Algorithm of combining primitives with the same color to the larger one.
 
 21. UTF8 in legend-option
 
@@ -114,6 +114,11 @@ D. Docs about JS interface
 13. Docs about inline function (after '\'); functions 'sum', 'prod'.
 14. Update 'save', 'savehdf', 'cont', ...
 15. Docs about  mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf().
+16. Docs about mgl_load_background_ext()
+17. Notice about 'title' --- second call reserve more space for subtitle. So, you need to manually call 'subplot' after "rasterize:clf".
+18. Docs about mgl_formula_calc(), mgl_formula_calc_c() and mglFormulaCalc(), mglFormulaCalcC()
+19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
+20. Docs about mgl_default_graph() -- the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
 
 
 ZZ. Update time.texi {before release!!!}

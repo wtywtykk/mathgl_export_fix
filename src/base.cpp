@@ -20,6 +20,14 @@
 #include "mgl2/font.h"
 #include "mgl2/base.h"
 #include "mgl2/eval.h"
+
+#if MGL_HAVE_FREETYPE
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include FT_OUTLINE_H
+#include FT_BBOX_H
+#endif
+
 #if MGL_HAVE_OMP
 #include <omp.h>
 #endif
@@ -268,6 +276,116 @@ void mglBase::SetWarn(int code, const char *who)
 }
 //-----------------------------------------------------------------------------
 //		Add glyph to the buffer
+//-----------------------------------------------------------------------------
+MGL_NO_EXPORT int mgl_glf_moveto(const FT_Vector *to, void *user)
+{
+	std::vector<double> *a = (std::vector<double> *)user;
+	if(a->size()>1)	{	a->push_back(NAN);	a->push_back(NAN);	}
+	a->push_back(to->x);	a->push_back(to->y);
+	return 0;
+}
+MGL_NO_EXPORT int mgl_glf_lineto(const FT_Vector *to, void *user)
+{
+	std::vector<double> *a = (std::vector<double> *)user;
+	if(a->size()<2)	{	a->push_back(0);	a->push_back(0);	}
+	a->push_back(to->x);	a->push_back(to->y);
+	return 0;
+}
+MGL_NO_EXPORT int mgl_glf_parabto(const FT_Vector *ctrl, const FT_Vector *to, void *user)
+{
+	std::vector<double> *a = (std::vector<double> *)user;
+	int x0=0,y0=0, x1=ctrl->x,y1=ctrl->y, x2=to->x,y2=to->y;
+	size_t n=a->size();
+	if(n<2)	{	a->push_back(0);	a->push_back(0);	}
+	else	{	x0 = (*a)[n-2];	y0 = (*a)[n-1];	}
+	for(int i=1;i<=10;i++)
+	{
+		double t = 0.1*i;
+		a->push_back(x0*(1-t)*(1-t)+2*(1-t)*t*x1+t*t*x2);
+		a->push_back(y0*(1-t)*(1-t)+2*(1-t)*t*y1+t*t*y2);
+	}
+	return 0;
+}
+MGL_NO_EXPORT int mgl_glf_cubeto(const FT_Vector *ctrl1, const FT_Vector *ctrl2, const FT_Vector *to, void *user)
+{
+	std::vector<double> *a = (std::vector<double> *)user;
+	int x0=0,y0=0, x1=ctrl1->x,y1=ctrl1->y, x2=ctrl2->x,y2=ctrl2->y, x3=to->x,y3=to->y;
+	size_t n=a->size();
+	if(n<2)	{	a->push_back(0);	a->push_back(0);	}
+	else	{	x0 = (*a)[n-2];	y0 = (*a)[n-1];	}
+	for(int i=1;i<=30;i++)
+	{
+		double t = 0.1*i;
+		a->push_back(x0*(1-t)*(1-t)*(1-t) + 3*(1-t)*t*(x1*(1-t)+t*x2) + t*t*t*x3);
+		a->push_back(y0*(1-t)*(1-t)*(1-t) + 3*(1-t)*t*(y1*(1-t)+t*y2) + t*t*t*y3);
+	}
+	return 0;
+}
+
+void mglGlyph::Load(wchar_t id, const char *fname)
+{
+#if MGL_HAVE_FREETYPE
+	FT_Library m_ftLibrary;
+	if(FT_Init_FreeType(&m_ftLibrary))
+		mgl_set_global_warn("Couldn't initialize the FreeType library.");
+	else
+	{
+		FT_Face m_face;
+		// For simplicity, always use the first face index.
+		if(FT_New_Face(m_ftLibrary, fname, 0, &m_face))
+			mgl_set_global_warn("Couldn't load the font file.");
+		else
+		{
+			// For simplicity, use the charmap FreeType provides by default;
+			// in most cases this means Unicode.
+			FT_UInt index = FT_Get_Char_Index(m_face, id);
+			if(FT_Load_Glyph(m_face, index, FT_LOAD_NO_SCALE|FT_LOAD_NO_BITMAP))
+				mgl_set_global_warn("Couldn't load the glyph.");
+			else
+			{
+				FT_GlyphSlot slot = m_face->glyph;
+				FT_Outline &outline = slot->outline;
+
+				if(slot->format!=FT_GLYPH_FORMAT_OUTLINE || outline.n_contours <= 0 || outline.n_points <= 0 ||FT_Outline_Check(&outline))
+					mgl_set_global_warn("Outline doesn't exist.");
+				else
+				{
+					const FT_Fixed multiplier = 32768L;
+					FT_Matrix matrix;
+					matrix.xx = matrix.yy = multiplier;
+					matrix.xy = matrix.yx = 0;
+					FT_Outline_Transform(&outline, &matrix);
+					
+					FT_Outline_Funcs callbacks;
+					callbacks.move_to = mgl_glf_moveto;
+					callbacks.line_to = mgl_glf_lineto;
+					callbacks.conic_to = mgl_glf_parabto;
+					callbacks.cubic_to = mgl_glf_cubeto;
+					callbacks.shift = 0;
+					callbacks.delta = 0;
+					std::vector<double> xy_coor;
+					if(FT_Outline_Decompose(&outline, &callbacks, &xy_coor))
+						mgl_set_global_warn("Couldn't extract the outline.");
+					nt = -id;	// TODO optimize and copy points. Q: actual width? Q: cmp with known.
+					FT_BBox boundingBox;
+					FT_Outline_Get_BBox(&outline, &boundingBox);
+					FT_Pos xMin = boundingBox.xMin;
+					FT_Pos yMin = boundingBox.yMin;
+					FT_Pos xMax = boundingBox.xMax;
+					FT_Pos yMax = boundingBox.yMax;
+/*					m_xMin = xMin;
+					m_yMin = yMin;
+					m_width = xMax - xMin;
+					m_height = yMax - yMin;*/
+
+				}
+			}
+			FT_Done_Face(m_face);
+		}
+	}
+	FT_Done_FreeType(m_ftLibrary);
+#endif
+}
 //-----------------------------------------------------------------------------
 void mglGlyph::Create(long Nt, long Nl)
 {

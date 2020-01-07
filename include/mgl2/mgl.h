@@ -35,17 +35,29 @@ protected:
 	HMGL gr;
 public:
 	HMPR pr;	///< Pointer to associated MGL parser
-	mglGraph(int kind=0, int width=600, int height=400)
+	mglGraph(int kind=-1)
 	{	pr = NULL;
-		if(kind==-1)	gr=NULL;
+		if(kind==0)	gr=mgl_create_graph(600, 400);
 #if MGL_HAVE_OPENGL
 		else if(kind==1)	gr=mgl_create_graph_gl();
 #else
 		else if(kind==1)
-		{	gr=mgl_create_graph(width, height);
+		{	gr=mgl_default_graph();	mgl_use_graph(gr,1);
 			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
 #endif
-		else	gr=mgl_create_graph(width, height);
+		else	{	gr=mgl_default_graph();	mgl_use_graph(gr,1);	}
+	}
+	mglGraph(int kind, int width, int height)
+	{	pr = NULL;
+		if(kind==0)	gr=mgl_create_graph(width, height);
+#if MGL_HAVE_OPENGL
+		else if(kind==1)	gr=mgl_create_graph_gl();
+#else
+		else if(kind==1)
+		{	gr=mgl_default_graph();	mgl_use_graph(gr,1);
+			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
+#endif
+		else	{	gr=mgl_default_graph();	mgl_use_graph(gr,1);	mgl_set_size(gr,width,height);	}
 	}
 	mglGraph(HMGL graph)
 	{	pr = NULL;	gr = graph;		mgl_use_graph(gr,1);	}
@@ -575,9 +587,19 @@ public:
 	/// Clear unused points and primitives. Useful only in combination with SetFaceNum().
 	inline void ClearUnused()	{	mgl_clear_unused(gr);	}
 
-	/// Load background image
+	/// Load background image (basic variant: no scaling, whole image)
 	inline void LoadBackground(const char *fname, double alpha=1)
 	{	mgl_load_background(gr,fname,alpha);	}
+	/// Load image for background from file. 
+	/** Parameter 'how' can be:
+	 *   'a' for filling current subplot only;
+	 *   's' for scaling (resizing) image to whole area;
+	 *   'c' for centering image;
+	 *   'm' for tessellate image as mosaic. */
+	void LoadBackground(const char *fname, const char *how, double alpha=1)
+	{	mgl_load_background_ext(gr,fname,how,alpha);	}
+	/// Fill background image by specified color
+	void FillBackground(const mglColor &cc);
 	/// Force drawing the image and use it as background one
 	inline void Rasterize()			{	mgl_rasterize(gr);	}
 

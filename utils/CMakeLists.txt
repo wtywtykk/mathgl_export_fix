@@ -1,6 +1,13 @@
 add_executable(make_pas make_pas.cpp)
 
+if(MSVC)
+set(link_type -static)
+else(MSVC)
+set(link_type)
+endif(MSVC)
+
 add_executable(mgltask mgltask.cpp)
+target_link_libraries(mgltask mgl${link_type} ${getopt_lib-static})
 install(
 	TARGETS mgltask
 	EXPORT MathGLTargets
@@ -8,11 +15,6 @@ install(
 )
 
 add_executable(mglconv mglconv.cpp)
-if(MSVC)
-set(link_type -static)
-else(MSVC)
-set(link_type)
-endif(MSVC)
 target_link_libraries(mglconv mgl${link_type} ${getopt_lib-static})
 install(
 	TARGETS mglconv
@@ -29,7 +31,7 @@ install(
 	RUNTIME DESTINATION ${MGL_CGI_PATH}
 )
 
-mgl_po_src(mglconv.cpp mglview.cpp mglcgi.cpp)
+mgl_po_src(mglconv.cpp mglview.cpp mglcgi.cpp mgltask.cpp)
 
 if(MGL_HAVE_FLTK)
 	add_definitions(-DUSE_FLTK)

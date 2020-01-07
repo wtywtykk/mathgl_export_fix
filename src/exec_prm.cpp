@@ -67,6 +67,8 @@ int static mgls_background(mglGraph *gr, long , mglArg *a, const char *k, const 
 	int res=0;
 	if(!strcmp(k,"s"))	gr->LoadBackground(a[0].s.s);
 	else if(!strcmp(k,"sn"))	gr->LoadBackground(a[0].s.s,a[1].v);
+	else if(!strcmp(k,"ss"))	gr->LoadBackground(a[0].s.s,a[1].s.s);
+	else if(!strcmp(k,"ssn"))	gr->LoadBackground(a[0].s.s,a[1].s.s,a[2].v);
 	else res = 1;
 	return res;
 }
@@ -623,7 +625,7 @@ int static mgls_zlabel(mglGraph *gr, long , mglArg *a, const char *k, const char
 mglCommand mgls_prm_cmd[] = {
 	{"arc",_("Draw angle arc"),"arc x0 y0 x1 y1 a ['fmt']|x0 y0 z0 x1 y1 a ['fmt']|x0 y0 z0 xr yr zr x1 y1 z1 a ['fmt']", mgls_arc ,13},
 	{"axis",_("Setup or draw axis"),"axis ['dir' 'fmt']|'fx' 'fy' 'fz' ['fc']|how", mgls_axis ,12},
-	{"background",_("Load image for background"),"background 'fname' [alpha]", mgls_background ,12},
+	{"background",_("Load image for background"),"background 'fname' [alpha]| 'fname' 'how' [alpha]", mgls_background ,12},
 	{"ball",_("Draw point (ball)"),"ball posx posy ['fmt']|posx posy posz ['fmt']", mgls_ball ,13},
 	{"box",_("Draw bounding box"),"box ['fmt' ticks]", mgls_box ,12},
 	{"circle",_("Draw circle"),"circle x y r ['fmt']|x y z r ['fmt']", mgls_circle ,13},

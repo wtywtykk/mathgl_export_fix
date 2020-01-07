@@ -66,8 +66,6 @@ void static mgl_surf_plot(mglBase *gr, long kq, long n, long m)
 //	Plot by formulas series
 //
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head);
-//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_fsurf(HMGL gr, const char *eqZ, const char *sch, const char *opt)
 {	// NOTE Strong function variation analysis can be added here
 	if(eqZ==0 || eqZ[0]==0)	return;		// nothing to plot

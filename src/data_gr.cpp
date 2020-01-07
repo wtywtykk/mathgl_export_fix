@@ -28,9 +28,6 @@
 #include "mgl2/thread.h"
 #include "mgl2/base.h"
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head);
-HADT MGL_NO_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &head);
-//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_data_refill_gr(HMGL gr, HMDT dat, HCDT xdat, HCDT ydat, HCDT zdat, HCDT vdat, long sl, const char *opt)
 {
 	if(!vdat)	return;

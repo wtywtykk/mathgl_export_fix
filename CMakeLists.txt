@@ -208,6 +208,7 @@ CMAKE_DEPENDENT_OPTION(enable-qt4 "Enable Qt4 widget" OFF "NOT enable-all-widget
 CMAKE_DEPENDENT_OPTION(enable-qt4asqt "Set Qt4 as default libmgl-qt" OFF "enable-qt4" OFF)
 CMAKE_DEPENDENT_OPTION(enable-qt5 "Enable Qt5 widget" OFF "NOT enable-all-widgets" ON)
 CMAKE_DEPENDENT_OPTION(enable-qt5asqt "Set Qt5 as default libmgl-qt" OFF "enable-qt5" OFF)
+CMAKE_DEPENDENT_OPTION(enable-freetype "Enable freetype support" ON "NOT enable-all" ON)
 
 # msvc fwprintf print char* for the specifier of "%s" format
 if(MSVC AND MSVC_VERSION GREATER 1899)
@@ -526,6 +527,18 @@ if(enable-zlib)
 else(enable-zlib)
 	set(MGL_HAVE_ZLIB 0)
 endif(enable-zlib)
+
+if(enable-freetype)
+	set(MGL_HAVE_FREETYPE 1)
+	include(FindFreetype)
+	if(NOT FREETYPE_FOUND)
+		message(SEND_ERROR "Couldn't find FreeType library.")
+	endif(NOT FREETYPE_FOUND)
+	set(MGL_DEP_LIBS ${FREETYPE_LIBRARIES} ${MGL_DEP_LIBS})
+	include_directories(${FREETYPE_INCLUDE_DIRS})
+else(enable-freetype)
+	set(MGL_HAVE_FREETYPE 0)
+endif(enable-freetype)
 
 if(enable-png)
 	set(MGL_HAVE_PNG 1)

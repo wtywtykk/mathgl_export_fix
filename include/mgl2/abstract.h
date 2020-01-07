@@ -385,6 +385,9 @@ public:
 		dif.x*=GetNx()>1?GetNx()-1:1;	dif.y*=GetNy()>1?GetNy()-1:1;	dif.z*=GetNz()>1?GetNz()-1:1;	return res;	}
 };
 //-----------------------------------------------------------------------------
+/// List of user-defined data arrays
+MGL_EXPORT extern std::vector<mglDataA*> mglDataList;
+//-----------------------------------------------------------------------------
 /// Structure for color ID
 struct MGL_EXPORT mglColorID
 {

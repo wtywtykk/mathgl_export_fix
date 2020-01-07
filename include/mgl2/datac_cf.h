@@ -183,6 +183,8 @@ uintptr_t MGL_EXPORT mgl_datac_section_(uintptr_t *d, uintptr_t *ids, const char
 /** If section id is negative then reverse order is used (i.e. -1 give last section). */
 HADT MGL_EXPORT mgl_datac_section_val(HCDT dat, long id, char dir, mreal val);
 uintptr_t MGL_EXPORT mgl_datac_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int);
+/// Evaluate formula 'str' for given list of variables.
+HADT MGL_EXPORT mgl_formula_calc_c(const char *str, long n, ...);
 
 /// Equidistantly fill the data to range [x1,x2] in direction dir
 void MGL_EXPORT mgl_datac_fill(HADT dat, mdual x1,mdual x2,char dir);

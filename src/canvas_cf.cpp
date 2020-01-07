@@ -25,6 +25,9 @@
 #undef _GR_
 #define _GR_	((mglCanvas *)(*gr))
 //-----------------------------------------------------------------------------
+MGL_EXPORT std::string mglGlobalMess;	///< Buffer for receiving global messages
+MGL_EXPORT mglCanvas mglDefaultGr(600,400);	///< Default HMGL object
+//-----------------------------------------------------------------------------
 MGL_EXPORT const unsigned char *mgl_get_rgb(HMGL gr)
 {	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	return g?g->GetBits():0;	}
 MGL_EXPORT const unsigned char *mgl_get_rgba(HMGL gr)
@@ -111,6 +114,8 @@ void MGL_EXPORT mgl_clf_str(HMGL gr, const char *col)
 {	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->Clf(col);	}
 void MGL_EXPORT mgl_load_background(HMGL gr, const char *fn, double alpha)
 {	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->LoadBackground(fn,alpha);	}
+void MGL_EXPORT mgl_load_background_ext(HMGL gr, const char *fn, const char *how, double alpha)
+{	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	if(g)	g->LoadBackground(fn,how,alpha);	}
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_subplot_d(HMGL gr, int nx,int ny,int m,const char *style,double dx,double dy)
 {
@@ -226,6 +231,10 @@ void MGL_EXPORT mgl_clf_str_(uintptr_t *gr, const char *col, int l)
 void MGL_EXPORT mgl_load_background_(uintptr_t *gr, const char *fn, mreal *a, int l)
 {	char *s=new char[l+1];	memcpy(s,fn,l);	s[l]=0;
 	mgl_load_background(_GR_,s,*a);	delete []s;	}
+void MGL_EXPORT mgl_load_background_ext_(uintptr_t *gr, const char *fn, const char *how, mreal *a, int l,int m)
+{	char *s=new char[l+1];	memcpy(s,fn,l);		s[l]=0;
+	char *h=new char[m+1];	memcpy(h,how,l);	h[m]=0;
+	mgl_load_background_ext(_GR_,s,h,*a);	delete []s;	delete []h;	}
 //-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_subplot_d_(uintptr_t *gr, int *nx,int *ny,int *m,const char *st, mreal *dx, mreal *dy,int l)
 {	char *s=new char[l+1];	memcpy(s,st,l);	s[l]=0;
@@ -290,6 +299,7 @@ double mgl_size_scl = 1;
 HMGL MGL_EXPORT mgl_create_graph(int width, int height)
 {	return new mglCanvas(width,height);	}
 void MGL_EXPORT mgl_delete_graph(HMGL gr)	{	if(gr)	delete gr;	}
+HMGL MGL_EXPORT mgl_default_graph()	{	return &mglDefaultGr;	}
 void MGL_EXPORT mgl_set_size_scl(double scl){	if(scl>0)	mgl_size_scl = scl;	}
 void MGL_EXPORT mgl_set_size(HMGL gr, int width, int height)
 {
@@ -384,6 +394,7 @@ void MGL_EXPORT mgl_set_legend_marks(HMGL gr, int num)
 uintptr_t MGL_EXPORT mgl_create_graph_(int *width, int *height)
 {	return uintptr_t(new mglCanvas(*width,*height));	}
 void MGL_EXPORT mgl_delete_graph_(uintptr_t *gr)	{	delete _GR_;	}
+uintptr_t MGL_EXPORT mgl_default_graph_()	{	return uintptr_t(&mglDefaultGr);	}
 void MGL_EXPORT mgl_set_size_scl_(double *scl)	{	mgl_set_size_scl(*scl);	}
 void MGL_EXPORT mgl_set_size_(uintptr_t *gr, int *width, int *height)
 {	mgl_set_size(_GR_,*width,*height);	}

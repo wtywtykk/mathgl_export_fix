@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 21:15+0300\n"
+"POT-Creation-Date: 2020-01-07 12:56+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -666,7 +666,7 @@ msgstr "Добавить текст"
 msgid "Add text which properties can be changed later by mouse."
 msgstr "Добавить текст. Его свойства можно изменить позже мышью."
 
-#: src/exec_prm.cpp:658
+#: src/exec_prm.cpp:660
 msgid "Add title for current subplot/inplot"
 msgstr "Добавить заголовок к текущему под-графику"
 
@@ -811,7 +811,7 @@ msgstr "Выполнить скрипт после загрузки"
 msgid "Automatically save before redrawing (F5)"
 msgstr "Сохранять скрипт перед рисованием (F5)"
 
-#: src/data.cpp:1488
+#: src/data.cpp:1490
 #, c-format
 msgid ""
 "Averages are:\n"
@@ -1090,19 +1090,19 @@ msgstr "Опции команды"
 msgid "Comments"
 msgstr "Комментарий"
 
-#: src/exec_prm.cpp:646
+#: src/exec_prm.cpp:648
 msgid "Computes the attractor of an IFS"
 msgstr "Вычисляет точки фрактала IFS"
 
-#: src/exec_prm.cpp:647
+#: src/exec_prm.cpp:649
 msgid "Computes the attractor of an IFS for 3d case"
 msgstr "Вычисляет точки фрактала IFS в 3d случае"
 
-#: src/exec_prm.cpp:648
+#: src/exec_prm.cpp:650
 msgid "Computes the attractor of an IFS with parameters from *.ifs file"
 msgstr "Вычисляет точки фрактала IFS с параметрами из файла"
 
-#: src/exec_prm.cpp:642
+#: src/exec_prm.cpp:644
 msgid "Computes the flame fractal"
 msgstr "Вычисляет точки фрактала flame"
 
@@ -1518,7 +1518,7 @@ msgstr "Нарисовать диаграмму STFA"
 msgid "Draw TeX mark at point position"
 msgstr "Нарисовать ТеХ символы в положении точек"
 
-#: src/exec_prm.cpp:624
+#: src/exec_prm.cpp:626
 msgid "Draw angle arc"
 msgstr "Нарисовать дугу"
 
@@ -1542,11 +1542,11 @@ msgstr "Нарисовать поверхность ленточками с за
 msgid "Draw binormales for 1D data"
 msgstr "Нарисовать нормаль и бинормаль для кривой"
 
-#: src/exec_prm.cpp:651
+#: src/exec_prm.cpp:653
 msgid "Draw bitmap (logo) along axis range"
 msgstr "Нарисовать растр (логотип) в области осей координат"
 
-#: src/exec_prm.cpp:628
+#: src/exec_prm.cpp:630
 msgid "Draw bounding box"
 msgstr "Нарисовать ограничивающий параллелепипед"
 
@@ -1566,7 +1566,7 @@ msgstr "Нарисовать свечной график"
 msgid "Draw chart"
 msgstr "Нарисовать линейчатую (круговую) диаграмму"
 
-#: src/exec_prm.cpp:629
+#: src/exec_prm.cpp:631
 msgid "Draw circle"
 msgstr "Нарисовать окружность (круг)"
 
@@ -1574,11 +1574,11 @@ msgstr "Нарисовать окружность (круг)"
 msgid "Draw cloud"
 msgstr "Нарисовать облако для 3D данных"
 
-#: src/exec_prm.cpp:631
+#: src/exec_prm.cpp:633
 msgid "Draw colorbar"
 msgstr "Нарисовать цветовую шкалу"
 
-#: src/exec_prm.cpp:632
+#: src/exec_prm.cpp:634
 msgid "Draw cone"
 msgstr "Нарисовать конус"
 
@@ -1622,7 +1622,7 @@ msgstr "Нарисовать цилиндры по линиям уровней"
 msgid "Draw contour tubes for surface of triangles"
 msgstr "Нарисовать цилиндры по линиям уровней для поверхности из треугольников"
 
-#: src/exec_prm.cpp:633
+#: src/exec_prm.cpp:635
 msgid "Draw curve"
 msgstr "Нарисовать кривую"
 
@@ -1663,15 +1663,15 @@ msgstr "Нарисовать векторное поле каплями"
 msgid "Draw dots for arbitrary data points"
 msgstr "Нарисовать набор точек"
 
-#: src/exec_prm.cpp:634
+#: src/exec_prm.cpp:636
 msgid "Draw drop"
 msgstr "Нарисовать каплю"
 
-#: src/exec_prm.cpp:635
+#: src/exec_prm.cpp:637
 msgid "Draw ellipse"
 msgstr "Нарисовать эллипс"
 
-#: src/exec_prm.cpp:636
+#: src/exec_prm.cpp:638
 msgid "Draw error box"
 msgstr "Нарисовать размер ошибки"
 
@@ -1679,19 +1679,19 @@ msgstr "Нарисовать размер ошибки"
 msgid "Draw error boxes"
 msgstr "Нарисовать размеры ошибок для 1D данных"
 
-#: src/exec_prm.cpp:637
+#: src/exec_prm.cpp:639
 msgid "Draw face (quadrangle)"
 msgstr "Нарисовать грань (четырехугольник)"
 
-#: src/exec_prm.cpp:638
+#: src/exec_prm.cpp:640
 msgid "Draw face perpendicular to x-axis"
 msgstr "Нарисовать грань поперек оси x"
 
-#: src/exec_prm.cpp:639
+#: src/exec_prm.cpp:641
 msgid "Draw face perpendicular to y-axis"
 msgstr "Нарисовать грань поперек оси y"
 
-#: src/exec_prm.cpp:640
+#: src/exec_prm.cpp:642
 msgid "Draw face perpendicular to z-axis"
 msgstr "Нарисовать грань поперек оси z"
 
@@ -1715,7 +1715,7 @@ msgstr "Нарисовать линии тока для векторного п�
 msgid "Draw gradient lines for scalar field"
 msgstr "Нарисовать линии градиента для скалярного поля"
 
-#: src/exec_prm.cpp:645
+#: src/exec_prm.cpp:647
 msgid "Draw grid"
 msgstr "Нарисовать сетку осей координат"
 
@@ -1759,31 +1759,31 @@ msgstr "Нарисовать поверхность уровня с заданн
 msgid "Draw label at arbitrary position"
 msgstr "Вывести надписи для 1D данных"
 
-#: src/exec_prm.cpp:630
+#: src/exec_prm.cpp:632
 msgid "Draw label for colorbar"
 msgstr "Вывести подпись colorbar"
 
-#: src/exec_prm.cpp:659
+#: src/exec_prm.cpp:661
 msgid "Draw label for t-axis"
 msgstr "Вывести подпись оси t"
 
-#: src/exec_prm.cpp:660
+#: src/exec_prm.cpp:662
 msgid "Draw label for x-axis"
 msgstr "Вывести подпись оси x"
 
-#: src/exec_prm.cpp:661
+#: src/exec_prm.cpp:663
 msgid "Draw label for y-axis"
 msgstr "Вывести подпись оси y"
 
-#: src/exec_prm.cpp:662
+#: src/exec_prm.cpp:664
 msgid "Draw label for z-axis"
 msgstr "Вывести подпись оси z"
 
-#: src/exec_prm.cpp:649
+#: src/exec_prm.cpp:651
 msgid "Draw legend"
 msgstr "Нарисовать легенду графика"
 
-#: src/exec_prm.cpp:650
+#: src/exec_prm.cpp:652
 msgid "Draw line"
 msgstr "Нарисовать прямую линию"
 
@@ -1804,11 +1804,11 @@ msgstr "Нарисовать маркеры переменного размер�
 msgid "Draw mesh surface"
 msgstr "Нарисовать сетчатую поверхность"
 
-#: src/exec_prm.cpp:627
+#: src/exec_prm.cpp:629
 msgid "Draw point (ball)"
 msgstr "Нарисовать точку"
 
-#: src/exec_prm.cpp:652
+#: src/exec_prm.cpp:654
 msgid "Draw polygon"
 msgstr "Нарисовать полигон"
 
@@ -1824,11 +1824,11 @@ msgstr "Нарисовать круговой график"
 msgid "Draw reconstructed surface for arbitrary data points"
 msgstr "Нарисовать поверхность по произвольным точкам"
 
-#: src/exec_prm.cpp:653
+#: src/exec_prm.cpp:655
 msgid "Draw rectangle"
 msgstr "Нарисовать прямоугольник"
 
-#: src/exec_prm.cpp:654
+#: src/exec_prm.cpp:656
 msgid "Draw rhombus"
 msgstr "Нарисовать ромб"
 
@@ -1872,7 +1872,7 @@ msgstr "Нарисовать поверхность с заданным цвет
 msgid "Draw solid surface transpared by other data"
 msgstr "Нарисовать поверхность с заданной прозрачностью"
 
-#: src/exec_prm.cpp:655
+#: src/exec_prm.cpp:657
 msgid "Draw sphere"
 msgstr "Нарисовать сферу"
 
@@ -1908,11 +1908,11 @@ msgstr "Нарисовать таблицу значений данных"
 msgid "Draw tension plot for 1D data"
 msgstr "Нарисовать кривую с заданным цветом"
 
-#: src/exec_prm.cpp:657
+#: src/exec_prm.cpp:659
 msgid "Draw text at some position or along curve"
 msgstr "Вывести текст в точке или вдоль кривой"
 
-#: src/exec_prm.cpp:656
+#: src/exec_prm.cpp:658
 msgid "Draw user-defined symbol at given position and direction"
 msgstr "Нарисовать символ в заданных точке и направлении"
 
@@ -2669,7 +2669,7 @@ msgstr "Группы команд MGL"
 msgid "H - darkgray"
 msgstr "H - темно-серый"
 
-#: src/data_io.cpp:1119
+#: src/data_io.cpp:1118
 msgid "HDF4 support was disabled. Please, enable it and rebuild MathGL."
 msgstr "HDF4 поддержка отключена. Включите ее и пересоберите MathGL."
 
@@ -3046,7 +3046,7 @@ msgstr "Загрузить шрифт"
 msgid "Load from file"
 msgstr "Загрузить из файла"
 
-#: src/exec_prm.cpp:626
+#: src/exec_prm.cpp:628
 msgid "Load image for background"
 msgstr "Загрузить фоновое изображение"
 
@@ -3191,7 +3191,7 @@ msgstr "Учитывать регистр"
 msgid "MathGL - about"
 msgstr "MathGL - о программе"
 
-#: src/base.cpp:265
+#: src/base.cpp:273
 #, c-format
 msgid "MathGL message - %s\n"
 msgstr "Сообщение MathGL - %s\n"
@@ -3232,7 +3232,7 @@ msgstr "Максимум Y для обрезания или координат"
 msgid "Maximal value of Z for cutting or for coordinate filling"
 msgstr "Максимум Z для обрезания или координат"
 
-#: src/data.cpp:1480
+#: src/data.cpp:1482
 #, c-format
 msgid "Maximum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Максимум %g\t при x = %ld\ty = %ld\tz = %ld\n"
@@ -3289,7 +3289,7 @@ msgstr "Минимум Y для обрезания или координат"
 msgid "Minimal value of Z for cutting or for coordinate filling"
 msgstr "Минимум Z для обрезания или координат"
 
-#: src/data.cpp:1483
+#: src/data.cpp:1485
 #, c-format
 msgid "Minimum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Минимум %g\t при x = %ld\ty = %ld\tz = %ld\n"
@@ -3680,7 +3680,7 @@ msgstr ""
 msgid "PNG Files \t*.png"
 msgstr "PNG файлы \t*.png"
 
-#: src/canvas_cf.cpp:495 src/canvas_cf.cpp:497 src/data_png.cpp:118
+#: src/canvas_cf.cpp:506 src/canvas_cf.cpp:508 src/data_png.cpp:118
 #: src/export.cpp:75 src/export.cpp:109
 msgid "PNG support was disabled. Please, enable it and rebuild MathGL."
 msgstr "PNG поддержка отключена. Включите ее и пересоберите MathGL."
@@ -3754,7 +3754,7 @@ msgstr "Поместить редактор сверху"
 msgid "Plot ID"
 msgstr "ID графика"
 
-#: src/exec_prm.cpp:643
+#: src/exec_prm.cpp:645
 msgid "Plot curve by formula"
 msgstr "Построить кривую по формуле"
 
@@ -3783,7 +3783,7 @@ msgstr "Настройки графика"
 msgid "Plot style"
 msgstr "Стиль графика"
 
-#: src/exec_prm.cpp:644
+#: src/exec_prm.cpp:646
 msgid "Plot surface by formula"
 msgstr "Построить поверхность по формуле"
 
@@ -3851,7 +3851,7 @@ msgstr "Напечатать график"
 msgid "Print script"
 msgstr "Напечатать скрипт"
 
-#: src/exec_prm.cpp:641
+#: src/exec_prm.cpp:643
 msgid "Print string from file"
 msgstr "Вывести строку в файл"
 
@@ -4613,7 +4613,7 @@ msgstr "Настроить шрифт"
 msgid "Setup light"
 msgstr "Настроить освещение"
 
-#: src/exec_prm.cpp:625
+#: src/exec_prm.cpp:627
 msgid "Setup or draw axis"
 msgstr "Настроить или нарисовать оси"
 
@@ -5209,7 +5209,7 @@ msgid ""
 msgstr "Повторяющиеся или близкие точки при триангуляции"
 
 #. mglScrStr
-#: src/base.cpp:251
+#: src/base.cpp:259
 msgid "There is changing temporary data in script"
 msgstr "Попытка изменить временные данные в скрипте"
 
@@ -5245,22 +5245,22 @@ msgstr ""
 "переменные из скрипта."
 
 #. mglScrCmd
-#: src/base.cpp:249
+#: src/base.cpp:257
 msgid "There is too long string(s) in script"
 msgstr "Слишком длинная строка в скрипте"
 
 #. mglScrLong
-#: src/base.cpp:250
+#: src/base.cpp:258
 msgid "There is unbalanced ' in script"
 msgstr "Лишняя кавычка ' в скрипте"
 
 #. mglWarnSpc
-#: src/base.cpp:247
+#: src/base.cpp:255
 msgid "There is wrong argument(s) in script"
 msgstr "Неправильные аргументы команды в скрипте"
 
 #. mglScrArg
-#: src/base.cpp:248
+#: src/base.cpp:256
 msgid "There is wrong command(s) in script"
 msgstr "В скрипте неправильная команд(ы)"
 
@@ -5692,7 +5692,7 @@ msgstr "Ширина"
 msgid "Width of selected cells"
 msgstr "Ширины выбранных ячеек"
 
-#: src/data.cpp:1490
+#: src/data.cpp:1492
 #, c-format
 msgid ""
 "Widths are:\n"
@@ -6107,7 +6107,7 @@ msgid "attach light"
 msgstr "прикрепить свет"
 
 #. mglWarnFmt
-#: src/base.cpp:244
+#: src/base.cpp:252
 msgid "axis ranges are incompatible"
 msgstr "размеры осей неправильные"
 
@@ -6148,7 +6148,7 @@ msgid "click at %g, %g, %g"
 msgstr "клик в %g, %g, %g"
 
 #. mglWarnCnt
-#: src/base.cpp:240
+#: src/base.cpp:248
 msgid "couldn't open file"
 msgstr "не могу открыть файл"
 
@@ -6161,17 +6161,17 @@ msgid "cutting"
 msgstr "обрезание"
 
 #. -----------------------------------------------------------------------------
-#: src/base.cpp:231
+#: src/base.cpp:239
 msgid "data dimension(s) is incompatible"
 msgstr "размеры данных несовместимы"
 
 #. mglWarnDim
-#: src/base.cpp:232
+#: src/base.cpp:240
 msgid "data dimension(s) is too small"
 msgstr "размеры данных слишком малы"
 
 #. mglWarnMem
-#: src/base.cpp:236
+#: src/base.cpp:244
 msgid "data values are zero"
 msgstr "значение данных равно нулю"
 
@@ -6203,11 +6203,11 @@ msgid "factor"
 msgstr "множитель"
 
 #. mglWarnSize
-#: src/base.cpp:243
+#: src/base.cpp:251
 msgid "format is not supported for that build"
 msgstr "формат не поддерживается для этой сборки"
 
-#: src/canvas.cpp:33
+#: src/canvas.cpp:31
 msgid "frame"
 msgstr "кадр"
 
@@ -6269,7 +6269,7 @@ msgid "left"
 msgstr "слева"
 
 #. mglWarnOpen
-#: src/base.cpp:241
+#: src/base.cpp:249
 msgid "light: ID is out of range"
 msgstr "light: ID вне диапазона"
 
@@ -6360,7 +6360,7 @@ msgid "min"
 msgstr "min"
 
 #. mglWarnLow
-#: src/base.cpp:233
+#: src/base.cpp:241
 msgid "minimal data value is negative"
 msgstr "минимальное значение отрицательно"
 
@@ -6374,12 +6374,12 @@ msgid "name"
 msgstr "имя"
 
 #. mglWarnNeg
-#: src/base.cpp:234
+#: src/base.cpp:242
 msgid "no file or wrong data dimensions"
 msgstr "нет файла или неверные размеры"
 
 #. mglWarnZero
-#: src/base.cpp:237
+#: src/base.cpp:245
 msgid "no legend entries"
 msgstr "нет записей легенды"
 
@@ -6401,12 +6401,12 @@ msgid "none or default"
 msgstr "нет или по умолчанию"
 
 #. mglWarnFile
-#: src/base.cpp:235
+#: src/base.cpp:243
 msgid "not enough memory"
 msgstr "не хватает памяти"
 
 #. mglWarnNull
-#: src/base.cpp:246
+#: src/base.cpp:254
 msgid "not enough space for plot"
 msgstr "не достаточно места для графика"
 
@@ -6415,7 +6415,7 @@ msgid "not used"
 msgstr "не используется"
 
 #. mglWarnSlc
-#: src/base.cpp:239
+#: src/base.cpp:247
 msgid "number of contours is zero or negative"
 msgstr "число контуров меньше или равно нуля"
 
@@ -6445,7 +6445,7 @@ msgid "plain"
 msgstr "карта"
 
 #. mglWarnTern
-#: src/base.cpp:245
+#: src/base.cpp:253
 msgid "pointer is NULL"
 msgstr "указатель равен NULL"
 
@@ -6498,12 +6498,12 @@ msgid "save slides"
 msgstr "сохранить кадры"
 
 #. mglWarnLId
-#: src/base.cpp:242
+#: src/base.cpp:250
 msgid "size(s) is zero or negative"
 msgstr "размер(ы) меньше или равны нулю"
 
 #. mglWarnLeg
-#: src/base.cpp:238
+#: src/base.cpp:246
 msgid "slice value is out of range"
 msgstr "срез вне диапазона"
 

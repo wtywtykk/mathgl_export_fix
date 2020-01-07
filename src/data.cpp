@@ -25,6 +25,8 @@
 #include "interp.hpp"
 
 MGL_EXPORT int mglNumThr=0;
+MGL_EXPORT std::vector<mglDataA*> mglDataList;
+
 //-----------------------------------------------------------------------------
 #if MGL_HAVE_PTHREAD
 #ifdef WIN32

@@ -651,6 +651,10 @@ inline mglData mglGSplineInit(const mglDataA &xdat, const mglDataA &ydat)
 inline mreal mglGSpline(const mglDataA &coef, mreal dx, mreal *d1=0, mreal *d2=0)
 {	return mgl_gspline(&coef, dx, d1,d2);	}
 //-----------------------------------------------------------------------------
+/// Evaluate formula 'str' for given list of variables 'vars'. 
+/** NOTE: you need to delete returned data array!*/
+HMDT MGL_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &vars);
+//-----------------------------------------------------------------------------
 /// Wrapper class for expression evaluating
 class MGL_EXPORT mglExpr
 {

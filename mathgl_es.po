@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 21:15+0300\n"
+"POT-Creation-Date: 2020-01-07 12:56+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -669,7 +669,7 @@ msgstr "Añadir texto"
 msgid "Add text which properties can be changed later by mouse."
 msgstr "Añadir texto configurable por el mouse."
 
-#: src/exec_prm.cpp:658
+#: src/exec_prm.cpp:660
 msgid "Add title for current subplot/inplot"
 msgstr "Añadir titulo al subgráfica/gráfica interna"
 
@@ -817,7 +817,7 @@ msgstr "Ejecutar script automáticamente al cargarlo"
 msgid "Automatically save before redrawing (F5)"
 msgstr "Guardar automáticamente antes de graficar (F5)"
 
-#: src/data.cpp:1488
+#: src/data.cpp:1490
 #, c-format
 msgid ""
 "Averages are:\n"
@@ -1099,19 +1099,19 @@ msgstr "Opciones de comando"
 msgid "Comments"
 msgstr "Comentarios"
 
-#: src/exec_prm.cpp:646
+#: src/exec_prm.cpp:648
 msgid "Computes the attractor of an IFS"
 msgstr "Calcula el atractor de un IFS"
 
-#: src/exec_prm.cpp:647
+#: src/exec_prm.cpp:649
 msgid "Computes the attractor of an IFS for 3d case"
 msgstr "Calcula el atractor de un IFS para el caso 3d"
 
-#: src/exec_prm.cpp:648
+#: src/exec_prm.cpp:650
 msgid "Computes the attractor of an IFS with parameters from *.ifs file"
 msgstr "Calcula el atractor de un IFS con parámetros de un archivo *.ifs"
 
-#: src/exec_prm.cpp:642
+#: src/exec_prm.cpp:644
 msgid "Computes the flame fractal"
 msgstr "Calcula un fractal de flama"
 
@@ -1528,7 +1528,7 @@ msgstr "Diagrama STFA"
 msgid "Draw TeX mark at point position"
 msgstr "Graficar marca de TeX en posición"
 
-#: src/exec_prm.cpp:624
+#: src/exec_prm.cpp:626
 msgid "Draw angle arc"
 msgstr "Graficar arco"
 
@@ -1552,11 +1552,11 @@ msgstr "Gráfica de correas coloreada por otros datos"
 msgid "Draw binormales for 1D data"
 msgstr "Gráfica de binormales para datos 1D"
 
-#: src/exec_prm.cpp:651
+#: src/exec_prm.cpp:653
 msgid "Draw bitmap (logo) along axis range"
 msgstr "Graficar imagen (logo) en el rango de ejes"
 
-#: src/exec_prm.cpp:628
+#: src/exec_prm.cpp:630
 msgid "Draw bounding box"
 msgstr "Graficar bordes"
 
@@ -1576,7 +1576,7 @@ msgstr "Diagrama de velas"
 msgid "Draw chart"
 msgstr "Gráfica de cuadros"
 
-#: src/exec_prm.cpp:629
+#: src/exec_prm.cpp:631
 msgid "Draw circle"
 msgstr "Graficar círculo"
 
@@ -1584,11 +1584,11 @@ msgstr "Graficar círculo"
 msgid "Draw cloud"
 msgstr "Gráfica de nube"
 
-#: src/exec_prm.cpp:631
+#: src/exec_prm.cpp:633
 msgid "Draw colorbar"
 msgstr "Graficar barra de colores"
 
-#: src/exec_prm.cpp:632
+#: src/exec_prm.cpp:634
 msgid "Draw cone"
 msgstr "Dibujar cono"
 
@@ -1632,7 +1632,7 @@ msgstr "Cilindros de nivel"
 msgid "Draw contour tubes for surface of triangles"
 msgstr "Cilindros de nivel para superficie de triángulos"
 
-#: src/exec_prm.cpp:633
+#: src/exec_prm.cpp:635
 msgid "Draw curve"
 msgstr "Graficar curva"
 
@@ -1674,15 +1674,15 @@ msgstr "Gráfica de gotas"
 msgid "Draw dots for arbitrary data points"
 msgstr "Diagrama de puntos para datos arbitrarios"
 
-#: src/exec_prm.cpp:634
+#: src/exec_prm.cpp:636
 msgid "Draw drop"
 msgstr "Graficar gota"
 
-#: src/exec_prm.cpp:635
+#: src/exec_prm.cpp:637
 msgid "Draw ellipse"
 msgstr "Graficar elipse"
 
-#: src/exec_prm.cpp:636
+#: src/exec_prm.cpp:638
 msgid "Draw error box"
 msgstr "Graficar caja de error"
 
@@ -1690,19 +1690,19 @@ msgstr "Graficar caja de error"
 msgid "Draw error boxes"
 msgstr "Graficar cajas de error"
 
-#: src/exec_prm.cpp:637
+#: src/exec_prm.cpp:639
 msgid "Draw face (quadrangle)"
 msgstr "Graficar faceta (cuadrángulo)"
 
-#: src/exec_prm.cpp:638
+#: src/exec_prm.cpp:640
 msgid "Draw face perpendicular to x-axis"
 msgstr "Graficar faceta perpendicular al eje x"
 
-#: src/exec_prm.cpp:639
+#: src/exec_prm.cpp:641
 msgid "Draw face perpendicular to y-axis"
 msgstr "Graficar faceta perpendicular al eje y"
 
-#: src/exec_prm.cpp:640
+#: src/exec_prm.cpp:642
 msgid "Draw face perpendicular to z-axis"
 msgstr "Graficar faceta perpendicular al eje z"
 
@@ -1726,7 +1726,7 @@ msgstr "Graficar de líneas de flujo desde plano para campo vectorial"
 msgid "Draw gradient lines for scalar field"
 msgstr "Graficar líneas de gradiente para campo escalar"
 
-#: src/exec_prm.cpp:645
+#: src/exec_prm.cpp:647
 msgid "Draw grid"
 msgstr "Graficar grilla"
 
@@ -1771,32 +1771,32 @@ msgstr "Isosuperficie para datos 3D con transparencia de otros datos"
 msgid "Draw label at arbitrary position"
 msgstr "Etiqueta en posición arbitraria"
 
-#: src/exec_prm.cpp:630
+#: src/exec_prm.cpp:632
 #, fuzzy
 msgid "Draw label for colorbar"
 msgstr "Etiqueta para eje t"
 
-#: src/exec_prm.cpp:659
+#: src/exec_prm.cpp:661
 msgid "Draw label for t-axis"
 msgstr "Etiqueta para eje t"
 
-#: src/exec_prm.cpp:660
+#: src/exec_prm.cpp:662
 msgid "Draw label for x-axis"
 msgstr "Etiqueta para el eje x"
 
-#: src/exec_prm.cpp:661
+#: src/exec_prm.cpp:663
 msgid "Draw label for y-axis"
 msgstr "Etiqueta para el eje y"
 
-#: src/exec_prm.cpp:662
+#: src/exec_prm.cpp:664
 msgid "Draw label for z-axis"
 msgstr "Etiqueta para el eje z"
 
-#: src/exec_prm.cpp:649
+#: src/exec_prm.cpp:651
 msgid "Draw legend"
 msgstr "Graficar leyenda"
 
-#: src/exec_prm.cpp:650
+#: src/exec_prm.cpp:652
 msgid "Draw line"
 msgstr "Graficar recta"
 
@@ -1817,11 +1817,11 @@ msgstr "Gráfica de marcas para datos 1D"
 msgid "Draw mesh surface"
 msgstr "Graficar grilla de superficie"
 
-#: src/exec_prm.cpp:627
+#: src/exec_prm.cpp:629
 msgid "Draw point (ball)"
 msgstr "Graficar punto (esfera)"
 
-#: src/exec_prm.cpp:652
+#: src/exec_prm.cpp:654
 msgid "Draw polygon"
 msgstr "Graficar polígono"
 
@@ -1837,11 +1837,11 @@ msgstr "Diagrama de radar"
 msgid "Draw reconstructed surface for arbitrary data points"
 msgstr "Graficar superficie reconstruida para puntos arbitrarios"
 
-#: src/exec_prm.cpp:653
+#: src/exec_prm.cpp:655
 msgid "Draw rectangle"
 msgstr "Graficar rectángulo"
 
-#: src/exec_prm.cpp:654
+#: src/exec_prm.cpp:656
 msgid "Draw rhombus"
 msgstr "Graficar rombo"
 
@@ -1885,7 +1885,7 @@ msgstr "Superficie sólida con coloración de otros datos"
 msgid "Draw solid surface transpared by other data"
 msgstr "Superficie sólida con transparencia de otros datos"
 
-#: src/exec_prm.cpp:655
+#: src/exec_prm.cpp:657
 msgid "Draw sphere"
 msgstr "Graficar esfera"
 
@@ -1921,11 +1921,11 @@ msgstr "Graficar tabla de valores"
 msgid "Draw tension plot for 1D data"
 msgstr "Gráfica de tensión para datos 1D"
 
-#: src/exec_prm.cpp:657
+#: src/exec_prm.cpp:659
 msgid "Draw text at some position or along curve"
 msgstr "Texto en posición especifica o curva"
 
-#: src/exec_prm.cpp:656
+#: src/exec_prm.cpp:658
 msgid "Draw user-defined symbol at given position and direction"
 msgstr "Símbolo personalizado en posición y dirección dadas"
 
@@ -2684,7 +2684,7 @@ msgstr "Grupos de comandos de MGL"
 msgid "H - darkgray"
 msgstr "H - gris oscuro"
 
-#: src/data_io.cpp:1119
+#: src/data_io.cpp:1118
 msgid "HDF4 support was disabled. Please, enable it and rebuild MathGL."
 msgstr "Formato HDF4 deshabilitado. Habilítelo y recompile MathGL."
 
@@ -3061,7 +3061,7 @@ msgstr "Cargar fuentes"
 msgid "Load from file"
 msgstr "Cargar de archivo"
 
-#: src/exec_prm.cpp:626
+#: src/exec_prm.cpp:628
 msgid "Load image for background"
 msgstr "Cargar imagen como fondo"
 
@@ -3206,7 +3206,7 @@ msgstr "Match case"
 msgid "MathGL - about"
 msgstr "MathGL - acerca de"
 
-#: src/base.cpp:265
+#: src/base.cpp:273
 #, c-format
 msgid "MathGL message - %s\n"
 msgstr "Mensaje de MathGL - %s\n"
@@ -3247,7 +3247,7 @@ msgstr "Valor maximal de Y para o para llenado de coord."
 msgid "Maximal value of Z for cutting or for coordinate filling"
 msgstr "Valor maximal de Z para corte o para llenado de coord."
 
-#: src/data.cpp:1480
+#: src/data.cpp:1482
 #, c-format
 msgid "Maximum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Maximo es %g\t en x = %ld\ty = %ld\tz = %ld\n"
@@ -3304,7 +3304,7 @@ msgstr "Valor minimal de Y para corte o para llenado de coord."
 msgid "Minimal value of Z for cutting or for coordinate filling"
 msgstr "Valor minimal de Z para corte o para llenado de coord."
 
-#: src/data.cpp:1483
+#: src/data.cpp:1485
 #, c-format
 msgid "Minimum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Minimo es %g\t en x = %ld\ty = %ld\tz = %ld\n"
@@ -3696,7 +3696,7 @@ msgstr "PNG"
 msgid "PNG Files \t*.png"
 msgstr "Archivos PNG \t*.png"
 
-#: src/canvas_cf.cpp:495 src/canvas_cf.cpp:497 src/data_png.cpp:118
+#: src/canvas_cf.cpp:506 src/canvas_cf.cpp:508 src/data_png.cpp:118
 #: src/export.cpp:75 src/export.cpp:109
 msgid "PNG support was disabled. Please, enable it and rebuild MathGL."
 msgstr "Formato PNG deshabilitado. Habilítelo y recompile MathGL."
@@ -3770,7 +3770,7 @@ msgstr "Mover editor arriba"
 msgid "Plot ID"
 msgstr "ID del gráfico"
 
-#: src/exec_prm.cpp:643
+#: src/exec_prm.cpp:645
 msgid "Plot curve by formula"
 msgstr "Gráficar curva por fórmula"
 
@@ -3799,7 +3799,7 @@ msgstr "Gráfica"
 msgid "Plot style"
 msgstr "Estilo de gráfica"
 
-#: src/exec_prm.cpp:644
+#: src/exec_prm.cpp:646
 msgid "Plot surface by formula"
 msgstr "Graficar superficie por fórmula"
 
@@ -3867,7 +3867,7 @@ msgstr "Imprimir gráfica"
 msgid "Print script"
 msgstr "Imprimir script"
 
-#: src/exec_prm.cpp:641
+#: src/exec_prm.cpp:643
 msgid "Print string from file"
 msgstr "Imprimir texto de archivo"
 
@@ -4630,7 +4630,7 @@ msgstr "Config. fuente"
 msgid "Setup light"
 msgstr "Config. luz"
 
-#: src/exec_prm.cpp:625
+#: src/exec_prm.cpp:627
 msgid "Setup or draw axis"
 msgstr "Config. o graficar eje"
 
@@ -5236,7 +5236,7 @@ msgstr ""
 "Hay puntos duplicados o indistinguiblemente juntos para la triangulación."
 
 #. mglScrStr
-#: src/base.cpp:251
+#: src/base.cpp:259
 msgid "There is changing temporary data in script"
 msgstr "Algunos datos temporales cambiaron en el script"
 
@@ -5272,22 +5272,22 @@ msgstr ""
 "existentes en las expresiones."
 
 #. mglScrCmd
-#: src/base.cpp:249
+#: src/base.cpp:257
 msgid "There is too long string(s) in script"
 msgstr "Texto muy largo en el script"
 
 #. mglScrLong
-#: src/base.cpp:250
+#: src/base.cpp:258
 msgid "There is unbalanced ' in script"
 msgstr "Desbalance de ' en el script"
 
 #. mglWarnSpc
-#: src/base.cpp:247
+#: src/base.cpp:255
 msgid "There is wrong argument(s) in script"
 msgstr "Argumento(s) incorrecto(s) en el script"
 
 #. mglScrArg
-#: src/base.cpp:248
+#: src/base.cpp:256
 msgid "There is wrong command(s) in script"
 msgstr "Comando(s) incorrecto(s) en el script"
 
@@ -5721,7 +5721,7 @@ msgstr "Ancho"
 msgid "Width of selected cells"
 msgstr "Ancho de las celdas seleccionadas"
 
-#: src/data.cpp:1490
+#: src/data.cpp:1492
 #, c-format
 msgid ""
 "Widths are:\n"
@@ -6147,7 +6147,7 @@ msgid "attach light"
 msgstr "vincular luz"
 
 #. mglWarnFmt
-#: src/base.cpp:244
+#: src/base.cpp:252
 msgid "axis ranges are incompatible"
 msgstr "rangos de ejes incompletos"
 
@@ -6188,7 +6188,7 @@ msgid "click at %g, %g, %g"
 msgstr "clic en %g, %g, %g"
 
 #. mglWarnCnt
-#: src/base.cpp:240
+#: src/base.cpp:248
 msgid "couldn't open file"
 msgstr "no se pudo abrir archivo"
 
@@ -6201,17 +6201,17 @@ msgid "cutting"
 msgstr "cortado"
 
 #. -----------------------------------------------------------------------------
-#: src/base.cpp:231
+#: src/base.cpp:239
 msgid "data dimension(s) is incompatible"
 msgstr "dimensión(es) de datos incompatible(s)"
 
 #. mglWarnDim
-#: src/base.cpp:232
+#: src/base.cpp:240
 msgid "data dimension(s) is too small"
 msgstr "dimensión(es) de datos muy pequeña(s)"
 
 #. mglWarnMem
-#: src/base.cpp:236
+#: src/base.cpp:244
 msgid "data values are zero"
 msgstr "valores nulos"
 
@@ -6243,11 +6243,11 @@ msgid "factor"
 msgstr "factor"
 
 #. mglWarnSize
-#: src/base.cpp:243
+#: src/base.cpp:251
 msgid "format is not supported for that build"
 msgstr "formato no soportado"
 
-#: src/canvas.cpp:33
+#: src/canvas.cpp:31
 msgid "frame"
 msgstr "cuadro"
 
@@ -6309,7 +6309,7 @@ msgid "left"
 msgstr "izquierda"
 
 #. mglWarnOpen
-#: src/base.cpp:241
+#: src/base.cpp:249
 msgid "light: ID is out of range"
 msgstr "luz: ID fuera de rango"
 
@@ -6401,7 +6401,7 @@ msgid "min"
 msgstr "min"
 
 #. mglWarnLow
-#: src/base.cpp:233
+#: src/base.cpp:241
 msgid "minimal data value is negative"
 msgstr "valor minimal de datos es negativo"
 
@@ -6415,12 +6415,12 @@ msgid "name"
 msgstr "nombre"
 
 #. mglWarnNeg
-#: src/base.cpp:234
+#: src/base.cpp:242
 msgid "no file or wrong data dimensions"
 msgstr "archivo no existe o las dimensiones de datos son incorrectas"
 
 #. mglWarnZero
-#: src/base.cpp:237
+#: src/base.cpp:245
 msgid "no legend entries"
 msgstr "leyenda vacia"
 
@@ -6442,12 +6442,12 @@ msgid "none or default"
 msgstr "ninguno o por defecto"
 
 #. mglWarnFile
-#: src/base.cpp:235
+#: src/base.cpp:243
 msgid "not enough memory"
 msgstr "no hay suficiente memoria"
 
 #. mglWarnNull
-#: src/base.cpp:246
+#: src/base.cpp:254
 msgid "not enough space for plot"
 msgstr "no hay suficiente espacio para gráfica"
 
@@ -6456,7 +6456,7 @@ msgid "not used"
 msgstr "no usado"
 
 #. mglWarnSlc
-#: src/base.cpp:239
+#: src/base.cpp:247
 msgid "number of contours is zero or negative"
 msgstr "número de curvas de nivel es cero o negativo"
 
@@ -6487,7 +6487,7 @@ msgid "plain"
 msgstr "plano"
 
 #. mglWarnTern
-#: src/base.cpp:245
+#: src/base.cpp:253
 msgid "pointer is NULL"
 msgstr "puntero es NULL"
 
@@ -6542,12 +6542,12 @@ msgid "save slides"
 msgstr "guardar cuadros"
 
 #. mglWarnLId
-#: src/base.cpp:242
+#: src/base.cpp:250
 msgid "size(s) is zero or negative"
 msgstr "tamaño(s) nulo(s) o negativo(s)"
 
 #. mglWarnLeg
-#: src/base.cpp:238
+#: src/base.cpp:246
 msgid "slice value is out of range"
 msgstr "valor de sección fuera de rango"
 

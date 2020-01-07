@@ -204,8 +204,16 @@ using mglBase::Light;
 
 	/// Rasterize current plot and set it as background image
 	void Rasterize();
-	/// Load image for background from file
+	/// Load image for background from file (basic variant)
 	void LoadBackground(const char *fname, double alpha=1);
+	/// Load image for background from file. 
+	/** Parameter 'how' can be:
+	 *   'a' for filling current subplot only;
+	 *   's' for spline-based resizing;
+	 *   'f' for fixing aspect ratio at resizing;
+	 *   'c' for centering image;
+	 *   't' for tessellate image. */
+	void LoadBackground(const char *fname, const char *how, double alpha=1);
 	/// Fill background image by specified color
 	void FillBackground(const mglColor &cc);
 

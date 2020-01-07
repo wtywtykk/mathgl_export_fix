@@ -1,149 +1,97 @@
-#include <iostream>
-#include <string.h>
+#include <locale.h>
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-//===================================================================
-#define IM1 2147483563
-#define IM2 2147483399
-#define AM (1.0/IM1)
-#define IMM1 (IM1-1)
-#define IA1 40014
-#define IA2 40692
-#define IQ1 53668
-#define IQ2 52774
-#define IR1 12211
-#define IR2 3791
-#define NTAB 32
-#define NDIV (1+IMM1/NTAB)
-#define EPS 1.2e-7
-#define RNMX (1.0-EPS)
-#ifndef NULL
-#define NULL 0L
-#endif
-//===================================================================
-double Random()
-// Long period (> 2 * 10^18 ) random number generator of L'Ecuyer with
-// Bays-Durham shuffle and added safeguards. Returns a uniform random deviate
-// between 0.0 and 1.0 (exclusive of the endpoint values). Call with idum a
-// negative integer to initialize; thereafter, do not alter idum between
-// successive deviates in a sequence. RNMX should approximate the largest
-// floating value that is less than 1.
-{
-	static long idum=0;
-	int j;
-	long k;
-	static long idum2=123456789;
-	static long iy=0;
-	static long iv[NTAB];
-	double temp;
-	if(idum==0)
-		idum = -(long)(time(NULL));
-	if (idum <= 0) { 				// Initialize.
-		if (-(idum) < 1) idum=1;	// Be sure to prevent idum = 0.
-		else idum = -(idum);
-		idum2=(idum);
-		for (j=NTAB+7;j>=0;j--) {	// Load the shuffle table (after 8 warm-ups).
-			k=(idum)/IQ1;
-			idum=IA1*(idum-k*IQ1)-k*IR1;
-			if (idum < 0) idum += IM1;
-			if (j < NTAB) iv[j] = idum;
-		}
-		iy=iv[0];
-	}
-	k=(idum)/IQ1; 					// Start here when not initializing.
-	idum=IA1*(idum-k*IQ1)-k*IR1;	// Compute idum=(IA1*idum) % IM1 without
-									// over ows by Schrage's method.
-	if (idum < 0) idum += IM1;
-	k=idum2/IQ2;
-	idum2=IA2*(idum2-k*IQ2)-k*IR2;	// Compute idum2=(IA2*idum) % IM2 likewise.
-	if (idum2 < 0) idum2 += IM2;
-	j=iy/NDIV; 						// Will be in the range 0..NTAB-1.
-	iy=iv[j]-idum2;					// Here idum is shued, idum and idum2 are
-									// combined to generate output.
-	iv[j] = idum;
-	if (iy < 1) iy += IMM1;
-	if ((temp=AM*iy) > RNMX)	// Because users don't expect endpoint values.
-		return RNMX;
-	else return temp;
-}
-//===================================================================
-int strpos(char *str,char ch)
-{
-	char *p=strchr(str,ch);
-	int res;
-	if(p)	res = p-str;
-	else	res = -1;
-	return res;
-}
-//===================================================================
-// multi_task empl_7b_tr.ini empl.ini 0:1:2 2:2:6
+
+#include "mgl2/addon.h"
+#include "mgl2/data.h"
+//-----------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
-	bool e[10];
-	if(argc<3)    // if incorrect number of arguments then print the help
+	const char *args_opt="a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:";
+	std::string eqs[26];
+	while(1)
+	{
+		int ch = getopt(argc, argv, args_opt);
+		if(ch>='a' & ch<='z')	eqs[ch-'a'] = optarg;
+		if(ch<0)	break;
+	}
+	
+	double x1[3]={0,0,0},x2[3]={0,0,0},dx[3]={1,1,1};
+	bool e[3]={false,false,false};
+	int n=argc-optind-2;	// number of counters
+
+	if(n<1)    // if incorrect number of arguments then print the help
 	{
 		printf("mgltask make output file with a set of copies of mask-file with repeatedly replaced $# by loop values. It useful for making set of initial conditions with a few parameters varied in specified range.\n");
-		printf("Usage:\tmgltask maskfile outputfile [min1:step1:max1] [min2:step2:max2]\n\n");
-		printf("\tmask file  -- mask file in which all '$#' will be replaced by counter # value\n");
-		printf("\t\tHere # = 0 is random number in [0,1].\n");
-		printf("\t\tHere # = 1,2...9 is counter number.\n");
-		printf("\toutputfile -- file where result will be saved\n");
-		printf("\tmin#:step#:max# -- is minimum, step increment and maximum values of counter #\n");
-		printf("\t'e'min#:step#:max# -- the same but in exponential form 10^#\n");
+		printf("Usage:\tmgltask [options] maskfile outputfile [min1:step1:max1 [min2:step2:max2 [min3:step3:max3]]]\n\n");
+		printf("\tmask file  -- mask file in which all '$#' will be replaced by counter # value.\n");
+		printf("\t\tHere # = 0 is random number in [0,1]; # = 1,2,3 are counters;\n");
+		printf("\t\t# = a,b,...,z are formulas defined by options.\n");
+		printf("\toutputfile -- file where result will be saved, the '-' will print in stdout;\n");
+		printf("\tmin#:step#:max# -- is minimum, step increment and maximum values of counter #;\n");
+		printf("\t'e'min#:step#:max# -- the same but in exponential form 10^#.\n");
+		printf("\tOptions -a, -b, ..., -z define formulas for arguments $a,$b,...,$z,\n");
+		printf("\t\twhich can depended on counters v0=$0,v1=$1,v2=$2,v3=$3.\n");
 //		system("PAUSE");
 		return 0;
 	}
-	//char maskname[256],outname[256];
-	char str[1024],*buf;
-	double x1[10],x2[10],dx[10],x[10];
-	int k,i,n=argc-3;//=(argc==4) ? 1:2;
-	FILE *fm,*fo;
-	
-	// first place zeros
-	for(i=0;i<10;i++)
-	{
-		x1[i] = x2[i] = 0;
-		dx[i] = 1;
-		e[i] = false;
-	}
-	printf("mask = %s, out = %s\n",argv[1],argv[2]);
+
+	FILE *fm = fopen(argv[optind],"r");
+	FILE *fo = strcmp(argv[optind+1],"-") ? fopen(argv[optind+1],"w"):stdout;
+	printf("mask = %s, out = %s\n",argv[optind],argv[optind+1]);
 	// read parameters of loops
-	for(i=0;i<n;i++)
+	for(int i=0;i<n;i++)
 	{
-		char *par = argv[i+3];
+		const char *par = argv[optind+i+2];
 		if(par[0]=='e')	{	e[i] = true;	par++;	}
-		sscanf(par,"%lg:%lg:%lg",&(x1[i]),&(dx[i]),&(x2[i]));
-		printf("%g:%g:%g\n",x1[i],dx[i],x2[i]);
+		int r=sscanf(par,"%lg:%lg:%lg",x1+i,dx+i,x2+i);
+		if(r==2)	{	x2[i]=dx[i];	dx[i]=1;	}
+		else if(r!=3)	break;	// something wrong in arguments
+		printf("$%d in %g:%g:%g\n",i+1,x1[i],dx[i],x2[i]);
 	}
 	// for each variable
-	fm = fopen(argv[1],"r");
-	fo = fopen(argv[2],"w");
-	for(x[0]=x1[0];x[0]<=x2[0];x[0]+=dx[0])
-		for(x[1]=x1[1];x[1]<=x2[1];x[1]+=dx[1])
+	double v1,v2,v3;
+	mglData d0,d1,d2,d3;
+	d0.Name("v0");	d1.Name("v1");	d2.Name("v2");	d3.Name("v3");
+	double vals[26]={0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
+	for(v3=x1[2];v3<=x2[2];v3+=dx[2])	for(v2=x1[1];v2<=x2[1];v2+=dx[1])	for(v1=x1[0];v1<=x2[0];v1+=dx[0])
+	{
+		d0.a[0]=mgl_rnd();	d1.a[0]=v1;	d2.a[0]=v2;	d3.a[0]=v3;
+		for(int i=0;i<26;i++)	if(!eqs[i].empty())
 		{
-			fseek(fm,0,0);
-			while(!feof(fm))
-			{
-				fgets(str,1024,fm);		// for each string
-				buf = str;
-				while((i=strpos(buf,'$'))!=-1)    // find '$'
-				{
-					k=buf[i+1]-'1';
-					buf[i]=0;
-					if(k<0)				// random number
-						fprintf(fo,"%s%g",buf,Random());
-					if(k>=0 && k<n)		// if parameter is correct then change it
-						fprintf(fo,"%s%g",buf,e[k] ? exp(M_LN10*x[k]):(fabs(x[k])<1e-10?0:x[k]));
-					buf = &(buf[i+2]);	// handle the last part
-				}
-				fprintf(fo,"%s",buf);	// write it
-			}
-			fprintf(fo,"\n");
+			HMDT d = mgl_formula_calc(eqs[i].c_str(), 4, &d0,&d1,&d2,&d3);
+			vals[i] = d->a[0];	mgl_delete_data(d);
 		}
-	fclose(fm);
-	fclose(fo);
+		
+		fseek(fm,0,0);
+		while(!feof(fm))
+		{
+			int i;
+			char str[1024],*buf=str;
+			char *r=fgets(str,1024,fm);		// for each string
+			if(!r)	break;
+			while((i=mgl_chrpos(buf,'$'))!=-1)    // find '$'
+			{
+				char k=buf[i+1];
+				buf[i]=0;
+				if(k=='0')	fprintf(fo,"%s%g",buf,d0.a[0]);
+				else if(k=='1')
+					fprintf(fo,"%s%g",buf,e[0] ? exp(M_LN10*v1):(fabs(v1)<1e-10?0:v1));
+				else if(k=='2')
+					fprintf(fo,"%s%g",buf,e[1] ? exp(M_LN10*v2):(fabs(v2)<1e-10?0:v2));
+				else if(k=='3')
+					fprintf(fo,"%s%g",buf,e[2] ? exp(M_LN10*v3):(fabs(v3)<1e-10?0:v3));
+				else if(k>='a' && k<='z')	fprintf(fo,"%s%g",buf,vals[k-'a']);
+				buf = &(buf[i+2]);	// handle the last part
+			}
+			fprintf(fo,"%s",buf);	// write it
+		}
+		fprintf(fo,"\n");
+	}
+	fclose(fm);	fclose(fo);
 	return 0;
 }
-//===================================================================
+//-----------------------------------------------------------------------------

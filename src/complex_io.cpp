@@ -34,7 +34,6 @@
 
 inline bool isn(char ch)	{return ch=='\n';}
 MGL_NO_EXPORT char *mgl_read_gz(gzFile fp);
-HADT MGL_NO_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &head);
 //-----------------------------------------------------------------------------
 HADT MGL_EXPORT mgl_create_datac()	{	return new mglDataC;	}
 HADT MGL_EXPORT mgl_create_datac_size(long nx, long ny, long nz){	return new mglDataC(nx,ny,nz);	}
@@ -882,8 +881,9 @@ int MGL_EXPORT mgl_datac_read_hdf(HADT d,const char *fname,const char *data)
 	hf = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
 	if(hf<0)	return 0;
 	hd = H5Dopen(hf,data);
-	if(hd<0)	return 0;
+	if(hd<0)	{	H5Fclose(hf);	return 0;	}
 	hs = H5Dget_space(hd);
+	if(hs<0)	{	H5Dclose(hd);	H5Fclose(hf);	return 0;	}
 	rank = H5Sget_simple_extent_ndims(hs);
 	if(rank>0 && rank<=4)
 	{

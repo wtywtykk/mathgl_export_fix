@@ -550,6 +550,73 @@ void mglCanvas::LoadBackground(const char *fname, double alpha)
 		for(long i=0;i<Width*Height;i++)	GB[4*i+3] = (unsigned char)(GB[4*i+3]*alpha);
 }
 //-----------------------------------------------------------------------------
+void mglCanvas::LoadBackground(const char *fname, const char *how, double alpha)
+{
+	int w,h;	// bitmap sizes
+	unsigned char *g=NULL;
+	mgl_read_image(&g,w,h,fname);
+	if(!g)	return;
+	if(alpha<1 && alpha>0)
+#pragma omp parallel for
+		for(long i=0;i<w*h;i++)	g[4*i+3] = (unsigned char)(g[4*i+3]*alpha);
+	int ww=Width, hh=Height, ii=0, jj=0;	// canvas range
+	if(mglchr(how,'a'))	{	ww=inW;	hh=inH;	ii=inX;	jj=Height-inY-inH;	}
+	int di = 0, dj=0;	// bitmap shift
+	bool center=false;
+	if(mglchr(how,'c'))	{	center=true;	di = (w-ww)/2;	dj = (h-hh)/2;	}
+	if(mglchr(how,'s'))	// spline resizing
+	{
+		double ki=double(w-1)/(ww-1), kj=double(h-1)/(hh-1);
+		for(int j=0;j<hh-1;j++)
+		{
+			double tj = kj*j;
+			int pj = int(tj);
+			if(pj>h-1)	{	pj--;	tj=1;	}	else	tj -= pj;
+			for(int i=0;i<ww-1;i++)
+			{
+				unsigned char *b=GB+4*(ii+i+Width*(jj+j));
+				int pi = int(ki*i);
+				double ti = ki*i-pi;
+				const unsigned char *p=g+4*(pi+w*pj), *q=g+4*(pi+w*pj+w);
+				b[0] = p[0]*(1-ti)*(1-tj) + p[4]*ti*(1-tj) + q[0]*(1-ti)*tj + q[4]*ti*tj;
+				b[1] = p[1]*(1-ti)*(1-tj) + p[5]*ti*(1-tj) + q[1]*(1-ti)*tj + q[5]*ti*tj;
+				b[2] = p[2]*(1-ti)*(1-tj) + p[6]*ti*(1-tj) + q[2]*(1-ti)*tj + q[6]*ti*tj;
+				b[3] = p[3]*(1-ti)*(1-tj) + p[7]*ti*(1-tj) + q[3]*(1-ti)*tj + q[7]*ti*tj;
+			}
+			unsigned char *b=GB+4*(ii+ww-1+Width*(jj+j));
+			const unsigned char *p=g+4*(w*(pj+1)-1), *q=g+4*(w*(pj+2)-1);
+			b[0] = q[0]*tj + p[0]*(1-tj);
+			b[1] = q[1]*tj + p[1]*(1-tj);
+			b[2] = q[2]*tj + p[2]*(1-tj);
+			b[3] = q[3]*tj + p[3]*(1-tj);
+		}
+	}
+	else if(mglchr(how,'m'))	// mosaic
+	{
+		while(di<0)	di+=w;	// stupid correction
+		while(dj<0)	dj+=h;
+		for(int j=0;j<hh;j++)
+		{
+			int pj = (j+dj)%h;
+			for(int i=0;i<ww;i++)
+			{
+				unsigned char *b=GB+4*(ii+i+Width*(jj+j));
+				int pi = (i+di)%w;
+				unsigned char *p=g+4*(pi+w*pj);
+				b[0] = p[0];	b[1] = p[1];	b[2] = p[2];	b[3] = p[3];
+			}
+		}
+	}
+	else
+	{
+		if(w<ww)	{	ww=w;	if(center)	{	ii-=di;	di=0;	}	}
+		if(h<hh)	{	hh=h;	if(center)	{	jj-=dj;	dj=0;	}	}
+		for(int j=0;j<hh;j++)
+			memcpy(GB+4*(ii+Width*(jj+j)), g+4*(di+w*(dj+j)), 4*ww);
+	}
+	if(g)	delete []g;
+}
+//-----------------------------------------------------------------------------
 void mglCanvas::FillBackground(const mglColor &cc)
 {
 	BDef[0] = (unsigned char)(255*cc.r);	BDef[1] = (unsigned char)(255*cc.g);

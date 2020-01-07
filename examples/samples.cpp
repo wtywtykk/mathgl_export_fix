@@ -837,6 +837,21 @@ void smgl_fonts(mglGraph *gr)	// font typefaces
 	gr->LoadFont("");
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_background="define $f udav_new.png\n#background '$f' 's'\n"
+"subplot 2 2 0 '':box\nbackground '$f' 'a'\ntext 0.5 0.1 'Default' 'a'\n"
+"subplot 2 2 1 '':box\nbackground '$f' 'ca'\ntext 0.5 0.1 'Centering' 'a'\n"
+"subplot 2 2 2 '':box\nbackground '$f' 'ma'\ntext 0.5 0.1 'Mosaic' 'a'\n"
+"subplot 2 2 3 '':box\nbackground '$f' 'sa'\ntext 0.5 0.1 'Scaling' 'a'";
+void smgl_background(mglGraph *gr)
+{
+	const char *fname = "udav_new.png";
+	gr->SubPlot(2,2,0,"");	gr->Box();	gr->LoadBackground(fname,"a");	gr->Puts(0.5,0.1,"Default","a");
+	gr->SubPlot(2,2,1,"");	gr->Box();	gr->LoadBackground(fname,"ca");	gr->Puts(0.5,0.1,"Centering","a");
+	gr->SubPlot(2,2,2,"");	gr->Box();	gr->LoadBackground(fname,"ma");	gr->Puts(0.5,0.1,"Mosaic","a");
+	gr->SubPlot(2,2,3,"");	gr->Box();	gr->LoadBackground(fname,"sa");	gr->Puts(0.5,0.1,"Scaling","a");
+	//gr->LoadBackground(fname,"s");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_bars="new ys 10 3 '0.8*sin(pi*(x+y/4+1.25))+0.2*rnd':origin 0 0 0\n"
 "subplot 3 2 0 '':title 'Bars plot (default)':box:bars ys\nsubplot 3 2 1 '':title '2 colors':box:bars ys 'cbgGyr'\n"
 "subplot 3 2 4 '':title '\"\\#\" style':box:bars ys '#'\n"
@@ -2845,6 +2860,26 @@ void smgl_ifs2d(mglGraph *gr)
 	gr->Axis();	gr->Plot(f.SubData(0), f.SubData(1),"r#o ","size 0.05");
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_icon="setsize 200 200\nzrange 0 2\n\ndefine $s 0.8\nnew x 200 '$s*(x+1)/2*sin(2*pi*x)'\n"
+"new y 200 '$s*(x+1)/2*cos(2*pi*x)'\nnew z 200 '$s*(2-(x+1))+0.1'\n"
+"new r 200 '0.02+0.07*(x+1)'\n\nsubplot 1 1 0 '#'\nfsurf 'v*cos(2*pi*u)' 'v*sin(2*pi*u)-0.05' 'v/2' 'Yyyww'\n"
+"light on\nrotate 65 80\ntube x y z+0.15 r\ndefine $r 0.13\n"
+"fsurf '0+$r*cos(2*pi*u)*cos(2*pi*v)' '0.03+$r*cos(2*pi*u)*sin(2*pi*v)' '2*$s+0.25+$r*sin(2*pi*u)' 'r'\n"
+"define $r 0.155\nfsurf '$r*cos(2*pi*u)*cos(2*pi*v)' '$s+$r*cos(2*pi*u)*sin(2*pi*v)' '0.25+$r*sin(2*pi*u)' 'b'\n";
+void smgl_icon(mglGraph *gr)
+{
+	gr->SetSize(200,200);	gr->SetRange('z',0,2);
+	mglData x(200);	gr->Fill(x,"0.8*(x+1)/2*sin(2*pi*x)");
+	mglData y(200);	gr->Fill(y,"0.8*(x+1)/2*cos(2*pi*x)");
+	mglData z(200);	gr->Fill(z,"0.8*(2-(x+1))+0.25");
+	mglData r(200);	gr->Fill(r,"0.02+0.07*(x+1)");
+	gr->SubPlot(1,1,0,"#");
+	gr->FSurf("v*cos(2*pi*u)","v*sin(2*pi*u)-0.05","v/2","Yyyww");
+	gr->Light(true);	gr->Rotate(65,80);	gr->Tube(x,y,z,r);
+	gr->FSurf("0.13*cos(2*pi*u)*cos(2*pi*v)","0.03+0.13*cos(2*pi*u)*sin(2*pi*v)","1.85+0.13*sin(2*pi*u)","r");
+	gr->FSurf("0.155*cos(2*pi*u)*cos(2*pi*v)","0.8+0.155*cos(2*pi*u)*sin(2*pi*v)","0.25+0.155*sin(2*pi*u)","b");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_ifs3d="list A [0,0,0,0,.18,0,0,0,0,0,0,0,.01] [.85,0,0,0,.85,.1,0,-0.1,0.85,0,1.6,0,.85]\\\n"
 "\t[.2,-.2,0,.2,.2,0,0,0,0.3,0,0.8,0,.07] [-.2,.2,0,.2,.2,0,0,0,0.3,0,0.8,0,.07]\n"
 "ifs3d f A 100000\ntitle 'IFS 3d sample':rotate 50 60\n"
@@ -3453,6 +3488,7 @@ mglSample samp[] = {
 	{"aspect", smgl_aspect, mmgl_aspect, "Example of @ref{subplot}, @ref{inplot}, @ref{rotate}, @ref{aspect}, @ref{shear}."},
 	{"axial", smgl_axial, mmgl_axial, "Function @ref{axial} draw surfaces of rotation for contour lines. You can draw wire surfaces (@samp{#} style) or ones rotated in other directions (@samp{x}, @samp{z} styles)."},
 	{"axis", smgl_axis, mmgl_axis, "Different forms of @ref{axis} position."},
+	{"background", smgl_background, mmgl_background, "Load @ref{background} from an image file."},
 	{"barh", smgl_barh, mmgl_barh, "Function @ref{barh} is the similar to @ref{bars} but draw horizontal bars."},
 	{"bars", smgl_bars, mmgl_bars, "Function @ref{bars} draw vertical bars. It have a lot of options: bar-above-bar (@samp{a} style), fall like (@samp{f} style), 2 colors for positive and negative values, wired bars (@samp{#} style), 3D variant."},
 	{"belt", smgl_belt, mmgl_belt, "Function @ref{belt} draw surface by belts. You can use @samp{x} style for drawing lines in other direction."},
@@ -3505,6 +3541,7 @@ mglSample samp[] = {
 	{"fonts", smgl_fonts, mmgl_fonts, "Example of @ref{font} typefaces."},
 	{"grad", smgl_grad, mmgl_grad, "Function @ref{grad} draw gradient lines for matrix."},
 	{"hist", smgl_hist, mmgl_hist, "Example of @ref{hist} (histogram)."},
+	{"icon", smgl_icon, mmgl_icon, "Default UDAV and mgllab icon."},
 	{"ifs2d", smgl_ifs2d, mmgl_ifs2d, "Function @ref{ifs2d} generate points for fractals using iterated function system in 2d case."},
 	{"ifs3d", smgl_ifs3d, mmgl_ifs3d, "Function @ref{ifs3d} generate points for fractals using iterated function system in 3d case."},
 	{"indirect",smgl_indirect,mmgl_indirect, "Comparison of @ref{subdata} vs @ref{evaluate}/"},

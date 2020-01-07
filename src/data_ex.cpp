@@ -25,7 +25,6 @@
 #include "mgl2/thread.h"
 #include "interp.hpp"
 void MGL_NO_EXPORT mgl_txt_func(const mreal *x, mreal *dx, void *par);
-HMDT MGL_NO_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head);
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_data_trace(HCDT d)
 {

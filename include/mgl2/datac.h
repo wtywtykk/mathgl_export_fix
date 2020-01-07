@@ -587,6 +587,10 @@ inline mglDataC mglGSplineCInit(const mglDataA &xdat, const mglDataA &ydat)
 inline dual mglGSplineC(const mglDataA &coef, mreal dx, dual *d1=0, dual *d2=0)
 {	return mgl_gsplinec(&coef, dx, reinterpret_cast<mdual*>(d1), reinterpret_cast<mdual*>(d2));	}
 //-----------------------------------------------------------------------------
+/// Evaluate formula 'str' for given list of variables 'vars'.
+/** NOTE: you need to delete returned data array!*/
+HADT MGL_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &vars);
+//-----------------------------------------------------------------------------
 #define _DN_(a)	((mglDataC *)*(a))
 #define _DC_		((mglDataC *)*d)
 //-----------------------------------------------------------------------------

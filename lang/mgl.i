@@ -26,9 +26,23 @@ class mglGraph
 protected:
 	HMGL gr;
 public:
-	inline mglGraph(int kind=0, int width=600, int height=400)
-	{
-		if(kind==-1)	gr=NULL;
+	mglGraph(int kind=2)
+	{	pr = NULL;
+		if(kind==0)	gr=mgl_create_graph(600, 400);
+		else if(kind==-1)	gr=NULL;
+#if MGL_HAVE_OPENGL
+		else if(kind==1)	gr=mgl_create_graph_gl();
+#else
+		else if(kind==1)
+		{	gr=mgl_gr;	mgl_use_graph(gr,1);
+			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
+#endif
+		else	{	gr=mgl_gr;	mgl_use_graph(gr,1);	}
+	}
+	mglGraph(int kind, int width, int height)
+	{	pr = NULL;
+		if(kind==0)	gr=mgl_create_graph(width, height);
+		else if(kind==-1)	gr=NULL;
 #if MGL_HAVE_OPENGL
 		else if(kind==1)	gr=mgl_create_graph_gl();
 #else
@@ -36,7 +50,7 @@ public:
 		{	gr=mgl_create_graph(width, height);
 			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
 #endif
-		else	gr=mgl_create_graph(width, height);
+		else	{	gr=mgl_gr;	mgl_use_graph(gr,1);	}
 	}
 	inline mglGraph(HMGL graph)
 	{	gr = graph;		mgl_use_graph(gr,1);	}
@@ -2314,4 +2328,6 @@ public:
 	/// Delete all data variables
 	void DeleteAll()	{	mgl_parser_del_all(pr);	}
 };
+//-----------------------------------------------------------------------------
+mglGraph mglGr;
 //-----------------------------------------------------------------------------

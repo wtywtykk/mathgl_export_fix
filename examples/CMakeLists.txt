@@ -1,3 +1,4 @@
+file(COPY ${CMAKE_SOURCE_DIR}/udav_new.png DESTINATION ${CMAKE_BINARY_DIR}/examples)
 file(COPY ${CMAKE_SOURCE_DIR}/examples/iris.dat DESTINATION ${CMAKE_BINARY_DIR}/examples)
 file(COPY ${CMAKE_SOURCE_DIR}/examples/Equirectangular-projection.jpg DESTINATION ${CMAKE_BINARY_DIR}/examples)
 file(COPY ${CMAKE_SOURCE_DIR}/examples/samples.cpp DESTINATION ${CMAKE_BINARY_DIR}/examples)

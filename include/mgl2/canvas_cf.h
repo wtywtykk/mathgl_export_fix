@@ -31,6 +31,9 @@ uintptr_t MGL_EXPORT mgl_create_graph_(int *width, int *height);
 /// Delete HMGL object
 void MGL_EXPORT mgl_delete_graph(HMGL gr);
 void MGL_EXPORT mgl_delete_graph_(uintptr_t *gr);
+/// Return pointer to built-in (default) HMGL object
+HMGL MGL_EXPORT mgl_default_graph();
+uintptr_t MGL_EXPORT mgl_default_graph_();
 /// Set size of frame in pixels. Normally this function is called internally.
 void MGL_EXPORT mgl_set_size(HMGL gr, int width, int height);
 void MGL_EXPORT mgl_set_size_(uintptr_t *gr, int *width, int *height);
@@ -444,6 +447,14 @@ void MGL_EXPORT mgl_clf_str_(uintptr_t *gr, const char *col, int);
 /// Load background image
 void MGL_EXPORT mgl_load_background(HMGL gr, const char *fname, double alpha);
 void MGL_EXPORT mgl_load_background_(uintptr_t *gr, const char *fname, mreal *alpha, int);
+/// Load background image
+	/** Parameter 'how' can be:
+	 *   'a' for filling current subplot only;
+	 *   's' for scaling (resizing) image to whole area;
+	 *   'c' for centering image;
+	 *   'm' for tessellate image as mosaic. */
+void MGL_EXPORT mgl_load_background_ext(HMGL gr, const char *fname, const char *how, double alpha);
+void MGL_EXPORT mgl_load_background_ext_(uintptr_t *gr, const char *fname, const char *how, mreal *alpha, int,int);
 
 /// Put further plotting in m-th cell of nx*ny grid of the image.
 /** String \a style may contain:

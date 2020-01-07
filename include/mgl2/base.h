@@ -267,7 +267,8 @@ struct MGL_EXPORT mglGlyph
 	mglGlyph(long Nt, long Nl):nt(0),nl(0),trig(0),line(0)	{	Create(Nt,Nl);	}
 	~mglGlyph()	{	if(trig)	delete []trig;	if(line)	delete []line;	}
 
-	void Create(long Nt, long Nl);
+	void Create(long Nt, long Nl);	///< Allocate memory for given sizes
+	void Load(wchar_t id, const char *fname);	///< Load glyph 'id' from TTF/OTF file 'fname'
 	bool operator==(const mglGlyph &g) const MGL_FUNC_PURE;
 	inline bool operator!=(const mglGlyph &g) const MGL_FUNC_PURE
 	{	return !(*this==g);	}

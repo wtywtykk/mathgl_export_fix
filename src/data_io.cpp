@@ -40,7 +40,6 @@
 #endif
 
 inline bool isn(char ch)	{return ch=='\n';}
-HMDT MGL_NO_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head);
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_create_data()	{	return new mglData;	}
 HMDT MGL_EXPORT mgl_create_data_size(long nx, long ny, long nz){	return new mglData(nx,ny,nz);	}
@@ -1209,8 +1208,9 @@ int MGL_EXPORT mgl_data_read_hdf(HMDT d,const char *fname,const char *data)
 	hf = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
 	if(hf<0)	return 0;
 	hd = H5Dopen(hf,data);
-	if(hd<0)	return 0;
+	if(hd<0)	{	H5Fclose(hf);	return 0;	}
 	hs = H5Dget_space(hd);
+	if(hs<0)	{	H5Dclose(hd);	H5Fclose(hf);	return 0;	}
 	rank = H5Sget_simple_extent_ndims(hs);
 	if(rank>0 && rank<=3)
 	{
