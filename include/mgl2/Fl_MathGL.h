@@ -41,7 +41,6 @@ class MGL_EXPORT Fl_MathGL : public Fl_Widget
 public:
 	Fl_Valuator	*tet_val;	///< pointer to external tet-angle validator
 	Fl_Valuator	*phi_val;	///< pointer to external phi-angle validator
-	mglCanvas *gr;			///< Built-in mglCanvas instance (mglCanvasFLTK is used by default)
 	std::string prim;		///< manual primitives
 	bool use_pthr;			///< use pthread for update plot
 
@@ -86,11 +85,12 @@ public:
 	/// NOTE: Fl_MathGL will automatically delete this object
 	void set_graph(HMGL gr);
 	/// Set grapher object instead of built-in one. 
-	/// NOTE: Fl_MathGL will automatically delete this object
 	inline void set_graph(mglGraph *Gr)
 	{	set_graph(Gr->Self());	}
 	/// Get pointer to grapher
 	inline HMGL get_graph()	{	return (HMGL)gr;	}
+	/// Nullify grapher object for disabling double free. NOTE: this is internal function.
+	void no_graph()	{gr=0;};
 
 	/// Get mglDraw pointer or NULL
 	inline mglDraw *get_class()
@@ -114,6 +114,7 @@ public:
 	inline bool running()	{	return run;	}
 
 protected:
+	mglCanvas *gr;			///< Built-in mglCanvas instance (mglCanvasFL is used by default)
 	void *draw_par;		///< Parameters for drawing function draw_func().
 	/// Drawing function for window procedure. It should return the number of frames.
 	int (*draw_func)(mglBase *gr, void *par);

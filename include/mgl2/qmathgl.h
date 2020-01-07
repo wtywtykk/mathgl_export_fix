@@ -43,7 +43,6 @@ public:
 	bool enableMouse;	///< Enable mouse handlers
 	bool enableWheel;	///< Enable mouse wheel handlers
 	QString primitives;	///< Manual primitives, defined by user
-	mglCanvas *gr;		///< Built-in mglCanvas instance (mglCanvasQT is used by default)
 
 	QMathGL(QWidget *parent = 0, Qt::WindowFlags f = 0);
 	virtual ~QMathGL();
@@ -54,6 +53,9 @@ public:
 	inline void setGraph(mglGraph *GR)
 	{	setGraph(GR->Self());	}
 	inline HMGL getGraph()	{	return (HMGL)gr;	}
+	/// Nullify grapher object for disabling double free. NOTE: this is internal function.
+	void noGraph()	{gr=0;};
+
 	/// Set drawing functions and its parameter
 	void setDraw(int (*func)(mglBase *gr, void *par), void *par);
 	void setDraw(mglDraw *dr);
@@ -185,6 +187,7 @@ protected:
 	void wheelEvent(QWheelEvent *);
 	void mouseDoubleClickEvent(QMouseEvent *);
 
+	mglCanvas *gr;		///< Built-in mglCanvas instance (mglCanvasQT is used by default)
 	void *draw_par;		///< Parameters for drawing function mglCanvasWnd::DrawFunc.
 	/// Drawing function for window procedure. It should return the number of frames.
 	int (*draw_func)(mglBase *gr, void *par);

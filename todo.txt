@@ -29,31 +29,27 @@
 ============= NEW FEATURES =============
 
 1. Centered curved text (see text2)
-2. Quality=3 for mirror+shadows? Could be in bitmap only mode
+2. Quality=3 for mirror+shadows + arrow_plot_3d? Could be in bitmap only mode
 5. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
 6. Flag to determine discontinuous surfaces in 'fsurf'
 7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
 
 11. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
-12. Chord diagram
+12. Chord diagram ???
 13. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
-14. Dendrogram ???
+14. Dendrogram specified by string "{val, {lVal,{...},{...}}, {rVal,{...},{...}} }" with styles: 's' for hor/vert lines, or straight lines by default ???
 15. Voronoi diagram ??? -- triangulation + coloring by point
-16. Sankey diagram ???
-
-17. Global mglDataA* collection (like in mglParser) for viewing/changing in GUI data from external languages (like, Python, ...). It should have: new(), add(), del(), get(). 
+16. Sankey diagram -- 2d version of tube
 
 18. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp). https://www.freetype.org/freetype2/docs/tutorial/step3.html -- add optimization of bezier curves by number of points. Use it as glyph definition or as default source for all/unknown glyphs!?
 
-19. Optimize triangulation in 2d and 3d, rewrite crust (test 2d version too).
+19. Triangulation in 3d + rewrite crust (test 2d version too). See https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm
 
 20. Algorithm of combining primitives with the same color to the larger one.
 
 21. UTF8 in legend-option
 
 * Add 'connect' for connecting points to set of surfaces
-
-
 
 ZZ. Update *.i for new functions {before release!!!}
 
@@ -119,6 +115,8 @@ D. Docs about JS interface
 18. Docs about mgl_formula_calc(), mgl_formula_calc_c() and mglFormulaCalc(), mglFormulaCalcC()
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 20. Docs about mgl_default_graph() -- the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
+21. Docs about mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
+
 
 
 ZZ. Update time.texi {before release!!!}
@@ -153,6 +151,9 @@ Instead of steps 1-2, you can download sources and build the MathGL libraries wi
 * dialog to visual construct "custom dialog" + read/add "##d" to the end of file.
 * check manual dash/mask
 
+* use mgl_default_graph() for drawing ???
+* use mglDataList for viewing/changing in GUI data from external languages (like, Python, ...) ???
+
 X. Own file-chooser dialog -- separate path and fname fields + add sorting by date|size ???
 Y. Window with Zoom/Hidden ???
 
@@ -177,6 +178,11 @@ Y. Window with Zoom/Hidden ???
 * collect mouse clicks to draw line(s) and save it into data
 * Animation from ##c, ##a + remove old entries at "Put to script" (the same in mgllab)
 * Custom dialog in QMathGL
+
+* Check autoResize=true
+
+* use mgl_default_graph() for drawing ???
+* use mglDataList for viewing/changing in GUI data from external languages (like, Python, ...) ???
 
 ============= UNSURE ===========
 

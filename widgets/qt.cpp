@@ -971,7 +971,7 @@ void QMathGL::addText(QString txt)
 mglCanvasQT::mglCanvasQT() : mglCanvasWnd()
 {	Wnd = 0;	}
 mglCanvasQT::~mglCanvasQT()
-{	if(Wnd)	{	QMGL->gr=0;	delete Wnd;	}	}
+{	if(Wnd)	{	QMGL->noGraph();	delete Wnd;	}	}
 //-----------------------------------------------------------------------------
 void mglCanvasQT::GotoFrame(int d)
 {

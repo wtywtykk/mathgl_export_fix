@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 12:56+0300\n"
+"POT-Creation-Date: 2020-01-07 23:34+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -480,7 +480,7 @@ msgstr "15 - текст/легенда"
 msgid "16 - data transform"
 msgstr "16 - преобразования данных"
 
-#: udav/info_dlg.cpp:47
+#: udav/info_dlg.cpp:49
 msgid "1D plot"
 msgstr "1D график"
 
@@ -496,7 +496,7 @@ msgstr "1D вид"
 msgid "2 - setup"
 msgstr "2 - настройки"
 
-#: udav/info_dlg.cpp:47
+#: udav/info_dlg.cpp:49
 msgid "2D plot"
 msgstr "2D график"
 
@@ -1332,11 +1332,12 @@ msgstr "Информация и просмотр данных."
 msgid "Data name"
 msgstr "Имя данных"
 
-#: udav/info_dlg.cpp:42
+#. mgl->autoResize = true;	// TODO: something strange here !!!
+#: udav/info_dlg.cpp:43
 msgid "Data preview"
 msgstr "Просмотр данных"
 
-#: udav/info_dlg.cpp:43
+#: udav/info_dlg.cpp:44
 msgid "Data preview for current slice."
 msgstr "Просмотр текущего среза данных."
 
@@ -2512,7 +2513,7 @@ msgstr "Графика/Подогнать размер"
 #. /< Callback function for delay
 #. /< Callback function for reloading
 #. / Toggle transparency (alpha) button
-#: widgets/fltk.cpp:958 include/mgl2/Fl_MathGL.h:164
+#: widgets/fltk.cpp:958 include/mgl2/Fl_MathGL.h:165
 msgid "Graphics/Alpha"
 msgstr "Графика/Прозрачность"
 
@@ -2529,7 +2530,7 @@ msgid "Graphics/Animation/Setup animation"
 msgstr "Графика/Анимация/Настройка"
 
 #. / Toggle slideshow button
-#: widgets/fltk.cpp:992 include/mgl2/Fl_MathGL.h:168
+#: widgets/fltk.cpp:992 include/mgl2/Fl_MathGL.h:169
 msgid "Graphics/Animation/Slideshow"
 msgstr "Графика/Анимация/Запустить"
 
@@ -2598,17 +2599,17 @@ msgid "Graphics/Export/as vector EPS"
 msgstr "Графика/Экспорт/как EPS"
 
 #. / Toggle grid drawing button
-#: widgets/fltk.cpp:960 include/mgl2/Fl_MathGL.h:170
+#: widgets/fltk.cpp:960 include/mgl2/Fl_MathGL.h:171
 msgid "Graphics/Grid"
 msgstr "Графика/Сетка"
 
 #. / Toggle lighting button
-#: widgets/fltk.cpp:959 include/mgl2/Fl_MathGL.h:166
+#: widgets/fltk.cpp:959 include/mgl2/Fl_MathGL.h:167
 msgid "Graphics/Light"
 msgstr "Графика/Освещение"
 
 #. / Toggle pause calculation button
-#: widgets/fltk.cpp:969 include/mgl2/Fl_MathGL.h:182 mgllab/mgllab.cpp:387
+#: widgets/fltk.cpp:969 include/mgl2/Fl_MathGL.h:183 mgllab/mgllab.cpp:387
 msgid "Graphics/Pause calc"
 msgstr "Графика/Пауза расчета"
 
@@ -2809,7 +2810,7 @@ msgstr "Увеличить размер шрифта"
 msgid "Info"
 msgstr "Инфо"
 
-#: udav/info_dlg.cpp:55 mgllab/help.cpp:335
+#: udav/info_dlg.cpp:57 mgllab/help.cpp:335
 msgid "Information"
 msgstr "Информация"
 
@@ -2928,7 +2929,7 @@ msgstr ""
 " * Прочие -- числа (например, zval);\n"
 " * В скобках [] -- опциональные аргументы."
 
-#: udav/info_dlg.cpp:50
+#: udav/info_dlg.cpp:52
 msgid "Kind of plots: lines for 1D, density for 2D."
 msgstr "Тип графика: кривые для 1D, график плотности для 2D."
 
@@ -3803,7 +3804,7 @@ msgstr "Предыдущий срез"
 msgid "Prev slide"
 msgstr "Предыдущий кадр"
 
-#: udav/info_dlg.cpp:51
+#: udav/info_dlg.cpp:53
 msgid "Preview"
 msgstr "Просмотр"
 
@@ -4665,7 +4666,7 @@ msgstr "Сдвинуть рисунок вверх"
 msgid "Short description of selected command"
 msgstr "Краткое описание выбранной команды"
 
-#: udav/info_dlg.cpp:54
+#: udav/info_dlg.cpp:56
 msgid "Short information about the data."
 msgstr "Краткая информация о данных"
 

@@ -41,14 +41,14 @@ HADT MGL_EXPORT mgl_create_datac_file(const char *fname)		{	return new mglDataC(
 void MGL_EXPORT mgl_delete_datac(HADT d)	{	if(d)	delete d;	}
 //-----------------------------------------------------------------------------
 uintptr_t MGL_EXPORT mgl_create_datac_()
-{	return uintptr_t(new mglDataC());	}
+{	return uintptr_t(mgl_create_datac());	}
 uintptr_t MGL_EXPORT mgl_create_datac_size_(int *nx, int *ny, int *nz)
-{	return uintptr_t(new mglDataC(*nx,*ny,*nz));	}
+{	return uintptr_t(mgl_create_datac_size(*nx,*ny,*nz));	}
 uintptr_t MGL_EXPORT mgl_create_datac_file_(const char *fname,int l)
 {	char *s=new char[l+1];	memcpy(s,fname,l);	s[l]=0;
-	uintptr_t r = uintptr_t(new mglDataC(s));	delete []s;	return r;	}
+	uintptr_t r = uintptr_t(mgl_create_datac_file(s));	delete []s;	return r;	}
 void MGL_EXPORT mgl_delete_datac_(uintptr_t *d)
-{	if(_DC_)	delete _DC_;	}
+{	mgl_delete_datac(_DC_);	}
 //-----------------------------------------------------------------------------
 cmdual MGL_EXPORT mgl_atoc(const char *s, int adv)
 {

@@ -234,6 +234,9 @@ struct MGL_EXPORT mglNum
 	{	d=n.d;	c=n.c;	s=n.s;	return n;	}
 };
 //-----------------------------------------------------------------------------
+/// List of user-defined data arrays
+MGL_EXPORT extern std::vector<mglDataA*> mglDataList;
+//-----------------------------------------------------------------------------
 /// Abstract class for data array
 class MGL_EXPORT mglDataA
 {
@@ -245,8 +248,14 @@ public:
 	void (*func)(void *);	///< Callback function for destroying
 	void *o; 		///< Pointer to external object
 
-	mglDataA()	{	temp=false;	func=0;	o=0;	}
-	virtual ~mglDataA()	{	if(func)	func(o);	}
+	mglDataA()	{	mglDataList.push_back(this);	temp=false;	func=0;	o=0;	}
+	virtual ~mglDataA()
+	{
+		for(long i = mglDataList.size()-1; i>=0; i--)
+			if(mglDataList[i] == this)
+			{	mglDataList.erase(mglDataList.begin()+i);	break;	}
+		if(func)	func(o);
+	}
 	/// Set name for data variable (can be used in mgl_formula_calc() or in MGL scripts)
 	inline void Name(const char *name)		{	s = name;	}
 	inline void Name(const wchar_t *name)	{	s = name;	}
@@ -384,9 +393,6 @@ public:
 	{	mreal res=mgl_data_linear_ext(this,x*(GetNx()-1),y*(GetNy()-1),z*(GetNz()-1), &(dif.x),&(dif.y), &(dif.z));
 		dif.x*=GetNx()>1?GetNx()-1:1;	dif.y*=GetNy()>1?GetNy()-1:1;	dif.z*=GetNz()>1?GetNz()-1:1;	return res;	}
 };
-//-----------------------------------------------------------------------------
-/// List of user-defined data arrays
-MGL_EXPORT extern std::vector<mglDataA*> mglDataList;
 //-----------------------------------------------------------------------------
 /// Structure for color ID
 struct MGL_EXPORT mglColorID

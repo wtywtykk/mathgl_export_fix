@@ -943,7 +943,7 @@ Fl_MGLView::~Fl_MGLView()
 //
 //-----------------------------------------------------------------------------
 mglCanvasFL::mglCanvasFL() : mglCanvasWnd()	{	Wnd=0;	mgl=0;	}
-mglCanvasFL::~mglCanvasFL()		{	if(Wnd)	{	mgl->FMGL->gr=0;	delete Wnd;	}	}
+mglCanvasFL::~mglCanvasFL()		{	if(Wnd)	{	mgl->FMGL->no_graph();	delete Wnd;	}	}
 //-----------------------------------------------------------------------------
 void mglCanvasFL::GotoFrame(int d)
 {

@@ -47,14 +47,14 @@ HMDT MGL_EXPORT mgl_create_data_file(const char *fname)		{	return new mglData(fn
 void MGL_EXPORT mgl_delete_data(HMDT d)	{	if(d)	delete d;	}
 //-----------------------------------------------------------------------------
 uintptr_t MGL_EXPORT mgl_create_data_()
-{	return uintptr_t(new mglData());	}
+{	return uintptr_t(mgl_create_data());	}
 uintptr_t MGL_EXPORT mgl_create_data_size_(int *nx, int *ny, int *nz)
-{	return uintptr_t(new mglData(*nx,*ny,*nz));	}
+{	return uintptr_t(mgl_create_data_size(*nx,*ny,*nz));	}
 uintptr_t MGL_EXPORT mgl_create_data_file_(const char *fname,int l)
 {	char *s=new char[l+1];	memcpy(s,fname,l);	s[l]=0;
-	uintptr_t r = uintptr_t(new mglData(s));	delete []s;	return r;	}
+	uintptr_t r = uintptr_t(mgl_create_data_file(s));	delete []s;	return r;	}
 void MGL_EXPORT mgl_delete_data_(uintptr_t *d)
-{	if(_DT_)	delete _DT_;	}
+{	mgl_delete_data(_DT_);	}
 //-----------------------------------------------------------------------------
 void mglFromStr(HMDT d,char *buf,long NX,long NY,long NZ)
 {
