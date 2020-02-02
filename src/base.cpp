@@ -1549,7 +1549,7 @@ mreal mglBase::SaveState(const char *opt)
 		s=q;	q=strchr(s,';');
 		if(q)	{	*q=0;	q++;	}
 		mgl_strtrim(s);		char *a=s;
-		long n=mglFindArg(s);	if(n>0)	{	s[n]=0;		s=s+n+1;	}
+		long n=mglFindArg(s);	if(n>0)	{	s[n]=0;	s=s+n+1;	}
 		mgl_strtrim(a);		char *b=s;
 		n=mglFindArg(s);	if(n>0)	{	s[n]=0;		s=s+n+1;	}
 		mgl_strtrim(b);

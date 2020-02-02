@@ -21,10 +21,12 @@
 #include "mgl2/canvas_cf.h"
 #include "mgl2/eval.h"
 #include "mgl2/evalc.h"
+#include "mgl2/font.h"
 //-----------------------------------------------------------------------------
 #undef _GR_
 #define _GR_	((mglCanvas *)(*gr))
 //-----------------------------------------------------------------------------
+mglFont mglDefFont;
 MGL_EXPORT std::string mglGlobalMess;	///< Buffer for receiving global messages
 MGL_EXPORT mglCanvas mglDefaultGr(600,400);	///< Default HMGL object
 //-----------------------------------------------------------------------------

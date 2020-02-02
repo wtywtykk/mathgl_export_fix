@@ -20,6 +20,7 @@
 #include <getopt.h>
 #include "mgl2/font.h"
 //-----------------------------------------------------------------------------
+mglFont mglDefFont;
 int main(int argc, char *argv[])
 {
 	mglFont fnt;
