@@ -33,6 +33,7 @@
 #include <FL/Fl_Progress.H>
 #include <mgl2/fltk.h>
 class mglCanvas;
+class Fl_Double_Window;
 //-----------------------------------------------------------------------------
 /// Class is FLTK widget which display MathGL graphics
 class MGL_EXPORT Fl_MathGL : public Fl_Widget
@@ -59,6 +60,9 @@ public:
 	/// Set function for parameters
 	inline void set_prop(void (*func)(char id, const char *val, void *par), void *par)
 	{	prop_func=func;	prop_par=par;	}
+	/// Set function for handling events. Note, use Fl::event_key() for getting pressed keybutton
+	inline void set_handle(int (*func)(int val, void *par), void *par)
+	{	hndl_func=func;	hndl_par=par;	}
 
 	/// Refresh image (without executing update)
 	void refresh();
@@ -106,7 +110,7 @@ public:
 	/// Ask to stop of script parsing
 	void stop(bool stop=true);
 	/// Enable/disable key handling as in mglview (default is false)
-	inline void set_handle_key(bool val)	{	handle_keys=true;	}
+	inline void set_handle_key(bool val)	{	handle_keys=val;	}
 	/// Get id of last clicked object
 	inline int get_last_id()	{	return last_id;	}
 	void draw_plot();	///< Single thread drawing itself
@@ -121,6 +125,9 @@ protected:
 	void *prop_par;	///< Parameters for prop_func().
 	/// Function for setting properties.
 	void (*prop_func)(char id, const char *val, void *par);
+	void *hndl_par;	///< Parameters for hndl_func().
+	/// Function for handling events.
+	int (*hndl_func)(int val, void *par);
 	mglDraw *draw_cl;
 	int last_id;				///< last selected object id
 
@@ -162,13 +169,13 @@ public:
 	void (*reload)(void*);	///< Callback function for reloading
 
 	/// Toggle transparency (alpha) button
-	void toggle_alpha()	{	toggle(alpha, alpha_bt, _("Graphics/Alpha"));	}
+	void toggle_alpha();
 	/// Toggle lighting button
-	void toggle_light()	{	toggle(light, light_bt, _("Graphics/Light"));	}
+	void toggle_light();
 	/// Toggle slideshow button
-	void toggle_sshow()	{	toggle(sshow, anim_bt, _("Graphics/Animation/Slideshow"));	}
+	void toggle_sshow();
 	/// Toggle grid drawing button
-	void toggle_grid()	{	toggle(grid, grid_bt, _("Graphics/Grid"));	}
+	void toggle_grid();
 	/// Toggle mouse zoom button
 	void toggle_zoom()	{	toggle(zoom, zoom_bt);	}
 	/// Toggle mouse rotate button
@@ -180,7 +187,7 @@ public:
 	/// Check if slideshow running
 	bool is_sshow()		{	return sshow;	}
 	/// Toggle pause calculation button
-	void toggle_pause()	{	toggle(pauseC, pause_bt, _("Graphics/Pause calc"));	exec_pause();	}
+	void toggle_pause();
 	/// Adjust image sizes to the current widget sizes
 	void adjust()
 	{	mgl_set_size(FMGL->get_graph(),scroll->w(),scroll->h());	FMGL->size(scroll->w(),scroll->h());	update();	}

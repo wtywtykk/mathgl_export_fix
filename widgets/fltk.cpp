@@ -113,6 +113,8 @@ Fl_MathGL::Fl_MathGL(int xx, int yy, int ww, int hh, const char *lbl) : Fl_Widge
 	flag=x0=y0=xe=ye=0;	show_warn=true;
 	tet_val = phi_val = 0;
 	draw_par = 0;	draw_func = 0;	draw_cl = 0;
+	hndl_func = 0;	hndl_par = 0;
+	prop_func = 0;	prop_par = 0;
 	last_id = -1;	run = false;
 	popup=0;	vpar=0;	wpar=0;
 #if (MGL_HAVE_PTHREAD|MGL_HAVE_PTHR_WIDGET)
@@ -248,10 +250,12 @@ int Fl_MathGL::handle(int code)
 {
 	static bool busy=false;
 	static int last_pos=-1;
+	int r = hndl_func?hndl_func(code, hndl_par):0;
+	if(r)	return r;
 	if(handle_keys && code==FL_KEYUP && Fl::event_button()!=FL_LEFT_MOUSE)
 	{
 		int key=Fl::event_key();
-		if(!strchr(" .,wasdrfx",key))	return 0;
+//		if(!strchr(" .,wasdrfx",key))	return 0;
 		if(key==' ')	{	update();	return 1;	}
 		if(key=='w')
 		{
@@ -1084,6 +1088,12 @@ int MGL_EXPORT mgl_fltk_thr()		// NOTE: Qt couldn't be running in non-primary th
 static void mgl_upd_vals(Fl_Widget *, void *p)	{	((Fl_MGLView *)p)->get_values();	}
 //-----------------------------------------------------------------------------
 static void mgl_dlg_hide(Fl_Widget *, void *p)	{	((Fl_MGLView *)p)->dlg_hide();	}
+//-----------------------------------------------------------------------------
+void Fl_MGLView::toggle_alpha()	{	toggle(alpha, alpha_bt, _("Graphics/Alpha"));	}
+void Fl_MGLView::toggle_light()	{	toggle(light, light_bt, _("Graphics/Light"));	}
+void Fl_MGLView::toggle_sshow()	{	toggle(sshow, anim_bt, _("Graphics/Animation/Slideshow"));	}
+void Fl_MGLView::toggle_grid()	{	toggle(grid, grid_bt, _("Graphics/Grid"));	}
+void Fl_MGLView::toggle_pause()	{	toggle(pauseC, pause_bt, _("Graphics/Pause calc"));	exec_pause();	}
 //-----------------------------------------------------------------------------
 void Fl_MGLView::dlg_window(const char *title)
 {
