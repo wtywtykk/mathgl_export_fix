@@ -246,6 +246,8 @@ void Fl_MathGL::update()
 void Fl_MathGL::resize(int xx, int yy, int ww, int hh)
 {	Fl_Widget::resize(xx,yy,ww,hh);	}
 //-----------------------------------------------------------------------------
+void Fl_MGLView::dlg_show()	{	dlg_finish();	dlg_wnd->show();	}	///< Show window
+void Fl_MGLView::dlg_hide()	{	dlg_wnd->hide();	}	///< Close window
 int Fl_MathGL::handle(int code)
 {
 	static bool busy=false;

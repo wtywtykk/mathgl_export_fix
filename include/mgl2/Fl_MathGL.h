@@ -215,8 +215,8 @@ public:
 	}
 	void dlg_window(const char *title="");	///< Create/label dialog window
 	void add_widget(char id, const char *args);	///< Add widget to dialog
-	void dlg_show()	{	dlg_finish();	dlg_wnd->show();	}	///< Show window
-	void dlg_hide()	{	dlg_wnd->hide();	}	///< Close window
+	void dlg_show();	///< Show window
+	void dlg_hide();	///< Close window
 	void get_values();	///< Get all values from dialog window
 	void set_progress(int value, int maximal);	///< Set progress
 

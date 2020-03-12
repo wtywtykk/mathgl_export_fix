@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-06 10:12+0300\n"
+"POT-Creation-Date: 2020-03-12 15:12+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -682,11 +682,11 @@ msgstr "Añadir a"
 msgid "Add user-defined symbol"
 msgstr "Añadir símbolo personalizado"
 
-#: widgets/fltk.cpp:881
+#: widgets/fltk.cpp:883
 msgid "Adjust picture size to fill drawing area"
 msgstr "Ajustar imagen al área de dibujo"
 
-#: widgets/fltk.cpp:844 widgets/qt.cpp:1156 udav/plot_pnl.cpp:337
+#: widgets/fltk.cpp:846 widgets/qt.cpp:1156 udav/plot_pnl.cpp:337
 msgid "Adjust size"
 msgstr "Ajustar tamaño"
 
@@ -1027,7 +1027,7 @@ msgid "Clear picture"
 msgstr "Borrar imagen"
 
 #. o = new Fl_Button(180, 130, 25, 25);o->image(img_save);	o->tooltip("img_save");
-#: widgets/fltk.cpp:1116 widgets/qt.cpp:1108 udav/find_dlg.cpp:52
+#: widgets/fltk.cpp:1118 widgets/qt.cpp:1108 udav/find_dlg.cpp:52
 #: udav/hint_dlg.cpp:52 mgllab/editor.cpp:566 mgllab/help.cpp:289
 #: mgllab/help.cpp:349 mgllab/help.cpp:465
 msgid "Close"
@@ -1140,7 +1140,7 @@ msgstr "Copiar datos"
 msgid "Copy data from another variable"
 msgstr "Copiar datos de otra variable"
 
-#: widgets/fltk.cpp:841
+#: widgets/fltk.cpp:843
 msgid "Copy graphics"
 msgstr "Copiar gráfico"
 
@@ -1148,7 +1148,7 @@ msgstr "Copiar gráfico"
 msgid "Copy graphics to clipboard (Ctrl+Shift+G)."
 msgstr "Copiar gráfico a memoria (Ctrl+Shift+G)."
 
-#: widgets/fltk.cpp:885
+#: widgets/fltk.cpp:887
 msgid "Copy image to clipboard"
 msgstr "Copiar imagen a memoria"
 
@@ -2158,7 +2158,7 @@ msgstr "Integrales exp"
 msgid "Export Data?"
 msgstr "¿Exportar datos?"
 
-#: widgets/fltk.cpp:819
+#: widgets/fltk.cpp:821
 msgid "Export as ..."
 msgstr "Exportar como ..."
 
@@ -2518,20 +2518,20 @@ msgstr "Gráfica"
 msgid "Graphics setup"
 msgstr "Config. gráfica"
 
-#: widgets/fltk.cpp:968
+#: widgets/fltk.cpp:970
 msgid "Graphics/Adjust size"
 msgstr "Gráfica/Ajustar tamaño"
 
 #. -----------------------------------------------------------------------------
-#: widgets/fltk.cpp:962 widgets/fltk.cpp:1092
+#: widgets/fltk.cpp:964 widgets/fltk.cpp:1094
 msgid "Graphics/Alpha"
 msgstr "Gráfica/Alfa"
 
-#: widgets/fltk.cpp:997
+#: widgets/fltk.cpp:999
 msgid "Graphics/Animation/Next frame"
 msgstr "Gráfica/Animación/Sgte. cuadro"
 
-#: widgets/fltk.cpp:998
+#: widgets/fltk.cpp:1000
 msgid "Graphics/Animation/Prev frame"
 msgstr "Gráfica/Animación/Ant. cuadro"
 
@@ -2539,83 +2539,83 @@ msgstr "Gráfica/Animación/Ant. cuadro"
 msgid "Graphics/Animation/Setup animation"
 msgstr "Gráfica/Animación/Animación"
 
-#: widgets/fltk.cpp:996 widgets/fltk.cpp:1094
+#: widgets/fltk.cpp:998 widgets/fltk.cpp:1096
 msgid "Graphics/Animation/Slideshow"
 msgstr "Gráfica/Animación/Presentacion"
 
-#: widgets/fltk.cpp:972
+#: widgets/fltk.cpp:974
 msgid "Graphics/Copy click coor."
 msgstr "Gráfica/Copiar coord. al clicar"
 
-#: widgets/fltk.cpp:971
+#: widgets/fltk.cpp:973
 msgid "Graphics/Copy graphics"
 msgstr "Gráfica/Copiar gráfica"
 
-#: widgets/fltk.cpp:985
+#: widgets/fltk.cpp:987
 msgid "Graphics/Export/as BMP"
 msgstr "Gráfica/Exportar/como BMP"
 
-#: widgets/fltk.cpp:983
+#: widgets/fltk.cpp:985
 msgid "Graphics/Export/as GIF"
 msgstr "Gráfica/Exportar/como GIF"
 
-#: widgets/fltk.cpp:980
+#: widgets/fltk.cpp:982
 msgid "Graphics/Export/as JPEG"
 msgstr "Gráfica/Exportar/como JPEG"
 
-#: widgets/fltk.cpp:991
+#: widgets/fltk.cpp:993
 msgid "Graphics/Export/as OBJ"
 msgstr "Gráfica/Exportar/como OBJ"
 
-#: widgets/fltk.cpp:992
+#: widgets/fltk.cpp:994
 msgid "Graphics/Export/as OFF"
 msgstr "Gráfica/Exportar/como OFF"
 
-#: widgets/fltk.cpp:976
+#: widgets/fltk.cpp:978
 msgid "Graphics/Export/as PNG"
 msgstr "Gráfica/Exportar/como PNG"
 
-#: widgets/fltk.cpp:990
+#: widgets/fltk.cpp:992
 msgid "Graphics/Export/as PRC"
 msgstr "Gráfica/Exportar/como PRC"
 
-#: widgets/fltk.cpp:993
+#: widgets/fltk.cpp:995
 msgid "Graphics/Export/as STL"
 msgstr "Gráfica/Exportar/como STL"
 
-#: widgets/fltk.cpp:986
+#: widgets/fltk.cpp:988
 msgid "Graphics/Export/as SVG"
 msgstr "Gráfica/Exportar/como SVG"
 
-#: widgets/fltk.cpp:989
+#: widgets/fltk.cpp:991
 msgid "Graphics/Export/as TeX"
 msgstr "Gráfica/Exportar/como TeX"
 
-#: widgets/fltk.cpp:994
+#: widgets/fltk.cpp:996
 msgid "Graphics/Export/as XYZ"
 msgstr "Gráfica/Exportar/como XYZ"
 
-#: widgets/fltk.cpp:988
+#: widgets/fltk.cpp:990
 msgid "Graphics/Export/as bitmap EPS"
 msgstr "Gráfica/Exportar/como mapa de bits EPS"
 
-#: widgets/fltk.cpp:977
+#: widgets/fltk.cpp:979
 msgid "Graphics/Export/as solid PNG"
 msgstr "Gráfica/Exportar/como PNG sólido"
 
-#: widgets/fltk.cpp:987
+#: widgets/fltk.cpp:989
 msgid "Graphics/Export/as vector EPS"
 msgstr "Gráfica/Exportar/como EPS vectorial"
 
-#: widgets/fltk.cpp:964 widgets/fltk.cpp:1095
+#: widgets/fltk.cpp:966 widgets/fltk.cpp:1097
 msgid "Graphics/Grid"
 msgstr "Gráfica/Grilla"
 
-#: widgets/fltk.cpp:963 widgets/fltk.cpp:1093
+#: widgets/fltk.cpp:965 widgets/fltk.cpp:1095
 msgid "Graphics/Light"
 msgstr "Gráfica/Luz"
 
-#: widgets/fltk.cpp:973 widgets/fltk.cpp:1096 mgllab/mgllab.cpp:387
+#: widgets/fltk.cpp:975 widgets/fltk.cpp:1098 mgllab/mgllab.cpp:387
 msgid "Graphics/Pause calc"
 msgstr "Gráfica/Pausar calc."
 
@@ -2623,43 +2623,43 @@ msgstr "Gráfica/Pausar calc."
 msgid "Graphics/Primitive"
 msgstr "Gráfica/Primitiva"
 
-#: widgets/fltk.cpp:967
+#: widgets/fltk.cpp:969
 msgid "Graphics/Redraw"
 msgstr "Gráfica/Redibujar"
 
-#: widgets/fltk.cpp:969
+#: widgets/fltk.cpp:971
 msgid "Graphics/Reload data"
 msgstr "Gráfica/Volver a cargar datos"
 
-#: widgets/fltk.cpp:966
+#: widgets/fltk.cpp:968
 msgid "Graphics/Restore"
 msgstr "Gráfica/Reestablecer"
 
-#: widgets/fltk.cpp:970
+#: widgets/fltk.cpp:972
 msgid "Graphics/Stop"
 msgstr "Gráfica/Detener"
 
-#: widgets/fltk.cpp:1004
+#: widgets/fltk.cpp:1006
 msgid "Graphics/Transform/Move down"
 msgstr "Gráfica/Transformar/Mover abajo"
 
-#: widgets/fltk.cpp:1000
+#: widgets/fltk.cpp:1002
 msgid "Graphics/Transform/Move left"
 msgstr "Gráfica/Transformar/Mover izq."
 
-#: widgets/fltk.cpp:1005
+#: widgets/fltk.cpp:1007
 msgid "Graphics/Transform/Move right"
 msgstr "Gráfica/Transformar/Mover der."
 
-#: widgets/fltk.cpp:1001
+#: widgets/fltk.cpp:1003
 msgid "Graphics/Transform/Move up"
 msgstr "Gráfica/Transformar/Mover arriba"
 
-#: widgets/fltk.cpp:1002
+#: widgets/fltk.cpp:1004
 msgid "Graphics/Transform/Zoom in"
 msgstr "Gráfica/Transformar/Acercar"
 
-#: widgets/fltk.cpp:1003
+#: widgets/fltk.cpp:1005
 msgid "Graphics/Transform/Zoom out"
 msgstr "Gráfica/Transformar/Alejar"
 
@@ -3513,7 +3513,7 @@ msgstr "No se encontró el texto"
 msgid "No text rotation"
 msgstr "No hay ángulo para texto"
 
-#: widgets/fltk.cpp:842
+#: widgets/fltk.cpp:844
 msgid "Normal view"
 msgstr "Vista normal"
 
@@ -3742,7 +3742,7 @@ msgid "Pause calculation"
 msgstr "Paudar calculos"
 
 #. Wnd->connect(a, SIGNAL(triggered()), QMGL, SLOT(setPause()));
-#: widgets/fltk.cpp:925 widgets/qt.cpp:1287
+#: widgets/fltk.cpp:927 widgets/qt.cpp:1287
 msgid "Pause on/off external calculations"
 msgstr "Pausar on/off calculos externos"
 
@@ -3750,7 +3750,7 @@ msgstr "Pausar on/off calculos externos"
 msgid "Perform Runge-Kutta step"
 msgstr "Ejecutar un paso de Runge-Kutta"
 
-#: widgets/fltk.cpp:894
+#: widgets/fltk.cpp:896
 msgid "Phi angle (rotate in x*y plane)"
 msgstr "Ángulo phi (rotar en plano xy)"
 
@@ -3982,7 +3982,7 @@ msgstr "Volver a graficar"
 msgid "Redraw picture for $0 equal to"
 msgstr "Volver a graficar para $0 igual a"
 
-#: widgets/fltk.cpp:843
+#: widgets/fltk.cpp:845
 msgid "Redraw plot"
 msgstr "Volver a graficar"
 
@@ -3990,7 +3990,7 @@ msgstr "Volver a graficar"
 msgid "Refresh"
 msgstr "Actualizar"
 
-#: widgets/fltk.cpp:877
+#: widgets/fltk.cpp:879
 msgid "Refresh the picture"
 msgstr "Actualizar la imagen"
 
@@ -4002,11 +4002,11 @@ msgstr "Posición relativa al i-ésimo color"
 msgid "Reload"
 msgstr "Recargar"
 
-#: widgets/fltk.cpp:845
+#: widgets/fltk.cpp:847
 msgid "Reload data"
 msgstr "Recargar datos"
 
-#: widgets/fltk.cpp:883
+#: widgets/fltk.cpp:885
 msgid "Reload data and refresh the picture"
 msgstr "REcargar datos y actualizar imagen"
 
@@ -4092,7 +4092,7 @@ msgstr "Reescalar datos con suavizado"
 msgid "Restore"
 msgstr "Reestablecer"
 
-#: widgets/fltk.cpp:874
+#: widgets/fltk.cpp:876
 msgid "Restore default graphics rotation, zoom and perspective"
 msgstr "Reestablecer rotacion , zoom y perspectiva por defecto"
 
@@ -4162,7 +4162,7 @@ msgstr "Rotar a la izq."
 msgid "Rotate on"
 msgstr "Rotate on"
 
-#: widgets/fltk.cpp:870
+#: widgets/fltk.cpp:872
 msgid "Rotate picture by holding left mouse button"
 msgstr "Rotar figura al presionando el botón izq. del mouse"
 
@@ -4194,7 +4194,7 @@ msgstr ""
 "Correr animación (Ctrl+F5). Si no se especifican\n"
 "parámetros, se mostrará el dialogo de animación."
 
-#: widgets/fltk.cpp:916
+#: widgets/fltk.cpp:918
 msgid "Run/Stop slideshow (graphics animation)"
 msgstr "Correr/detener animación"
 
@@ -4222,7 +4222,7 @@ msgstr "Guardar"
 msgid "Save Data?"
 msgstr "¿Guardar datos?"
 
-#: widgets/fltk.cpp:599 mgllab/mgllab.cpp:229
+#: widgets/fltk.cpp:601 mgllab/mgllab.cpp:229
 msgid "Save File As?"
 msgstr "Guardar archivo como"
 
@@ -4654,19 +4654,19 @@ msgstr "Colores fuertes"
 msgid "Shear plot"
 msgstr "Recortar gráfica"
 
-#: widgets/fltk.cpp:909
+#: widgets/fltk.cpp:911
 msgid "Shift the picture down"
 msgstr "Mover la imagen abajo"
 
-#: widgets/fltk.cpp:901
+#: widgets/fltk.cpp:903
 msgid "Shift the picture left"
 msgstr "Mover la imagen a la izq."
 
-#: widgets/fltk.cpp:907
+#: widgets/fltk.cpp:909
 msgid "Shift the picture right"
 msgstr "Mover la imagen a la der."
 
-#: widgets/fltk.cpp:899
+#: widgets/fltk.cpp:901
 msgid "Shift the picture up"
 msgstr "Mover la imagen arriba"
 
@@ -4694,7 +4694,7 @@ msgstr ""
 msgid "Show calculator window"
 msgstr "Mostrar ventana de calculadora"
 
-#: widgets/fltk.cpp:920
+#: widgets/fltk.cpp:922
 msgid "Show custom dialog for plot setup"
 msgstr "Mostrar dialogo de config. de gráfica"
 
@@ -4763,7 +4763,7 @@ msgstr "Mostrar info."
 msgid "Show lines"
 msgstr "Mostrar líneas"
 
-#: widgets/fltk.cpp:917
+#: widgets/fltk.cpp:919
 msgid "Show next frame in slideshow"
 msgstr "Mostrar sgte. cuadro de la animación"
 
@@ -4771,7 +4771,7 @@ msgstr "Mostrar sgte. cuadro de la animación"
 msgid "Show next slide (Ctrl+.)."
 msgstr "Mostrar sgte. cuadro (Ctrl+.)."
 
-#: widgets/fltk.cpp:912
+#: widgets/fltk.cpp:914
 msgid "Show previous frame in slideshow"
 msgstr "Mostrar cuadro previo de la animación"
 
@@ -4938,7 +4938,7 @@ msgstr "Paso para pulso de difracción"
 msgid "Stop"
 msgstr "Deterner"
 
-#: widgets/fltk.cpp:879
+#: widgets/fltk.cpp:881
 msgid "Stop drawing"
 msgstr "Detener graficación"
 
@@ -5088,7 +5088,7 @@ msgstr "Activar/desactivar niebla"
 msgid "Switch on/off gray-scale mode"
 msgstr "Activar/desactivar modo B/N"
 
-#: widgets/fltk.cpp:866
+#: widgets/fltk.cpp:868
 msgid "Switch on/off grid drawing"
 msgstr "Activar/desactivar dibujado de grilla"
 
@@ -5105,7 +5105,7 @@ msgstr "Activar/desactivar luz para las gráficas (Alt+L)."
 msgid "Switch on/off lightning for the graphics (Ctrl+L)."
 msgstr "Activar/desactivar luz para las gráficas (Alt+L)."
 
-#: widgets/fltk.cpp:863
+#: widgets/fltk.cpp:865
 msgid "Switch on/off lightning in the picture"
 msgstr "Activar/desactivar luz en la imagen"
 
@@ -5138,7 +5138,7 @@ msgstr "Activar/desactivar transparencia para gráfica (Alt+T)."
 msgid "Switch on/off transparency for the graphics (Ctrl+T)."
 msgstr "Activar/desactivar transparencia para gráfica (Alt+T)."
 
-#: widgets/fltk.cpp:860
+#: widgets/fltk.cpp:862
 msgid "Switch on/off transparency in the picture"
 msgstr "Activar/desactivar transparencia en la imagen"
 
@@ -5283,11 +5283,11 @@ msgstr "Argumento(s) incorrecto(s) en el script"
 msgid "There is wrong command(s) in script"
 msgstr "Comando(s) incorrecto(s) en el script"
 
-#: widgets/fltk.cpp:892
+#: widgets/fltk.cpp:894
 msgid "Theta angle (tilt z-axis)"
 msgstr "Ángulo theta (inclinación del eje z)"
 
-#: widgets/fltk.cpp:1201
+#: widgets/fltk.cpp:1203
 msgid "This is for parameter "
 msgstr "Esto es para parámetro "
 
@@ -5579,7 +5579,7 @@ msgstr "Sin nombre"
 msgid "Untitled - mgllab"
 msgstr "Sin nombre - mgllab"
 
-#: widgets/fltk.cpp:1118
+#: widgets/fltk.cpp:1120
 msgid "Update"
 msgstr "Actualizar"
 
@@ -6039,7 +6039,7 @@ msgstr "Magnificar"
 msgid "Zoom in graphics."
 msgstr "Magnificar gráfica."
 
-#: widgets/fltk.cpp:873
+#: widgets/fltk.cpp:875
 msgid "Zoom in selected region of the picture"
 msgstr "Magnificar región seleccionada de la imagen"
 
@@ -6048,7 +6048,7 @@ msgstr "Magnificar región seleccionada de la imagen"
 msgid "Zoom in text"
 msgstr "Magnificar texto"
 
-#: widgets/fltk.cpp:903
+#: widgets/fltk.cpp:905
 msgid "Zoom in the picture"
 msgstr "Magnificar la imagen"
 
@@ -6064,7 +6064,7 @@ msgstr "Reducir gráfica."
 msgid "Zoom out text"
 msgstr "Reducir texto"
 
-#: widgets/fltk.cpp:905
+#: widgets/fltk.cpp:907
 msgid "Zoom out the picture"
 msgstr "Reducir la imagen"
 
@@ -6174,7 +6174,7 @@ msgstr "c - cian"
 msgid "center"
 msgstr "centro"
 
-#: widgets/fltk.cpp:798
+#: widgets/fltk.cpp:800
 #, c-format
 msgid "click at %g, %g, %g"
 msgstr "clic en %g, %g, %g"
