@@ -116,7 +116,9 @@ D. Docs about JS interface
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 20. Docs about mgl_default_graph() -- the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
 21. Docs about mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
-
+22. Update Widget() to return Fl_MGLView (not Fl_MathGL);
+23. Add doc about mglWnd::Window();
+24. Add docs about Fl_MGLView.
 
 
 ZZ. Update time.texi {before release!!!}
