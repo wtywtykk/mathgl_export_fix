@@ -1339,52 +1339,72 @@ int MGL_EXPORT mgl_data_find_any_(uintptr_t *d, const char *cond, int l)
 mreal MGL_EXPORT mgl_data_momentum_val(HCDT dd, char dir, mreal *x, mreal *w, mreal *s, mreal *k)
 {
 	long nx=dd->GetNx(),ny=dd->GetNy(),nz=dd->GetNz();
-	mreal i0=0,i1=0,i2=0,i3=0,i4=0;
+	mreal i0=0,i1=0,i2=0,i3=0,i4=0,is;
 	switch(dir)
 	{
 	case 'x':
-#pragma omp parallel for reduction(+:i0,i1,i2,i3,i4)
+#pragma omp parallel for reduction(+:i0,i1)
 		for(long i=0;i<nx*ny*nz;i++)
 		{
-			mreal d = mreal(i%nx), t = d*d, v = dd->vthr(i);
-			i0+= v;	i1+= v*d;	i2+= v*t;
-			i3+= v*d*t;		i4+= v*t*t;
+			mreal d = mreal(i%nx), v = dd->vthr(i);
+			i0+= v;	i1+= v*d;
+		}
+		is = i1/i0;
+#pragma omp parallel for reduction(+:i2,i3,i4)
+		for(long i=0;i<nx*ny*nz;i++)
+		{
+			mreal d = mreal(i%nx)-is, t = d*d, v = dd->vthr(i);
+			i2+= v*t;	i3+= v*d*t;	i4+= v*t*t;
 		}
 		break;
 	case 'y':
-#pragma omp parallel for reduction(+:i0,i1,i2,i3,i4)
+#pragma omp parallel for reduction(+:i0,i1)
 		for(long i=0;i<nx*ny*nz;i++)
 		{
-			mreal d = mreal((i/nx)%ny), t = d*d, v = dd->vthr(i);
-			i0+= v;	i1+= v*d;	i2+= v*t;
-			i3+= v*d*t;		i4+= v*t*t;
+			mreal d = mreal((i/nx)%ny), v = dd->vthr(i);
+			i0+= v;	i1+= v*d;
+		}
+		is = i1/i0;
+#pragma omp parallel for reduction(+:i2,i3,i4)
+		for(long i=0;i<nx*ny*nz;i++)
+		{
+			mreal d = mreal((i/nx)%ny)-is, t = d*d, v = dd->vthr(i);
+			i2+= v*t;	i3+= v*d*t;		i4+= v*t*t;
 		}
 		break;
 	case 'z':
-#pragma omp parallel for reduction(+:i0,i1,i2,i3,i4)
+#pragma omp parallel for reduction(+:i0,i1)
 		for(long i=0;i<nx*ny*nz;i++)
 		{
-			mreal d = mreal(i/(nx*ny)), t = d*d, v = dd->vthr(i);
-			i0+= v;	i1+= v*d;	i2+= v*t;
-			i3+= v*d*t;		i4+= v*t*t;
+			mreal d = mreal(i/(nx*ny)), v = dd->vthr(i);
+			i0+= v;	i1+= v*d;
+		}
+		is = i1/i0;
+#pragma omp parallel for reduction(+:i2,i3,i4)
+		for(long i=0;i<nx*ny*nz;i++)
+		{
+			mreal d = mreal(i/(nx*ny))-is, t = d*d, v = dd->vthr(i);
+			i2+= v*t;	i3+= v*d*t;	i4+= v*t*t;
 		}
 		break;
 	default:	// "self-dispersion"
 		i0 = nx*ny*nz;
-#pragma omp parallel for reduction(+:i1,i2,i3,i4)
+#pragma omp parallel for reduction(+:i1)
+		for(long i=0;i<nx*ny*nz;i++)	i1 += dd->vthr(i);
+		is = i1/i0;
+#pragma omp parallel for reduction(+:i2,i3,i4)
 		for(long i=0;i<nx*ny*nz;i++)
 		{
-			mreal v = dd->vthr(i), t = v*v;
-			i1+= v;			i2+= t;
-			i3+= v*t;		i4+= t*t;
+			mreal v = dd->vthr(i)-is, t = v*v;
+			i2+= t;	i3+= v*t;	i4+= t*t;
 		}
 	}
 	if(i0==0)	return 0;
-	mreal d=i1/i0;
-	if(x)	*x=d;
-	if(w)	*w=i2>d*d*i0 ? sqrt(i2/i0-d*d) : 0;
-	if(s)	*s=i3/i0;
-	if(k)	*k=i4/(i0*3);
+	mreal w2=i2/i0, ww = sqrt(w2);
+	if(x)	*x=is;
+	if(w)	*w=ww;
+	if(s)	*s=i3/i0/ww/w2;
+	if(k)	*k=i4/(i0*3)/w2/w2;
 	return i0;
 }
 mreal MGL_EXPORT mgl_data_momentum_val_(uintptr_t *d, char *dir, mreal *m, mreal *w, mreal *s, mreal *k,int)

@@ -609,11 +609,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 			else if(!p.compare(L"nmin"))	{	v=d->Minimal();	v = v<0?v:0;	}
 		}
 		else if(c0=='k')
-		{
-			d->Momentum(ch,x,y,z,k);
-			if(ch=='a')	v = k;
-			else if(ch>='x' && ch<='z')	v = k/ns[ch-'x'];
-		}
+		{	d->Momentum(ch,x,y,z,k);	v=k;	}
 		else if(c0=='w')
 		{
 			d->Momentum(ch,x,y);
@@ -637,10 +633,8 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		else if(c0=='s')
 		{
 			if(ch=='u' && p[2]=='m')	v = d->Momentum('x',x,y);
-			else if(ch=='a')
+			else if(ch=='a' || (ch>='x' && ch<='z'))
 			{	d->Momentum(ch,x,y,z,k);	v = z;	}
-			else if(ch>='x' && ch<='z')
-			{	d->Momentum(ch,x,y,z,k);	v = z/ns[ch-'x'];	}
 		}
 		else if(!p.compare(L"fst"))	{	long i=-1,j=-1,l=-1;	v = d->Find(0,i,j,l);	}
 		else if(!p.compare(L"lst"))	{	long i=-1,j=-1,l=-1;	v = d->Last(0,i,j,l);	}

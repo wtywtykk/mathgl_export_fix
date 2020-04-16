@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-12 15:12+0300\n"
+"POT-Creation-Date: 2020-04-15 20:05+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -817,7 +817,7 @@ msgstr "Ejecutar script automáticamente al cargarlo"
 msgid "Automatically save before redrawing (F5)"
 msgstr "Guardar automáticamente antes de graficar (F5)"
 
-#: src/data.cpp:1490
+#: src/data.cpp:1510
 #, c-format
 msgid ""
 "Averages are:\n"
@@ -3239,7 +3239,7 @@ msgstr "Valor maximal de Y para o para llenado de coord."
 msgid "Maximal value of Z for cutting or for coordinate filling"
 msgstr "Valor maximal de Z para corte o para llenado de coord."
 
-#: src/data.cpp:1482
+#: src/data.cpp:1502
 #, c-format
 msgid "Maximum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Maximo es %g\t en x = %ld\ty = %ld\tz = %ld\n"
@@ -3296,7 +3296,7 @@ msgstr "Valor minimal de Y para corte o para llenado de coord."
 msgid "Minimal value of Z for cutting or for coordinate filling"
 msgstr "Valor minimal de Z para corte o para llenado de coord."
 
-#: src/data.cpp:1485
+#: src/data.cpp:1505
 #, c-format
 msgid "Minimum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Minimo es %g\t en x = %ld\ty = %ld\tz = %ld\n"
@@ -5713,7 +5713,7 @@ msgstr "Ancho"
 msgid "Width of selected cells"
 msgstr "Ancho de las celdas seleccionadas"
 
-#: src/data.cpp:1492
+#: src/data.cpp:1512
 #, c-format
 msgid ""
 "Widths are:\n"

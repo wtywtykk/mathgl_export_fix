@@ -119,7 +119,8 @@ D. Docs about JS interface
 22. Update Widget() to return Fl_MGLView (not Fl_MathGL);
 23. Add doc about mglWnd::Window();
 24. Add docs about Fl_MGLView.
-
+25. Check '\overline'
+26. Update docs about .s[axyz], .k[axyz]
 
 ZZ. Update time.texi {before release!!!}
 
