@@ -536,7 +536,7 @@ uintptr_t MGL_EXPORT mgl_data_roots_(const char *func, uintptr_t *ini, const cha
 HMDT MGL_EXPORT mgl_find_roots_txt(const char *func, const char *vars, HCDT ini);
 uintptr_t MGL_EXPORT mgl_find_roots_txt_(const char *func, const char *vars, uintptr_t *ini,int,int);
 /// Find roots for set of nonlinear equations defined by function
-bool MGL_EXPORT mgl_find_roots(size_t n, void (*func)(const mreal *x, mreal *f, void *par), mreal *x0, void *par);
+int MGL_EXPORT mgl_find_roots(size_t n, void (*func)(const mreal *x, mreal *f, void *par), mreal *x0, void *par);
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 }

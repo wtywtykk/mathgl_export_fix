@@ -65,7 +65,7 @@ int MGL_NO_EXPORT mgl_pnga_save(const char *fname, int w, int h, unsigned char *
 						PNG_FILTER_TYPE_DEFAULT);
 			png_set_rows(png_ptr, info_ptr, p);
 			png_write_png(png_ptr, info_ptr,  PNG_TRANSFORM_IDENTITY, 0);
-			png_write_end(png_ptr, info_ptr);
+//			png_write_end(png_ptr, info_ptr);
 		}
 		png_destroy_write_struct(&png_ptr, &info_ptr);
 	}
@@ -99,7 +99,7 @@ int MGL_NO_EXPORT mgl_png_save(const char *fname, int w, int h, unsigned char **
 						PNG_FILTER_TYPE_DEFAULT);
 			png_set_rows(png_ptr, info_ptr, p);
 			png_write_png(png_ptr, info_ptr,  PNG_TRANSFORM_IDENTITY, 0);
-			png_write_end(png_ptr, info_ptr);
+//			png_write_end(png_ptr, info_ptr);
 		}
 		png_destroy_write_struct(&png_ptr, &info_ptr);
 	}

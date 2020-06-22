@@ -1119,7 +1119,7 @@ int MGL_EXPORT mgl_data_read_hdf4(HMDT ,const char *,const char *)
 #endif
 //-----------------------------------------------------------------------------
 #if MGL_HAVE_HDF5
-void MGL_EXPORT mgl_dual_save_hdf(dual val,const char *fname,const char *data,int rewrite)
+void MGL_EXPORT mgl_dual_save_hdf(mdual val,const char *fname,const char *data,int rewrite)
 {
 	hid_t hf,hd,hs;
 	hsize_t dims[4]={1,2};
@@ -1301,8 +1301,8 @@ void MGL_EXPORT mgl_real_save_hdf_(double *val,const char *fname,const char *dat
 	char *t=new char[n+1];		memcpy(t,data,n);	t[n]=0;
 	mgl_real_save_hdf(*val,s,t,*rewrite);	delete []s;	delete []t;	}
 void MGL_EXPORT mgl_int_save_hdf_(long *val,const char *fname,const char *data,int *rewrite,int l,int n)
-{	char *s=new char[+1];		memcpy(s,fname,l);	s[l]=0;
-	char *t=new char[+1];		memcpy(t,data,n);	t[n]=0;
+{	char *s=new char[l+1];		memcpy(s,fname,l);	s[l]=0;
+	char *t=new char[n+1];		memcpy(t,data,n);	t[n]=0;
 	mgl_int_save_hdf(*val,s,t,*rewrite);	delete []s;	delete []t;	}
 //-----------------------------------------------------------------------------
 bool MGL_EXPORT mgl_add_file(long &kx,long &ky, long &kz, mreal *&b, mglData *d,bool as_slice)

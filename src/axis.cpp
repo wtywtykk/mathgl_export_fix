@@ -278,7 +278,7 @@ void mglCanvas::SetTickTime(char dir, mreal d, const char *t)
 	}
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::AdjustTicks(const char *dir, bool force, std::string stl)
+void mglCanvas::AdjustTicks(const char *dir, bool force, const std::string &stl)
 {
 	if(force)	SetTuneTicks(3);
 	UpdateAxis();

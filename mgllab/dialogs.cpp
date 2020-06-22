@@ -544,8 +544,8 @@ void cb_style_sch(Fl_Widget *, void *)	{	style_dlg.set_scheme();	}
 void style_dlg_cb(Fl_Widget *, void *v)
 {	style_dlg.ext=NULL;	style_dlg.e=(ScriptWindow *)v;	style_dlg.show();	}
 //-----------------------------------------------------------------------------
-void style_in_cb(Fl_Widget *, void *v)
-{	style_dlg.ext=(Fl_Input*)v;	style_dlg.e=NULL;	style_dlg.show();	}
+//void style_in_cb(Fl_Widget *, void *v)
+//{	style_dlg.ext=(Fl_Input*)v;	style_dlg.e=NULL;	style_dlg.show();	}
 //-----------------------------------------------------------------------------
 void cb_datsel_upd(Fl_Widget *, void *);
 void cb_datsel_act(Fl_Widget *, void *);
@@ -900,8 +900,8 @@ public:
 		}
 		hide();
 	}
-	void set_cmd(const char *line)	// TODO
-	{}
+//	void set_cmd(const char *line)	// TODO
+//	{}
 } newcmd_dlg;
 //-----------------------------------------------------------------------------
 void cb_cmd_type(Fl_Widget*, void*)	{	newcmd_dlg.type_sel();	}

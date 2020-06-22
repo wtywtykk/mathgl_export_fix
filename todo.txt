@@ -47,9 +47,14 @@
 
 20. Algorithm of combining primitives with the same color to the larger one.
 
-21. UTF8 in legend-option
+21. UTF8 in legend-option ?
 
-* Add 'connect' for connecting points to set of surfaces
+22. Select one of Qt4 or Qt5 by default. Add flag qt4and5
+
+23. Add 'connect' for connecting points to set of surfaces
+
+24. New block about random generators
+25. Add high-level function (+ MGL command) which disable TeX parsing (gr->Self()->GetFont()->parse=false;)
 
 ZZ. Update *.i for new functions {before release!!!}
 
@@ -121,6 +126,7 @@ D. Docs about JS interface
 24. Add docs about Fl_MGLView.
 25. Check '\overline'
 26. Update docs about .s[axyz], .k[axyz]
+27. Beltc sample
 
 ZZ. Update time.texi {before release!!!}
 

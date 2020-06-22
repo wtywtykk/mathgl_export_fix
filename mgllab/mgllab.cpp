@@ -249,8 +249,8 @@ void saveas_cb(Fl_Widget*, void *v)
 }
 //-----------------------------------------------------------------------------
 ScriptWindow *new_view();
-void view_cb(Fl_Widget*, void*)
-{	Fl_Window* w = new_view();	w->show();	}
+//void view_cb(Fl_Widget*, void*)
+//{	Fl_Window* w = new_view();	w->show();	}
 //-----------------------------------------------------------------------------
 void hint_cb(Fl_Widget*, void*)	{}
 void lastfile1_cb(Fl_Widget*, void *v)

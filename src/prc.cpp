@@ -313,7 +313,7 @@ void MGL_EXPORT mgl_write_prc(HMGL gr, const char *fname,const char* /*descr*/, 
 				PNG_FILTER_TYPE_DEFAULT);
 		png_set_rows(png_ptr, info_ptr, pbuf);
 		png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, 0);
-		png_write_end(png_ptr, info_ptr);
+//		png_write_end(png_ptr, info_ptr);
 
 		png_destroy_write_struct(&png_ptr, &info_ptr);
 		delete []pbuf;	delete []buf;

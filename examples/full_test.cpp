@@ -157,6 +157,18 @@ void mgl_generate_texi()
 	fclose(fs);	fclose(fp);	fclose(fq);
 }
 
+void mgl_generate_slides()
+{
+	FILE *fp = fopen("samples.tex","w");
+	FILE *fs = fopen("samples.cpp","r");
+	for(size_t i=0;samp[i].name && samp[i].name[0];i++)
+	{
+		fprintf(fp,"\n\\begin{frame}[fragile]{Пример \\href{http://mathgl.sourceforge.net/doc_en/%s-sample.html}{\\texttt{%s}}}\n%s\n", samp[i].name, samp[i].name, samp[i].info);
+		fprintf(fp,"\\begin{center}\n\\includegraphics[width=0.7\\linewidth]{png/%s}\n\\end{center}\n\\end{frame}\n", samp[i].name);
+	}
+	fclose(fp);	fclose(fs);
+}
+
 static struct option longopts[] =
 {
 	{ "big",	no_argument,	&big,		1 },
@@ -401,6 +413,7 @@ int main(int argc,char **argv)
 		clock_t beg,end;
 		while(s->name[0])	// all samples
 		{
+			if(!strcmp(s->name,"icon"))	{	s++;	continue;	}
 			char *buf = new char[strlen(s->mgl)+ll];
 			strcpy(buf,s->mgl);	strcat(buf,mmgl_dat_prepare);
 			fprintf(fp,"\n@item %s",s->name);
@@ -432,6 +445,7 @@ int main(int argc,char **argv)
 	}
 	else if(dotest==6)
 	{
+		mgl_generate_slides();
 		mgl_generate_texi();
 		delete gr;	return 0;
 	}
@@ -444,6 +458,7 @@ int main(int argc,char **argv)
 	{
 		while(s->name[0])	// all samples
 		{
+			if(!strcmp(s->name,"icon"))	{	s++;	continue;	}
 			gr->DefaultPlotParam();	gr->Clf();
 			if(use_mgl)
 			{

@@ -3377,25 +3377,29 @@ void all_prims(mglGraph *gr)	// test drawing of all kinds
 //-----------------------------------------------------------------------------
 const char *mmgl_minmax="define $p 30\n"
 "new h 300 300 '-sqrt(1-x^2-y^2)*(3*x*y^2*$p-x^3*$p+6*y)/(3*sqrt(2))+x*y+(y^2+x^2)*$p/3 -7*(y^2+x^2)^2*$p/24+y^2+3*x^2'\n"
-"\nminmax e h\n\ncrange h:dens h:box\nfplot 'sin(2*pi*t)' 'cos(2*pi*t)' '0' 'k'\nplot e(0)*2-1 e(1)*2-1 '. c'";
+"\nminmax e h\nsubplot 1 1 0 '':title 'MinMax sample'\ncrange h:dens h:box\n"
+"fplot 'sin(2*pi*t)' 'cos(2*pi*t)' '0' 'k'\nplot e(0)*2-1 e(1)*2-1 '. c'";
 void smgl_minmax(mglGraph *gr)	// test minmax
 {
 	mglData h(300,300);
 	gr->Fill(h,"-sqrt(1-x^2-y^2)*(3*x*y^2*30-x^3*30+6*y)/(3*sqrt(2))+x*y+(y^2+x^2)*10 -7*(y^2+x^2)^2*30/24+y^2+3*x^2");
 	mglData e=h.MinMax();
+	if(big!=3)	{	gr->SubPlot(1,1,0,"");	gr->Title("MinMax sample");	}
 	gr->SetRange('c',h);	gr->Dens(h);	gr->Box();
 	gr->FPlot("sin(2*pi*t)","cos(2*pi*t)","0","k");
 	e*=2;	e-=1;
 	gr->Plot(e(0),e(1),". c");
 }
 //-----------------------------------------------------------------------------
-const char *mmgl_conts="new a 10 10 'sin(2*pi*x*y)'\nrotate 40 60\n"
+const char *mmgl_conts="new a 10 10 'sin(2*pi*x*y)'\ntitle 'Conts sample':rotate 40 60:box\n"
 "dens a '#'\ncont [0,0] a 'r'\nconts r 0 a\nplot 2*r(0)-1 2*r(1)-1 1+r(2) '2c'";
 void smgl_conts(mglGraph *gr)	// test conts
 {
 	mglData a(10,10);	gr->Fill(a,"sin(2*pi*x*y)");
 	mglData v, r=a.Conts(0);
-	gr->Rotate(40,60);	gr->Dens(a,"#");	gr->Cont(v,a,"r");
+	if(big!=3)	{	gr->Title("Conts sample");	}
+	gr->Rotate(40,60);	gr->Box();
+	gr->Dens(a,"#");	gr->Cont(v,a,"r");
 	mglData x(r.ny),y(r.ny),z(r.ny);
 	for(long i=0;i<x.nx;i++)	{	x[i]=r[r.nx*i]*2-1;	y[i]=r[r.nx*i+1]*2-1;	z[i]=1;	}
 	gr->Plot(x,y,z,"2c");

@@ -599,8 +599,8 @@ HADT MGL_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &v
 class MGL_EXPORT mglExprC
 {
 	HAEX ex;
-	mglExprC(const mglExprC &){}	// copying is not allowed
-	const mglExprC &operator=(const mglExprC &t){return t;}	// copying is not allowed
+	mglExprC(const mglExprC &){ex=0;}	// copying is not allowed
+	const mglExprC &operator=(const mglExprC &t){ex=0;	return t;}	// copying is not allowed
 public:
 	mglExprC(const char *expr)		{	ex = mgl_create_cexpr(expr);	}
 	~mglExprC()	{	mgl_delete_cexpr(ex);	}

@@ -299,7 +299,7 @@ using mglBase::Light;
 	/// Set the ticks parameters
 	void SetTicks(char dir, mreal d=0, int ns=0, mreal org=NAN, const wchar_t *lbl=0);
 	/// Auto adjust ticks
-	void AdjustTicks(const char *dir="xyzc", bool force=false, std::string stl="");
+	void AdjustTicks(const char *dir="xyzc", bool force=false, const std::string &stl="");
 	/// Tune ticks
 	inline void SetTuneTicks(int tune, mreal pos=1.15)
 	{	TuneTicks = tune;	FactorPos = pos;	}

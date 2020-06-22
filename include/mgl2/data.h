@@ -659,8 +659,8 @@ HMDT MGL_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &va
 class MGL_EXPORT mglExpr
 {
 	HMEX ex;
-	mglExpr(const mglExpr &){}	// copying is not allowed
-	const mglExpr &operator=(const mglExpr &t){return t;}	// copying is not allowed
+	mglExpr(const mglExpr &){ex=0;}	// copying is not allowed
+	const mglExpr &operator=(const mglExpr &t){ex=0;	return t;}	// copying is not allowed
 public:
 	mglExpr(const char *expr)		{	ex = mgl_create_expr(expr);	}
 #if MGL_HAVE_RVAL
@@ -847,7 +847,7 @@ public:
 
 	/// Create or recreate the array with specified size and fill it by zero
 	inline void Create(long mx,long my=1,long mz=1)	{	nx=mx;	ny=my;	nz=mz;	setD();	}
-	inline void SetRanges(mglPoint p1, mglPoint p2)	{	v1=p1;	v2=p2;	setD();	}
+	inline void SetRanges(const mglPoint &p1, const mglPoint &p2)	{	v1=p1;	v2=p2;	setD();	}
 	/// Set formula to be used as dfunction
 	inline void SetFormula(const char *eq)
 	{
@@ -938,7 +938,7 @@ class MGL_EXPORT mglDataT : public mglDataA
 {
 	const mglDataA &dat;
 	long ind;
-	const mglDataT &operator=(const mglDataT &d)	{	return d;	}
+	const mglDataT &operator=(const mglDataT &d)	{	ind=0;	return d;	}
 public:
 	mglDataT(const mglDataT &d) : dat(d.dat), ind(d.ind)	{	s = d.s;	}
 	mglDataT(const mglDataA &d, long col=0) : dat(d), ind(col)	{}
@@ -988,7 +988,7 @@ class MGL_EXPORT mglDataR : public mglDataA
 {
 	const mglDataA &dat;
 	long ind;
-	const mglDataR &operator=(const mglDataR &d)	{	return d;	}
+	const mglDataR &operator=(const mglDataR &d)	{	ind=0;	return d;	}
 public:
 	mglDataR(const mglDataR &d) : dat(d.dat), ind(d.ind)	{	s = d.s;	}
 	mglDataR(const mglDataA &d, long row=0) : dat(d), ind(row)	{}

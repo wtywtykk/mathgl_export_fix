@@ -426,7 +426,7 @@ public:
 	/// Set additional cutting box
 	inline void SetCutBox(mreal x1, mreal y1, mreal z1, mreal x2, mreal y2, mreal z2)
 	{	CutMin.Set(x1,y1,z1);	CutMax.Set(x2,y2,z2);	}
-	inline void SetCutBox(mglPoint v1, mglPoint v2)	{	CutMin=v1;	CutMax=v2;	}
+	inline void SetCutBox(const mglPoint &v1, const mglPoint &v2)	{	CutMin=v1;	CutMax=v2;	}
 	/// Reset mask to solid state
 	inline void ResetMask()	{	mask = MGL_SOLID_MASK;	MaskAn = DefMaskAn;	}
 	/// Set default mask rotation angle

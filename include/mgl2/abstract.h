@@ -109,11 +109,11 @@ void MGL_EXPORT mgl_data_export_(uintptr_t *dat, const char *fname, const char *
 void MGL_EXPORT mgl_data_save_hdf(HCDT d,const char *fname,const char *data,int rewrite);
 void MGL_EXPORT mgl_data_save_hdf_(uintptr_t *d, const char *fname, const char *data, int *rewrite,int l,int n);
 /// Save value to HDF file
-void MGL_EXPORT mgl_dual_save_hdf(dual val,const char *fname,const char *data,int rewrite);
+void MGL_EXPORT mgl_dual_save_hdf(mdual val,const char *fname,const char *data,int rewrite);
 void MGL_EXPORT mgl_real_save_hdf(double val,const char *fname,const char *data,int rewrite);
 void MGL_EXPORT mgl_int_save_hdf(long val,const char *fname,const char *data,int rewrite);
 void MGL_EXPORT mgl_real_save_hdf_(double *val,const char *fname,const char *data,int *rewrite,int,int);
-void mgl_int_save_hdf_(long *val, const char *fname, const char *data, int *rewrite, int, int);
+void MGL_EXPORT mgl_int_save_hdf_(long *val, const char *fname, const char *data, int *rewrite, int, int);
 /// Get information about the data (sizes and momentum) to string
 MGL_EXPORT const char *mgl_data_info(HCDT dat);
 int MGL_EXPORT mgl_data_info_(uintptr_t *dat, char *out, int len);

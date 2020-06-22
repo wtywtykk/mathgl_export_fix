@@ -383,7 +383,7 @@ double MGL_NO_EXPORT mgl_jac_sn(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_sc(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=1, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -391,7 +391,7 @@ double MGL_NO_EXPORT mgl_jac_sc(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_sd(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=0, dn=1;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -400,7 +400,7 @@ double MGL_NO_EXPORT mgl_jac_sd(double a, double m)
 
 double MGL_NO_EXPORT mgl_jac_cn(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=1, cn=0, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -408,7 +408,7 @@ double MGL_NO_EXPORT mgl_jac_cn(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_cs(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=1, cn=0, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -416,7 +416,7 @@ double MGL_NO_EXPORT mgl_jac_cs(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_cd(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=0, dn=1;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -433,7 +433,7 @@ double MGL_NO_EXPORT mgl_jac_dn(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_ds(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=1, cn=0, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -441,7 +441,7 @@ double MGL_NO_EXPORT mgl_jac_ds(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_dc(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=1, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -450,7 +450,7 @@ double MGL_NO_EXPORT mgl_jac_dc(double a, double m)
 
 double MGL_NO_EXPORT mgl_jac_nd(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=0, dn=1;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -458,7 +458,7 @@ double MGL_NO_EXPORT mgl_jac_nd(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_ns(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=1, cn=0, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -466,7 +466,7 @@ double MGL_NO_EXPORT mgl_jac_ns(double a, double m)
 }
 double MGL_NO_EXPORT mgl_jac_nc(double a, double m)
 {
-	double sn=0, cn=0, dn=0;
+	double sn=0, cn=1, dn=0;
 #if MGL_HAVE_GSL
 	gsl_sf_elljac_e(a,m, &sn, &cn, &dn);
 #endif
@@ -684,7 +684,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		HMDT tmp = 0;
 //		mglVar *v = arg->FindVar(nm.c_str());
 		if(!v && !nm.compare(0,7,L"jacobi_"))	nm = nm.substr(7);
-		if(!v && nm.empty())	
+		if(!v && nm.empty())
 		{
 			long m=mglFindInText(str,")");
 			if(m>1)

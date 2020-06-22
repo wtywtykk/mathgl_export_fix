@@ -965,7 +965,7 @@ int static mgl_root(const gsl_vector *x, void *params, gsl_vector *f)
 		if(mgl_isbad(p->f[i]))	ok=false;	}
 	return ok?GSL_SUCCESS:GSL_FAILURE;
 }
-bool MGL_EXPORT mgl_find_roots(size_t n, void (*func)(const mreal *x, mreal *f, void *par), mreal *x0, void *par)
+int MGL_EXPORT mgl_find_roots(size_t n, void (*func)(const mreal *x, mreal *f, void *par), mreal *x0, void *par)
 {
 	for(size_t i=0;i<n;i++)	if(mgl_isbad(x0[i]))	return false;
 	mglRoots pp;

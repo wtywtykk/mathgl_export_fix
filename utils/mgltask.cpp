@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	while(1)
 	{
 		int ch = getopt(argc, argv, args_opt);
-		if(ch>='a' & ch<='z')	eqs[ch-'a'] = optarg;
+		if(ch>='a' && ch<='z')	eqs[ch-'a'] = optarg;
 		if(ch<0)	break;
 	}
 	
