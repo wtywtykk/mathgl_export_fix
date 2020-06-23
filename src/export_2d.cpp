@@ -131,7 +131,7 @@ void static put_desc(HMGL gr, void *fp, bool gz, const char *pre, const char *ln
 	int *s = new int[n];	n=0;
 	for(long i=0;i<gr->GetPrmNum();i++)
 	{
-		const mglPrim q = gr->GetPrm(i);
+		const mglPrim &q = gr->GetPrm(i);
 		if(q.type!=4 || (q.n3&8))	continue;	// not a glyph
 		bool is=false;
 		for(long j=0;j<n;j++)	if(g[j]==q.n4 && s[j]==(q.n3&7))	is = true;
@@ -250,7 +250,7 @@ void MGL_EXPORT mgl_write_eps(HMGL gr, const char *fname,const char *descr)
 	// add mark definition if present
 	for(long i=0;i<gr->GetPrmNum();i++)
 	{
-		const mglPrim q = gr->GetPrm(i);
+		const mglPrim &q = gr->GetPrm(i);
 		if(q.type>0)	continue;
 		if(q.n4=='+')	m_p = true;
 		if(q.n4=='x')	m_x = true;
@@ -329,7 +329,7 @@ void MGL_EXPORT mgl_write_eps(HMGL gr, const char *fname,const char *descr)
 		const mglPrim &q = gr->GetPrm(i);
 		if(q.type<0)	continue;	// q.n1>=0 always
 		cp.c = _Gr_->GetPrmCol(i);
-		const mglPnt p1 = gr->GetPnt(q.n1);
+		const mglPnt &p1 = gr->GetPnt(q.n1);
 		if(q.type>1)
 		{
 			snprintf(str,256,"%.2g %.2g %.2g rgb ", cp.r[0]/255.,cp.r[1]/255.,cp.r[2]/255.);	str[255]=0;
@@ -517,7 +517,7 @@ void MGL_EXPORT mgl_write_svg(HMGL gr, const char *fname,const char *descr)
 		const mglPrim &q = gr->GetPrm(i);
 		if(q.type<0)	continue;	// q.n1>=0 always
 		cp.c = _Gr_->GetPrmCol(i);
-		const mglPnt p1=gr->GetPnt(q.n1);
+		const mglPnt &p1=gr->GetPnt(q.n1);
 		if(q.type==0)
 		{
 			mreal x=p1.x-x1,y=hh-p1.y,s=q.s;
@@ -692,7 +692,7 @@ void MGL_EXPORT mgl_write_tex(HMGL gr, const char *fname,const char *descr)
 		cp.c = _Gr_->GetPrmCol(i);
 		snprintf(cname,128,"color={rgb,255:red,%d;green,%d;blue,%d}",cp.r[0],cp.r[1],cp.r[2]);	cname[127]=0;
 
-		const mglPnt p1=gr->GetPnt(q.n1);
+		const mglPnt &p1=gr->GetPnt(q.n1);
 		mreal x=p1.x/100,y=p1.y/100,s=q.s/100;
 		if(q.type==0)
 		{
@@ -729,7 +729,7 @@ void MGL_EXPORT mgl_write_tex(HMGL gr, const char *fname,const char *descr)
 		}
 		else if(q.type==2 && cp.r[3])
 		{
-			const mglPnt p2=gr->GetPnt(q.n2), p3=gr->GetPnt(q.n3);
+			const mglPnt &p2=gr->GetPnt(q.n2), &p3=gr->GetPnt(q.n3);
 			if(cp.r[3]<255)
 				fwprintf(fp, L"\\fill[%s, fill opacity=%.4g] (%.4g,%.4g) -- (%.4g,%.4g) -- (%.4g,%.4g) -- cycle;\n", cname,cp.r[3]/255., x,y, p2.x/100,p2.y/100, p3.x/100,p3.y/100);
 			else
@@ -737,7 +737,7 @@ void MGL_EXPORT mgl_write_tex(HMGL gr, const char *fname,const char *descr)
 		}
 		else if(q.type==3 && cp.r[3])
 		{
-			const mglPnt p2=gr->GetPnt(q.n2), p3=gr->GetPnt(q.n3), p4=gr->GetPnt(q.n4);
+			const mglPnt &p2=gr->GetPnt(q.n2), &p3=gr->GetPnt(q.n3), &p4=gr->GetPnt(q.n4);
 			if(cp.r[3]<255)
 				fwprintf(fp, L"\\fill[%s, fill opacity=%.4g] (%.4g,%.4g) -- (%.4g,%.4g) -- (%.4g,%.4g) -- (%.4g,%.4g) -- cycle;\n", cname,cp.r[3]/255., x,y, p2.x/100,p2.y/100, p4.x/100,p4.y/100, p3.x/100,p3.y/100);
 			else

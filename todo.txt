@@ -55,6 +55,7 @@
 
 24. New block about random generators
 25. Add high-level function (+ MGL command) which disable TeX parsing (gr->Self()->GetFont()->parse=false;)
+26. Bypass realloc() ???
 
 ZZ. Update *.i for new functions {before release!!!}
 

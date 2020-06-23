@@ -81,13 +81,12 @@ mglFormulaC::~mglFormulaC()
 }
 //-----------------------------------------------------------------------------
 // Formula constructor (automatically parse and "compile" formula)
-mglFormulaC::mglFormulaC(const char *string)
+mglFormulaC::mglFormulaC(const char *string):Res(0)
 {
 	dat = tmp = NULL;
 	dx1=dy1=dz1=0;	dx2=dy2=dz2=1;
-	Error=0;
+	Error=Kod=0;
 	Left=Right=0;
-	Res=0; Kod=0;
 	if(!string)	{	Kod = EQ_NUM;	Res = 0;	return;	}
 	char *str = new char[strlen(string)+1];
 	strcpy(str,string);

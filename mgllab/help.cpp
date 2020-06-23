@@ -127,8 +127,8 @@ void mem_dlg_cb3(Fl_Widget *, void *v)
 void mem_dlg_cb4(Fl_Widget *, void *v)
 {	((ScriptWindow*)v)->mem_pressed(4);	}
 //-----------------------------------------------------------------------------
-void mem_update_cb(Fl_Widget *, void *v)
-{	((ScriptWindow*)v)->mem_init();	}
+// void mem_update_cb(Fl_Widget *, void *v)
+// {	((ScriptWindow*)v)->mem_init();	}
 //-----------------------------------------------------------------------------
 void delete_all_cb(Fl_Widget *, void *v)
 {

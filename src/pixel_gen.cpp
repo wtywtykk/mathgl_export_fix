@@ -316,7 +316,7 @@ void mglCanvas::CalcScr(mglPoint p, int *xs, int *ys) const
 	if(ys)	*ys=int(p.y);
 }
 //-----------------------------------------------------------------------------
-mglPoint mglCanvas::CalcScr(mglPoint p) const
+mglPoint mglCanvas::CalcScr(const mglPoint &p) const
 {	int x,y;	CalcScr(p,&x,&y);	return mglPoint(x,y);	}
 //-----------------------------------------------------------------------------
 /*void static mgl_prm_swap(mglPrim &s1,mglPrim &s2,mglPrim *buf)

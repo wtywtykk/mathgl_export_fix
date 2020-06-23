@@ -384,11 +384,11 @@ public:
 	inline void set(bool v,uint32_t fl)	{	Flag = v ? Flag|fl : Flag&(~fl);	}
 
 	/// Set axis range scaling -- simplified way to shift/zoom axis range -- need to replot whole image!
-	inline void ZoomAxis(mglPoint p1=mglPoint(0,0,0,0), mglPoint p2=mglPoint(1,1,1,1))	{	AMin = p1;	AMax = p2;	}
+	inline void ZoomAxis(const mglPoint &p1=mglPoint(0,0,0,0), const mglPoint &p2=mglPoint(1,1,1,1))	{	AMin = p1;	AMax = p2;	}
 	/// Set values of mglGraph::Min and mglGraph::Max
 	inline void SetRanges(mreal x1, mreal x2, mreal y1, mreal y2, mreal z1=0, mreal z2=0, mreal c1=0, mreal c2=0)
 	{	SetRanges(mglPoint(x1,y1,z1,c1),mglPoint(x2,y2,z2,c2));	}
-	void SetRanges(mglPoint v1, mglPoint v2);
+	void SetRanges(const mglPoint &v1, const mglPoint &v2);
 	/// Set values of mglGraph::Cmin and mglGraph::Cmax as minimal and maximal values of data a
 	void CRange(HCDT a, bool add = false, mreal fact=0);
 	void CRange(mreal v1,mreal v2,bool add=false);
@@ -532,15 +532,15 @@ public:
 
 	// ~~~~~~~~~~~~~~~~~~~~~~ Developer functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/// Add point to the Pnt and return its position
-	inline long AddPnt(mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1)
+	inline long AddPnt(const mglPoint &p, mreal c=-1, const mglPoint &n=mglPoint(NAN), mreal a=-1, int scl=1)
 	{	return AddPnt(&B,p,c,n,a,scl);	}
-	long AddPnt(const mglMatrix *M, mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1);
+	long AddPnt(const mglMatrix *M, const mglPoint &p, mreal c=-1, const mglPoint &n=mglPoint(NAN), mreal a=-1, int scl=1);
 	bool AddPntQ(mglPnt &q, const mglMatrix *M, mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1);
-	inline bool AddPntQ(mglPnt &q, mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1)
+	inline bool AddPntQ(mglPnt &q, mglPoint p, mreal c=-1, const mglPoint &n=mglPoint(NAN), mreal a=-1, int scl=1)
 	{	return AddPntQ(q,&B,p,c,n,a,scl);	}
-	inline bool AddPntQ(long id, const mglMatrix *M, mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1)
+	inline bool AddPntQ(long id, const mglMatrix *M, const mglPoint &p, mreal c=-1, const mglPoint &n=mglPoint(NAN), mreal a=-1, int scl=1)
 	{	return AddPntQ(Pnt[id],M,p,c,n,a,scl);	}
-	inline bool AddPntQ(long id, mglPoint p, mreal c=-1, mglPoint n=mglPoint(NAN), mreal a=-1, int scl=1)
+	inline bool AddPntQ(long id, const mglPoint &p, mreal c=-1, const mglPoint &n=mglPoint(NAN), mreal a=-1, int scl=1)
 	{	return AddPntQ(Pnt[id],&B,p,c,n,a,scl);	}
 	inline void SetPntOff(size_t id)	{	Pnt[id].x=NAN;	}
 	long AllocPnts(size_t num);
@@ -549,9 +549,9 @@ public:
 	bool CopyNtoC(mglPnt &q, long k, mreal c);
 	inline bool CopyNtoC(long id, long k, mreal c)
 	{	return (id>=0)?CopyNtoC(Pnt[id],k,c):false;	}
-	long CopyProj(long from, mglPoint p, mglPoint n, short sub=0);
-	bool CopyProj(mglPnt &q, long from, mglPoint p, mglPoint n, short sub=0);
-	void CopyProj(long id, long from, mglPoint p, mglPoint n, short sub=0)
+	long CopyProj(long from, const mglPoint &p, const mglPoint &n, short sub=0);
+	bool CopyProj(mglPnt &q, long from, const mglPoint &p, const mglPoint &n, short sub=0);
+	void CopyProj(long id, long from, const mglPoint &p, const mglPoint &n, short sub=0)
 	{	if(id>=0)	CopyProj(Pnt[id],from,p,n,sub);	}
 	void DisablePnt(long id)	{	Pnt[id].x = NAN;	}
 	void SetRGBA(long k, const mglColor &c)

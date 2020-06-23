@@ -147,8 +147,8 @@ class ObjXYZ
   { x = fx; y = fy; z = fz; }
   mreal Dot(const ObjXYZ & sPt) const
   { return(x*sPt.x)+(y*sPt.y)+(z*sPt.z); }
-  mreal LengthSquared()
-  { return(x*x+y*y+z*z); }
+//  mreal LengthSquared()
+//  { return(x*x+y*y+z*z); }
 
   friend ObjXYZ operator + (const ObjXYZ& a, const ObjXYZ& b)
   { return ObjXYZ(a.x+b.x,a.y+b.y,a.z+b.z); }

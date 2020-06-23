@@ -59,7 +59,7 @@ void PRCbitStream::compress()
     ++chunks;
     // strm.avail_out should be 0 if we got Z_OK
     compressedDataSize = sizeAvailable - strm.avail_out;
-    compressedData = (uint8_t*) realloc(compressedData,CHUNK*chunks);
+    compressedData = (uint8_t*)realloc(compressedData,CHUNK*chunks);
     strm.next_out = (Bytef*)(compressedData + compressedDataSize);
     strm.avail_out += CHUNK;
     sizeAvailable += CHUNK;

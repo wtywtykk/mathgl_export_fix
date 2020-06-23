@@ -115,13 +115,13 @@ void Fl_MGL::update()
 	}
 }
 //-----------------------------------------------------------------------------
-void add_suffix(char *fname, const char *ext)
-{
-	long n=strlen(fname);
-	if(n>4 && fname[n-4]=='.')
-	{	fname[n-3]=ext[0];	fname[n-2]=ext[1];	fname[n-1]=ext[2];	}
-	else	{	strcat(fname,".");	strcat(fname,ext);	}
-}
+// void add_suffix(char *fname, const char *ext)
+// {
+// 	long n=strlen(fname);
+// 	if(n>4 && fname[n-4]=='.')
+// 	{	fname[n-3]=ext[0];	fname[n-2]=ext[1];	fname[n-1]=ext[2];	}
+// 	else	{	strcat(fname,".");	strcat(fname,ext);	}
+// }
 //-----------------------------------------------------------------------------
 class ArgsDlg : public GeneralDlg
 {

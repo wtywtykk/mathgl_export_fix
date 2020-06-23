@@ -28,10 +28,10 @@
 #endif
 //-----------------------------------------------------------------------------
 std::wstring mgl_trim_ws(const std::wstring &str);
-HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
-HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
-HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns);
-HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns);
+HMDT MGL_NO_EXPORT mglFormulaCalc(const std::wstring &string, mglParser *arg, const std::vector<mglDataA*> &head);
+HADT MGL_NO_EXPORT mglFormulaCalcC(const std::wstring &string, mglParser *arg, const std::vector<mglDataA*> &head);
+HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns);
+HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns);
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_formula_calc(const char *str, long n, ...)
 {
@@ -67,7 +67,7 @@ HADT MGL_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &h
 	return mglFormulaCalcC(s,0,head);
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyFunc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double), const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyFunc(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double), const std::vector<std::wstring> &fns)
 {
 	HMDT d = mglFormulaCalcA(str, arg, head, fns);
 	long n = d->GetNN();	mreal *dd=d->a;
@@ -77,7 +77,7 @@ HMDT MGL_NO_EXPORT mglApplyFunc(std::wstring str, mglParser *arg, const std::vec
 }
 //-----------------------------------------------------------------------------
 #if MGL_HAVE_GSL
-HMDT MGL_NO_EXPORT mglApplyFuncGSL(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double, gsl_mode_t), const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyFuncGSL(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double, gsl_mode_t), const std::vector<std::wstring> &fns)
 {
 	HMDT d = mglFormulaCalcA(str, arg, head, fns);
 	long n = d->GetNN();	mreal *dd=d->a;
@@ -87,7 +87,7 @@ HMDT MGL_NO_EXPORT mglApplyFuncGSL(std::wstring str, mglParser *arg, const std::
 }
 #endif
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyOper(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double,double), const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyOper(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, double (*func)(double,double), const std::vector<std::wstring> &fns)
 {
 	HMDT a = mglFormulaCalcA(a1,arg,head, fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -106,7 +106,7 @@ HMDT MGL_NO_EXPORT mglApplyOper(std::wstring a1, std::wstring a2, mglParser *arg
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyOperAdd(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyOperAdd(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -122,7 +122,7 @@ HMDT MGL_NO_EXPORT mglApplyOperAdd(std::wstring a1, std::wstring a2, mglParser *
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyOperSub(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyOperSub(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -141,7 +141,7 @@ HMDT MGL_NO_EXPORT mglApplyOperSub(std::wstring a1, std::wstring a2, mglParser *
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyOperMul(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyOperMul(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -157,7 +157,7 @@ HMDT MGL_NO_EXPORT mglApplyOperMul(std::wstring a1, std::wstring a2, mglParser *
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglApplyOperDiv(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglApplyOperDiv(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HMDT a = mglFormulaCalcA(a1,arg,head,fns), b = mglFormulaCalcA(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -179,7 +179,7 @@ HMDT MGL_NO_EXPORT mglApplyOperDiv(std::wstring a1, std::wstring a2, mglParser *
 	mgl_delete_data(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyFuncC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual), const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyFuncC(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual), const std::vector<std::wstring> &fns)
 {
 	HADT d = mglFormulaCalcAC(str, arg, head,fns);
 	long n = d->GetNN();	dual *dd=d->a;
@@ -188,7 +188,7 @@ HADT MGL_NO_EXPORT mglApplyFuncC(std::wstring str, mglParser *arg, const std::ve
 	return d;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyOperC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual,dual), const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyOperC(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, dual (*func)(dual,dual), const std::vector<std::wstring> &fns)
 {
 	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -207,7 +207,7 @@ HADT MGL_NO_EXPORT mglApplyOperC(std::wstring a1, std::wstring a2, mglParser *ar
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyOperAddC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyOperAddC(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -223,7 +223,7 @@ HADT MGL_NO_EXPORT mglApplyOperAddC(std::wstring a1, std::wstring a2, mglParser 
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyOperSubC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyOperSubC(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -242,7 +242,7 @@ HADT MGL_NO_EXPORT mglApplyOperSubC(std::wstring a1, std::wstring a2, mglParser 
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyOperMulC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyOperMulC(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -258,7 +258,7 @@ HADT MGL_NO_EXPORT mglApplyOperMulC(std::wstring a1, std::wstring a2, mglParser 
 	mgl_delete_datac(d);	return r;
 }
 //-----------------------------------------------------------------------------
-HADT MGL_NO_EXPORT mglApplyOperDivC(std::wstring a1, std::wstring a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglApplyOperDivC(const std::wstring &a1, const std::wstring &a2, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 	HADT a = mglFormulaCalcAC(a1,arg,head,fns), b = mglFormulaCalcAC(a2,arg,head,fns), r,d;
 	long na = a->GetNN(), nb = b->GetNN(), nn;
@@ -477,12 +477,12 @@ double MGL_NO_EXPORT mgl_jac_nc(double a, double m)
 // All numbers are presented as mglData(1). Do boundary checking.
 // NOTE: In any case where number is required the mglData::a[0] is used.
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
-HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
+HMDT MGL_NO_EXPORT mglFormulaCalc(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
 	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
 	return mglFormulaCalcA(fns[0],arg,head,fns);
 }
-HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();
@@ -1131,12 +1131,12 @@ dual MGL_LOCAL_CONST normc(dual x);	//{	return norm(x);	}
 // All numbers are presented as mglData(1). Do boundary checking.
 // NOTE: In any case where number is required the mglData::a[0] is used.
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
-HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head)
+HADT MGL_NO_EXPORT mglFormulaCalcC(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
 	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
 	return mglFormulaCalcAC(fns[0],arg,head,fns);
 }
-HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> fns)
+HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std::vector<mglDataA*> &head, const std::vector<std::wstring> &fns)
 {
 #if MGL_HAVE_GSL
 	gsl_set_error_handler_off();

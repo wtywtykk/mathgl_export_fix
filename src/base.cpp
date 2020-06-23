@@ -492,7 +492,7 @@ static void mgl_coor_box(HMGL gr, mglPoint &p)
 	mgl_put_inbox(gr->Min.y, gr->Max.y, p.y);
 	mgl_put_inbox(gr->Min.z, gr->Max.z, p.z);
 }
-long mglBase::AddPnt(const mglMatrix *mat, mglPoint p, mreal c, mglPoint n, mreal a, int scl)
+long mglBase::AddPnt(const mglMatrix *mat, const mglPoint &p, mreal c, const mglPoint &n, mreal a, int scl)
 {
 	mglPnt q;
 	if(!AddPntQ(q,mat,p,c,n,a,scl))	return -1;
@@ -573,7 +573,7 @@ bool mglBase::CopyNtoC(mglPnt &q, long from, mreal c)
 	return mgl_isnum(q.x);
 }
 //-----------------------------------------------------------------------------
-long mglBase::CopyProj(long from, mglPoint p, mglPoint n, short sub)
+long mglBase::CopyProj(long from, const mglPoint &p, const mglPoint &n, short sub)
 {
 	mglPnt q;
 	if(!CopyProj(q,from,p,n,sub))	return -1;
@@ -582,7 +582,7 @@ long mglBase::CopyProj(long from, mglPoint p, mglPoint n, short sub)
 	{k=Pnt.size();	MGL_PUSH(Pnt,q,mutexPnt);}	return k;
 }
 //-----------------------------------------------------------------------------
-bool mglBase::CopyProj(mglPnt &q, long from, mglPoint p, mglPoint n, short sub)
+bool mglBase::CopyProj(mglPnt &q, long from, const mglPoint &p, const mglPoint &n, short sub)
 {
 	if(from<0)	return false;
 	q=Pnt[from];	q.sub = sub;
@@ -811,7 +811,7 @@ void mglBase::SetOrigin(mreal x0, mreal y0, mreal z0, mreal c0)
 	}
 }
 //-----------------------------------------------------------------------------
-void mglBase::SetRanges(mglPoint m1, mglPoint m2)
+void mglBase::SetRanges(const mglPoint &m1, const mglPoint &m2)
 {
 	if(mgl_isrange(m1.x, m2.x))	{	Min.x=m1.x;	Max.x=m2.x;	}
 	if(mgl_isrange(m1.y, m2.y))	{	Min.y=m1.y;	Max.y=m2.y;	}

@@ -224,7 +224,7 @@ using mglBase::Light;
 	mglPoint CalcXYZ(int xs, int ys, bool real=false) const MGL_FUNC_PURE;
 	/// Calculate screen point {xs,ys} for 3D coordinate {x,y,z}
 	void CalcScr(mglPoint p, int *xs, int *ys) const;
-	mglPoint CalcScr(mglPoint p) const;
+	mglPoint CalcScr(const mglPoint &p) const;
 	/// Set object/subplot id
 	inline void SetObjId(long id)	{	ObjId = id;	}
 	/// Get object id

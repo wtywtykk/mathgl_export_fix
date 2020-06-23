@@ -179,8 +179,8 @@ public:
 void dirsel_dlg_cb(Fl_Widget *, void *v)
 {	dirsel_dlg.ext=NULL;	dirsel_dlg.e=(ScriptWindow *)v;	dirsel_dlg.show();	}
 //-----------------------------------------------------------------------------
-void dirsel_in_cb(Fl_Widget *, void *v)
-{	dirsel_dlg.ext=(Fl_Input*)v;	dirsel_dlg.e=NULL;	dirsel_dlg.show();	}
+// void dirsel_in_cb(Fl_Widget *, void *v)
+// {	dirsel_dlg.ext=(Fl_Input*)v;	dirsel_dlg.e=NULL;	dirsel_dlg.show();	}
 //-----------------------------------------------------------------------------
 //const char *arr = "_AKVITSDOX";
 Fl_Menu_Item arrows[] = {
@@ -671,8 +671,8 @@ void cb_datsel_act(Fl_Widget *, void *)	{	datsel_dlg.activate();	}
 void datsel_dlg_cb(Fl_Widget *, void *v)
 {	datsel_dlg.ext=NULL;	datsel_dlg.e=(ScriptWindow *)v;	datsel_dlg.show();	}
 //-----------------------------------------------------------------------------
-void datsel_in_cb(Fl_Widget *, void *v)
-{	datsel_dlg.ext=(Fl_Input*)v;	datsel_dlg.e=NULL;	datsel_dlg.show();	}
+// void datsel_in_cb(Fl_Widget *, void *v)
+// {	datsel_dlg.ext=(Fl_Input*)v;	datsel_dlg.e=NULL;	datsel_dlg.show();	}
 //-----------------------------------------------------------------------------
 std::string with_arg(std::string ss, std::vector<std::string> prev)
 {

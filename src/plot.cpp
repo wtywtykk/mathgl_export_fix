@@ -1849,7 +1849,7 @@ void MGL_EXPORT mgl_error_exy_(uintptr_t *gr, uintptr_t *x, uintptr_t *y, uintpt
 //		Chart series
 //
 //-----------------------------------------------------------------------------
-void face_plot(mglBase *gr, mglPoint o, mglPoint d1, mglPoint d2, double c, bool wire)
+void face_plot(mglBase *gr, const mglPoint &o, mglPoint d1, mglPoint d2, double c, bool wire)
 {
 	const int num=10;
 	mglPoint nn=d1^d2;

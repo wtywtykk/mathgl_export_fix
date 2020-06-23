@@ -46,7 +46,7 @@ public:
 	void SetCurFig(int c);
 	void ResetFrames();
 	inline mglPoint GetMousePos() const	{	return LastMousePos;}
-	inline void SetMousePos(mglPoint p)	{	LastMousePos=p;	}
+	inline void SetMousePos(const mglPoint &p)	{	LastMousePos=p;	}
 	inline void Setup(bool clf_upd=true, bool showpos=false)
 	{	set(showpos,MGL_SHOW_POS);	set(clf_upd,MGL_CLF_ON_UPD);
 		if(!clf_upd)	ResetFrames();	}

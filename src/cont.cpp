@@ -496,7 +496,7 @@ std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(const mglPoint &Min, const mglP
 	delete []used;	delete []xsl;	delete []ysl;
 	return curvs;
 }
-std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(HMGL gr, std::vector<mglSegment> lines)
+std::vector<mglSegment> MGL_EXPORT mgl_get_curvs(HMGL gr, const std::vector<mglSegment> &lines)
 {	return mgl_get_curvs(gr->Min, gr->Max, lines);	}
 //-----------------------------------------------------------------------------
 void MGL_NO_EXPORT mgl_draw_curvs(HMGL gr, mreal val, mreal c, int text, const std::vector<mglSegment> &curvs)

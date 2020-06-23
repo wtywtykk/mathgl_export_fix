@@ -152,18 +152,6 @@ void set_title(Fl_Window* w)
 //-----------------------------------------------------------------------------
 void close_dlg_cb(Fl_Widget *, void *v)	{	((Fl_Window *)v)->hide();	}
 //-----------------------------------------------------------------------------
-void fname_cb(Fl_Widget*, void *v)
-{
-	ScriptWindow* e = (ScriptWindow*)v;
-	const char *file = mgl_file_chooser(_("Insert file name?"));
-	if(file)
-	{
-		char *str = new char[strlen(file)+4];
-		snprintf(str,strlen(file)+4," '%s'",file);
-		e->editor->insert(str);
-		delete []str;
-	}
-}
 //-----------------------------------------------------------------------------
 void new_cb(Fl_Widget*, void*)
 {
@@ -252,7 +240,7 @@ ScriptWindow *new_view();
 //void view_cb(Fl_Widget*, void*)
 //{	Fl_Window* w = new_view();	w->show();	}
 //-----------------------------------------------------------------------------
-void hint_cb(Fl_Widget*, void*)	{}
+// void hint_cb(Fl_Widget*, void*)	{}
 void lastfile1_cb(Fl_Widget*, void *v)
 {	if (!check_save()) return;
 	load_file(lastfiles[0].c_str(),-1,(ScriptWindow*)v);	}

@@ -941,7 +941,7 @@ bool mglFont::Load(const char *base, const char *path)
 	}
 	if(ex_b.size()>0)
 	{
-		glyphs.reserve(ex_b.size());	// preallocate memory
+		glyphs.reserve(ex_b.size());	// pmgl_reallocate memory
 		glyphs.insert(glyphs.end(), ex_b.begin(), ex_b.end());
 		std::sort(glyphs.begin(),glyphs.end());
 	}

@@ -55,8 +55,8 @@ void mglParser::FillBaseCmd()
 #endif
 }
 //-----------------------------------------------------------------------------
-HMDT MGL_NO_EXPORT mglFormulaCalc(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
-HADT MGL_NO_EXPORT mglFormulaCalcC(std::wstring string, mglParser *arg, const std::vector<mglDataA*> &head);
+HMDT MGL_NO_EXPORT mglFormulaCalc(const std::wstring &string, mglParser *arg, const std::vector<mglDataA*> &head);
+HADT MGL_NO_EXPORT mglFormulaCalcC(const std::wstring &string, mglParser *arg, const std::vector<mglDataA*> &head);
 //-----------------------------------------------------------------------------
 MGL_EXPORT void (*mgl_ask_func)(const wchar_t *, wchar_t *)=0;
 void MGL_EXPORT mgl_ask_gets(const wchar_t *quest, wchar_t *res)
@@ -73,9 +73,9 @@ MGL_EXPORT void (*mgl_progress_func)(int value, int maximal, HMGL)=mgl_progress_
 void MGL_EXPORT mgl_progress(int value, int maximal, HMGL gr)
 {	mgl_progress_func(value, maximal, gr);	}
 //-----------------------------------------------------------------------------
-mglFunc::mglFunc(long p, const wchar_t *f)
+mglFunc::mglFunc(long p, const wchar_t *f):func(f)
 {
-	pos = p;	func = f;
+	pos = p;
 	size_t i;
 	for(i=0;(isalnum(f[i]) || f[i]=='_');i++);
 	narg = wcstol(f+i+1,0,0);	func.crop(0,i);

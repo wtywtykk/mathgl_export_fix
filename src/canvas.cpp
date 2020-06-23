@@ -963,7 +963,7 @@ void mglCanvas::Legend(const std::vector<mglText> &leg, mreal x, mreal y, const 
 	strcpy(ff,fmt?fmt:"");	strcat(ff,":L");	Push();
 	if((pA=strchr(ff,'A')))
 	{	*pA = ' ';	InPlot(0,1,0,1,false);	iw=B1.b[0];	ih=B1.b[4];	}
-	else if(mglchr(font,'A'))
+	else if(strchr(font,'A'))
 	{	InPlot(0,1,0,1,false);	iw=B1.b[0];	ih=B1.b[4];	}
 	else	{	iw=B1.b[0]/B1.pf;	ih=B1.b[4]/B1.pf;	}
 	// find sizes
@@ -984,7 +984,7 @@ void mglCanvas::Legend(const std::vector<mglText> &leg, mreal x, mreal y, const 
 		nrow = 1+(n-1)/j;
 		ncol = (n+nrow-1)/nrow;
 	}
-	if(mglchr(font,'^'))	// use "external" positioning
+	if(strchr(font,'^'))	// use "external" positioning
 	{
 		x = x>=0.5 ? x*iw : x*iw-w*ncol-2*dx;
 		y = y>=0.5 ? y*ih : y*ih-h*nrow-2*dy;
@@ -999,6 +999,7 @@ void mglCanvas::Legend(const std::vector<mglText> &leg, mreal x, mreal y, const 
 	mglPoint p,q(NAN,NAN,NAN);
 
 	mreal cc = AddTexture(font);
+	SetMask("");
 	mreal c1,c2;	//=AddTexture(char(k1?k1:'w')), c2=AddTexture(char(k2?k2:'k'));
 	if(cc<2 || Txt[long(cc+0.5)].n==0)
 	{	c1 = AddTexture('w');	cc = c2 = AddTexture('k');	}

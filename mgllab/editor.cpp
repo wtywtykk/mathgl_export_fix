@@ -482,12 +482,12 @@ void changed_cb(int pos, int nInserted, int nDeleted, int nRestyled, const char 
 	if (loading) w->editor->show_insert_position();
 }
 //-----------------------------------------------------------------------------
-void insert_cb(Fl_Widget*, void *v)
-{
-	const char *newfile = mgl_file_chooser(_("Insert file content?"));
-	ScriptWindow *w = (ScriptWindow *)v;
-	if (newfile != NULL) load_file(newfile, w->editor->insert_position(),w);
-}
+// void insert_cb(Fl_Widget*, void *v)
+// {
+// 	const char *newfile = mgl_file_chooser(_("Insert file content?"));
+// 	ScriptWindow *w = (ScriptWindow *)v;
+// 	if (newfile != NULL) load_file(newfile, w->editor->insert_position(),w);
+// }
 //-----------------------------------------------------------------------------
 void paste_cb(Fl_Widget*, void* v)
 {
