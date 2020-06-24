@@ -382,7 +382,7 @@ public:
 			case 0:	*out = c->Sum(r);	break;
 			case 1:	*out = c->Max(r);	break;
 			case 2:	*out = c->Min(r);	break;
-			case 3:	out = mgl_data_pulse(c,*r);	break;
+			case 3:	*out = mglData(true,mgl_data_pulse(c,*r));	break;
 		}
 		hide();
 	}

@@ -18,17 +18,17 @@ endif(NOT SWIG_FOUND)
 INCLUDE(${SWIG_USE_FILE})
 
 if(enable-python)
-	set(Python_ADDITIONAL_VERSIONS 2.7)
-	FIND_PACKAGE(PythonInterp)
+	set(Python_ADDITIONAL_VERSIONS ${PY3VERSION_DOTTED})
+	FIND_PACKAGE(PythonInterp ${PY3VERSION_DOTTED} REQUIRED)
 	if(NOT PYTHONINTERP_FOUND)
 		message(SEND_ERROR "Couldn't find python interpreter.")
 	endif(NOT PYTHONINTERP_FOUND)
-	FIND_PACKAGE(PythonLibs)
+	FIND_PACKAGE(PythonLibs ${PY3VERSION_DOTTED} REQUIRED)
 	if(NOT PYTHONLIBS_FOUND)
 		message(SEND_ERROR "Couldn't find python development libraries.")
 	endif(NOT PYTHONLIBS_FOUND)
 	execute_process(
-		COMMAND ${PYTHON_EXECUTABLE} -c "import numpy; print numpy.get_include()"
+		COMMAND ${PYTHON_EXECUTABLE} -c "import numpy; print (numpy.get_include())"
 		OUTPUT_VARIABLE NUMPY_INCLUDE_PATH
 		RESULT_VARIABLE NUMPY_ERR
 		OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -39,11 +39,11 @@ if(enable-python)
 
 	include_directories(${PYTHON_INCLUDE_DIR}  ${NUMPY_INCLUDE_PATH})
 	execute_process(
-		COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(prefix='${CMAKE_INSTALL_PREFIX}')"
+		COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print (get_python_lib(prefix='${CMAKE_INSTALL_PREFIX}'))"
 		OUTPUT_VARIABLE MGL_PYTHON_SITE_PACKAGES
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
 	set(SWIG_MODULE_mathgl_EXTRA_DEPS numpy.i ${src_imp_dep})
-	if(${CMAKE_VERSION} VERSION_LESS "3.8.0") 
+	if(${CMAKE_VERSION} VERSION_LESS "3.8.0")
 		SWIG_ADD_MODULE(mathgl python mathgl.i)
 	else(${CMAKE_VERSION} VERSION_LESS "3.8.0")
 		SWIG_ADD_LIBRARY(mathgl LANGUAGE python SOURCES mathgl.i)
@@ -58,7 +58,7 @@ if(enable-python)
 	)
 	add_custom_target(mgl_python_module ALL DEPENDS _mathgl mathgl.pyc)
 
-	install(FILES ${MathGL2_BINARY_DIR}/lang/mathgl.py ${MathGL2_BINARY_DIR}/lang/mathgl.pyc DESTINATION ${MGL_PYTHON_SITE_PACKAGES})
+	install(FILES ${MathGL2_BINARY_DIR}/lang/mathgl.py ${MathGL2_BINARY_DIR}/lang/__pycache__/mathgl.cpython-${PY3VERSION_NODOT}.pyc DESTINATION ${MGL_PYTHON_SITE_PACKAGES}/__pycache__)
 	install (TARGETS _mathgl LIBRARY DESTINATION ${MGL_PYTHON_SITE_PACKAGES})
 	set(mgl_clean_files ${mgl_clean_files} mathgl.py)
 endif(enable-python)

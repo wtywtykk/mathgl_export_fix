@@ -217,24 +217,26 @@ printf("\n");
 #else
 	long num=0;
 	unsigned char *c = mgl_create_scheme(scheme,num);
-	if(num<2)	return;
-	d->Create(w,h,1);
-#pragma omp parallel for collapse(2)
-	for(long i=0;i<h;i++)	for(long j=0;j<w;j++)
+	if(num>=2)
 	{
-		unsigned pos=0,mval=256*256;
-		const unsigned char *c2=g+4*w*(d->ny-i-1)+4*j;
-		for(long k=0;k<num;k++)
+		d->Create(w,h,1);
+#pragma omp parallel for collapse(2)
+		for(long i=0;i<h;i++)	for(long j=0;j<w;j++)
 		{
-			const unsigned char *c1=c+3*k;
-			int v0=int(c1[0])-c2[0];
-			int v1=int(c1[1])-c2[1];
-			int v2=int(c1[2])-c2[2];
-			unsigned val = v0*v0+v1*v1+v2*v2;
-			if(val==0)		{	pos=k;	break;	}
-			if(val<mval)	{	pos=k;	mval=val;	}
+			unsigned pos=0,mval=256*256;
+			const unsigned char *c2=g+4*w*(d->ny-i-1)+4*j;
+			for(long k=0;k<num;k++)
+			{
+				const unsigned char *c1=c+3*k;
+				int v0=int(c1[0])-c2[0];
+				int v1=int(c1[1])-c2[1];
+				int v2=int(c1[2])-c2[2];
+				unsigned val = v0*v0+v1*v1+v2*v2;
+				if(val==0)		{	pos=k;	break;	}
+				if(val<mval)	{	pos=k;	mval=val;	}
+			}
+			d->a[j+d->nx*i] = v1 + pos*(v2-v1)/(num-1);
 		}
-		d->a[j+d->nx*i] = v1 + pos*(v2-v1)/(num-1);
 	}
 	delete []c;	delete []g;
 #endif

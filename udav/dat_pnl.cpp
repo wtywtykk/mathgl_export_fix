@@ -290,7 +290,7 @@ void DatPanel::load()
 void DatPanel::copy()
 {
 	QTableWidgetSelectionRange ts = tab->selectedRanges().first();
-	QString res, s;
+	QString res;
 	for(long j=ts.topRow();j<=ts.bottomRow();j++)
 	{
 		for(long i=ts.leftColumn();i<=ts.rightColumn();i++)

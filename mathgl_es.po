@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 16:31+0300\n"
+"POT-Creation-Date: 2020-06-24 22:06+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -5279,7 +5279,7 @@ msgstr "Comando(s) incorrecto(s) en el script"
 msgid "Theta angle (tilt z-axis)"
 msgstr "Ángulo theta (inclinación del eje z)"
 
-#: widgets/fltk.cpp:1203
+#: widgets/fltk.cpp:1206
 msgid "This is for parameter "
 msgstr "Esto es para parámetro "
 
@@ -5511,7 +5511,7 @@ msgstr "UDAV - Comprimir datos"
 msgid "UDAV - about"
 msgstr "UDAV - Acerca de"
 
-#: udav/anim_dlg.cpp:105
+#: udav/anim_dlg.cpp:104
 msgid "UDAV - animation"
 msgstr "UDAV - Animación"
 
@@ -5970,7 +5970,7 @@ msgstr "Debe especificar dirección(es)"
 msgid "You should put text inside ' ' for argument "
 msgstr "Debe poner el texto entre ' para el argumento "
 
-#: udav/anim_dlg.cpp:106
+#: udav/anim_dlg.cpp:105
 msgid "You should select one of case"
 msgstr "Debe seleccionar uno de los casos"
 

@@ -375,7 +375,7 @@ void QMathGL::drawPrim()
 	for(i=0;i<n;i++)
 	{
 		mgl_set_obj_id(gr,i+MGL_MAX_LINES);
-		QString tst = primitives.section('\n',i,i);
+//		QString tst = primitives.section('\n',i,i);
 		pr.Parse(&gg,primitives.section('\n',i,i).toLocal8Bit().constData(),i+MGL_MAX_LINES);
 	}
 	gg.SetRanges(ox1,ox2);	gg.Pop();	setlocale(LC_NUMERIC, loc.c_str());

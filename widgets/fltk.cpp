@@ -1159,10 +1159,13 @@ void Fl_MGLView::add_widget(char id, const char *args)
 	args += 2;
 	Fl_Widget *w=NULL;
 	char *lbl=0;
-	for(size_t i=0;args[i];i++)	if(args[i]=='|')	// find label
-	{	lbl = (char*)malloc(i);	lbl[i]=0;
-		for(size_t j=0;j<i;j++)	lbl[j] = args[j];
-		args += i;	break;	}
+	for(size_t i=0;args[i];i++)
+		if(args[i]=='|')	// find label
+		{
+			lbl = (char*)malloc(i);	lbl[i]=0;
+			for(size_t j=0;j<i;j++)	lbl[j] = args[j];
+			args += i;	break;
+		}
 	if(!lbl)
 	{	lbl = (char*)malloc(3);	lbl[0]='$';	lbl[1]=id;	lbl[2]=0;	}
 	else	args++;

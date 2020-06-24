@@ -122,13 +122,13 @@ void MGL_EXPORT mgl_vect_xy(HMGL gr, HCDT x, HCDT y, HCDT ax, HCDT ay, const cha
 	if(tx<1)	tx=1;
 	if(ty<1)	ty=1;
 
-	double xm=0,cm=0,ca=0;
+	double xm=0,cm=0;
 	double dm=(fabs(gr->Max.c)+fabs(gr->Min.c))*1e-5;
 	// use whole array for determining maximal vectors length
 #pragma omp parallel
 	{
 		double xm1=0,cm1=0,xx,c1,c2;
-#pragma omp for nowait collapse(3) reduction(+:ca)
+#pragma omp for nowait collapse(3)
 		for(long k=0;k<l;k++)	for(long j=0;j<m;j+=ty)	for(long i=0;i<n;i+=tx)
 		{
 			mglPoint d(GetX(x,i,j,k).x, GetY(y,i,j,k).x),p1;
@@ -138,12 +138,11 @@ void MGL_EXPORT mgl_vect_xy(HMGL gr, HCDT x, HCDT y, HCDT ax, HCDT ay, const cha
 			c1 = fabs(v*p1);	xx = p1.norm();	c1 *= xx?1/(xx*xx):0;
 			p1 = j<m-1 ? mglPoint(GetX(x,i,j+ty,k).x, GetY(y,i,j+ty,k).x)-d : d-mglPoint(GetX(x,i,j-ty,k).x, GetY(y,i,j-ty,k).x);
 			c2 = fabs(v*p1);	xx = p1.norm();	c2 *= xx?1/(xx*xx):0;
-			c1 = c1<c2 ? c2:c1;	ca+=c1;	cm1 = cm1<c1 ? c1:cm1;
+			c1 = c1<c2 ? c2:c1;	cm1 = cm1<c1 ? c1:cm1;
 		}
 #pragma omp critical(max_vec)
 		{cm = cm<cm1 ? cm1:cm;	xm = xm<xm1 ? xm1:xm;}
 	}
-	ca /= (n*m*l)/(tx*ty);
 	xm = xm?1./xm:0;	cm = cm?fact/cm:0;
 
 	for(long k=0;k<l;k++)
@@ -225,13 +224,13 @@ void MGL_EXPORT mgl_vect_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay, 
 	if(ty<1)	ty=1;
 	if(tz<1)	tz=1;
 
-	double xm=0,cm=0,ca=0, asize = gr->GetArrowSize();
+	double xm=0,cm=0, asize = gr->GetArrowSize();
 	double dm=(fabs(gr->Max.c)+fabs(gr->Min.c))*1e-5;
 	// use whole array for determining maximal vectors length
 #pragma omp parallel
 	{
 		double c1,c2,c3, xm1=0,cm1=0,xx;
-#pragma omp for nowait collapse(3) reduction(+:ca)
+#pragma omp for nowait collapse(3)
 		for(long k=0;k<l;k+=tz)	for(long i=0;i<n;i+=tx)	for(long j=0;j<m;j+=ty)
 		{
 			mglPoint d(GetX(x,i,j,k).x, GetY(y,i,j,k).x, GetZ(z,i,j,k).x);
@@ -244,12 +243,11 @@ void MGL_EXPORT mgl_vect_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay, 
 			p1 = k<l-1 ? mglPoint(GetX(x,i,j,k+tz).x, GetY(y,i,j,k+tz).x, GetZ(z,i,j,k+tz).x)-d : d-mglPoint(GetX(x,i,j,k-tz).x, GetY(y,i,j,k-tz).x, GetZ(z,i,j,k-tz).x);
 			c3 = fabs(v*p1);	xx = p1.norm();	c3 *= xx?1/(xx*xx):0;
 			c1 = c1<c2 ? c2:c1;	c1 = c1<c3 ? c3:c1;
-			ca+=c1;	cm1 = cm1<c1 ? c1:cm1;
+			cm1 = cm1<c1 ? c1:cm1;
 		}
 #pragma omp critical(max_vec)
 		{cm = cm<cm1 ? cm1:cm;	xm = xm<xm1 ? xm1:xm;}
 	}
-	ca /= double(n*m*l)/double(tx*ty*tz);
 	xm = xm?1./xm:0;	cm = cm?fact/cm:0;
 
 	const long ni = 1+((n-1)/tx), nj = 1+((m-1)/ty), nk = 1+((l-1)/tz);
@@ -430,7 +428,7 @@ void MGL_EXPORT mgl_vect3_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay,
 	if(gr->MeshNum>1)	{	tx=(n-1)/(gr->MeshNum-1);	ty=(m-1)/(gr->MeshNum-1);	}
 	if(tx<1)	tx=1;
 	if(ty<1)	ty=1;
-	double xm=0,cm=0,ca=0, asize = gr->GetArrowSize();
+	double xm=0,cm=0, asize = gr->GetArrowSize();
 	double dm=(fabs(gr->Max.c)+fabs(gr->Min.c))*1e-5;
 	// use whole array for determining maximal vectors length
 	mglPoint d=(gr->Max-gr->Min)/mglPoint(1./ax->GetNx(),1./ax->GetNy(),1./ax->GetNz());
@@ -440,7 +438,7 @@ void MGL_EXPORT mgl_vect3_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay,
 	{
 		double xm1=0,cm1=0, xx,yy,zz, c1,c2;
 		mglPoint p1, p2, v;
-#pragma omp for nowait collapse(2) reduction(+:ca)
+#pragma omp for nowait collapse(2)
 		for(long i=0;i<n;i+=tx)	for(long j=0;j<m;j+=ty)
 		{
 			long i0 = i+n*j;
@@ -453,12 +451,11 @@ void MGL_EXPORT mgl_vect3_xyz(HMGL gr, HCDT x, HCDT y, HCDT z, HCDT ax, HCDT ay,
 			c1 = fabs(v*p1);	xx = p1.norm();	c1 *= xx?1/(xx*xx):0;
 			c2 = fabs(v*p2);	xx = p2.norm();	c2 *= xx?1/(xx*xx):0;
 			c1 = c1<c2 ? c2:c1;	c1 = c1<yy ? yy:c1;
-			ca+=c1;	cm1 = cm1<c1 ? c1:cm1;
+			cm1 = cm1<c1 ? c1:cm1;
 		}
 #pragma omp critical(max_vec)
 		{cm = cm<cm1 ? cm1:cm;	xm = xm<xm1 ? xm1:xm;}
 	}
-	ca /= mreal(n*m)/mreal(tx*ty);
 	xm = xm?1./xm:0;	cm = cm?fact/cm:0;
 
 	const long ni = 1+((n-1)/tx), nj = 1+((m-1)/ty);
@@ -1126,10 +1123,8 @@ void MGL_EXPORT mgl_flowp_xyz(HMGL gr, double x0, double y0, double z0, HCDT x, 
 		mreal dx=INFINITY, dy=INFINITY, dz=INFINITY;
 		for(long i=0;i<n;i++)
 		{	mreal d = fabs(x->v(i)-p.x);	if(d<dx)	{	i0=i;	dx=d;	}	}
-		dm = INFINITY;
 		for(long j=0;j<m;j++)
 		{	mreal d = fabs(y->v(j)-p.y);	if(d<dy)	{	j0=j;	dy=d;	}	}
-		dm = INFINITY;
 		for(long k=0;k<l;k++)
 		{	mreal d = fabs(z->v(k)-p.z);	if(d<dz)	{	k0=k;	dz=d;	}	}
 		dm = sqrt(dx*dx+dy*dy+dz*dz);

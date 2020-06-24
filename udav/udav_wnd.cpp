@@ -761,7 +761,6 @@ void MainWindow::messClicked()
 	QString q = mess->textCursor().block().text();
 	if(q.contains("in line "))
 	{
-		QString s = q.section(' ',-1);
 		int n = q.section(' ',-1).toInt()-1;	if(n<0)	return;
 		edit->moveCursor(QTextCursor::Start);
 		for(int i=0;i<n;i++)	edit->moveCursor(QTextCursor::NextBlock);

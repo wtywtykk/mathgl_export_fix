@@ -131,7 +131,6 @@ void mglCanvasGL::AddLight(int n,mglPoint r,mglPoint d,char cc, mreal br,mreal a
 		spc[0] = spc[1] = spc[2] = br;
 		amb[0] = amb[1] = amb[2] = AmbBr;
 	}
-	ap = 90-180*atan(fabs(ap))/M_PI;
 	dif[0] = dif[1] = dif[2] = DifBr;
 	dif[3] = amb[3] = spc[3] = 1.;
 	if(inf)
@@ -146,6 +145,7 @@ void mglCanvasGL::AddLight(int n,mglPoint r,mglPoint d,char cc, mreal br,mreal a
 	glLightfv(GL_LIGHT0+n, GL_POSITION, pos);
 	if(!inf)
 	{
+//		ap = 90-180*atan(fabs(ap))/M_PI;
 //		float dir[4]={d.x, d.y, d.z, 0};
 //		glLightfv(GL_LIGHT0+n, GL_SPOT_DIRECTION, dir);
 //		glLightf(GL_LIGHT0+n, GL_SPOT_CUTOFF, ap);
