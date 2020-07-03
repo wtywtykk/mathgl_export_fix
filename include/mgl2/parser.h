@@ -51,7 +51,7 @@ struct mglCommand
 	///	12 - axis, 13 - primitives, 14 - axis setup, 15 - text/legend, 16 - data transform
 	int type;
 };
-extern mglCommand mgls_prg_cmd[], mgls_dat_cmd[], mgls_grf_cmd[], mgls_set_cmd[], mgls_prm_cmd[];
+extern mglCommand mgls_prg_cmd[], mgls_dat_cmd[], mgls_grf_cmd[], mgls_set_cmd[], mgls_prm_cmd[], mgls_rnd_cmd[];
 //-----------------------------------------------------------------------------
 /// Structure for function name and position.
 struct mglFunc

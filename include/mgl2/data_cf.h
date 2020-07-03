@@ -537,6 +537,55 @@ HMDT MGL_EXPORT mgl_find_roots_txt(const char *func, const char *vars, HCDT ini)
 uintptr_t MGL_EXPORT mgl_find_roots_txt_(const char *func, const char *vars, uintptr_t *ini,int,int);
 /// Find roots for set of nonlinear equations defined by function
 int MGL_EXPORT mgl_find_roots(size_t n, void (*func)(const mreal *x, mreal *f, void *par), mreal *x0, void *par);
+
+/// Gets integer random numbers of uniform distribution in range [lo,hi]
+mreal MGL_EXPORT mgl_rnd_integer(long lo, long hi);
+double MGL_EXPORT mgl_rnd_integer_(int *lo, int *hi);
+/// Gets random numbers of uniform distribution in range [lo,hi]
+mreal MGL_EXPORT mgl_rnd_uniform(mreal lo, mreal hi);
+double MGL_EXPORT mgl_rnd_uniform_(double *lo, double *hi);
+/// Gets random numbers of bernoulli distribution
+mreal MGL_EXPORT mgl_rnd_bernoulli(mreal p);
+double MGL_EXPORT mgl_rnd_bernoulli_(double *p);
+/// Gets random numbers of binomial distribution
+long MGL_EXPORT mgl_rnd_binomial(long trials, mreal p);
+int MGL_EXPORT mgl_rnd_binomial_(int *trials, double *p);
+/// Gets random numbers of gaussian distribution
+mreal MGL_EXPORT mgl_rnd_gaussian(mreal mu, mreal sigma);
+double MGL_EXPORT mgl_rnd_gaussian_(double *mu, double *sigma);
+/// Gets random numbers of exponential distribution
+mreal MGL_EXPORT mgl_rnd_exponential(mreal lambda);
+double MGL_EXPORT mgl_rnd_exponential_(double *lambda);
+/// Gets random numbers of discrete distribution according A. It assumes A to be 1d.
+long MGL_EXPORT mgl_rnd_discrete(HCDT A);
+double MGL_EXPORT mgl_rnd_discrete_(uintptr_t *d);
+
+/// Fills data by integer random numbers of uniform distribution in range [lo,hi]
+void MGL_EXPORT mgl_data_rnd_integer(HMDT d, long lo, long hi);
+void MGL_EXPORT mgl_data_rnd_integer_(uintptr_t *d, int *lo, int *hi);
+/// Fills data by random numbers of uniform distribution in range [lo,hi]
+void MGL_EXPORT mgl_data_rnd_uniform(HMDT d, mreal lo, mreal hi);
+void MGL_EXPORT mgl_data_rnd_uniform_(uintptr_t *d, double *lo, double *hi);
+/// Fills data by random numbers of bernoulli distribution
+void MGL_EXPORT mgl_data_rnd_bernoulli(HMDT d, mreal p);
+void MGL_EXPORT mgl_data_rnd_bernoulli_(uintptr_t *d, double *p);
+/// Fills data by random numbers of binomial distribution
+void MGL_EXPORT mgl_data_rnd_binomial(HMDT d, long trials, mreal p);
+void MGL_EXPORT mgl_data_rnd_binomial_(uintptr_t *d, double *p);
+/// Fills data by random numbers of gaussian distribution
+void MGL_EXPORT mgl_data_rnd_gaussian(HMDT d, mreal mu, mreal sigma);
+void MGL_EXPORT mgl_data_rnd_gaussian_(uintptr_t *d, double *mu, double *s);
+/// Fills data by random numbers of exponential distribution
+void MGL_EXPORT mgl_data_rnd_exponential(HMDT d, mreal lambda);
+void MGL_EXPORT mgl_data_rnd_exponential_(uintptr_t *d, double *l);
+/// Fills data by random numbers of discrete distribution according A
+void MGL_EXPORT mgl_data_rnd_discrete(HMDT d, HCDT A);
+void MGL_EXPORT mgl_data_rnd_discrete_(uintptr_t *d, uintptr_t *A);
+/// Shuffles elements or slices of data array
+void MGL_EXPORT mgl_shuffle(HMDT d, char dir);
+void MGL_EXPORT mgl_shuffle_(uintptr_t *d, char *dir, int);
+
+
 //-----------------------------------------------------------------------------
 #ifdef __cplusplus
 }

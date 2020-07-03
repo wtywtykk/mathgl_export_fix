@@ -33,18 +33,20 @@ mglCommand *mglParser::BaseCmd=NULL;	///< Base table of MGL commands. It MUST be
 void mglParser::FillBaseCmd()
 {
 	if(BaseCmd)	return;
-	size_t na=0, nd=0, ng=0, np=0, ns=0, nsum=0;
+	size_t na=0, nd=0, ng=0, np=0, ns=0, nr=0, nsum=0;
 	while(mgls_prg_cmd[na].name[0])	na++;
 	while(mgls_dat_cmd[nd].name[0])	nd++;
 	while(mgls_grf_cmd[ng].name[0])	ng++;
 	while(mgls_prm_cmd[np].name[0])	np++;
 	while(mgls_set_cmd[ns].name[0])	ns++;
-	BaseCmd = new mglCommand[na+nd+ng+np+ns+1];
+	while(mgls_rnd_cmd[nr].name[0])	nr++;
+	BaseCmd = new mglCommand[na+nd+ng+np+ns+nr+1];
 	memcpy(BaseCmd, 	mgls_prg_cmd, na*sizeof(mglCommand));	nsum+=na;
 	memcpy(BaseCmd+nsum,mgls_dat_cmd, nd*sizeof(mglCommand));	nsum+=nd;
 	memcpy(BaseCmd+nsum,mgls_grf_cmd, ng*sizeof(mglCommand));	nsum+=ng;
 	memcpy(BaseCmd+nsum,mgls_prm_cmd, np*sizeof(mglCommand));	nsum+=np;
-	memcpy(BaseCmd+nsum,mgls_set_cmd, (ns+1)*sizeof(mglCommand));	nsum+=ns;
+	memcpy(BaseCmd+nsum,mgls_rnd_cmd, nr*sizeof(mglCommand));	nsum+=nr;
+	memcpy(BaseCmd+nsum,mgls_set_cmd,(ns+1)*sizeof(mglCommand));nsum+=ns;
 	qsort(BaseCmd, nsum, sizeof(mglCommand), mgl_cmd_cmp);
 #if DEBUG
 	long stat[17];	memset(stat,0,17*sizeof(long));

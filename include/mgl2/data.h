@@ -245,6 +245,31 @@ using mglDataA::Last;
 	inline void Put(const mglDataA &dat, long i=-1, long j=-1, long k=-1)
 	{	mgl_data_put_dat(this,&dat,i,j,k);	}
 
+	/// Fills data by integer random numbers of uniform distribution in range [lo,hi]
+	inline void RndInteger(long lo, long hi)
+	{	mgl_data_rnd_integer(this, lo, hi);	}
+	/// Fills data by random numbers of uniform distribution in range [lo,hi]
+	inline void RndUniform(mreal lo, mreal hi)
+	{	mgl_data_rnd_uniform(this, lo, hi);	}
+	/// Fills data by random numbers of bernoulli distribution
+	inline void RndBernoulli(mreal p=0.5)
+	{	mgl_data_rnd_bernoulli(this, p);	}
+	/// Fills data by random numbers of binomial distribution
+	inline void RndBinomial(long trials, mreal p=0.5)
+	{	mgl_data_rnd_binomial(this, trials, p);	}
+	/// Fills data by random numbers of gaussian distribution
+	inline void RndGaussian(mreal mu=0.0, mreal sigma=1.0)
+	{	mgl_data_rnd_gaussian(this, mu, sigma);	}
+	/// Fills data by random numbers of exponential distribution
+	inline void RndExponential(mreal lambda)
+	{	mgl_data_rnd_exponential(this, lambda);	}
+	/// Fills data by random numbers of discrete distribution according A
+	inline void RndDiscrete(const mglDataA &A)
+	{	mgl_data_rnd_discrete(this, &A);	}
+	/// Shuffles elements or slices of data array
+	inline void Shuffle(char dir='a')
+	{	mgl_shuffle(this, dir);	}
+
 	/// Read data from tab-separated text file with auto determining size
 	inline bool Read(const char *fname)
 	{	return mgl_data_read(this,fname); }
