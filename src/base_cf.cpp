@@ -247,6 +247,11 @@ int MGL_EXPORT mgl_check_version_(const char *ver, int l)
 {	char *s=new char[l+1];		memcpy(s,ver,l);	s[l]=0;
 	int r=mgl_check_version(s);	delete []s;	return r;	}
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_set_tex_parse(HMGL gr, int val)
+{	gr->GetFont()->parse=val;	}
+void MGL_EXPORT mgl_set_tex_parse_(uintptr_t *gr, int *val)
+{	_GR_->GetFont()->parse=*val;	}
+//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_start_group(HMGL gr, const char *s)	{	gr->StartAutoGroup(s);	}
 void MGL_EXPORT mgl_end_group(HMGL gr)	{	gr->EndGroup();	}
 void MGL_EXPORT mgl_start_group_(uintptr_t *gr, const char *name,int l)

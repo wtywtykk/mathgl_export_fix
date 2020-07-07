@@ -334,14 +334,14 @@ int MGL_NO_EXPORT mgls_brownian(mglGraph *, long, mglArg *a, const char *k, cons
 }
 //-----------------------------------------------------------------------------
 mglCommand mgls_rnd_cmd[] = {
-	{"bernoulli", "Fills by random numbers according to Bernoulli distribution with probability p", "bernoulli A [p]", mgls_data_rnd_bernoulli, 3},
-	{"binomial", "Fills by random numbers according to binomial distribution in n coin flips with probability p", "binomial A n [p]", mgls_data_rnd_binomial, 3},
-	{"brownian", "Fills by fractional brownian motion", "brownian A y1 y2 sigma h", mgls_brownian, 3},
-	{"discrete", "Fills by random numbers according to discrete distribution", "discrete A D", mgls_data_rnd_discrete, 3},
-	{"exponential", "Fills by random numbers according to exponential distribution with probability p", "exponential A p", mgls_data_rnd_exponential, 3},
-	{"gaussian", "Fills by random numbers according to Gaussian distribution", "gaussian A [mu sigma]", mgls_data_rnd_gaussian, 3},
-	{"shuffle", "Shuffle data cells (for dir='a') or slices (for dir='xyz')", "shuffle A ['dir']", mgls_shuffle, 3},
-	{"uniform", "Fills by random numbers uniformly chosen in [lo,hi)", "uniform A lo hi", mgls_data_rnd_uniform, 3},
-	{"uniformint", "Fills by random integers uniformly chosen in [lo, hi)", "uniformint A lo hi", mgls_data_rnd_integer, 3},
+	{"bernoulli", _("Fills by random numbers according to Bernoulli distribution with probability p"), "bernoulli A [p]", mgls_data_rnd_bernoulli, 3},
+	{"binomial", _("Fills by random numbers according to binomial distribution in n coin flips with probability p"), "binomial A n [p]", mgls_data_rnd_binomial, 3},
+	{"brownian", _("Fills by fractional brownian motion"), "brownian A y1 y2 sigma h", mgls_brownian, 3},
+	{"discrete", _("Fills by random numbers according to discrete distribution"), "discrete A D", mgls_data_rnd_discrete, 3},
+	{"exponential", _("Fills by random numbers according to exponential distribution with probability p"), "exponential A p", mgls_data_rnd_exponential, 3},
+	{"gaussian", _("Fills by random numbers according to Gaussian distribution"), "gaussian A [mu sigma]", mgls_data_rnd_gaussian, 3},
+	{"shuffle", _("Shuffle data cells (for dir='a') or slices (for dir='xyz')"), "shuffle A ['dir']", mgls_shuffle, 3},
+	{"uniform", _("Fills by random numbers uniformly chosen in [lo,hi)"), "uniform A lo hi", mgls_data_rnd_uniform, 3},
+	{"uniformint", _("Fills by random integers uniformly chosen in [lo, hi)"), "uniformint A lo hi", mgls_data_rnd_integer, 3},
 {"","","",NULL,0}};
 //-----------------------------------------------------------------------------

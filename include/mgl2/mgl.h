@@ -121,6 +121,8 @@ public:
 	inline void SetMeshNum(int num)			{	mgl_set_meshnum(gr, num);	}
 	/// Set number of visible faces (use 0 to draw all of them)
 	inline void SetFaceNum(int num)			{	mgl_set_facenum(gr, num);	}
+	/// Set TeX parsing at text drawing
+	inline void SetTeXparse(bool val)		{	mgl_set_tex_parse(gr, val);	}
 
 	/// Set cutting for points outside of bounding box
 	inline void SetCut(bool cut)				{	mgl_set_cut(gr, cut);	}

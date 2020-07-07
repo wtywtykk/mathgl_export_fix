@@ -25,6 +25,7 @@
 13. Use arrow_plot_3d ???
 14. Mask in SVG ???
 15. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
+16. Bypass realloc() ???
 
 ============= NEW FEATURES =============
 
@@ -49,12 +50,9 @@
 
 21. UTF8 in legend-option ?
 
-22. Select one of Qt4 or Qt5 by default. Add flag qt4and5
+22. Add 'connect' for connecting points to set of surfaces
 
-23. Add 'connect' for connecting points to set of surfaces
-
-25. Add high-level function (+ MGL command) which disable TeX parsing (gr->Self()->GetFont()->parse=false;)
-26. Bypass realloc() ???
+23. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
 
 ZZ. Update *.i for new functions {before release!!!}
 
@@ -130,6 +128,7 @@ D. Docs about JS interface
 28. Brownian sample
 29. Rnd filling sample
 30. Docs about random.cpp functions
+31. Docs about 'texparse'
 
 ZZ. Update time.texi {before release!!!}
 

@@ -506,6 +506,14 @@ int static mgls_setsizescl(mglGraph *gr, long , mglArg *a, const char *k, const 
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_texparse(mglGraph *gr, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(!strcmp(k,"n"))	gr->SetTeXparse(a[0].v);
+	else res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_setup(mglGraph *gr, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
@@ -845,6 +853,7 @@ mglCommand mgls_set_cmd[] = {
 	{"stickplot",_("Set position of plot inside cell of rotated stick"), "stickplot num ind tet phi", mgls_stickplot ,5},
 	{"subplot",_("Set position of plot as cell of matrix"),"subplot m n pos ['style' dx dy]", mgls_subplot ,5},
 	{"ternary",_("Switch on/off to use ternary axis"),"ternary val", mgls_ternary ,14},
+	{"texparse",_("Switch on/off TeX parsing at text output"), "texparse val", mgls_texparse, 2},
 	{"ticklen",_("Set tick length"),"ticklen val [stt]", mgls_ticklen ,14},
 	{"tickshift",_("Set additional tick and axis labels shift"),"tickshift dx [dy dz dc]", mgls_tickshift ,14},
 	{"ticktime",_("Set ticks in time format"),"ticktime 'dir' [dv 'tmpl']", mgls_ticktime ,14},

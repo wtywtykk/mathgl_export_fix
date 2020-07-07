@@ -132,6 +132,9 @@ void MGL_EXPORT mgl_set_facenum_(uintptr_t *gr, int *num);
 /// Clear unused points and primitives. Useful only in combination with mgl_set_facenum().
 void MGL_EXPORT mgl_clear_unused(HMGL gr);
 void MGL_EXPORT mgl_clear_unused_(uintptr_t *gr);
+/// Set TeX parsing at text drawing
+void MGL_EXPORT mgl_set_tex_parse(HMGL gr, int val);
+void MGL_EXPORT mgl_set_tex_parse_(uintptr_t *gr, int *val);
 
 /// Set ambient light brightness
 void MGL_EXPORT mgl_set_ambbr(HMGL gr, double i);
