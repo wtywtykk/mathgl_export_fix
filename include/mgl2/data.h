@@ -269,7 +269,10 @@ using mglDataA::Last;
 	/// Shuffles elements or slices of data array
 	inline void Shuffle(char dir='a')
 	{	mgl_shuffle(this, dir);	}
-
+	/// Fills data by fractional brownian motions along x-direction
+	inline void Brownian(mreal y1, mreal y2, mreal sigma, mreal alpha)
+	{	mgl_data_brownian(this, y1, y2, sigma, alpha);	}
+	
 	/// Read data from tab-separated text file with auto determining size
 	inline bool Read(const char *fname)
 	{	return mgl_data_read(this,fname); }

@@ -53,7 +53,6 @@
 
 23. Add 'connect' for connecting points to set of surfaces
 
-24. New block about random generators
 25. Add high-level function (+ MGL command) which disable TeX parsing (gr->Self()->GetFont()->parse=false;)
 26. Bypass realloc() ???
 
@@ -128,6 +127,9 @@ D. Docs about JS interface
 25. Check '\overline'
 26. Update docs about .s[axyz], .k[axyz]
 27. Beltc sample
+28. Brownian sample
+29. Rnd filling sample
+30. Docs about random.cpp functions
 
 ZZ. Update time.texi {before release!!!}
 

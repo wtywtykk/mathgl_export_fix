@@ -584,6 +584,9 @@ void MGL_EXPORT mgl_data_rnd_discrete_(uintptr_t *d, uintptr_t *A);
 /// Shuffles elements or slices of data array
 void MGL_EXPORT mgl_shuffle(HMDT d, char dir);
 void MGL_EXPORT mgl_shuffle_(uintptr_t *d, char *dir, int);
+/// Fills data by fractional brownian motions along x-direction
+void MGL_EXPORT mgl_data_brownian(HMDT d, mreal y1, mreal y2, mreal sigma, mreal alpha);
+void MGL_EXPORT mgl_data_brownian_(uintptr_t *d, double *y1, double *y2, double *sigma, double *alpha);
 
 
 //-----------------------------------------------------------------------------

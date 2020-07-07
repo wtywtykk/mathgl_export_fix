@@ -213,6 +213,8 @@ CMAKE_DEPENDENT_OPTION(enable-qt4asqt "Set Qt4 as default libmgl-qt" OFF "enable
 option(enable-qt5 "Enable Qt5 widget" OFF)
 CMAKE_DEPENDENT_OPTION(enable-qt5asqt "Set Qt5 as default libmgl-qt" OFF "enable-qt5" OFF)
 CMAKE_DEPENDENT_OPTION(enable-freetype "Enable freetype support" ON "NOT enable-all" ON)
+set(PY3VERSION_DOTTED "3.8" CACHE STRING "Used python version")
+string(REPLACE "." "" PY3VERSION_NODOT ${PY3VERSION_DOTTED})
 
 # msvc fwprintf print char* for the specifier of "%s" format
 if(MSVC AND MSVC_VERSION GREATER 1899)

@@ -1,7 +1,7 @@
 /***************************************************************************
- * exec_2d.cpp is part of Math Graphic Library
- * Copyright (C) 2020-??? Diego Sejas Viscarra <dsejas@pm.me>, 
- *                         Alexey Balakin <mathgl.abalakin@gmail.ru>       *
+ * random.cpp is part of Math Graphic Library                              *
+ * Copyright (C) 2020-??? Diego Sejas Viscarra <dsejas.math@pm.me>,        *
+ *                        Alexey Balakin <mathgl.abalakin@gmail.ru>        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU Library General Public License as       *
@@ -212,6 +212,29 @@ void MGL_EXPORT mgl_shuffle(HMDT d, char dir)
 void MGL_EXPORT mgl_shuffle_(uintptr_t *d, char *dir, int)
 {	mgl_shuffle(_DT_,*dir);	}
 //-----------------------------------------------------------------------------
+void MGL_NO_EXPORT mgl_fill_brownian(HMDT d, long n1, long n2, mreal sigma, mreal alpha)
+{
+	if (n1+1<n2)
+	{
+		long n = d->nx, nn = d->ny*d->nz, m = (n1+n2)/2;
+		for(long i=0;i<nn;i++)
+		{
+			mreal delta = mgl_rnd_gaussian(0, sigma);
+			d->a[m+n*i] = (d->a[n1+n*i]+d->a[n2+n*i])/2 + delta;
+		}
+		mgl_fill_brownian(d, n1, m, sigma/alpha, alpha);
+		mgl_fill_brownian(d, m, n2, sigma/alpha, alpha);
+	}
+}
+void MGL_EXPORT mgl_data_brownian(HMDT d, mreal y1, mreal y2, mreal sigma, mreal alpha)
+{
+	long n = d->nx, nn = d->ny*d->nz;
+	for(long i=0;i<nn;i++)	{	d->a[n*i] = y1;   d->a[n*(i+1)-1] = y2;	}
+	mgl_fill_brownian(d, 0, n-1, sigma, alpha);
+}
+void MGL_EXPORT mgl_data_brownian_(uintptr_t *d, double *y1, double *y2, double *sigma, double *alpha)
+{	mgl_data_brownian(_DT_,*y1,*y2,*sigma,*alpha);	}
+//-----------------------------------------------------------------------------
 //
 //	MGL commands
 //
@@ -300,11 +323,22 @@ int MGL_NO_EXPORT mgls_shuffle(mglGraph *, long, mglArg *a, const char *k, const
 	return res;
 }
 //-----------------------------------------------------------------------------
+int MGL_NO_EXPORT mgls_brownian(mglGraph *, long, mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData*>(a[0].d);
+	if (d && !strcmp(k, "dnnnn"))	d->Brownian(a[1].v,a[2].v,a[3].v,a[4].v);
+	else    res = 1;
+	return res;
+}
+//-----------------------------------------------------------------------------
 mglCommand mgls_rnd_cmd[] = {
 	{"bernoulli", "Fills by random numbers according to Bernoulli distribution with probability p", "bernoulli A [p]", mgls_data_rnd_bernoulli, 3},
 	{"binomial", "Fills by random numbers according to binomial distribution in n coin flips with probability p", "binomial A n [p]", mgls_data_rnd_binomial, 3},
+	{"brownian", "Fills by fractional brownian motion", "brownian A y1 y2 sigma h", mgls_brownian, 3},
 	{"discrete", "Fills by random numbers according to discrete distribution", "discrete A D", mgls_data_rnd_discrete, 3},
-	{"exponential", "Fills by random numbers according to exponential distribution with probability p", "bernoulli A [p]", mgls_data_rnd_bernoulli, 3},
+	{"exponential", "Fills by random numbers according to exponential distribution with probability p", "exponential A p", mgls_data_rnd_exponential, 3},
 	{"gaussian", "Fills by random numbers according to Gaussian distribution", "gaussian A [mu sigma]", mgls_data_rnd_gaussian, 3},
 	{"shuffle", "Shuffle data cells (for dir='a') or slices (for dir='xyz')", "shuffle A ['dir']", mgls_shuffle, 3},
 	{"uniform", "Fills by random numbers uniformly chosen in [lo,hi)", "uniform A lo hi", mgls_data_rnd_uniform, 3},
