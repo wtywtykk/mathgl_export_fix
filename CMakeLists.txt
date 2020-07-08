@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.1.0)
 
+if(POLICY CMP0078)
+    cmake_policy(SET CMP0078 OLD)
+endif()
+if(POLICY CMP0086)
+    cmake_policy(SET CMP0086 OLD)
+endif()
+
 project( MathGL2 )
 
 set(mgl_clean_files )
