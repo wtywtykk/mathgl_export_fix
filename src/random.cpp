@@ -4,7 +4,7 @@
  *                        Alexey Balakin <mathgl.abalakin@gmail.ru>        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU Library General Public License as       *
+ *   it under the terms of the GNU Lesser General Public License  as       *
  *   published by the Free Software Foundation; either version 3 of the    *
  *   License, or (at your option) any later version.                       *
  *                                                                         *
@@ -24,6 +24,10 @@
 //-----------------------------------------------------------------------------
 //
 //	Basic random functions
+// The following code is partially based on the book 
+// "Introduction to Programming in Python. An Interdisciplinary Approach," 
+// by Robert Sedgewick, Kevin Wayne, and Robert Dondero. 
+// A copy of the book can be obtained at https://introcs.cs.princeton.edu/python/home/
 //
 //-----------------------------------------------------------------------------
 mreal MGL_EXPORT mgl_rnd_integer(long lo, long hi)

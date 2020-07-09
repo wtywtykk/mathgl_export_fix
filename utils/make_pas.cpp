@@ -27,7 +27,7 @@ const char *head =
 // Copyright (C) 2008-2013 Mikhail Barg, Alexey Balakin                    *\n\
 //                                                                         *\n\
 //   This program is free software; you can redistribute it and/or modify  *\n\
-//   it under the terms of the GNU Library General Public License as       *\n\
+//   it under the terms of the GNU Lesser General Public License  as       *\n\
 //   published by the Free Software Foundation; either version 2 of the    *\n\
 //   License, or (at your option) any later version.                       *\n\
 //                                                                         *\n\

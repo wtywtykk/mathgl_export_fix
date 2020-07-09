@@ -53,7 +53,9 @@
 22. Add 'connect' for connecting points to set of surfaces
 
 23. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
+24. Check colorbar sample
 
+ZZ. Update *.i for new functions {before release!!!}
 ZZ. Update *.i for new functions {before release!!!}
 
 curve_draw: step?, bifurcation?, flow3d
@@ -129,6 +131,7 @@ D. Docs about JS interface
 29. Rnd filling sample
 30. Docs about random.cpp functions
 31. Docs about 'texparse'
+32. Rename LGPL to GNU Lesser General Public License
 
 ZZ. Update time.texi {before release!!!}
 

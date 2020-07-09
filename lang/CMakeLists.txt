@@ -58,8 +58,8 @@ if(enable-python)
 	)
 	add_custom_target(mgl_python_module ALL DEPENDS _mathgl mathgl.pyc)
 
-	install(FILES ${MathGL2_BINARY_DIR}/lang/mathgl.py ${MathGL2_BINARY_DIR}/lang/__pycache__/mathgl.cpython-${PY3VERSION_NODOT}.pyc DESTINATION ${MGL_PYTHON_SITE_PACKAGES}/__pycache__)
-	install (TARGETS _mathgl LIBRARY DESTINATION ${MGL_PYTHON_SITE_PACKAGES})
+	install(FILES ${MathGL2_BINARY_DIR}/lang/mathgl.py ${MathGL2_BINARY_DIR}/lang/__pycache__/mathgl.cpython-${PY3VERSION_NODOT}.pyc DESTINATION ${MGL_PYTHON_SITE_PACKAGES}/mathgl/__pycache__)
+	install (TARGETS _mathgl LIBRARY DESTINATION ${MGL_PYTHON_SITE_PACKAGES}/mathgl)
 	set(mgl_clean_files ${mgl_clean_files} mathgl.py)
 endif(enable-python)
 
