@@ -210,7 +210,10 @@ void MGL_EXPORT mgl_write_eps(HMGL gr, const char *fname,const char *descr)
 	int w = _Gr_->GetWidth(), h = _Gr_->GetHeight();
 
 	int x1=gr->BBoxX1, x2=gr->BBoxX2<0?w:gr->BBoxX2, y1=gr->BBoxY1, y2=gr->BBoxY2<0?h:gr->BBoxY2;
-	if(x1<0 || x1>=x2 || y1<0 || y1>=y2)	{	x1=y1=0;	x2=w;	y2=h;	}
+	if(x2>w)	x2=w;
+	if(y2>h)	y2=h;
+	if(x1<0 || x1>=x2)	{	x1=0;	x2=w;	}
+	if(y1<0 || y1>=y2)	{	y1=0;	y2=h;	}
 
 	if(gz)
 	{
@@ -459,7 +462,10 @@ void MGL_EXPORT mgl_write_svg(HMGL gr, const char *fname,const char *descr)
 	if(!fp)		{	gr->SetWarn(mglWarnOpen,fname);	return;	}
 
 	int x1=gr->BBoxX1, x2=gr->BBoxX2<0?ww:gr->BBoxX2, y1=gr->BBoxY1, y2=gr->BBoxY2<0?hh:gr->BBoxY2;
-	if(x1<0 || x1>=x2 || y1<0 || y1>=y2)	{	x1=y1=0;	x2=ww;	y2=hh;	}
+	if(x2>ww)	x2=ww;
+	if(y2>hh)	y2=hh;
+	if(x1<0 || x1>=x2)	{	x1=0;	x2=ww;	}
+	if(y1<0 || y1>=y2)	{	y1=0;	y2=hh;	}
 	ww = x2-x1;	hh = y2-y1;
 
 	const std::string loc = setlocale(LC_NUMERIC, "C");

@@ -54,6 +54,13 @@
 
 23. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
 24. Check colorbar sample
+25. Add mgl_set_font_hscale() to MGL
+26. Add Rotate() around a point (not {0,0,0} by default).
+27. Bug of absent argument in option (like "xrange")
+28. Reccurence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
+
+29. Check transparent background at export to pnga !!!
+
 
 ZZ. Update *.i for new functions {before release!!!}
 ZZ. Update *.i for new functions {before release!!!}

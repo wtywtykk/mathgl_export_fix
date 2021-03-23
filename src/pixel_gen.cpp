@@ -473,6 +473,8 @@ void mglCanvas::Finish()
 		mglStartThread(&mglCanvas::pxl_memcpy,this,n);
 	}
 	int x2 = BBoxX2<0?Width:BBoxX2, y2 = BBoxY2<0?Height:BBoxY2;
+	if(x2>Width)	x2=Width;
+	if(y2>Height)	y2=Height;
 	if(BBoxX1>=0 && BBoxX1<x2 && BBoxY1>=0 && BBoxY1<y2)
 	{
 		unsigned char ff[8]={255,255,255,255, 0,0,0,255}, *g1 = G4+BBoxX1*4-4;
@@ -640,6 +642,8 @@ unsigned char **mglCanvas::GetRGBLines(long &w, long &h, unsigned char *&f, bool
 	long c = alpha?4:3, d = c*Width;
 	unsigned char *gg = (alpha?G4:G);
 	int x2 = BBoxX2<0?Width:BBoxX2, y2 = BBoxY2<0?Height:BBoxY2;
+	if(x2>Width)	x2=Width;
+	if(y2>Height)	y2=Height;
 	if(BBoxX1>=0 && BBoxX1<x2 && BBoxY1>=0 && BBoxY1<y2)
 	{
 		gg += c*BBoxX1 + d*BBoxY1;

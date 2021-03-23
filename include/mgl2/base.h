@@ -496,6 +496,7 @@ public:
 	/// Copy font from another mglGraph instance
 	void CopyFont(mglBase *gr);
 	/// Set default font size
+	void SetFontHscale(mreal val);
 	inline void SetFontSize(mreal val)	{	FontSize=val>0 ? val:-FontSize*val;	}
 	inline mreal GetFontSize() const	{	return FontSize;	}
 	mreal TextWidth(const char *text, const char *font, mreal size) const MGL_FUNC_PURE;
@@ -656,6 +657,7 @@ public:
 	void SetEventFunc(void (*func)(void *), void *par)	{	event_cb=func;	event_par=par;	}
 
 protected:
+	bool limit_pm1;		///< limit coordinates in range [-1,+1] for OpenGL only
 	volatile bool Stop;	///< Flag that execution should be terminated.
 	void (*event_cb)(void *);	///< Function to be called for event processing
 	void *event_par;	///< Parameter for event processing function

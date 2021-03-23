@@ -130,6 +130,7 @@ void MGL_EXPORT mgl_strlwr(char *str)
 mglBase::mglBase()
 {
 	Flag=0;	saved=false;	PrmInd=NULL;
+	limit_pm1 = false;
 #if MGL_HAVE_PTHREAD
 	pthread_mutex_init(&mutexPnt,0);
 	pthread_mutex_init(&mutexTxt,0);
@@ -195,6 +196,7 @@ mglBase::~mglBase()
 #endif
 }
 //-----------------------------------------------------------------------------
+void mglBase::SetFontHscale(mreal val)	{	fnt->HeightScale(val);	}
 void mglBase::RestoreFont()	{	fnt->Restore();	}
 void mglBase::LoadFont(const char *name, const char *path)
 {	if(name && *name)	fnt->Load(name,path);	else	fnt->Restore();	}
@@ -777,6 +779,12 @@ bool mglBase::ScalePoint(const mglMatrix *, mglPoint &p, mglPoint &n, bool use_n
 	if(fabs(x)>MGL_FEPSILON || fabs(y)>MGL_FEPSILON || fabs(z)>MGL_FEPSILON)	res = false;
 
 	if(!res && use_nan)	x = NAN;	// extra sign that point shouldn't be plotted
+	else if(limit_pm1)
+	{
+		x = x>1?1:(x<-1?-1:x);
+		y = y>1?1:(y<-1?-1:y);
+		z = z>1?1:(z<-1?-1:z);
+	}
 	return res;
 }
 //-----------------------------------------------------------------------------

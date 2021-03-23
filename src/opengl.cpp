@@ -18,7 +18,7 @@ uintptr_t MGL_EXPORT mgl_create_graph_gl_()
 {	return uintptr_t(new mglCanvasGL);	}
 //-----------------------------------------------------------------------------
 mglCanvasGL::mglCanvasGL() : mglCanvas(1,1)
-{	Clf();	Zoom(0,0,1,1);	set(MGL_FULL_CURV);	}
+{	Clf();	Zoom(0,0,1,1);	set(MGL_FULL_CURV);	limit_pm1=true;	}
 //-----------------------------------------------------------------------------
 mglCanvasGL::~mglCanvasGL(){}
 //-----------------------------------------------------------------------------

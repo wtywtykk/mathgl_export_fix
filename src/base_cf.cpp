@@ -206,6 +206,7 @@ void MGL_EXPORT mgl_set_scale_text(HMGL gr, int enable)		{	gr->set(!enable, MGL_
 void MGL_EXPORT mgl_set_mark_size(HMGL gr, double size)		{	gr->SetMarkSize(size);	}
 void MGL_EXPORT mgl_set_arrow_size(HMGL gr, double size)	{	gr->SetArrowSize(size);	}
 void MGL_EXPORT mgl_set_font_size(HMGL gr, double size)		{	gr->SetFontSize(size);	}
+void MGL_EXPORT mgl_set_font_hscale(HMGL gr, double scale)	{	gr->SetFontHscale(scale);	}
 void MGL_EXPORT mgl_set_font_def(HMGL gr, const char *fnt)	{	gr->SetFontDef(fnt);	}
 void MGL_EXPORT mgl_load_font(HMGL gr, const char *name, const char *path)
 {	gr->LoadFont(name,path);	}
@@ -219,6 +220,7 @@ void MGL_EXPORT mgl_set_scale_text_(uintptr_t *gr, int *enable)	{	mgl_set_scale_
 void MGL_EXPORT mgl_set_mark_size_(uintptr_t *gr, mreal *size)		{	_GR_->SetMarkSize(*size);	}
 void MGL_EXPORT mgl_set_arrow_size_(uintptr_t *gr, mreal *size)	{	_GR_->SetArrowSize(*size);	}
 void MGL_EXPORT mgl_set_font_size_(uintptr_t *gr, mreal *size)		{	_GR_->SetFontSize(*size);	}
+void MGL_EXPORT mgl_set_font_hscale_(uintptr_t *gr, double *scale)	{	_GR_->SetFontHscale(*scale);	}
 void MGL_EXPORT mgl_set_font_def_(uintptr_t *gr, const char *name, int l)
 {	char *s=new char[l+1];		memcpy(s,name,l);	s[l]=0;
 	_GR_->SetFontDef(s);	delete []s;	}

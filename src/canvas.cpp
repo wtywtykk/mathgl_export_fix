@@ -231,7 +231,7 @@ GifFileType *gif;*/
 	SetFunc(0,0);	CutOff(0);	Ternary(0);
 	Stop=false;	event_cb = NULL;	event_par=NULL;
 	SetRanges(mglPoint(-1,-1,-1,-1), mglPoint(1,1,1,1));
-	SetOrigin(NAN,NAN,NAN,NAN);
+	SetOrigin(NAN,NAN,NAN,NAN);	set(0, MGL_NO_ORIGIN);
 	SetBarWidth(0.7);	SetMarkSize(1);	SetArrowSize(1);
 	SetAlphaDef(0.5);		FontDef[0]=0;
 	SetTranspType(0);		SetMeshNum(0);	// NOTE: default MeshNum=0

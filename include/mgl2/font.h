@@ -99,6 +99,8 @@ public:
 	/// Get width of text string for font specified by string
 	float Width(const wchar_t *str,const char *how, float *y1=0, float *y2=0) const;
 
+	/// Set height scaling factor
+	inline void HeightScale(float s=1)	{	Hscale = s>0?s:1;	}
 	/// Get internal code for symbol
 	inline long Internal(unsigned s) const	{	return mgl_internal_code(s,glyphs);	}
 	/// Return number of glyphs
@@ -115,7 +117,8 @@ protected:
 	std::vector<mglGlyphDescr> glyphs;	///< information about know glyphs
 	float fact[4];	///< Divider for width of glyph
 	short *Buf;		///< Buffer for glyph descriptions
-	size_t numb;		///< Buffer size
+	size_t numb;	///< Buffer size
+	float Hscale;	///< Height scaling
 
 	/// Print text string for font specified by integer constant
 	float Puts(const wchar_t *str,int font,int align, float c1,float c2) const;

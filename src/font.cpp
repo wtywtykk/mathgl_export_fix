@@ -228,7 +228,7 @@ float mglFont::Height(int font) const
 {
 	if(GetNumGlyph()==0)	return 0;
 	int s = (font/MGL_FONT_BOLD)&3;
-	return 660/fact[s];
+	return Hscale*660/fact[s];
 }
 //-----------------------------------------------------------------------------
 float mglFont::Height(const char *how) const
@@ -240,7 +240,7 @@ float mglFont::Height(const char *how) const
 		if(strchr(how,'b'))	s = s|1;
 		if(strchr(how,'i'))	s = s|2;
 	}
-	return 660/fact[s];
+	return Hscale*660/fact[s];
 }
 //-----------------------------------------------------------------------------
 /// Table of acents and its UTF8 codes
@@ -974,7 +974,7 @@ void static mgl_init()
 //-----------------------------------------------------------------------------
 mglFont::mglFont(const char *name, const char *path)
 {
-	parse = true;	gr=0;	Buf=0;
+	parse = true;	gr=0;	Buf=0;	Hscale=1;
 //	if(this==&mglDefFont)	Load(name, path);	else	Copy(&mglDefFont);
 	if(name && *name)	Load(name, path);
 	else if(this!=&mglDefFont)	Copy(&mglDefFont);
