@@ -855,7 +855,7 @@ int mglParser::Parse(mglGraph *gr, std::wstring str, long pos)
 			if(n)	st.state = MGL_ST_BREAK;
 			stack.push_back(st);	delete []a;	return n;
 		}
-		// alocate new arrays and execute the command itself
+		// allocate new arrays and execute the command itself
 		n = PreExec(gr, k, &(arg[0]), a);
 		if(n>0)	n--;
 		else if(!arg[0].compare(L"setsize") && !AllowSetSize)	n = 2;

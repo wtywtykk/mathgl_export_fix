@@ -534,7 +534,7 @@ void MGL_NO_EXPORT mgl_draw_curvs(HMGL gr, mreal val, mreal c, int text, const s
 		mreal x0 = (del*ii1)/0xffff, y0 = (del*ii2)/0xffff;
 		for(long k=0;k<pc;k++)	// print label several times if possible
 		{
-			if(nn[k]<0)	continue;
+			if(nn[k]<0 || ff[k]<0)	continue;
 			const mglPoint t = gr->GetPntP(ff[k]);
 			mreal tx = t.x+x0, ty = t.y+y0;		// quasi-random shift
 			long i = long(tx/del);	tx -= i*del;

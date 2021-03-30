@@ -139,6 +139,9 @@ D. Docs about JS interface
 30. Docs about random.cpp functions
 31. Docs about 'texparse'
 32. Rename LGPL to GNU Lesser General Public License
+33. Add "glutLeaveMainLoop()" about closing GLUT window (https://stackoverflow.com/questions/41434439/how-to-close-an-opengl-window)
+34. Extend desciption of "new" and "copy" that 1d array have only 'x' and 'i' variables nonzero, and 2d array have 'x','y','i' and 'j' variables.
+35. Add comments about the same ObjId for plots in the same line separated by ':'
 
 ZZ. Update time.texi {before release!!!}
 
