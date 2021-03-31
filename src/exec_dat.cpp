@@ -898,6 +898,10 @@ int static mgls_ode(mglGraph *, long , mglArg *a, const char *k, const char *)
 			*d = mglODE(a[1].s.s, a[2].s.s, *(a[3].d));
 		else if(!strcmp(k,"dssdnn"))
 			*d = mglODE(a[1].s.s, a[2].s.s, *(a[3].d), a[4].v, a[5].v);
+		if(!strcmp(k,"dsssd"))
+			*d = mglODEs(a[1].s.s, a[2].s.s, a[3].s.s[0], *(a[4].d));
+		else if(!strcmp(k,"dsssdnn"))
+			*d = mglODEs(a[1].s.s, a[2].s.s, a[3].s.s[0], *(a[4].d), a[5].v, a[6].v);
 	}
 	else if(c)
 	{
@@ -905,6 +909,10 @@ int static mgls_ode(mglGraph *, long , mglArg *a, const char *k, const char *)
 			*c = mglODEc(a[1].s.s, a[2].s.s, *(a[3].d));
 		else if(!strcmp(k,"dssdnn"))
 			*c = mglODEc(a[1].s.s, a[2].s.s, *(a[3].d), a[4].v, a[5].v);
+		if(!strcmp(k,"dsssd"))
+			*c = mglODEcs(a[1].s.s, a[2].s.s, a[3].s.s[0], *(a[4].d));
+		else if(!strcmp(k,"dsssdnn"))
+			*c = mglODEcs(a[1].s.s, a[2].s.s, a[3].s.s[0], *(a[4].d), a[5].v, a[6].v);
 	}
 	else res = 1;
 	return res;
@@ -1762,7 +1770,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"new",_("Create new data"),"new Dat nx ['eq']|Dat nx ny ['eq']|Dat nx ny nz ['eq']", mgls_new ,4},
 	{"norm",_("Normalize data"),"norm Dat v1 v2 [sym dim]", mgls_norm ,16},
 	{"normsl",_("Normalize data slice by slice"),"normsl Dat v1 v2 ['dir' keep sym] ", mgls_normsl ,16},
-	{"ode",_("Solve ODE"),"ode Res 'df' 'var' Ini [dt tmax]", mgls_ode ,4},
+	{"ode",_("Solve ODE"),"ode Res 'df' 'var' Ini [dt tmax]|Res 'df' 'var' 'brd' Ini [dt tmax]", mgls_ode ,4},
 	{"openhdf",_("Open all data arrays from HDF file"),"openhdf 'fname'", mgls_openhdf ,3},
 	{"pde",_("Solve PDE"),"pde Res 'ham' IniRe IniIm [dz k0]", mgls_pde ,4},
 	{"print",_("Immediately print the message"),"print 'message'|Dat|const", mgls_print ,3},

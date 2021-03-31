@@ -1277,7 +1277,7 @@ long MGL_EXPORT mgl_datas_hdf(const char *, char *, long )
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	return 0;}
 int MGL_EXPORT mgl_data_read_hdf(HMDT ,const char *,const char *)
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	return 0;}
-void MGL_EXPORT mgl_dual_save_hdf(dual val,const char *fname,const char *data,int rewrite)
+void MGL_EXPORT mgl_dual_save_hdf(mdual val,const char *fname,const char *data,int rewrite)
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	}
 void MGL_EXPORT mgl_real_save_hdf(double val,const char *fname,const char *data,int rewrite)
 {	mgl_set_global_warn(_("HDF5 support was disabled. Please, enable it and rebuild MathGL."));	}

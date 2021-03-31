@@ -26,40 +26,37 @@
 14. Mask in SVG ???
 15. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
 16. Bypass realloc() ???
+17. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
+18. UTF8 in legend-option ?
 
 ============= NEW FEATURES =============
 
 1. Centered curved text (see text2)
 2. Quality=3 for mirror+shadows + arrow_plot_3d? Could be in bitmap only mode
-5. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
-6. Flag to determine discontinuous surfaces in 'fsurf'
-7. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
+3. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
+4. Flag to determine discontinuous surfaces in 'fsurf'
 
-11. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
-12. Chord diagram ???
-13. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
-14. Dendrogram specified by string "{val, {lVal,{...},{...}}, {rVal,{...},{...}} }" with styles: 's' for hor/vert lines, or straight lines by default ???
-15. Voronoi diagram ??? -- triangulation + coloring by point
-16. Sankey diagram -- 2d version of tube
+5. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
+6. Chord diagram ???
+7. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
+8. Dendrogram specified by string "{val, {lVal,{...},{...}}, {rVal,{...},{...}} }" with styles: 's' for hor/vert lines, or straight lines by default ???
+9. Voronoi diagram ??? -- triangulation + coloring by point
+10. Sankey diagram -- 2d version of tube
 
-18. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp). https://www.freetype.org/freetype2/docs/tutorial/step3.html -- add optimization of bezier curves by number of points. Use it as glyph definition or as default source for all/unknown glyphs!?
+11. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp). https://www.freetype.org/freetype2/docs/tutorial/step3.html -- add optimization of bezier curves by number of points. Use it as glyph definition or as default source for all/unknown glyphs!?
 
-19. Triangulation in 3d + rewrite crust (test 2d version too). See https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm
+12. Triangulation in 3d + rewrite crust (test 2d version too). See https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm
 
-20. Algorithm of combining primitives with the same color to the larger one.
+13. Algorithm of combining primitives with the same color to the larger one.
 
-21. UTF8 in legend-option ?
+14. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
+15. Check colorbar sample
+16. Add mgl_set_font_hscale() to MGL
+17. Add Rotate() around a point (not {0,0,0} by default).
+18. Bug of absent argument in option (like "xrange")
+19. Reccurence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
 
-22. Add 'connect' for connecting points to set of surfaces
-
-23. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
-24. Check colorbar sample
-25. Add mgl_set_font_hscale() to MGL
-26. Add Rotate() around a point (not {0,0,0} by default).
-27. Bug of absent argument in option (like "xrange")
-28. Reccurence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
-
-29. Check transparent background at export to pnga !!!
+21. Check transparent background at export to pnga !!!
 
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -142,6 +139,7 @@ D. Docs about JS interface
 33. Add "glutLeaveMainLoop()" about closing GLUT window (https://stackoverflow.com/questions/41434439/how-to-close-an-opengl-window)
 34. Extend desciption of "new" and "copy" that 1d array have only 'x' and 'i' variables nonzero, and 2d array have 'x','y','i' and 'j' variables.
 35. Add comments about the same ObjId for plots in the same line separated by ':'
+20. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index.
 
 ZZ. Update time.texi {before release!!!}
 

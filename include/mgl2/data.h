@@ -619,6 +619,9 @@ inline mglData mglRay(const char *ham, mglPoint r0, mglPoint p0, mreal dt=0.1, m
 /// Saves result of ODE solving for var complex variables with right part func (separated by ';') and initial conditions x0 over time interval [0,tmax] with time step dt
 inline mglData mglODE(const char *func, const char *var, const mglDataA &ini, mreal dt=0.1, mreal tmax=10)
 {	return mglData(true, mgl_ode_solve_str(func,var, &ini, dt, tmax));	}
+/// Saves result of ODE solving for var complex variables with right part func (separated by ';') and initial conditions x0 of size n*m over time interval [0,tmax] with time step dt
+inline mglData mglODEs(const char *func, const char *var, char brd, const mglDataA &ini, mreal dt=0.1, mreal tmax=10)
+{	return mglData(true, mgl_ode_solve_set(func,var, brd, &ini, dt, tmax));	}
 //-----------------------------------------------------------------------------
 /// Get array as solution of tridiagonal system of equations a[i]*x[i-1]+b[i]*x[i]+c[i]*x[i+1]=d[i]
 /** String \a how may contain:

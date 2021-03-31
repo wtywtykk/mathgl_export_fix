@@ -258,8 +258,10 @@ struct mglEqTxT
 	HAEX *eqC;
 	HMEX *eqR;
 	const char *var;
+	char brd;
+	long m,n;
 
-	mglEqTxT(const char *vars=0):eqC(0),eqR(0),var(vars)	{}
+	mglEqTxT(const char *vars=0):eqC(0),eqR(0),var(vars),brd(0)	{}
 	~mglEqTxT()
 	{
 		if(eqR)	{	for(size_t i=0;i<str.size();i++)	mgl_delete_expr(eqR[i]);	delete []eqR;	}

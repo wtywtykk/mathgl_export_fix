@@ -194,6 +194,12 @@ struct MGL_EXPORT mglString
 #if MGL_HAVE_RVAL
 	mglString(mglString &&d):s(d.s),w(d.w)	{	d.s=NULL;	d.w=NULL;	}
 #endif
+	mglString(wchar_t ch)
+	{
+		s=new char[2];	w=new wchar_t[2];
+		s[0] = char(ch&0xff);	w[0] = ch;
+		s[1] = w[1] = 0;
+	}
 	mglString(const char *str)
 	{
 		if(str)

@@ -184,24 +184,29 @@ void MGL_EXPORT mgl_difr_grid_old(dual *a,int n,int step,dual q,int Border,dual 
 		{
 			default:
 			case 0:		// zero at border
+			case 'z':
 				b[0] = 0;	b[n-1] = 0;		break;
 			case 1:		// constant at border
 				b[0] = b[1];	b[n-1] = b[n-2];	break;
 			case 2:		// linear at border
+			case 'l':
 				b[0] = mreal(2)*b[1]-b[2];
 				b[n-1] = mreal(2)*b[n-2]-b[n-3];
 				break;
 			case 3:		// square at border
+			case 's':
 				b[0] = b[3]+mreal(3)*(b[1]-b[2]);
 				b[n-1] = b[n-4]+mreal(3)*(b[n-2]-b[n-3]);
 				break;
 			case -1:		// exponent at border
 			case 4:
+			case 'e':
 				b[0] = norm(b[2])<norm(b[1]) ? b[1] : b[1]*b[1]/b[2];
 				b[n-1] = norm(b[n-3])<norm(b[n-2]) ? b[n-2] : b[n-2]*b[n-2]/b[n-3];
 				break;
 			case -2:		// gaussian at border
 			case 5:
+			case 'g':
 				b[0] = norm(b[2])<norm(b[1]) ? b[3] : pow(b[1]/b[2],3)*b[3];
 				b[n-1] = norm(b[n-3])<norm(b[n-2]) ? b[n-4] : pow(b[n-2]/b[n-3],3)*b[n-4];
 				break;
