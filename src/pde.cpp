@@ -449,54 +449,39 @@ void MGL_NO_EXPORT mgl_set_func(const mreal *x, mreal *dx, void *par)
 {
 	mglEqTxT *p=(mglEqTxT *)par;
 	long n = p->n/p->m;
-	std::vector<mglDataA*> head;	// TODO create head only once
-	HMDT d = new mglData(n);
-	for(long i=0;i<n;i++)	d->a[i] = i;
-	d->s = 'j';	head.push_back(d);
 	for(long i=0;i<p->m;i++)
 	{
-		char ch = p->var[i];
-		if(ch>='a' && ch<='z')
-		{
-			d = new mglData(n, x+i*n);
-			d->s = ch;	head.push_back(d);
-		}
+		HMDT d = static_cast<HMDT>(p->head[i]);
+		memcpy(d->a, x+i*n, n*sizeof(mreal));
 	}
 //#pragma omp parallel for collapse(2)
 	for(long j=0;j<p->m;j++)
 	{
-		d = mglFormulaCalc(p->str[j].c_str(),head);
+		HMDT d = mglFormulaCalc(p->str[j].c_str(),p->head);
 		switch(p->brd)
 		{
-			default:
-			case 0:		// zero instead of NAN
+			default:	// zero instead of NAN
+			case 0:	
 			case 'z':
+			case '0':
 				for(long i=0;i<n;i++)	if(mgl_isbad(d->a[i]))	d->a[i] = 0;
 				break;
 			case 1:		// constant at border
+			case 'c':
+			case '1':
 				d->a[0] = d->a[1];	d->a[n-1] = d->a[n-2];	break;
 			case 2:		// linear at border
 			case 'l':
+			case '2':
 				d->a[0] = mreal(2)*d->a[1]-d->a[2];
 				d->a[n-1] = mreal(2)*d->a[n-2]-d->a[n-3];	break;
 			case 3:		// square at border
 			case 's':
+			case '3':
 				d->a[0] = d->a[3]+mreal(3)*(d->a[1]-d->a[2]);
 				d->a[n-1] = d->a[n-4]+mreal(3)*(d->a[n-2]-d->a[n-3]);	break;
-/*			case -1:		// exponent at border
-			case 4:
-			case 'e':
-				d->a[0] = norm(d->a[2])<norm(d->a[1]) ? d->a[1] : d->a[1]*d->a[1]/d->a[2];
-				d->a[n-1] = norm(d->a[n-3])<norm(d->a[n-2]) ? d->a[n-2] : d->a[n-2]*d->a[n-2]/d->a[n-3];
-				break;
-			case -2:		// gaussian at border
-			case 5:
-			case 'g':
-				d->a[0] = norm(d->a[2])<norm(d->a[1]) ? d->a[3] : pow(d->a[1]/d->a[2],3)*d->a[3];
-				d->a[n-1] = norm(d->a[n-3])<norm(d->a[n-2]) ? d->a[n-4] : pow(d->a[n-2]/d->a[n-3],3)*d->a[n-4];
-				break;*/
 		}
-		for(long i=0;i<n;i++)	dx[i+n*j] = d->a[i];
+		memcpy(dx+j*n, d->a, n*sizeof(mreal));
 		delete d;
 	}
 }
@@ -505,36 +490,38 @@ HMDT MGL_EXPORT mgl_ode_solve_set(const char *func, const char *var, char brd, H
 	if(!var || !(*var) || !func || !x0)	return 0;
 	mglEqTxT par;
 	par.var=var;	par.brd=brd;	par.FillStr(func);
-	long n = par.n = x0->GetNx();
-	par.m = long(strlen(var));	// number of variables
+	const long n = par.n = x0->GetNx();
+	const long m = par.m = long(strlen(var)), nn = n/m;	// number of variables
+	
+	HMDT dat = new mglData[m+1];
+	for(long i=0;i<m;i++)
+	{
+		HMDT d = dat+i;	d->Create(nn);
+		d->s = var[i];	par.head.push_back(d);
+	}
+	HMDT d = dat+m;	d->Create(nn);
+	for(long i=0;i<nn;i++)	d->a[i] = i;
+	d->s = 'j';	par.head.push_back(d);
+	
 	mreal *xx = new mreal[n];
 	for(long i=0;i<n;i++)	xx[i] = x0->vthr(i);
 	HMDT res = mgl_ode_solve_ex(mgl_set_func,n,xx,dt,tmax,&par,NULL);
-	delete []xx;	return res;
+	delete []xx;	delete []dat;	return res;
 }
 //-----------------------------------------------------------------------------
 void MGL_NO_EXPORT mgl_set_funcC(const mreal *x, mreal *dx, void *par)
 {
 	mglEqTxT *p=(mglEqTxT *)par;
 	long n = p->n/p->m;
-	std::vector<mglDataA*> head;
-	HMDT dj = new mglData(n);
-	for(long i=0;i<n;i++)	dj->a[i] = i;
-	dj->s = 'j';	head.push_back(dj);
 	for(long i=0;i<p->m;i++)
 	{
-		char ch = p->var[i];
-		if(ch>='a' && ch<='z')
-		{
-			HADT d = new mglDataC(n);
-			for(long j=0;j<n;j++)	d->a[i] = dual(x[2*(j+i*n)],x[1+2*(j+i*n)]);
-			d->s = ch;	head.push_back(d);
-		}
+		HADT d = static_cast<HADT>(p->head[i]);
+		memcpy(d->a, x+2*i*n, 2*n*sizeof(mreal));
 	}
 //#pragma omp parallel for collapse(2)
 	for(long j=0;j<p->m;j++)
 	{
-		HADT d = mglFormulaCalcC(p->str[j].c_str(),head);
+		HADT d = mglFormulaCalcC(p->str[j].c_str(),p->head);
 		switch(p->brd)
 		{
 			default:
@@ -565,8 +552,7 @@ void MGL_NO_EXPORT mgl_set_funcC(const mreal *x, mreal *dx, void *par)
 				d->a[n-1] = norm(d->a[n-3])<norm(d->a[n-2]) ? d->a[n-4] : pow(d->a[n-2]/d->a[n-3],3)*d->a[n-4];
 				break;
 		}
-		for(long i=0;i<n;i++)
-		{	dx[i+2*n*j] = real(d->a[i]);	dx[i+2*n*j+1] = imag(d->a[i]);	}
+		memcpy(dx+2*j*n, d->a, 2*n*sizeof(mreal));
 		delete d;
 	}
 }
@@ -575,17 +561,29 @@ HADT MGL_EXPORT mgl_ode_solve_set_c(const char *func, const char *var, char brd,
 	if(!var || !(*var) || !func || !x0)	return 0;
 	mglEqTxT par;
 	par.var=var;	par.brd=brd;	par.FillStr(func);
-	long n = par.n = x0->GetNx();
-	par.m = long(strlen(var));	// number of variables
+	const long n = par.n = x0->GetNx();
+	const long m = par.m = long(strlen(var)), nn = n/m;	// number of variables
+	
+	HADT dat = new mglDataC[m];
+	for(long i=0;i<m;i++)
+	{
+		HADT d = dat+i;	d->Create(nn);
+		d->s = var[i];	par.head.push_back(d);
+	}
+	HMDT d = new mglData(nn);	d->s = 'j';
+	for(long i=0;i<nn;i++)	d->a[i] = i;
+	par.head.push_back(d);
+
 	mreal *xx = new mreal[2*n];
 	const mglDataC *c = dynamic_cast<const mglDataC *>(x0);
-	for(long i=0;i<n;i++)
-	{
-		if(c)	{	xx[2*i]=real(c->a[i]);	xx[2*i+1]=imag(c->a[i]);	}
-		else	{	xx[2*i] = x0?x0->vthr(i):0;	xx[2*i+1]=0;	}
-	}
+	if(c)		for(long i=0;i<n;i++)	
+	{	xx[2*i]=real(c->a[i]);	xx[2*i+1]=imag(c->a[i]);	}
+	else if(x0)	for(long i=0;i<n;i++)	
+	{	xx[2*i] = x0->vthr(i);	xx[2*i+1]=0;	}
+	else		for(long i=0;i<n;i++)	xx[2*i] = xx[2*i+1]=0;
+
 	HMDT res = mgl_ode_solve_ex(mgl_set_funcC,2*n,xx,dt,tmax,&par,NULL);
-	delete []xx;
+	delete []xx;	delete d;	delete []dat;
 	const long nt=res->ny;
 	mglDataC *out = new mglDataC(n, nt);
 #pragma omp parallel for

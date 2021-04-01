@@ -260,6 +260,7 @@ struct mglEqTxT
 	const char *var;
 	char brd;
 	long m,n;
+	std::vector<mglDataA*> head;
 
 	mglEqTxT(const char *vars=0):eqC(0),eqR(0),var(vars),brd(0)	{}
 	~mglEqTxT()

@@ -122,14 +122,14 @@ HADT MGL_EXPORT mgl_datac_subdata_ext(HCDT d, HCDT xx, HCDT yy, HCDT zz)
 #pragma omp parallel for
 			for(long i0=0;i0<n*m*l;i0++)
 			{
-				long x=long(0.5+xx->vthr(i0)), y=long(0.5+yy->vthr(i0)), z=long(0.5+zz->vthr(i0));
+				long x=long(floor(0.5+xx->vthr(i0))), y=long(floor(0.5+yy->vthr(i0))), z=long(floor(0.5+zz->vthr(i0)));
 				r->a[i0] = (x>=0 && x<nx && y>=0 && y<ny && z>=0 && z<nz)?dd->a[x+nx*(y+ny*z)]:NAN;
 			}
 		else
 #pragma omp parallel for
 			for(long i0=0;i0<n*m*l;i0++)
 			{
-				long x=long(0.5+xx->vthr(i0)), y=long(0.5+yy->vthr(i0)), z=long(0.5+zz->vthr(i0));
+				long x=long(floor(0.5+xx->vthr(i0))), y=long(floor(0.5+yy->vthr(i0))), z=long(floor(0.5+zz->vthr(i0)));
 				r->a[i0] = (x>=0 && x<nx && y>=0 && y<ny && z>=0 && z<nz)?d->v(x,y,z):NAN;
 			}
 	}
@@ -144,14 +144,14 @@ HADT MGL_EXPORT mgl_datac_subdata_ext(HCDT d, HCDT xx, HCDT yy, HCDT zz)
 #pragma omp parallel for collapse(3)
 			for(long k=0;k<l;k++)	for(long j=0;j<m;j++)	for(long i=0;i<n;i++)
 			{
-				long x=long(0.5+xx->v(i)), y=long(0.5+yy->v(j)), z=long(0.5+zz->v(k));
+				long x=long(floor(0.5+xx->v(i))), y=long(floor(0.5+yy->v(j))), z=long(floor(0.5+zz->v(k)));
 				r->a[i+n*(j+m*k)] = (x>=0 && x<nx && y>=0 && y<ny && z>=0 && z<nz)?dd->a[x+nx*(y+ny*z)]:NAN;
 			}
 		else
 #pragma omp parallel for collapse(3)
 			for(long k=0;k<l;k++)	for(long j=0;j<m;j++)	for(long i=0;i<n;i++)
 			{
-				long x=long(0.5+xx->v(i)), y=long(0.5+yy->v(j)), z=long(0.5+zz->v(k));
+				long x=long(floor(0.5+xx->v(i))), y=long(floor(0.5+yy->v(j))), z=long(floor(0.5+zz->v(k)));
 				r->a[i+n*(j+m*k)] = (x>=0 && x<nx && y>=0 && y<ny && z>=0 && z<nz)?d->v(x,y,z):NAN;
 			}
 		if(m==1)	{	r->ny=r->nz;	r->nz=1;	}// "squeeze" dimensions
