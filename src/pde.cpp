@@ -454,6 +454,7 @@ void MGL_NO_EXPORT mgl_set_func(const mreal *x, mreal *dx, void *par)
 		HMDT d = static_cast<HMDT>(p->head[i]);
 		memcpy(d->a, x+i*n, n*sizeof(mreal));
 	}
+	p->t->a[0] = x[p->n];
 //#pragma omp parallel for collapse(2)
 	for(long j=0;j<p->m;j++)
 	{
@@ -493,15 +494,16 @@ HMDT MGL_EXPORT mgl_ode_solve_set(const char *func, const char *var, char brd, H
 	const long n = par.n = x0->GetNx();
 	const long m = par.m = long(strlen(var)), nn = n/m;	// number of variables
 	
-	HMDT dat = new mglData[m+1];
+	HMDT dat = new mglData[m+2];
 	for(long i=0;i<m;i++)
 	{
 		HMDT d = dat+i;	d->Create(nn);
 		d->s = var[i];	par.head.push_back(d);
 	}
-	HMDT d = dat+m;	d->Create(nn);
+	HMDT d = dat+m+1;	d->Create(nn);
 	for(long i=0;i<nn;i++)	d->a[i] = i;
 	d->s = 'j';	par.head.push_back(d);
+	par.t = dat+m;	par.t->s = 't';	par.head.push_back(par.t);
 	
 	mreal *xx = new mreal[n];
 	for(long i=0;i<n;i++)	xx[i] = x0->vthr(i);
@@ -518,6 +520,7 @@ void MGL_NO_EXPORT mgl_set_funcC(const mreal *x, mreal *dx, void *par)
 		HADT d = static_cast<HADT>(p->head[i]);
 		memcpy(d->a, x+2*i*n, 2*n*sizeof(mreal));
 	}
+	p->t->a[0] = x[p->n];
 //#pragma omp parallel for collapse(2)
 	for(long j=0;j<p->m;j++)
 	{
@@ -573,6 +576,8 @@ HADT MGL_EXPORT mgl_ode_solve_set_c(const char *func, const char *var, char brd,
 	HMDT d = new mglData(nn);	d->s = 'j';
 	for(long i=0;i<nn;i++)	d->a[i] = i;
 	par.head.push_back(d);
+	par.t = new mglData;	par.t->s = 't';
+	par.head.push_back(par.t);
 
 	mreal *xx = new mreal[2*n];
 	const mglDataC *c = dynamic_cast<const mglDataC *>(x0);
@@ -583,7 +588,7 @@ HADT MGL_EXPORT mgl_ode_solve_set_c(const char *func, const char *var, char brd,
 	else		for(long i=0;i<n;i++)	xx[2*i] = xx[2*i+1]=0;
 
 	HMDT res = mgl_ode_solve_ex(mgl_set_funcC,2*n,xx,dt,tmax,&par,NULL);
-	delete []xx;	delete d;	delete []dat;
+	delete []xx;	delete d;	delete par.t;	delete []dat;
 	const long nt=res->ny;
 	mglDataC *out = new mglDataC(n, nt);
 #pragma omp parallel for
@@ -654,24 +659,60 @@ HMDT MGL_EXPORT mgl_ode_solve(void (*func)(const mreal *x, mreal *dx, void *par)
 {	return mgl_ode_solve_ex(func,n,x0,dt,tmax,par,0);	}
 HMDT MGL_EXPORT mgl_ode_solve_ex(void (*func)(const mreal *x, mreal *dx, void *par), int n, const mreal *x0, mreal dt, mreal tmax, void *par, void (*bord)(mreal *x, const mreal *xp, void *par))
 {
+	bool scale=false;
+	if(dt*tmax<0)	{	scale = true;	dt = fabs(dt);	tmax = fabs(tmax);	}
 	if(tmax<dt)	return 0;	// nothing to do
 	const long nt = int(tmax/dt+0.5)+1;
 	mglData *res=new mglData(n,nt);
-	mreal *x=new mreal[n], *k1=new mreal[n], *k2=new mreal[n], *k3=new mreal[n], *v=new mreal[n], hh=dt/2;
+	mreal *x=new mreal[n+1], *k1=new mreal[n], *k2=new mreal[n], *k3=new mreal[n], *v=new mreal[n], hh=dt/2;
 	// initial conditions
 	for(long i=0;i<n;i++)	x[i] = res->a[i] = x0[i];
 	// Runge Kutta scheme of 4th order
 	bool good=true;
 	long k;
+	x[n] = 0;
 	for(k=1;k<nt && good;k++)
 	{
+		double m0=0,m1=0,m2=0,m3=0, t = x[n];
 		func(x,k1,par);
+		if(scale)
+		{
+			for(long i=0;i<n;i++)
+			{	double kk = fabs(k1[i]);	if(kk>m0)	m0 = kk;	}
+			for(long i=0;i<n;i++)	k1[i] /= m0;
+		}
+		else m0 = 1;
+		x[n] += hh/m0;
 		for(long i=0;i<n;i++)	v[i] = x[i]+k1[i]*hh;
 		func(v,k2,par);
+		if(scale)
+		{
+			for(long i=0;i<n;i++)
+			{	double kk = fabs(k2[i]);	if(kk>m1)	m1 = kk;	}
+			for(long i=0;i<n;i++)	k2[i] /= m1;
+		}
+		else m1 = 1;
+		x[n] = t+hh/m1;
 		for(long i=0;i<n;i++)	v[i] = x[i]+k2[i]*hh;
 		func(v,k3,par);
+		if(scale)
+		{
+			for(long i=0;i<n;i++)
+			{	double kk = fabs(k3[i]);	if(kk>m2)	m2 = kk;	}
+			for(long i=0;i<n;i++)	k3[i] /= m2;
+		}
+		else m2 = 1;
+		x[n] = t+dt/m2;
 		for(long i=0;i<n;i++)	{	v[i] = x[i]+k3[i]*dt;	k3[i] += k2[i];	}
 		func(v,k2,par);
+		if(scale)
+		{
+			for(long i=0;i<n;i++)
+			{	double kk = fabs(k2[i]);	if(kk>m3)	m3 = kk;	}
+			for(long i=0;i<n;i++)	k2[i] /= m3;
+		}
+		else m3 = 1;
+		x[n] = t + (1/m0+2/m1+2/m2+1/m3)*dt/6;
 		for(long i=0;i<n;i++)	x[i] += (k1[i]+k2[i]+2*k3[i])*dt/6;
 		if(bord)	bord(x,res->a+n*(k-1),par);
 		for(long i=0;i<n;i++)

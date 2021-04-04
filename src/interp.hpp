@@ -261,6 +261,7 @@ struct mglEqTxT
 	char brd;
 	long m,n;
 	std::vector<mglDataA*> head;
+	HMDT t;
 
 	mglEqTxT(const char *vars=0):eqC(0),eqR(0),var(vars),brd(0)	{}
 	~mglEqTxT()

@@ -139,7 +139,8 @@ D. Docs about JS interface
 33. Add "glutLeaveMainLoop()" about closing GLUT window (https://stackoverflow.com/questions/41434439/how-to-close-an-opengl-window)
 34. Extend desciption of "new" and "copy" that 1d array have only 'x' and 'i' variables nonzero, and 2d array have 'x','y','i' and 'j' variables.
 35. Add comments about the same ObjId for plots in the same line separated by ':'
-20. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index.
+20. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
+21. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
 
 ZZ. Update time.texi {before release!!!}
 
