@@ -532,6 +532,7 @@ double MGL_LOCAL_CONST mgl_acosh(double x)	{	return x>1 ? log(x+sqrt(x*x-1.)) : 
 double MGL_LOCAL_CONST mgl_atanh(double x)	{	return fabs(x)<1 ? log((1.+x)/(1.-x))/2 : NAN;	}
 double MGL_LOCAL_CONST mgl_fmin(double a,double b)	{	return a > b ? b : a;	}
 double MGL_LOCAL_CONST mgl_fmax(double a,double b)	{	return a > b ? a : b;	}
+double MGL_LOCAL_CONST mgl_fmod(double a, double m)	{	return (a>=0)?fmod(a,m):fmod(a,m)+m;	}
 //-----------------------------------------------------------------------------
 typedef double (*func_1)(double);
 typedef double (*func_2)(double, double);
@@ -543,7 +544,7 @@ static const mreal z2[EQ_SIN-EQ_LT] = {3,3,3,3,0,3,3,0,0,0,0,0,NAN,3,3,3,3
 	,0,0,0,0,0,0,0,0,0
 #endif
 };
-static const func_2 f2[EQ_SIN-EQ_LT] = {clt,cgt,ceq,cor,cand,add,sub,mul,del,ipw,pow,fmod,llg,arg,hypot,mgl_fmax,mgl_fmin
+static const func_2 f2[EQ_SIN-EQ_LT] = {clt,cgt,ceq,cor,cand,add,sub,mul,del,ipw,pow,mgl_fmod,llg,arg,hypot,mgl_fmax,mgl_fmin
 #if MGL_HAVE_GSL
 	,gsl_sf_bessel_Jnu,gsl_sf_bessel_Ynu,
 	gsl_sf_bessel_Inu,gsl_sf_bessel_Knu,

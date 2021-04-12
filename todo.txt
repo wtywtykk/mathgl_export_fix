@@ -57,6 +57,7 @@
 19. Reccurence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
 
 21. Check transparent background at export to pnga !!!
+22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring.
 
 
 ZZ. Update *.i for new functions {before release!!!}

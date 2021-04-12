@@ -327,6 +327,7 @@ double MGL_LOCAL_CONST mgl_acosh(double x);
 double MGL_LOCAL_CONST mgl_atanh(double x);
 double MGL_LOCAL_CONST mgl_fmin(double a,double b);
 double MGL_LOCAL_CONST mgl_fmax(double a,double b);
+double MGL_LOCAL_CONST mgl_fmod(double a, double m);
 //-----------------------------------------------------------------------------
 // It seems that standard wcstombs() have a bug. So, I replace by my own.
 void MGL_EXPORT mgl_wcstombs(char *dst, const wchar_t *src, int size)
@@ -561,7 +562,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 	if(n>=0)
 		return str[n]=='*'? mglApplyOperMul(str.substr(0,n),str.substr(n+1),arg, head,fns) : 
 			(str[n]=='/'? mglApplyOperDiv(str.substr(0,n),str.substr(n+1),arg, head,fns) :
-				mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod,fns));
+				mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmod,fns));
 	n=mglFindInText(str,"@");	// high priority -- combine
 	if(n>=0)
 	{
@@ -917,7 +918,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		else if(nm[0]=='m')
 		{
 			if(!nm.compare(L"mod") && n>0)
-				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, fmod,fns);
+				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmod,fns);
 			else if(!nm.compare(L"min") && n>0)
 				return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, mgl_fmin,fns);
 			else if(!nm.compare(L"max") && n>0)
