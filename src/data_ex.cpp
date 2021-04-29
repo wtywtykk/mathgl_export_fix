@@ -866,37 +866,99 @@ static void *mgl_hist_2(void *par)
 {
 	mglThreadD *t=(mglThreadD *)par;
 	long nn=t->n, n = t->p[0];
-	long ns=t->p[1], nx=t->p[2], ny=t->p[3];
+	long nsub=t->p[1], nx=t->p[2], ny=t->p[3], ns=labs(nsub)+1;
 	mreal *b=new mreal[n], d=1./ns;
 	memset(b,0,n*sizeof(mreal));
 	HCDT a = (HCDT)(t->b), c = (HCDT)(t->c);
 	const mreal *v=(const mreal *)t->v;
-	bool sp = n>0;
+	if(nsub>0)	// spline
+	{
+		if(c)
+		{
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
-	for(long i=t->id;i<nn;i+=mglNumThr)
-	{
-		mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
-		mreal f = sp ? a->value(x,y,z) : a->linear(x,y,z), w=1;
-		if(c)	w = sp ? c->value(x,y,z) : c->linear(x,y,z);
-		if(mgl_isnan(f) || mgl_isnan(w))	continue;
-		long k = long(n*(f-v[0])/(v[1]-v[0]));
-		if(k>=0 && k<n)
+			for(long i=t->id;i<nn;i+=mglNumThr)
+			{
+				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal f = a->value(x,y,z), w = c->value(x,y,z);
+				if(mgl_isnan(f) || mgl_isnan(w))	continue;
+				long k = long(n*(f-v[0])/(v[1]-v[0]));
+				if(k>=0 && k<n)
 #if !MGL_HAVE_PTHREAD
 #pragma omp critical(hist)
 #endif
-			b[k] += w * d*d*d;
+					b[k] += w * d*d*d;
+			}
+		}
+		else
+		{	
+#if !MGL_HAVE_PTHREAD
+#pragma omp parallel for
+#endif
+			for(long i=t->id;i<nn;i+=mglNumThr)
+			{
+				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal f = a->value(x,y,z);
+				if(mgl_isnan(f))	continue;
+				long k = long(n*(f-v[0])/(v[1]-v[0]));
+				if(k>=0 && k<n)
+#if !MGL_HAVE_PTHREAD
+#pragma omp critical(hist)
+#endif
+					b[k] += d*d*d;
+			}
+		}
+	}
+	else
+	{
+		if(c)
+		{
+#if !MGL_HAVE_PTHREAD
+#pragma omp parallel for
+#endif
+			for(long i=t->id;i<nn;i+=mglNumThr)
+			{
+				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal f = a->linear(x,y,z), w = c->linear(x,y,z);
+				if(mgl_isnan(f) || mgl_isnan(w))	continue;
+				long k = long(n*(f-v[0])/(v[1]-v[0]));
+				if(k>=0 && k<n)
+#if !MGL_HAVE_PTHREAD
+#pragma omp critical(hist)
+#endif
+					b[k] += w * d*d*d;
+			}
+		}
+		else
+		{	
+#if !MGL_HAVE_PTHREAD
+#pragma omp parallel for
+#endif
+			for(long i=t->id;i<nn;i+=mglNumThr)
+			{
+				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal f = a->linear(x,y,z);
+				if(mgl_isnan(f))	continue;
+				long k = long(n*(f-v[0])/(v[1]-v[0]));
+				if(k>=0 && k<n)
+#if !MGL_HAVE_PTHREAD
+#pragma omp critical(hist)
+#endif
+					b[k] += d*d*d;
+			}
+		}
 	}
 	t->a = b;	return 0;
 }
+//-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mgl_data_hist(HCDT dat, long n, mreal v1, mreal v2, long nsub)
 {
 	if(n<2 || v1==v2)	return 0;
 	mglData *b=new mglData(n);
 	mreal v[2]={v1,v2};
 	long nx=dat->GetNx(), ny=dat->GetNy(), nz=dat->GetNz();
-	long ns=labs(nsub)+1, p[5]={n,ns,nx,ny,nz};
+	long ns=labs(nsub)+1, p[5]={n,nsub,nx,ny,nz};
 	if(nsub==0)	mglStartThread(mgl_hist_1,mgl_hist_p, nx*ny*nz, b->a,(const mreal *)dat,0,p,v);
 	else	mglStartThread(mgl_hist_2,mgl_hist_p, nx*ny*nz*ns*ns*ns, b->a,(const mreal *)dat,0,p,v);
 	return b;
@@ -909,7 +971,7 @@ HMDT MGL_EXPORT mgl_data_hist_w(HCDT dat, HCDT weight, long n, mreal v1, mreal v
 	mreal v[2]={v1,v2};
 
 	long nx=dat->GetNx(), ny=dat->GetNy(), nz=dat->GetNz();
-	long ns=labs(nsub)+1, p[5]={n,ns,nx,ny,nz};
+	long ns=labs(nsub)+1, p[5]={n,nsub,nx,ny,nz};
 	if(nsub==0)	mglStartThread(mgl_hist_1,mgl_hist_p, nx*ny*nz, b->a,(const mreal *)dat,(const mreal *)weight,p,v);
 	else	mglStartThread(mgl_hist_2,mgl_hist_p, nx*ny*nz*ns*ns*ns, b->a,(const mreal *)dat,(const mreal *)weight,p,v);
 	return b;

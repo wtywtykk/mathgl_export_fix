@@ -55,6 +55,7 @@ HADT MGL_EXPORT mgl_formula_calc_c(const char *str, long n, ...)
 //-----------------------------------------------------------------------------
 HMDT MGL_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &head)
 {
+	if(!str || *str==0)	return NULL;
 	std::wstring s;
 	for(long i=0;str[i];i++)	s.push_back(str[i]);
 	return mglFormulaCalc(s,0,head);
@@ -62,6 +63,7 @@ HMDT MGL_EXPORT mglFormulaCalc(const char *str, const std::vector<mglDataA*> &he
 //-----------------------------------------------------------------------------
 HADT MGL_EXPORT mglFormulaCalcC(const char *str, const std::vector<mglDataA*> &head)
 {
+	if(!str || *str==0)	return NULL;
 	std::wstring s;
 	for(long i=0;str[i];i++)	s.push_back(str[i]);
 	return mglFormulaCalcC(s,0,head);
@@ -480,6 +482,7 @@ double MGL_NO_EXPORT mgl_jac_nc(double a, double m)
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HMDT MGL_NO_EXPORT mglFormulaCalc(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
+	if(str.empty())	return NULL;
 	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
 	return mglFormulaCalcA(fns[0],arg,head,fns);
 }
@@ -1134,6 +1137,7 @@ dual MGL_LOCAL_CONST normc(dual x);	//{	return norm(x);	}
 // String flag is binary 0x1 -> 'x', 0x2 -> 'y', 0x4 -> 'z'
 HADT MGL_NO_EXPORT mglFormulaCalcC(const std::wstring &str, mglParser *arg, const std::vector<mglDataA*> &head)
 {
+	if(str.empty())	return NULL;
 	std::vector<std::wstring> fns = mgl_wcs_args(str,'\\');
 	return mglFormulaCalcAC(fns[0],arg,head,fns);
 }

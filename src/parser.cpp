@@ -184,10 +184,13 @@ int mglParser::Exec(mglGraph *gr, const wchar_t *com, long n, mglArg *a, const s
 						if(s[k]>' ')	alph=true;
 						if(alph && s[k]<=' ')	break;
 					}
-					HMDT d1 = mglFormulaCalc(s.substr(j+1,k-j),this, DataList);
-					HMDT d2 = mglFormulaCalc(s.substr(k+1),this, DataList);
-					mglprintf(buf,64,L" %g %g",d1->a[0],d2->a[0]);
-					s = o+buf;	delete d1;	delete d2;
+					if(k<s.length())
+					{
+						HMDT d1 = mglFormulaCalc(s.substr(j+1,k-j),this, DataList);
+						HMDT d2 = mglFormulaCalc(s.substr(k+1),this, DataList);
+						mglprintf(buf,64,L" %g %g",d1->a[0],d2->a[0]);
+						s = o+buf;	delete d1;	delete d2;
+					}
 				}
 				else if(o!=L"legend")	// 1 argument
 				{

@@ -57,7 +57,8 @@
 19. Reccurence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
 
 21. Check transparent background at export to pnga !!!
-22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring.
+22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring + progonka.
+23. Bug with parsing "1E+01", "1E-01"
 
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -142,6 +143,7 @@ D. Docs about JS interface
 35. Add comments about the same ObjId for plots in the same line separated by ':'
 20. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
 21. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
+22. Update 'hist' that nsub<0 use linear interpolated instead of spline one.
 
 ZZ. Update time.texi {before release!!!}
 
