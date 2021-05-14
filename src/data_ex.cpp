@@ -871,7 +871,8 @@ static void *mgl_hist_2(void *par)
 	memset(b,0,n*sizeof(mreal));
 	HCDT a = (HCDT)(t->b), c = (HCDT)(t->c);
 	const mreal *v=(const mreal *)t->v;
-	if(nsub>0)	// spline
+	const long nsx=ns*nx, nsy=ns*ny, nxy=nsx*nsy;
+	if(nsub<0)	// spline
 	{
 		if(c)
 		{
@@ -880,7 +881,7 @@ static void *mgl_hist_2(void *par)
 #endif
 			for(long i=t->id;i<nn;i+=mglNumThr)
 			{
-				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal x = d*(i%nsx), y = d*((i/nsx)%nsy), z = d*(i/nxy);
 				mreal f = a->value(x,y,z), w = c->value(x,y,z);
 				if(mgl_isnan(f) || mgl_isnan(w))	continue;
 				long k = long(n*(f-v[0])/(v[1]-v[0]));
@@ -898,7 +899,7 @@ static void *mgl_hist_2(void *par)
 #endif
 			for(long i=t->id;i<nn;i+=mglNumThr)
 			{
-				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal x = d*(i%nsx), y = d*((i/nsx)%nsy), z = d*(i/nxy);
 				mreal f = a->value(x,y,z);
 				if(mgl_isnan(f))	continue;
 				long k = long(n*(f-v[0])/(v[1]-v[0]));
@@ -919,7 +920,7 @@ static void *mgl_hist_2(void *par)
 #endif
 			for(long i=t->id;i<nn;i+=mglNumThr)
 			{
-				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal x = d*(i%nsx), y = d*((i/nsx)%nsy), z = d*(i/nxy);
 				mreal f = a->linear(x,y,z), w = c->linear(x,y,z);
 				if(mgl_isnan(f) || mgl_isnan(w))	continue;
 				long k = long(n*(f-v[0])/(v[1]-v[0]));
@@ -937,7 +938,7 @@ static void *mgl_hist_2(void *par)
 #endif
 			for(long i=t->id;i<nn;i+=mglNumThr)
 			{
-				mreal x = d*(i%(nx*ns)), y = d*((i/(nx*ns))%(ny*ns)), z = d*(i/(nx*ny*ns*ns));
+				mreal x = d*(i%nsx), y = d*((i/nsx)%nsy), z = d*(i/nxy);
 				mreal f = a->linear(x,y,z);
 				if(mgl_isnan(f))	continue;
 				long k = long(n*(f-v[0])/(v[1]-v[0]));

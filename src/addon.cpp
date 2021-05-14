@@ -135,11 +135,11 @@ void MGL_EXPORT mgl_info(const char *str, ...)
 	fclose(fp);
 }
 //-----------------------------------------------------------------------------
-MGL_EXPORT FILE *mgl_next_data(const char *fname,int p)
+MGL_EXPORT FILE *mgl_next_data(const char *fname,long p)
 {
 	char *s;
-	int len;
-	static int pos=0;
+	long len;
+	static long pos=0;
 	static char path[256];
 
 	if(p>0)	pos = p;

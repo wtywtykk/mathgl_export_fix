@@ -119,6 +119,10 @@ int MGL_EXPORT mgl_data_read_range_(uintptr_t *d, const char *fname, mreal *n1, 
 /// Read data from tab-separated text files with auto determining size which filenames are satisfied to template (like "t_*.dat")
 int MGL_EXPORT mgl_data_read_all(HMDT dat, const char *templ, int as_slice);
 int MGL_EXPORT mgl_data_read_all_(uintptr_t *d, const char *fname, int *as_slice,int l);
+/// Read data from binary file of type: 0 - double, 1 - float, 2 - long double, 3 - long int, 4 - int, 5 - short int, 6 - char.
+/** NOTE: this function may not correctly read binary files written in different CPU kind! */
+int MGL_EXPORT mgl_data_read_bin(HMDT dat, const char *fname, int type);
+int MGL_EXPORT mgl_data_read_bin_(uintptr_t *d, const char *fname,int *type,int l);
 /// Import data array from PNG file according color scheme
 void MGL_EXPORT mgl_data_import(HMDT dat, const char *fname, const char *scheme,mreal v1,mreal v2);
 void MGL_EXPORT mgl_data_import_(uintptr_t *dat, const char *fname, const char *scheme,mreal *v1,mreal *v2,int,int);

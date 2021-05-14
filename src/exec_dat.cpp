@@ -1253,6 +1253,18 @@ int static mgls_readmat(mglGraph *gr, long , mglArg *a, const char *k, const cha
 	return res;
 }
 //-----------------------------------------------------------------------------
+int static mgls_readbin(mglGraph *gr, long , mglArg *a, const char *k, const char *)
+{
+	int res=0;
+	bool rr=true;
+	if(k[0]=='d' && a[0].d->temp)	return 5;
+	mglData *d = dynamic_cast<mglData *>(a[0].d);
+	if(d && !strcmp(k,"dsn"))		rr=d->ReadBin(a[1].s.s, mgl_int(a[2].v));
+	else res = 1;
+	if(!rr)	gr->SetWarn(mglWarnFile,"ReadBin");
+	return res;
+}
+//-----------------------------------------------------------------------------
 int static mgls_rearrange(mglGraph *, long , mglArg *a, const char *k, const char *)
 {
 	int res=0;
@@ -1783,6 +1795,7 @@ mglCommand mgls_dat_cmd[] = {
 	{"ray",_("Solve Hamiltonian ODE (find GO ray or trajectory)"),"ray Res 'ham' x0 y0 z0 px0 py0 pz0 [dt=0.1 tmax=10]", mgls_ray ,4},
 	{"read",_("Read data from file"),"read Dat 'file' [nx ny nz]|ReDat ImDat 'file' [nx ny nz]", mgls_read ,4},
 	{"readall",_("Read and join data from several files"),"readall Dat 'templ' [slice]|Dat 'templ' from to [step slice]", mgls_readall ,4},
+	{"readbin",_("Read data from binary file of specified type"),"readbin Dat 'file' type", mgls_readbin ,4},
 	{"readhdf",_("Read data with name 'id' from HDF file"),"readhdf Dat 'file' 'id'", mgls_readhdf ,4},
 	{"readmat",_("Read data from file with sizes specified in first row"),"readmat Dat 'file' [dim]", mgls_readmat ,4},
 	{"rearrange",_("Rearrange data dimensions"),"rearrange Dat mx [my mz]", mgls_rearrange ,3},

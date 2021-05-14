@@ -400,6 +400,92 @@ MGL_NO_EXPORT char *mgl_read_gz(gzFile fp)
 	return buf;
 }
 //-----------------------------------------------------------------------------
+int MGL_EXPORT mgl_data_read_bin(HMDT dat, const char *fname, int kind)
+{
+	FILE *fp = fopen(fname,"rb");
+	if(!fp)	return 0;
+	fseek(fp,0,SEEK_END);
+	long len=ftell(fp), n=0;	// file length, and number of elements
+	fseek(fp,0,SEEK_SET);
+	switch(kind)
+	{
+		case 0:	// double type
+			n = len/sizeof(double);
+			if(n>0)
+			{
+				double *a = new double[n];
+				n = fread(a,sizeof(double),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 1:	// float type
+			n = len/sizeof(float);
+			if(n>0)
+			{
+				float *a = new float[n];
+				n = fread(a,sizeof(float),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 2:	// long double type
+			n = len/sizeof(long double);
+			if(n>0)
+			{
+				long double *a = new long double[n];
+				n = fread(a,sizeof(long double),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 3:	// long int type
+			n = len/sizeof(long);
+			if(n>0)
+			{
+				long *a = new long[n];
+				n = fread(a,sizeof(long),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 4:	// int type
+			n = len/sizeof(int);
+			if(n>0)
+			{
+				int *a = new int[n];
+				n = fread(a,sizeof(int),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 5:	// short int type
+			n = len/sizeof(short);
+			if(n>0)
+			{
+				short *a = new short[n];
+				n = fread(a,sizeof(short),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+		case 6:	// char type
+			n = len/sizeof(char);
+			if(n>0)
+			{
+				char *a = new char[n];
+				n = fread(a,sizeof(char),n,fp);
+				dat->Create(n);
+				for(long i=0;i<n;i++)	dat->a[i]=a[i];
+			}
+			break;
+	}
+	return 1;
+}
+int MGL_EXPORT mgl_data_read_bin_(uintptr_t *d, const char *fname,int *kind,int l)
+{	char *s=new char[l+1];		memcpy(s,fname,l);	s[l]=0;
+	int r = mgl_data_read_bin(_DT_, s, *kind);	delete []s;		return r;	}
+//-----------------------------------------------------------------------------
 int MGL_EXPORT mgl_data_read(HMDT d, const char *fname)
 {
 	long l=1,m=1,k=1,i;

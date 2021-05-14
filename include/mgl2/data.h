@@ -297,6 +297,10 @@ using mglDataA::Last;
 	/// Scan textual file for template and fill data array
 	inline int ScanFile(const char *fname, const char *templ)
 	{	return mgl_data_scan_file(this,fname, templ);	}
+	/// Read data from binary file of type: 0 - double, 1 - float, 2 - long double, 3 - long int, 4 - int, 5 - short int, 6 - char.
+	/** NOTE: this function may not correctly read binary files written in different CPU kind! */
+	inline bool ReadBin(const char *fname, int type)
+	{	return mgl_data_read_bin(this, fname, type);	}
 
 
 	/// Get column (or slice) of the data filled by formulas of named columns
