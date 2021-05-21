@@ -459,7 +459,13 @@ void MGL_NO_EXPORT mgl_set_func(const mreal *x, mreal *dx, void *par)
 	for(long j=0;j<p->m;j++)
 	{
 		HMDT d = mglFormulaCalc(p->str[j].c_str(),p->head);
-		switch(p->brd)
+		mreal val = d->a[0];
+		if(d->nx<n)
+		{
+			d->Create(n);
+			for(long i=0;i<n;i++)	d->a[i] = val;
+		}
+		else switch(p->brd)
 		{
 			default:	// zero instead of NAN
 			case 0:	
@@ -494,7 +500,7 @@ HMDT MGL_EXPORT mgl_ode_solve_set(const char *func, const char *var, char brd, H
 	const long n = par.n = x0->GetNx();
 	const long m = par.m = long(strlen(var)), nn = n/m;	// number of variables
 	
-	HMDT dat = new mglData[m+2];
+	HMDT dat = new mglData[m+3];
 	for(long i=0;i<m;i++)
 	{
 		HMDT d = dat+i;	d->Create(nn);
@@ -503,6 +509,8 @@ HMDT MGL_EXPORT mgl_ode_solve_set(const char *func, const char *var, char brd, H
 	HMDT d = dat+m+1;	d->Create(nn);
 	for(long i=0;i<nn;i++)	d->a[i] = i;
 	d->s = 'j';	par.head.push_back(d);
+	(dat+m+2)->Create(nn);	(dat+m+2)->s = "#$mgl";
+	par.head.push_back(dat+m+2);
 	par.t = dat+m;	par.t->s = 't';	par.head.push_back(par.t);
 	
 	mreal *xx = new mreal[n];
@@ -520,37 +528,50 @@ void MGL_NO_EXPORT mgl_set_funcC(const mreal *x, mreal *dx, void *par)
 		HADT d = static_cast<HADT>(p->head[i]);
 		memcpy(d->a, x+2*i*n, 2*n*sizeof(mreal));
 	}
-	p->t->a[0] = x[p->n];
+	p->t->a[0] = x[2*p->n];
 //#pragma omp parallel for collapse(2)
 	for(long j=0;j<p->m;j++)
 	{
 		HADT d = mglFormulaCalcC(p->str[j].c_str(),p->head);
-		switch(p->brd)
+		dual val = d->a[0];
+		if(d->nx<n)
+		{
+			d->Create(n);
+			for(long i=0;i<n;i++)	d->a[i] = val;
+		}
+		else switch(p->brd)
 		{
 			default:
 			case 0:		// zero instead of NAN
 			case 'z':
+			case '0':
 				for(long i=0;i<n;i++)	if(mgl_isbad(d->a[i]))	d->a[i] = 0;
 				break;
 			case 1:		// constant at border
+			case 'c':
+			case '1':
 				d->a[0] = d->a[1];	d->a[n-1] = d->a[n-2];	break;
 			case 2:		// linear at border
 			case 'l':
+			case '2':
 				d->a[0] = mreal(2)*d->a[1]-d->a[2];
 				d->a[n-1] = mreal(2)*d->a[n-2]-d->a[n-3];	break;
 			case 3:		// square at border
 			case 's':
+			case '3':
 				d->a[0] = d->a[3]+mreal(3)*(d->a[1]-d->a[2]);
 				d->a[n-1] = d->a[n-4]+mreal(3)*(d->a[n-2]-d->a[n-3]);	break;
 			case -1:		// exponent at border
 			case 4:
 			case 'e':
+			case '4':
 				d->a[0] = norm(d->a[2])<norm(d->a[1]) ? d->a[1] : d->a[1]*d->a[1]/d->a[2];
 				d->a[n-1] = norm(d->a[n-3])<norm(d->a[n-2]) ? d->a[n-2] : d->a[n-2]*d->a[n-2]/d->a[n-3];
 				break;
 			case -2:		// gaussian at border
 			case 5:
 			case 'g':
+			case '5':
 				d->a[0] = norm(d->a[2])<norm(d->a[1]) ? d->a[3] : pow(d->a[1]/d->a[2],3)*d->a[3];
 				d->a[n-1] = norm(d->a[n-3])<norm(d->a[n-2]) ? d->a[n-4] : pow(d->a[n-2]/d->a[n-3],3)*d->a[n-4];
 				break;
@@ -573,10 +594,13 @@ HADT MGL_EXPORT mgl_ode_solve_set_c(const char *func, const char *var, char brd,
 		HADT d = dat+i;	d->Create(nn);
 		d->s = var[i];	par.head.push_back(d);
 	}
-	HMDT d = new mglData(nn);	d->s = 'j';
+	HMDT d = new mglData[3];
+	d->Create(nn);	d->s = 'j';
 	for(long i=0;i<nn;i++)	d->a[i] = i;
 	par.head.push_back(d);
-	par.t = new mglData;	par.t->s = 't';
+	(d+1)->Create(nn);	(d+1)->s = "#$mgl";
+	par.head.push_back(d+1);
+	par.t = d+2;	par.t->s = 't';
 	par.head.push_back(par.t);
 
 	mreal *xx = new mreal[2*n];
@@ -588,7 +612,7 @@ HADT MGL_EXPORT mgl_ode_solve_set_c(const char *func, const char *var, char brd,
 	else		for(long i=0;i<n;i++)	xx[2*i] = xx[2*i+1]=0;
 
 	HMDT res = mgl_ode_solve_ex(mgl_set_funcC,2*n,xx,dt,tmax,&par,NULL);
-	delete []xx;	delete d;	delete par.t;	delete []dat;
+	delete []xx;	delete []d;	delete []dat;
 	const long nt=res->ny;
 	mglDataC *out = new mglDataC(n, nt);
 #pragma omp parallel for
@@ -664,7 +688,7 @@ HMDT MGL_EXPORT mgl_ode_solve_ex(void (*func)(const mreal *x, mreal *dx, void *p
 	if(tmax<dt)	return 0;	// nothing to do
 	const long nt = int(tmax/dt+0.5)+1;
 	mglData *res=new mglData(n,nt);
-	mreal *x=new mreal[n+1], *k1=new mreal[n], *k2=new mreal[n], *k3=new mreal[n], *v=new mreal[n], hh=dt/2;
+	mreal *x=new mreal[n+1], *k1=new mreal[n], *k2=new mreal[n], *k3=new mreal[n], *v=new mreal[n+1], hh=dt/2;
 	// initial conditions
 	for(long i=0;i<n;i++)	x[i] = res->a[i] = x0[i];
 	// Runge Kutta scheme of 4th order
@@ -682,8 +706,8 @@ HMDT MGL_EXPORT mgl_ode_solve_ex(void (*func)(const mreal *x, mreal *dx, void *p
 			for(long i=0;i<n;i++)	k1[i] /= m0;
 		}
 		else m0 = 1;
-		x[n] += hh/m0;
 		for(long i=0;i<n;i++)	v[i] = x[i]+k1[i]*hh;
+		v[n] = t+hh/m0;
 		func(v,k2,par);
 		if(scale)
 		{
@@ -692,8 +716,8 @@ HMDT MGL_EXPORT mgl_ode_solve_ex(void (*func)(const mreal *x, mreal *dx, void *p
 			for(long i=0;i<n;i++)	k2[i] /= m1;
 		}
 		else m1 = 1;
-		x[n] = t+hh/m1;
 		for(long i=0;i<n;i++)	v[i] = x[i]+k2[i]*hh;
+		v[n] = t+hh/m1;
 		func(v,k3,par);
 		if(scale)
 		{
@@ -702,8 +726,8 @@ HMDT MGL_EXPORT mgl_ode_solve_ex(void (*func)(const mreal *x, mreal *dx, void *p
 			for(long i=0;i<n;i++)	k3[i] /= m2;
 		}
 		else m2 = 1;
-		x[n] = t+dt/m2;
 		for(long i=0;i<n;i++)	{	v[i] = x[i]+k3[i]*dt;	k3[i] += k2[i];	}
+		v[n] = t+dt/m2;
 		func(v,k2,par);
 		if(scale)
 		{
