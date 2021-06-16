@@ -145,6 +145,7 @@ D. Docs about JS interface
 21. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
 22. Update 'hist' that nsub<0 use linear interpolated instead of spline one.
 23. Add docs about 'readbin'
+24. Update 'smooth' by adding 'p' style for parabolic
 
 ZZ. Update time.texi {before release!!!}
 

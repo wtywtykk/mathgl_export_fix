@@ -164,25 +164,37 @@ static void *mgl_smth_x(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-			if(mgl_isnum(a[i]))	// bypass NAN values
-			{
-				long j = i%nx, nk = 2*kind+1;
-				for(long k=-kind;k<=kind;k++)
-					if(j+k>=0 && j+k<nx && mgl_isnum(a[i+k])) b[i] += a[i+k];	else nk--;
-				b[i] /= nk;
-			}	else	b[i] = a[i];
-	else if(kind==-1)
+		{
+			long j = i%nx;
+			double s0=0,s1=0,s2=0,sf=0,sxf=0;
+			for(long k=-kind;k<=kind;k++)
+				if(j+k>=0 && j+k<nx && mgl_isnum(a[i+k]))
+				{
+					s0+=1;	s1+=k;	s2+=k*k;
+					sf+=a[i+k];	sxf+=a[i+k]*k;
+				}
+			double d = s0*s2-s1*s1;
+			b[i] = d?(s2*sf - s1*sxf)/d:a[i];
+		}
+	else if(kind<-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
 		{
 			long j = i%nx;
-			if(j>1 && j<nx-2)	b[i] = (12*a[i-2] - 3*a[i-1] + 17*a[i] - 3*a[i+1] + 12*a[i+2])/35.;
-			else if(j==1 || j==nx-2)	b[i] = (a[i-1] + a[i] + a[i+1])/3.;
-			else	b[i] = a[i];
+			double s0=0,s1=0,s2=0,s3=0,s4=0,sf=0,sxf=0,sxxf=0;
+			for(long k=kind;k<=-kind;k++)
+				if(j+k>=0 && j+k<nx && mgl_isnum(a[i+k]))
+				{
+					long k2 = k*k, i0 = i+k;
+					s0+=1;	s1+=k;	s2+=k2;	s3+=k2*k;	s4+=k2*k2;
+					sf+=a[i0];	sxf+=a[i0]*k;	sxxf+=a[i0]*k2;
+				}
+			double d = (s0*s4-s2*s2)*s2 + (s2*s3-s4*s1)*s1 + (s1*s2-s0*s3)*s3;
+			b[i] = d?( (s1*s3-s2*s2)*sxxf + (s2*s3-s1*s4)*sxf + (s2*s4-s3*s3)*sf )/d:a[i];
 		}
-	else if(kind==-2)
+	else if(kind==0)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -192,7 +204,7 @@ static void *mgl_smth_x(void *par)
 			mreal v = (j>0 && j<nx-1) ? (a[i-1]+a[i+1])/2 : NAN;
 			b[i] = v<a[i]?v:a[i];
 		}
-	else if(kind==-3)
+	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -224,25 +236,37 @@ static void *mgl_smth_y(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-			if(mgl_isnum(a[i]))	// bypass NAN values
-			{
-				long j = (i/nx)%ny, nk = 2*kind+1;
-				for(long k=-kind;k<=kind;k++)
-					if(j+k>=0 && j+k<ny && mgl_isnum(a[i+k*nx])) b[i] += a[i+k*nx];	else nk--;
-				b[i] /= nk;
-			}	else	b[i] = a[i];
-	else if(kind==-1)
+		{
+			long j = (i/nx)%ny;
+			double s0=0,s1=0,s2=0,sf=0,sxf=0;
+			for(long k=-kind;k<=kind;k++)
+				if(j+k>=0 && j+k<ny && mgl_isnum(a[i+k*nx]))
+				{
+					s0+=1;	s1+=k;	s2+=k*k;
+					sf+=a[i+k*nx];	sxf+=a[i+k*nx]*k;
+				}
+			double d = s0*s2-s1*s1;
+			b[i] = d?(s2*sf - s1*sxf)/d:a[i];
+		}
+	else if(kind<-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
 		{
 			long j = (i/nx)%ny;
-			if(j>1 && j<ny-2)	b[i] = (12*a[i-2*nx] - 3*a[i-nx] + 17*a[i] - 3*a[i+nx] + 12*a[i+2*nx])/35.;
-			else if(j==1 || j==ny-2)	b[i] = (a[i-nx] + a[i] + a[i+nx])/3.;
-			else	b[i] = a[i];
+			double s0=0,s1=0,s2=0,s3=0,s4=0,sf=0,sxf=0,sxxf=0;
+			for(long k=kind;k<=-kind;k++)
+				if(j+k>=0 && j+k<ny && mgl_isnum(a[i+k*nx]))
+				{
+					long k2 = k*k, i0 = i+k*nx;
+					s0+=1;	s1+=k;	s2+=k2;	s3+=k2*k;	s4+=k2*k2;
+					sf+=a[i0];	sxf+=a[i0]*k;	sxxf+=a[i0]*k2;
+				}
+			double d = (s0*s4-s2*s2)*s2 + (s2*s3-s4*s1)*s1 + (s1*s2-s0*s3)*s3;
+			b[i] = d?( (s1*s3-s2*s2)*sxxf + (s2*s3-s1*s4)*sxf + (s2*s4-s3*s3)*sf )/d:a[i];
 		}
-	else if(kind==-2)
+	else if(kind==0)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -252,7 +276,7 @@ static void *mgl_smth_y(void *par)
 			mreal v = (j>0 && j<ny-1) ? (a[i-nx]+a[i+nx])/2 : NAN;
 			b[i] = v<a[i]?v:a[i];
 		}
-	else if(kind==-3)
+	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -284,25 +308,37 @@ static void *mgl_smth_z(void *par)
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
-			if(mgl_isnum(a[i]))	// bypass NAN values
-			{
-				long j = i/nn, nk = 2*kind+1;
-				for(long k=-kind;k<=kind;k++)
-					if(j+k>=0 && j+k<nz && mgl_isnum(a[i+k*nn])) b[i] += a[i+k*nn];	else nk--;
-				b[i] /= nk;
-			}	else	b[i] = a[i];
-	else if(kind==-1)
+		{
+			long j = i/nn;
+			double s0=0,s1=0,s2=0,sf=0,sxf=0;
+			for(long k=-kind;k<=kind;k++)
+				if(j+k>=0 && j+k<nz && mgl_isnum(a[i+k*nn]))
+				{
+					s0+=1;	s1+=k;	s2+=k*k;
+					sf+=a[i+k*nn];	sxf+=a[i+k*nn]*k;
+				}
+			double d = s0*s2-s1*s1;
+			b[i] = d?(s2*sf - s1*sxf)/d:a[i];
+		}
+	else if(kind<-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
 		for(long i=t->id;i<t->n;i+=mglNumThr)
 		{
 			long j = i/nn;
-			if(j>1 && j<nz-2)	b[i] = (12*a[i-2*nn] - 3*a[i-nn] + 17*a[i] - 3*a[i+nn] + 12*a[i+2*nn])/35.;
-			else if(j==1 || j==nz-2)	b[i] = (a[i-nn] + a[i] + a[i+nn])/3.;
-			else	b[i] = a[i];
+			double s0=0,s1=0,s2=0,s3=0,s4=0,sf=0,sxf=0,sxxf=0;
+			for(long k=kind;k<=-kind;k++)
+				if(j+k>=0 && j+k<nz && mgl_isnum(a[i+k*nn]))
+				{
+					long k2 = k*k, i0 = i+k*nn;
+					s0+=1;	s1+=k;	s2+=k2;	s3+=k2*k;	s4+=k2*k2;
+					sf+=a[i0];	sxf+=a[i0]*k;	sxxf+=a[i0]*k2;
+				}
+			double d = (s0*s4-s2*s2)*s2 + (s2*s3-s4*s1)*s1 + (s1*s2-s0*s3)*s3;
+			b[i] = d?( (s1*s3-s2*s2)*sxxf + (s2*s3-s1*s4)*sxf + (s2*s4-s3*s3)*sf )/d:a[i];
 		}
-	else if(kind==-2)
+	else if(kind==0)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -312,7 +348,7 @@ static void *mgl_smth_z(void *par)
 			mreal v = (j>0 && j<nz-1) ? (a[i-nn]+a[i+nn])/2 : NAN;
 			b[i] = v<a[i]?v:a[i];
 		}
-	else if(kind==-3)
+	else if(kind==-1)
 #if !MGL_HAVE_PTHREAD
 #pragma omp parallel for
 #endif
@@ -335,7 +371,7 @@ static void *mgl_smth_z(void *par)
 }
 void MGL_EXPORT mgl_data_smooth(HMDT d, const char *dirs, mreal delta)
 {
-	long Type = -1;
+	long Type = -2;
 	if(mglchr(dirs,'0'))	return;
 	bool xdir=mglchr(dirs,'x'), ydir=mglchr(dirs,'y'), zdir=mglchr(dirs,'z');
 	if(!xdir && !ydir && !zdir)	xdir=ydir=zdir=true;
@@ -351,14 +387,25 @@ void MGL_EXPORT mgl_data_smooth(HMDT d, const char *dirs, mreal delta)
 		if(mglchr(dirs,'8'))	Type = 8;
 		if(mglchr(dirs,'9'))	Type = 9;
 	}
+	else if(mglchr(dirs,'p'))
+	{
+		if(mglchr(dirs,'2'))	Type = -2;
+		if(mglchr(dirs,'3'))	Type = -3;
+		if(mglchr(dirs,'4'))	Type = -4;
+		if(mglchr(dirs,'5'))	Type = -5;
+		if(mglchr(dirs,'6'))	Type = -6;
+		if(mglchr(dirs,'7'))	Type = -7;
+		if(mglchr(dirs,'8'))	Type = -8;
+		if(mglchr(dirs,'9'))	Type = -9;
+	}
 	else
 	{
 		if(mglchr(dirs,'1'))	return;
 		if(mglchr(dirs,'3'))	Type = 1;
 		if(mglchr(dirs,'5'))	Type = 2;
 	}
-	if(mglchr(dirs,'_'))	Type = -2;
-	if(mglchr(dirs,'^'))	Type = -3;
+	if(mglchr(dirs,'_'))	Type = 0;
+	if(mglchr(dirs,'^'))	Type = -1;
 	long nx=d->nx,ny=d->ny,nz=d->nz;
 //	if(Type == SMOOTH_NONE)	return;
 	long p[3]={nx,ny,Type};

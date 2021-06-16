@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-13 20:16+0300\n"
+"POT-Creation-Date: 2021-06-16 19:12+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -811,7 +811,7 @@ msgstr "Выполнить скрипт после загрузки"
 msgid "Automatically save before redrawing (F5)"
 msgstr "Сохранять скрипт перед рисованием (F5)"
 
-#: src/data.cpp:1510
+#: src/data.cpp:1557
 #, c-format
 msgid ""
 "Averages are:\n"
@@ -3254,7 +3254,7 @@ msgstr "Максимум Y для обрезания или координат"
 msgid "Maximal value of Z for cutting or for coordinate filling"
 msgstr "Максимум Z для обрезания или координат"
 
-#: src/data.cpp:1502
+#: src/data.cpp:1549
 #, c-format
 msgid "Maximum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Максимум %g\t при x = %ld\ty = %ld\tz = %ld\n"
@@ -3311,7 +3311,7 @@ msgstr "Минимум Y для обрезания или координат"
 msgid "Minimal value of Z for cutting or for coordinate filling"
 msgstr "Минимум Z для обрезания или координат"
 
-#: src/data.cpp:1505
+#: src/data.cpp:1552
 #, c-format
 msgid "Minimum is %g\t at x = %ld\ty = %ld\tz = %ld\n"
 msgstr "Минимум %g\t при x = %ld\ty = %ld\tz = %ld\n"
@@ -5728,7 +5728,7 @@ msgstr "Ширина"
 msgid "Width of selected cells"
 msgstr "Ширины выбранных ячеек"
 
-#: src/data.cpp:1512
+#: src/data.cpp:1559
 #, c-format
 msgid ""
 "Widths are:\n"
