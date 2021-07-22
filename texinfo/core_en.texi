@@ -1184,6 +1184,7 @@ font style (see, @ref{Font styles});
 @samp{#} for box around the title.
 @end itemize
 Parameter @var{size} set font size. This function set off any aspects or rotations. So it should be used just after creating subplot.
+Note, that each call of this command will reserve extra space. So, you need to manually call @ref{subplot} command after @ref{rasterize} if you want to combine bitmap and vector graphics.
 @end deftypefn
 
 @anchor{rotate}
@@ -1708,16 +1709,19 @@ Clear the picture and fill background by specified color.
 @deftypefnx {Method on @code{mglGraph}} @code{void} Rasterize ()
 @deftypefnx {C function} @code{void} mgl_rasterize (@code{HMGL} gr)
 @end ifclear
-Force drawing the plot and use it as background. After it, function clear the list of primitives, like @ref{clf}. This function is useful if you want save part of plot as bitmap one (for example, large surfaces, isosurfaces or vector fields) and keep some parts as vector one (like annotation, curves, axis and so on).
+Force drawing the plot and use it as background. After it, function clear the list of primitives, like @ref{clf}. This function is useful if you want save part of plot as bitmap one (for example, large surfaces, isosurfaces or vector fields) and keep some parts as vector one (like annotation, curves, axis and so on). Often, you need to manually call @ref{subplot} command after @ref{rasterize} to avoid extra space allocation or plot rotation.
 @end deftypefn
 
 @anchor{background}
 @deftypefn {MGL command} {} background 'fname' [@code{alpha=1}]
+@deftypefnx {MGL command} {} background 'fname' 'how' [@code{alpha=1}]
 @ifclear UDAV
 @deftypefnx {Method on @code{mglGraph}} @code{void} LoadBackground (@code{const char *} fname, @code{double} alpha=@code{1})
 @deftypefnx {C function} @code{void} mgl_load_background (@code{HMGL} gr, @code{const char *} fname, @code{double} alpha)
+@deftypefnx {Method on @code{mglGraph}} @code{void} LoadBackground (@code{const char *} fname, @code{const char *} how, @code{double} alpha=@code{1})
+@deftypefnx {C function} @code{void} mgl_load_background_ext (@code{HMGL} gr, @code{const char *} fname, @code{const char *} how, @code{double} alpha)
 @end ifclear
-Load PNG or JPEG file @var{fname} as background for the plot. Parameter @var{alpha} manually set transparency of the background.
+Load PNG or JPEG file @var{fname} as background for the plot. Parameter @var{alpha} manually set transparency of the background. Parameter @var{how} can be: @samp{a} for filling current subplot only, @samp{s} for scaling (resizing) image to whole area, @samp{c} for centering image, @samp{m} for tessellate image as mosaic.
 @end deftypefn
 
 
@@ -1794,13 +1798,13 @@ Draws Bezier-like curve from point @var{p1} to @var{p2} using line style @var{st
 @deftypefnx {Method on @code{mglGraph}} @code{void} Face (@code{mglPoint} p1, @code{mglPoint} p2, @code{mglPoint} p3, @code{mglPoint} p4, @code{const char *}stl=@code{"w"})
 @deftypefnx {C function} @code{void} mgl_face (@code{HMGL} gr, @code{mreal} x1, @code{mreal} y1, @code{mreal} z1, @code{mreal} x2, @code{mreal} y2, @code{mreal} z2, @code{mreal} x3, @code{mreal} y3, @code{mreal} z3, @code{mreal} x4, @code{mreal} y4, @code{mreal} z4, @code{const char *}stl)
 @end ifclear
-Draws the solid quadrangle (face) with vertexes @var{p1}, @var{p2}, @var{p3}, @var{p4} and with color(s) @var{stl}. At this colors can be the same for all vertexes or different if all 4 colors are specified for each vertex. Face will be drawn even if it lies out of bounding box.
+Draws the solid quadrangle (face) with vertexes @var{p1}, @var{p2}, @var{p3}, @var{p4} and with color(s) @var{stl}. At this colors can be the same for all vertexes or different if all 4 colors are specified for each vertex. Face will be drawn even if it lies out of bounding box. Argument @var{stl} can also contain mask specification (see @ref{Color scheme}).
 @end deftypefn
 
 @anchor{rect}
 @deftypefn {MGL command} {} rect @code{x1 y1 x2 y2} ['stl'='']
 @deftypefnx {MGL command} {} rect @code{x1 y1 z1 x2 y2 z2} ['stl'='']
-Draws the solid rectangle (face) with vertexes @{@var{x1}, @var{y1}, @var{z1}@} and @{@var{x2}, @var{y2}, @var{z2}@} with color @var{stl}. At this colors can be the same for all vertexes or separately if all 4 colors are specified for each vertex. Face will be drawn even if it lies out of bounding box.
+Draws the solid rectangle (face) with vertexes @{@var{x1}, @var{y1}, @var{z1}@} and @{@var{x2}, @var{y2}, @var{z2}@} with color @var{stl}. At this colors can be the same for all vertexes or separately if all 4 colors are specified for each vertex. Face will be drawn even if it lies out of bounding box. Argument @var{stl} can also contain mask specification (see @ref{Color scheme}).
 @end deftypefn
 
 @anchor{facex}
@@ -1817,7 +1821,7 @@ Draws the solid rectangle (face) with vertexes @{@var{x1}, @var{y1}, @var{z1}@} 
 @deftypefnx {C function} @code{void} mgl_facey (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{mreal} wx, @code{mreal} wz, @code{const char *}stl, @code{mreal} d1, @code{mreal} d2)
 @deftypefnx {C function} @code{void} mgl_facez (@code{HMGL} gr, @code{mreal} x0, @code{mreal} y0, @code{mreal} z0, @code{mreal} wx, @code{mreal} wy, @code{const char *}stl, @code{mreal} d1, @code{mreal} d2)
 @end ifclear
-Draws the solid rectangle (face) perpendicular to [x,y,z]-axis correspondingly at position @{@var{x0}, @var{y0}, @var{z0}@} with color @var{stl} and with widths @var{wx}, @var{wy}, @var{wz} along corresponding directions. At this colors can be the same for all vertexes or separately if all 4 colors are specified for each vertex. Parameters @var{d1}!=0, @var{d2}!=0 set additional shift of the last vertex (i.e. to draw quadrangle). Face will be drawn even if it lies out of bounding box.
+Draws the solid rectangle (face) perpendicular to [x,y,z]-axis correspondingly at position @{@var{x0}, @var{y0}, @var{z0}@} with color @var{stl} and with widths @var{wx}, @var{wy}, @var{wz} along corresponding directions. At this colors can be the same for all vertexes or separately if all 4 colors are specified for each vertex. Argument @var{stl} can also contain mask specification (see @ref{Color scheme}). Parameters @var{d1}!=0, @var{d2}!=0 set additional shift of the last vertex (i.e. to draw quadrangle). Face will be drawn even if it lies out of bounding box.
 @end deftypefn
 
 @anchor{sphere}
@@ -1872,7 +1876,9 @@ colors for filling and boundary (second one if style @samp{@@} is used, black co
 @item
 @samp{#} for wire figure (boundary only);
 @item
-@samp{@@} for filling and boundary.
+@samp{@@} for filling and boundary;
+@item
+mask specification (see @ref{Color scheme}).
 @end itemize
 @end deftypefn
 
@@ -1890,7 +1896,9 @@ colors for filling and boundary (second one if style @samp{@@} is used, black co
 @item
 @samp{#} for wire figure (boundary only);
 @item
-@samp{@@} for filling and boundary.
+@samp{@@} for filling and boundary;
+@item
+mask specification (see @ref{Color scheme}).
 @end itemize
 @end deftypefn
 
@@ -1908,7 +1916,9 @@ colors for filling and boundary (second one if style @samp{@@} is used, black co
 @item
 @samp{#} for wire figure (boundary only);
 @item
-@samp{@@} for filling and boundary.
+@samp{@@} for filling and boundary;
+@item
+mask specification (see @ref{Color scheme}).
 @end itemize
 @end deftypefn
 
@@ -1939,7 +1949,9 @@ colors for filling and boundary (second one if style @samp{@@} is used, black co
 @item
 @samp{#} for wire figure (boundary only);
 @item
-@samp{@@} for filling and boundary.
+@samp{@@} for filling and boundary;
+@item
+mask specification (see @ref{Color scheme}).
 @end itemize
 @end deftypefn
 
@@ -2354,7 +2366,7 @@ These functions draw continuous lines between points @{@var{x}[i], @var{y}[i], @
 @deftypefnx {C function} @code{void} mgl_tape_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{const char *}pen, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_tape_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}pen, @code{const char *}opt)
 @end ifclear
-These functions draw tapes of normals for curve between points @{@var{x}[i], @var{y}[i], @var{z}[i]@}. Initial tape(s) was selected in x-y plane (for @samp{x} in @var{pen}) and/or y-z plane (for @samp{x} in @var{pen}). The width of tape is proportional to @ref{barwidth} and can be changed by option @code{value}. See also @ref{plot}, @ref{flow}, @ref{barwidth}. @sref{tape sample}
+These functions draw tapes of normals for curve between points @{@var{x}[i], @var{y}[i], @var{z}[i]@}. Initial tape(s) was selected in x-y plane (for @samp{x} in @var{pen}) and/or y-z plane (for @samp{x} in @var{pen}). Argument @var{pen} can also contain mask specification (see @ref{Color scheme}). The width of tape is proportional to @ref{barwidth} and can be changed by option @code{value}. See also @ref{plot}, @ref{flow}, @ref{barwidth}. @sref{tape sample}
 @end deftypefn
 
 @anchor{area}
@@ -2369,7 +2381,7 @@ These functions draw tapes of normals for curve between points @{@var{x}[i], @va
 @deftypefnx {C function} @code{void} mgl_area_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{const char *}pen, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_area_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}pen, @code{const char *}opt)
 @end ifclear
-These functions draw continuous lines between points and fills it to axis plane. Also you can use gradient filling if number of specified colors is equal to 2*number of curves. If @var{pen} contain @samp{#} then wired plot is drawn. If @var{pen} contain @samp{a} then segments between points outside of axis range are drawn too. See also @ref{plot}, @ref{bars}, @ref{stem}, @ref{region}. @sref{area sample}
+These functions draw continuous lines between points and fills it to axis plane. Also you can use gradient filling if number of specified colors is equal to 2*number of curves. If @var{pen} contain @samp{#} then wired plot is drawn. If @var{pen} contain @samp{a} then segments between points outside of axis range are drawn too. Argument @var{pen} can also contain mask specification (see @ref{Color scheme}). See also @ref{plot}, @ref{bars}, @ref{stem}, @ref{region}. @sref{area sample}
 @end deftypefn
 
 @anchor{region}
@@ -2386,7 +2398,7 @@ These functions draw continuous lines between points and fills it to axis plane.
 @deftypefnx {C function} @code{void} mgl_region_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y1, @code{HCDT} y2, @code{const char *}pen, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_region_3d (@code{HMGL} gr, @code{HCDT} x1, @code{HCDT} y1, @code{HCDT} z1, @code{HCDT} x2, @code{HCDT} y2, @code{HCDT} z2, @code{const char *}pen, @code{const char *}opt)
 @end ifclear
-These functions fill area between 2 curves. Dimensions of arrays @var{y1} and @var{y2} must be equal. Also you can use gradient filling if number of specified colors is equal to 2*number of curves. If for 2D version @var{pen} contain symbol @samp{i} then only area with y1<y<y2 will be filled else the area with y2<y<y1 will be filled too. If @var{pen} contain @samp{#} then wired plot is drawn. If @var{pen} contain @samp{a} then segments between points outside of axis range are drawn too. See also @ref{area}, @ref{bars}, @ref{stem}. @sref{region sample}
+These functions fill area between 2 curves. Dimensions of arrays @var{y1} and @var{y2} must be equal. Also you can use gradient filling if number of specified colors is equal to 2*number of curves. If for 2D version @var{pen} contain symbol @samp{i} then only area with y1<y<y2 will be filled else the area with y2<y<y1 will be filled too. If @var{pen} contain @samp{#} then wired plot is drawn. If @var{pen} contain @samp{a} then segments between points outside of axis range are drawn too. Argument @var{pen} can also contain mask specification (see @ref{Color scheme}). See also @ref{area}, @ref{bars}, @ref{stem}. @sref{region sample}
 @end deftypefn
 
 @anchor{stem}
@@ -2425,7 +2437,9 @@ These functions draw vertical bars from points to axis plane. Parameter @var{pen
 @item
 @samp{F} for using fixed (minimal) width for all bars;
 @item
-@samp{<}, @samp{^} or @samp{>} for aligning boxes left, right or centering them at its x-coordinates.
+@samp{<}, @samp{^} or @samp{>} for aligning boxes left, right or centering them at its x-coordinates;
+@item 
+mask specification (see @ref{Color scheme}).
 @end itemize
 You can give different colors for positive and negative values if number of specified colors is equal to 2*number of curves. If @var{x}.nx>@var{y}.nx then @var{x} set the edges of bars, rather than its central positions. See also @ref{barh}, @ref{cones}, @ref{area}, @ref{stem}, @ref{chart}, @ref{barwidth}. @sref{bars sample}
 @end deftypefn
@@ -2448,7 +2462,9 @@ These functions draw horizontal bars from points to axis plane. Parameter @var{p
 @item
 @samp{F} for using fixed (minimal) width for all bars;
 @item
-@samp{<}, @samp{^} or @samp{>} for aligning boxes left, right or centering them at its x-coordinates.
+@samp{<}, @samp{^} or @samp{>} for aligning boxes left, right or centering them at its x-coordinates;
+@item 
+mask specification (see @ref{Color scheme}).
 @end itemize
 You can give different colors for positive and negative values if number of specified colors is equal to 2*number of curves. If @var{x}.nx>@var{y}.nx then @var{x} set the edges of bars, rather than its central positions. See also @ref{bars}, @ref{barwidth}. @sref{barh sample}
 @end deftypefn
@@ -2489,7 +2505,7 @@ See also @ref{bars}, @ref{cone}, @ref{barwidth}. @sref{cones sample}
 @deftypefnx {Method on @code{mglGraph}} @code{void} Chart (@code{const mglDataA &}a, @code{const char *}col=@code{""}, @code{const char *}opt=@code{""})
 @deftypefnx {C function} @code{void} mgl_chart (@code{HMGL} gr, @code{HCDT} a, @code{const char *}col, @code{const char *}opt)
 @end ifclear
-The function draws colored stripes (boxes) for data in array @var{a}. The number of stripes is equal to the number of rows in @var{a} (equal to @var{a.ny}). The color of each next stripe is cyclically changed from colors specified in string @var{col} or in palette Pal (see @ref{Palette and colors}). Spaces in colors denote transparent ``color'' (i.e. corresponding stripe(s) are not drawn). The stripe width is proportional to value of element in @var{a}. Chart is plotted only for data with non-negative elements. If string @var{col} have symbol @samp{#} then black border lines are drawn. The most nice form the chart have in 3d (after rotation of coordinates) or in cylindrical coordinates (becomes so called Pie chart). @sref{chart sample}
+The function draws colored stripes (boxes) for data in array @var{a}. The number of stripes is equal to the number of rows in @var{a} (equal to @var{a.ny}). The color of each next stripe is cyclically changed from colors specified in string @var{col} or in palette Pal (see @ref{Palette and colors}).  Argument @var{col} can also contain mask specification (see @ref{Color scheme}). Spaces in colors denote transparent ``color'' (i.e. corresponding stripe(s) are not drawn). The stripe width is proportional to value of element in @var{a}. Chart is plotted only for data with non-negative elements. If string @var{col} have symbol @samp{#} then black border lines are drawn. The most nice form the chart have in 3d (after rotation of coordinates) or in cylindrical coordinates (becomes so called Pie chart). @sref{chart sample}
 @end deftypefn
 
 @anchor{boxplot}
@@ -2520,7 +2536,7 @@ These functions draw boxplot (also known as a box-and-whisker diagram) at points
 @deftypefnx {C function} @code{void} mgl_candle_yv (@code{HMGL} gr, @code{HCDT} v1, @code{HCDT} v2, @code{HCDT} y1, @code{HCDT} y2, @code{const char *}pen, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_candle_xyv (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} v1, @code{HCDT} v2, @code{HCDT} y1, @code{HCDT} y2, @code{const char *}pen, @code{const char *}opt)
 @end ifclear
-These functions draw candlestick chart at points @var{x}[i]. This is a combination of a line-chart and a bar-chart, in that each bar represents the range of price movement over a given time interval. Wire (or white) candle correspond to price growth @var{v1}[i]<@var{v2}[i], opposite case -- solid (or dark) candle. You can give different colors for growth and decrease values if number of specified colors is equal to 2. If @var{pen} contain @samp{#} then the wire candle will be used even for 2-color scheme. "Shadows" show the minimal @var{y1} and maximal @var{y2} prices. If @var{v2} is absent then it is determined as @var{v2}[i]=@var{v1}[i+1]. See also @ref{plot}, @ref{bars}, @ref{ohlc}, @ref{barwidth}. @sref{candle sample}
+These functions draw candlestick chart at points @var{x}[i]. This is a combination of a line-chart and a bar-chart, in that each bar represents the range of price movement over a given time interval. Wire (or white) candle correspond to price growth @var{v1}[i]<@var{v2}[i], opposite case -- solid (or dark) candle. You can give different colors for growth and decrease values if number of specified colors is equal to 2. If @var{pen} contain @samp{#} then the wire candle will be used even for 2-color scheme. Argument @var{pen} can also contain mask specification (see @ref{Color scheme}). "Shadows" show the minimal @var{y1} and maximal @var{y2} prices. If @var{v2} is absent then it is determined as @var{v2}[i]=@var{v1}[i+1]. See also @ref{plot}, @ref{bars}, @ref{ohlc}, @ref{barwidth}. @sref{candle sample}
 @end deftypefn
 
 @anchor{ohlc}

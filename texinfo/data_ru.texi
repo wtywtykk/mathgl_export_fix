@@ -493,7 +493,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefnx {Функция С} @code{void} mgl_data_fill_eq (@code{HMGL} gr, @code{HMDT} dat, @code{const char *}eq, @code{HCDT} vdat, @code{HCDT} wdat, @code{const char *}opt)
 @deftypefnx {Функция С} @code{void} mgl_datac_fill_eq (@code{HMGL} gr, @code{HADT} dat, @code{const char *}eq, @code{HCDT} vdat, @code{HCDT} wdat, @code{const char *}opt)
 @end ifclear
-Заполняет значениями вычисленными по формуле @var{eq}. Формула представляет собой произвольное выражение, зависящее от переменных @samp{x}, @samp{y}, @samp{z}, @samp{u}, @samp{v}, @samp{w}. Координаты @samp{x}, @samp{y}, @samp{z} полагаются меняющимися в диапазоне @var{Min} x @var{Max} (в отличие от функции @code{Modify}). Переменная @samp{u} -- значения исходного массива, переменные @samp{v}, @samp{w} -- значения массивов @var{vdat}, @var{wdat}. Последние могут быть @code{NULL}, т.е. опущены.
+Заполняет значениями вычисленными по формуле @var{eq}. Формула представляет собой произвольное выражение, зависящее от переменных @samp{x}, @samp{y}, @samp{z}, @samp{u}, @samp{v}, @samp{w}. Координаты @samp{x}, @samp{y}, @samp{z} полагаются меняющимися в диапазоне @var{Min} x @var{Max} (в отличие от функции @code{Modify}). Переменные @samp{i}, @samp{j}, @samp{k} равны значениям соответствующего индекса. При этом, используются нулевые значения для переменных, отвечающих отсутствующим размерностям. Переменная @samp{u} -- значения исходного массива, переменные @samp{v}, @samp{w} -- значения массивов @var{vdat}, @var{wdat}. Последние могут быть @code{NULL}, т.е. опущены.
 @end deftypefn
 
 @anchor{modify}
@@ -511,7 +511,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefnx {Функция С} @code{void} mgl_datac_modify (@code{HADT} dat, @code{const char *}eq, @code{int} dim)
 @deftypefnx {Функция С} @code{void} mgl_datac_modify_vw (@code{HADT} dat, @code{const char *}eq, @code{HCDT} v, @code{HCDT} w)
 @end ifclear
-Аналогично предыдущему с координатами @samp{x}, @samp{y}, @samp{z}, меняющимися в диапазоне [0,1]. Если указан @var{dim}>0, то изменяются только слои >=@var{dim}.
+Аналогично предыдущему с координатами @samp{x}, @samp{y}, @samp{z}, меняющимися в диапазоне [0,1]. Переменные @samp{i}, @samp{j}, @samp{k} равны значениям соответствующего индекса. При этом, используются нулевые значения для переменных, отвечающих отсутствующим размерностям. Если указан @var{dim}>0, то изменяются только слои >=@var{dim}.
 @end deftypefn
 
 @anchor{fillsample}
@@ -687,6 +687,10 @@ Allocate memory and set data from variable argument list of @emph{double} values
 Сохраняет весь массив данных при @var{ns}=@code{-1} или только @var{ns}-ый срез в текстовый файл.
 @end deftypefn
 
+@deftypefn {Команда MGL} {} save @code{val} 'fname'
+Сохраняет значение @var{val} в файл @var{fname}.
+@end deftypefn
+
 @deftypefn {Команда MGL} {} save 'str' 'fname' ['mode'='a']
 Сохраняет строку @var{str} в файл @var{fname}. Для параметра @var{mode}=@samp{a} происходит добавление строки (по умолчанию): для  @var{mode}=@samp{w} файл будет перезаписан. @sref{Saving and scanning file}
 @end deftypefn
@@ -710,6 +714,15 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefnx {Функция С} @code{void} mgl_datac_save_hdf (@code{HCDT} dat, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
 @end ifclear
 Сохраняет массив под именем @var{dname} в HDF5 или HDF4 файл @var{fname}. Функция ничего не делает если библиотека была собрана без поддержки HDF5|HDF4.
+@end deftypefn
+
+@deftypefn {Команда MGL} {} savehdf @code{val} 'fname' 'dname' [@code{rewrite}=@code{off}]
+@ifclear UDAV
+@deftypefnx {Функция С} @code{void} mgl_real_save_hdf (@code{real} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@deftypefnx {Функция С} @code{void} mgl_dual_save_hdf (@code{dual} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@deftypefnx {Функция С} @code{void} mgl_int_save_hdf (@code{long} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@end ifclear
+Сохраняет значение @code{val} под именем @var{dname} в HDF5 файл @var{fname}. Функция ничего не делает если библиотека была собрана без поддержки HDF5.
 @end deftypefn
 
 @anchor{datas}
@@ -898,7 +911,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefnx {Функция С} @code{HMDT} mgl_data_hist (@code{HCDT} dat, @code{int} n, @code{mreal} v1, @code{mreal} v2, @code{int} nsub)
 @deftypefnx {Функция С} @code{HMDT} mgl_data_hist_w (@code{HCDT} dat, @code{HCDT} w, @code{int} n, @code{mreal} v1, @code{mreal} v2, @code{int} nsub)
 @end ifclear
-Возвращает распределение (гистограмму) из @var{n} точек от значений массива в диапазоне [@var{v1}, @var{v2}]. Массив @var{w} задает веса элементов (по умолчанию все веса равны 1). Параметр @var{nsub} задает число дополнительных точек интерполяции (для сглаживания получившейся гистограммы). Функция возвращает NULL или пустой массив если данные не могут быть созданы при данных значениях аргументов. См. также @ref{Data manipulation}
+Возвращает распределение (гистограмму) из @var{n} точек от значений массива в диапазоне [@var{v1}, @var{v2}]. Массив @var{w} задает веса элементов (по умолчанию все веса равны 1). Параметр @var{nsub} задает число дополнительных точек интерполяции (для сглаживания получившейся гистограммы).  Если @var{nsub}<0, то используется линейная интерполяция вместо сплайнов. Функция возвращает NULL или пустой массив если данные не могут быть созданы при данных значениях аргументов. См. также @ref{Data manipulation}
 @end deftypefn
 
 @anchor{momentum}
@@ -1216,6 +1229,8 @@ These functions change the data in some direction like differentiations, integra
 @samp{5} -- линейное усреднение по 5 точкам,
 @item
 @samp{d1}...@samp{d9} -- линейное усреднение по (2*N+1) точкам,
+@item
+@samp{p1}...@samp{p9} -- параболличсеское усреднение по (2*N+1) точкам,
 @item
 @samp{^} -- определение верхней границы,
 @item

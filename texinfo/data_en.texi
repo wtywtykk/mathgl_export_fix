@@ -497,7 +497,7 @@ Equidistantly fills the data values to range [@var{v1}, @var{v2}] in direction @
 @deftypefnx {C function} @code{void} mgl_data_fill_eq (@code{HMGL} gr, @code{HMDT} dat, @code{const char *}eq, @code{HCDT} vdat, @code{HCDT} wdat, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_datac_fill_eq (@code{HMGL} gr, @code{HADT} dat, @code{const char *}eq, @code{HCDT} vdat, @code{HCDT} wdat, @code{const char *}opt)
 @end ifclear
-Fills the value of array according to the formula in string @var{eq}. Formula is an arbitrary expression depending  on variables @samp{x}, @samp{y}, @samp{z}, @samp{u}, @samp{v}, @samp{w}. Coordinates @samp{x}, @samp{y}, @samp{z} are supposed to be normalized in axis range of canvas @var{gr} (in difference from @code{Modify} functions). Variable @samp{u} is the original value of the array. Variables @samp{v} and @samp{w} are values of @var{vdat}, @var{wdat} which can be @code{NULL} (i.e. can be omitted).
+Fills the value of array according to the formula in string @var{eq}. Formula is an arbitrary expression depending  on variables @samp{x}, @samp{y}, @samp{z}, @samp{u}, @samp{v}, @samp{w}. Coordinates @samp{x}, @samp{y}, @samp{z} are supposed to be normalized in axis range of canvas @var{gr} (in difference from @code{Modify} functions). Variables @samp{i}, @samp{j}, @samp{k} denote corresponding index. At this, zero value is used for variables if corresponding dimension is absent in the data. Variable @samp{u} is the original value of the array. Variables @samp{v} and @samp{w} are values of @var{vdat}, @var{wdat} which can be @code{NULL} (i.e. can be omitted).
 @end deftypefn
 
 @anchor{modify}
@@ -515,7 +515,7 @@ Fills the value of array according to the formula in string @var{eq}. Formula is
 @deftypefnx {C function} @code{void} mgl_datac_modify (@code{HADT} dat, @code{const char *}eq, @code{int} dim)
 @deftypefnx {C function} @code{void} mgl_datac_modify_vw (@code{HADT} dat, @code{const char *}eq, @code{HCDT} v, @code{HCDT} w)
 @end ifclear
-The same as previous ones but coordinates @samp{x}, @samp{y}, @samp{z} are supposed to be normalized in range [0,1]. If @var{dim}>0 is specified then modification will be fulfilled only for slices >=@var{dim}.
+The same as previous ones but coordinates @samp{x}, @samp{y}, @samp{z} are supposed to be normalized in range [0,1]. Variables @samp{i}, @samp{j}, @samp{k} denote corresponding index. At this, zero value is used for variables if corresponding dimension is absent in the data. If @var{dim}>0 is specified then modification will be fulfilled only for slices >=@var{dim}. 
 @end deftypefn
 
 @anchor{fillsample}
@@ -691,6 +691,10 @@ Read file @var{fname} line-by-line and scan each line for numbers according the 
 Saves the whole data array (for @var{ns}=@code{-1}) or only @var{ns}-th slice to the text file @var{fname}.
 @end deftypefn
 
+@deftypefn {MGL command} {} save @code{val} dat 'fname'
+Saves the value @var{val} to the text file @var{fname}.
+@end deftypefn
+
 @deftypefn {MGL command} {} save 'str' 'fname' ['mode'='a']
 Saves the string @var{str} to the text file @var{fname}. For parameter @var{mode}=@samp{a} will append string to the file (default); for @var{mode}=@samp{w} will overwrite the file. @sref{Saving and scanning file}
 @end deftypefn
@@ -715,6 +719,15 @@ Reads data array named @var{dname} from HDF5 or HDF4 file. This function does no
 @deftypefnx {C function} @code{void} mgl_datac_save_hdf (@code{HCDT} dat, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
 @end ifclear
 Saves data array named @var{dname} to HDF5 file. This function does nothing if HDF5 was disabled during library compilation.
+@end deftypefn
+
+@deftypefn {MGL command} {} savehdf @code{val} 'fname' 'dname' [@code{rewrite}=@code{off}]
+@ifclear UDAV
+@deftypefnx {C function} @code{void} mgl_real_save_hdf (@code{real} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@deftypefnx {C function} @code{void} mgl_dual_save_hdf (@code{dual} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@deftypefnx {C function} @code{void} mgl_int_save_hdf (@code{long} val, @code{const char *}fname, @code{const char *}dname, @code{int} rewrite)
+@end ifclear
+Saves value @code{val} named @var{dname} to HDF5 file. This function does nothing if HDF5 was disabled during library compilation.
 @end deftypefn
 
 @anchor{datas}
@@ -911,7 +924,7 @@ Get curves @{x,y@}, separated by NAN values, for local maximal values of array @
 @deftypefnx {C function} @code{HMDT} mgl_data_hist (@code{HCDT} dat, @code{int} n, @code{mreal} v1, @code{mreal} v2, @code{int} nsub)
 @deftypefnx {C function} @code{HMDT} mgl_data_hist_w (@code{HCDT} dat, @code{HCDT} w, @code{int} n, @code{mreal} v1, @code{mreal} v2, @code{int} nsub)
 @end ifclear
-Creates @var{n}-th points distribution of the data values in range [@var{v1}, @var{v2}]. Array @var{w} specifies weights of the data elements (by default is 1). Parameter @var{nsub} define the number of additional interpolated points (for smoothness of histogram). Function return NULL or create empty data if data cannot be created for given arguments. See also @ref{Data manipulation}
+Creates @var{n}-th points distribution of the data values in range [@var{v1}, @var{v2}]. Array @var{w} specifies weights of the data elements (by default is 1). Parameter @var{nsub} define the number of additional interpolated points (for smoothness of histogram). If @var{nsub}<0 then linear interpolation is used instead of spline one. Function return NULL or create empty data if data cannot be created for given arguments. See also @ref{Data manipulation}
 @end deftypefn
 
 @anchor{momentum}
@@ -1230,6 +1243,8 @@ Smooths the data on specified direction or directions. String @var{dirs} specifi
 @samp{5} for linear averaging over 5 points,
 @item
 @samp{d1}...@samp{d9} for linear averaging over (2*N+1)-th points,
+@item
+@samp{p1}...@samp{p9} for parabolic averaging over (2*N+1)-th points,
 @item
 @samp{^} for finding upper bound,
 @item

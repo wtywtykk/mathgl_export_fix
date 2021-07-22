@@ -36,7 +36,7 @@ const char *head =
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *\n\
 //   GNU General Public License for more details.                          *\n\
 //                                                                         *\n\
-//   You should have received a copy of the GNU Library General Public     *\n\
+//   You should have received a copy of the GNU Lesser General Public     *\n\
 //   License along with this program; if not, write to the                 *\n\
 //   Free Software Foundation, Inc.,                                       *\n\
 //   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *\n\

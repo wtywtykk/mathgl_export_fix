@@ -111,7 +111,6 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
-6. Update about possible mask usage for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'
 7. Docs about 'dcont'
 8. Docs about 'connect'
 9. user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
@@ -119,10 +118,9 @@ D. Docs about JS interface
 11. Docs about Armadillo interface
 12. Docs about 'keep'
 13. Docs about inline function (after '\'); functions 'sum', 'prod'.
-14. Update 'save', 'savehdf', 'cont', ...
-15. Docs about  mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf().
-16. Docs about mgl_load_background_ext()
-17. Notice about 'title' --- second call reserve more space for subtitle. So, you need to manually call 'subplot' after "rasterize:clf".
+14. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
+15. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
+16. Add docs about 'readbin'
 18. Docs about mgl_formula_calc(), mgl_formula_calc_c() and mglFormulaCalc(), mglFormulaCalcC()
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 20. Docs about mgl_default_graph() -- the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
@@ -137,15 +135,7 @@ D. Docs about JS interface
 29. Rnd filling sample
 30. Docs about random.cpp functions
 31. Docs about 'texparse'
-32. Rename LGPL to GNU Lesser General Public License
-33. Add "glutLeaveMainLoop()" about closing GLUT window (https://stackoverflow.com/questions/41434439/how-to-close-an-opengl-window)
-34. Extend desciption of "new" and "copy" that 1d array have only 'x' and 'i' variables nonzero, and 2d array have 'x','y','i' and 'j' variables.
 35. Add comments about the same ObjId for plots in the same line separated by ':'
-20. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
-21. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
-22. Update 'hist' that nsub<0 use linear interpolated instead of spline one.
-23. Add docs about 'readbin'
-24. Update 'smooth' by adding 'p' style for parabolic
 
 ZZ. Update time.texi {before release!!!}
 
