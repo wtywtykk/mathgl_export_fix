@@ -1053,6 +1053,14 @@ Gets array of arguments of the data.
 Find pulse properties along direction @var{dir}: pulse maximum (in column 0) and its position (in column 1), pulse width near maximum (in column 3) and by half height (in column 2), energy in first pulse (in column 4). NAN values are used for widths if maximum is located near the edges. Note, that there is uncertainty for complex data. Usually one should use square of absolute value (i.e. |dat[i]|^2) for them. So, MathGL don't provide this function for complex data arrays. However, C function will work even in this case but use absolute value (i.e. |dat[i]|). Function return NULL or create empty data if data cannot be created for given arguments. See also @ref{max}, @ref{min}, @ref{momentum}, @ref{sum}. @sref{Pulse properties}
 @end deftypefn
 
+@ifclear UDAV
+@deftypefn {C function} @code{HMDT} mgl_formula_calc (@code{const char *}str, @code{long} n, ...)
+@deftypefnx {C function} @code{HADT} mgl_formula_calc_c (@code{const char *}str, @code{long} n, ...)
+Evaluate formula @var {str} for the given list of @var{n} data arrays of type @code{HCDT}. Variable names correspond to data names. You need to delete returned data array after usage! See also @ref{fill}.
+@end deftypefn
+@end ifclear
+
+
 
 @c ------------------------------------------------------------------
 @external{}

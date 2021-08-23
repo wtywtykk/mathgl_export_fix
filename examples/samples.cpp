@@ -1818,6 +1818,14 @@ void smgl_belt(mglGraph *gr)
 	gr->Rotate(50,60);	gr->Box();	gr->Belt(a);
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_beltc="call 'prepare2d'\ntitle 'BeltC plot':rotate 50 60:box:beltc a b";
+void smgl_beltc(mglGraph *gr)
+{
+	mglData a,b;	mgls_prepare2d(&a,&b);
+	if(big!=3)	gr->Title("BeltC plot");
+	gr->Rotate(50,60);	gr->Box();	gr->BeltC(a,b);
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_dens="call 'prepare2d'\nnew a1 30 40 3 '0.6*sin(2*pi*x+pi*(z+1)/2)*sin(3*pi*y+pi*z) + 0.4*cos(3*pi*(x*y)+pi*(z+1)^2/2)'\n"
 "subplot 2 2 0 '':title 'Dens plot (default)':box:dens a\n"
 "subplot 2 2 1:title '3d variant':rotate 50 60:box:dens a\n"
@@ -3496,6 +3504,7 @@ mglSample samp[] = {
 	{"barh", smgl_barh, mmgl_barh, "Function @ref{barh} is the similar to @ref{bars} but draw horizontal bars."},
 	{"bars", smgl_bars, mmgl_bars, "Function @ref{bars} draw vertical bars. It have a lot of options: bar-above-bar (@samp{a} style), fall like (@samp{f} style), 2 colors for positive and negative values, wired bars (@samp{#} style), 3D variant."},
 	{"belt", smgl_belt, mmgl_belt, "Function @ref{belt} draw surface by belts. You can use @samp{x} style for drawing lines in other direction."},
+	{"beltc", smgl_beltc, mmgl_beltc, "Function @ref{beltc} draw surface by belts. You can use @samp{x} style for drawing lines in other direction."},
 	{"bifurcation", smgl_bifurcation, mmgl_bifurcation, "Function @ref{bifurcation} draw Bifurcation diagram for multiple stationary points of the map (like logistic map)."},
 	{"box", smgl_box, mmgl_box, "Different styles of bounding @ref{box}."},
 	{"boxplot", smgl_boxplot, mmgl_boxplot, "Function @ref{boxplot} draw box-and-whisker diagram."},

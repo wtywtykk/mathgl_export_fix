@@ -253,7 +253,7 @@ mglFormula::mglFormula(const char *string)
 		delete []str;	return;
 	}
 	n=mglFindInText(str,"+-");				// normal priority -- additions
-	if(n>=0 && (n<2 || str[n-1]!='e' || (str[n-2]!='.' && !isdigit(str[n-2]))))
+	if(n>=0 && (n<2 || !strchr("eE",str[n-1]) || (str[n-2]!='.' && !isdigit(str[n-2]))))
 	{
 		if(str[n]=='+') Kod=EQ_ADD; else Kod=EQ_SUB;
 		str[n]=0;

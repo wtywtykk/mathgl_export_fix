@@ -558,7 +558,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 	if(n>=0)
 		return mglApplyOper(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?clt:(str[n]=='>'?cgt:ceq),fns);
 	n=mglFindInText(str,"+-");	// normal priority -- additions
-	if(n>=0 && (n<2 || str[n-1]!='e' || (str[n-2]!='.' && !isdigit(str[n-2])) ))
+	if(n>=0 && (n<2 || !strchr("eE",str[n-1]) || (str[n-2]!='.' && !isdigit(str[n-2])) ))
 		return str[n]=='+'? mglApplyOperAdd(str.substr(0,n),str.substr(n+1),arg, head,fns) : 
 				mglApplyOperSub(str.substr(0,n),str.substr(n+1),arg, head,fns);
 	n=mglFindInText(str,"*/%");	// high priority -- multiplications
@@ -589,7 +589,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 	}
 	n=mglFindInText(str,".");				// highest priority -- suffixes
 	wchar_t c0 = str[n+1];
-	if(n>=0  && c0>='a' && c0!='e')
+	if(n>=0  && c0>='a' && c0!='e' && c0!='E' && !isdigit(c0))
 	{
 		mreal x,y,z,k,v=NAN;
 		HMDT d = mglFormulaCalc(str.substr(0,n), arg, head);
@@ -1202,7 +1202,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 	if(n>=0)
 		return mglApplyOperC(str.substr(0,n),str.substr(n+1),arg, head, str[n]=='<'?cltc:(str[n]=='>'?cgtc:ceqc),fns);
 	n=mglFindInText(str,"+-");	// normal priority -- additions
-	if(n>=0 && (n<2 || str[n-1]!='e' || (str[n-2]!='.' && !isdigit(str[n-2]))))
+	if(n>=0 && (n<2 || !strchr("eE",str[n-1]) || (str[n-2]!='.' && !isdigit(str[n-2]))))
 		return str[n]=='+'? mglApplyOperAddC(str.substr(0,n),str.substr(n+1),arg, head,fns) : mglApplyOperSubC(str.substr(0,n),str.substr(n+1),arg, head,fns);
 	n=mglFindInText(str,"*/");	// high priority -- multiplications
 	if(n>=0)
@@ -1231,7 +1231,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 	}
 	n=mglFindInText(str,".");				// highest priority -- suffixes
 	wchar_t c0 = str[n+1];
-	if(n>=0  && c0>='a' && c0!='e')
+	if(n>=0  && c0>='a' && c0!='e' && c0!='E' && !isdigit(c0))
 	{
 		dual v=NAN;
 		HADT d = mglFormulaCalcC(str.substr(0,n), arg, head);

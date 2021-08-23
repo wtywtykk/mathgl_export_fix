@@ -58,7 +58,8 @@
 
 21. Check transparent background at export to pnga !!!
 22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring + progonka.
-23. Bug with parsing "1E+01", "1E-01"
+25. Check '\overline'
+26. Dark color scheme for mgllab and udav
 
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -121,21 +122,16 @@ D. Docs about JS interface
 14. Add docs about mglODEs() (i.e. 'ode') for PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
 15. Update ODE docs: returning array have n+1 columns (last one is time), regularization is used if dt<0 (total time may differ, but number of steps still the same).
 16. Add docs about 'readbin'
-18. Docs about mgl_formula_calc(), mgl_formula_calc_c() and mglFormulaCalc(), mglFormulaCalcC()
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 20. Docs about mgl_default_graph() -- the global (default) pointer to HMGL (for simplifying external scripts and capture it in GUI).
 21. Docs about mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
 22. Update Widget() to return Fl_MGLView (not Fl_MathGL);
 23. Add doc about mglWnd::Window();
 24. Add docs about Fl_MGLView.
-25. Check '\overline'
 26. Update docs about .s[axyz], .k[axyz]
-27. Beltc sample
-28. Brownian sample
-29. Rnd filling sample
+28. Brownian&Shuffle&RND filling sample
 30. Docs about random.cpp functions
 31. Docs about 'texparse'
-35. Add comments about the same ObjId for plots in the same line separated by ':'
 
 ZZ. Update time.texi {before release!!!}
 

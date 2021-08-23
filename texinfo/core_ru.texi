@@ -1613,7 +1613,7 @@ gr.GetBGRN(bits, len(bits));
 
 @deftypefn {Метод класса @code{mglGraph}} @code{int} GetObjId (@code{int} xs, @code{int} ys)
 @deftypefnx {Функция С} @code{int} mgl_get_obj_id (@code{HMGL} gr, @code{int} xs, @code{int} ys)
-Возвращает числовой идентификатор верхнего объекта в точке @{xs, ys@} рисунка.
+Возвращает числовой идентификатор верхнего объекта в точке @{xs, ys@} рисунка. Следует отметить, что все графики из одной строки MGL скрипта имеют одинаковый идентификатор.
 @end deftypefn
 
 @deftypefn {Метод класса @code{mglGraph}} @code{int} GetSplId (@code{int} xs, @code{int} ys)
@@ -3153,7 +3153,7 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefnx {Функция С} @code{void} mgl_beltc (@code{HMGL} gr, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
 @deftypefnx {Функция С} @code{void} mgl_beltc_xy (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{const char *}sch, @code{const char *}opt)
 @end ifclear
-Рисует ленточки для параметрически заданной поверхности @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} с цветом, заданным массивом @var{c}[i,j]. График может использоваться как 3d обобщение графика @ref{plot}. Если @var{sch} содержит @samp{x}, то ленточки рисуются вдоль оси x, иначе (по умолчанию) вдоль оси y. См. также @ref{belt}, @ref{surfc}, @ref{meshnum}. @c TODO @sref{beltc sample}
+Рисует ленточки для параметрически заданной поверхности @{@var{x}[i,j], @var{y}[i,j], @var{z}[i,j]@} с цветом, заданным массивом @var{c}[i,j]. График может использоваться как 3d обобщение графика @ref{plot}. Если @var{sch} содержит @samp{x}, то ленточки рисуются вдоль оси x, иначе (по умолчанию) вдоль оси y. См. также @ref{belt}, @ref{surfc}, @ref{meshnum}. @sref{beltc sample}
 @end deftypefn
 
 

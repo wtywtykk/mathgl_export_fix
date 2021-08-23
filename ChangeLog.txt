@@ -13,6 +13,7 @@
 * Allow value for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricont', 'tricontv', 'cont3', 'dcont'.
 * Allow value for saving in 'save', 'savehdf'.
 * Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf() for saving single number in HDF5 file. Correspondingly, commands 'save' and 'savehdf' can save single value now.
+* Add mgl_formula_calc(), mgl_formula_calc_c() for evaluating textual formulas of arbitrary set of data arays.
 * Allow mask usage for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
 * If nsub paramenter of command 'hist' is negative (nsub<0) then the linear interpolated is used instead of spline one.
 * Add Armadillo interface for mglData*
