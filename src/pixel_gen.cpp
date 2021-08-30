@@ -79,7 +79,7 @@ void mglCanvas::SetSize(int w,int h,bool clf)
 #pragma omp parallel for
 	for(long i=0;i<s;i++)
 	{	unsigned char *b=GB+4*i;
-		b[0]=BDef[0];	b[1]=BDef[1];	b[2]=BDef[2];	b[3]=BDef[3];	}
+		b[0]=BDef[0];	b[1]=BDef[1];	b[2]=BDef[2];	b[3]=0/*BDef[3]*/;	}
 #if MGL_HAVE_PTHREAD
 	pthread_mutex_unlock(&mutexClf);
 #elif MGL_HAVE_OMP

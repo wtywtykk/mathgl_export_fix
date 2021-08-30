@@ -74,8 +74,11 @@ void mgls_prepare3v(mglData *ex, mglData *ey, mglData *ez);
 void save(mglGraph *gr,const char *name,const char *suf);
 void test(mglGraph *gr)
 {
+//	gr->Box();	gr->WritePNG("1.png");	return;
+	
 	mglParse par;
-	par.Execute(gr,"xrange 0 1:new x 10 '3*x':echo x\nnew a 10 'value([0,1,-1],3*x)':echo a\nnew b 10 'spline([0,1,-1],3*x)':echo b");
+	par.Execute(gr,"fsurf 'x*y':rasterize:clf:fplot 'sin(x)' '2q':axis");
+//	par.Execute(gr,"xrange 0 1:new x 10 '3*x':echo x\nnew a 10 'value([0,1,-1],3*x)':echo a\nnew b 10 'spline([0,1,-1],3*x)':echo b");
 //	par.Execute(gr,"new a 1 'sum(_i^2,5)':echo a:new b 1 'prod(1+_i,5)':echo b\n"
 //	"new c 1 'dsum(_i,5)':echo c:new d 1 'sum(sum(_j+_i^2,5),5)':echo d");
 //	par.Execute(gr,"define n 30\nnew a n n n 'x^2+y^2'\nnew b n n n 'z^4+2*x^4-2*y^4'\nrotate 40 60:box:axis\n"
@@ -84,6 +87,7 @@ void test(mglGraph *gr)
 //	par.Execute(gr,"text 0 0 'ab' '@'");
 //	par.Execute(gr,"new a 3 3 'x*y'\nsubplot 2 1 0 '':dens a:dens a 'k+/'\n"
 //	"subplot 2 1 1 '':mask '+' 'ff00182424f800' 30:dens a '3+'");
+	gr->WritePNG("1.png");
 	return;
 	
 	dual c(0,M_PI/2), r=mgl_ipowc(c,2);

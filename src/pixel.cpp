@@ -55,7 +55,7 @@ void mglCanvas::pxl_backgr(long id, long n, const void *)
 #pragma omp parallel for
 #endif
 	for(long i=id;i<n;i+=mglNumThr)
-	{	unsigned char *b=GB+4*i, c[4]={b[0],b[1],b[2],b[3]}, *g=G+3*i;
+	{	unsigned char *b=GB+4*i, c[4]={BDef[0],BDef[1],BDef[2],BDef[3]}, *g=G+3*i;
 		combine(c,G4+4*i);	g[0]=c[0];	g[1]=c[1];	g[2]=c[2];	}
 }
 //-----------------------------------------------------------------------------

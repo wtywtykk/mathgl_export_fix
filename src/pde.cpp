@@ -1431,57 +1431,65 @@ HMDT MGL_EXPORT mgl_data_tridmat(HCDT A, HCDT B, HCDT C, HCDT D, const char *how
 	if(mglchr(how,'x') && (na==nn || na==np || na==nx))
 #pragma omp parallel
 	{
-		mglData T(nx,4);	mreal *uu=T.a+(per?3:2)*nx;
+		mreal *tt = new mreal[4*nx], *uu=tt+(per?3:2)*nx;
+// 		mglData T(nx,4);	mreal *uu=T.a+(per?3:2)*nx;
 #pragma omp for collapse(2)
 		for(long k=0;k<nz;k++)	for(long j=0;j<ny;j++)
 		{
 			long i0=0, i1=nx*(j+ny*k);
 			if(na==nn)	i0=nx*(j+ny*k);	else if(na==np)	i0=nx*j;
-			if(per)	mgl_progonka_pr(A,B,C,D,T.a,nx,i1,i0,1,difr);
-			else	mgl_progonka_sr(A,B,C,D,T.a,nx,i1,i0,1,difr);
+			if(per)	mgl_progonka_pr(A,B,C,D,tt,nx,i1,i0,1,difr);
+			else	mgl_progonka_sr(A,B,C,D,tt,nx,i1,i0,1,difr);
 			i0 = nx*(j+ny*k);
 			for(long i=0;i<nx;i++)	r->a[i+i0] = uu[i];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'y') && (na==nn || na==np || na==ny))
 #pragma omp parallel
 	{
-		mglData T(ny,4);	mreal *uu=T.a+(per?3:2)*ny;
+		mreal *tt = new mreal[4*ny], *uu=tt+(per?3:2)*ny;
+// /		mglData T(ny,4);	mreal *uu=T.a+(per?3:2)*ny;
 #pragma omp for collapse(2)
 		for(long k=0;k<nz;k++)	for(long i=0;i<nx;i++)
 		{
 			long i0=0, i1 = i+np*k;
 			if(na==nn)	i0=i+np*k;	else if(na==np)	i0=i;
-			if(per)	mgl_progonka_pr(A,B,C,D,T.a,ny,i1,i0,nx,difr);
-			else	mgl_progonka_sr(A,B,C,D,T.a,ny,i1,i0,nx,difr);
+			if(per)	mgl_progonka_pr(A,B,C,D,tt,ny,i1,i0,nx,difr);
+			else	mgl_progonka_sr(A,B,C,D,tt,ny,i1,i0,nx,difr);
 			i0 = i+np*k;
 			for(long j=0;j<ny;j++)	r->a[j*nx+i0] = uu[j];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'z') && (na==nn || na==nz))
 #pragma omp parallel
 	{
-		mglData T(nz,4);	mreal *uu=T.a+(per?3:2)*nz;
+		mreal *tt = new mreal[4*nz], *uu=tt+(per?3:2)*nz;
+// 		mglData T(nz,4);	mreal *uu=T.a+(per?3:2)*nz;
 #pragma omp for collapse(2)
 		for(long j=0;j<ny;j++)	for(long i=0;i<nx;i++)
 		{
 			long i0 = na==nn?i+nx*j:0, i1 = i+nx*j;
-			if(per)	mgl_progonka_pr(A,B,C,D,T.a,nz,i1,i0,np,difr);
-			else	mgl_progonka_sr(A,B,C,D,T.a,nz,i1,i0,np,difr);
+			if(per)	mgl_progonka_pr(A,B,C,D,tt,nz,i1,i0,np,difr);
+			else	mgl_progonka_sr(A,B,C,D,tt,nz,i1,i0,np,difr);
 			i0 = i+nx*j;
 			for(long k=0;k<nz;k++)	r->a[k*np+i0] = uu[k];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'h') && ny==nx && (na==nn || na==np) && nx>1)
 #pragma omp parallel
 	{
-		mglData T(np,2);
+		mreal *tt = new mreal[2*np];
+// 		mglData T(np,2);
 #pragma omp for
 		for(long k=0;k<nz;k++)
 		{
-			mgl_progonka_hr(A,B,C,D,T.a,nx,k*np,na==nn ? k*np:0,difr);
-			memcpy(r->a+k*np, T.a+np, np*sizeof(mreal));
+			mgl_progonka_hr(A,B,C,D,tt,nx,k*np,na==nn ? k*np:0,difr);
+			memcpy(r->a+k*np, tt+np, np*sizeof(mreal));
 		}
+		delete []tt;
 	}
 	else	{	delete r;	r=0;	}
 	return r;
@@ -1591,55 +1599,63 @@ HADT MGL_EXPORT mgl_datac_tridmat(HCDT A, HCDT B, HCDT C, HCDT D, const char *ho
 	if(mglchr(how,'x') && (na==nn || na==np || na==nx))
 #pragma omp parallel
 	{
-		mglDataC T(nx,4);	dual *uu=T.a+(per?3:2)*nx;
+		dual *tt = new dual[4*nx], *uu=tt+(per?3:2)*nx;
+// 		mglDataC T(nx,4);	dual *uu=T.a+(per?3:2)*nx;
 #pragma omp for collapse(2)
 		for(long k=0;k<nz;k++)	for(long j=0;j<ny;j++)
 		{
 			long i0=0, i1=nx*(j+ny*k);
 			if(na==nn)	i0=i1;	else if(na==np)	i0=nx*j;
-			if(per)	mgl_progonka_pc(A,B,C,D,T.a,nx,i1,i0,1,difr);
-			else	mgl_progonka_sc(A,B,C,D,T.a,nx,i1,i0,1,difr);
+			if(per)	mgl_progonka_pc(A,B,C,D,tt,nx,i1,i0,1,difr);
+			else	mgl_progonka_sc(A,B,C,D,tt,nx,i1,i0,1,difr);
 			for(long i=0;i<nx;i++)	r->a[i+i1] = uu[i];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'y') && (na==nn || na==np || na==ny))
 #pragma omp parallel
 	{
-		mglDataC T(ny,4);	dual *uu=T.a+(per?3:2)*ny;
+		dual *tt = new dual[4*ny], *uu=tt+(per?3:2)*ny;
+// 		mglDataC T(ny,4);	dual *uu=T.a+(per?3:2)*ny;
 #pragma omp for collapse(2)
 		for(long k=0;k<nz;k++)	for(long i=0;i<nx;i++)
 		{
 			long i0=0, i1 = i+np*k;
 			if(na==nn)	i0=i1;	else if(na==np)	i0=i;
-			if(per)	mgl_progonka_pc(A,B,C,D,T.a,ny,i1,i0,nx,difr);
-			else	mgl_progonka_sc(A,B,C,D,T.a,ny,i1,i0,nx,difr);
+			if(per)	mgl_progonka_pc(A,B,C,D,tt,ny,i1,i0,nx,difr);
+			else	mgl_progonka_sc(A,B,C,D,tt,ny,i1,i0,nx,difr);
 			i0 = i+np*k;
 			for(long j=0;j<ny;j++)	r->a[j*nx+i0] = uu[j];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'z') && (na==nn || na==nz))
 #pragma omp parallel
 	{
-		mglDataC T(nz,4);	dual *uu=T.a+(per?3:2)*nz;
+		dual *tt = new dual[4*nz], *uu=tt+(per?3:2)*ny;
+// 		mglDataC T(nz,4);	dual *uu=T.a+(per?3:2)*nz;
 #pragma omp for collapse(2)
 		for(long j=0;j<ny;j++)	for(long i=0;i<nx;i++)
 		{
 			long i0 = na==nn?i+nx*j:0, i1 = i+nx*j;
-			if(per)	mgl_progonka_pc(A,B,C,D,T.a,nz,i1,i0,np,difr);
-			else	mgl_progonka_sc(A,B,C,D,T.a,nz,i1,i0,np,difr);
+			if(per)	mgl_progonka_pc(A,B,C,D,tt,nz,i1,i0,np,difr);
+			else	mgl_progonka_sc(A,B,C,D,tt,nz,i1,i0,np,difr);
 			for(long k=0;k<nz;k++)	r->a[k*np+i1] = uu[k];
 		}
+		delete []tt;
 	}
 	else if(mglchr(how,'h') && ny==nx && (na==nn || na==np) && nx>1)
 #pragma omp parallel
 	{
-		mglDataC T(np,2);
+		dual *tt = new dual[2*np];
+// 		mglDataC T(np,2);
 #pragma omp for
 		for(long k=0;k<nz;k++)
 		{
-			mgl_progonka_hc(A,B,C,D,T.a,nx,k*np, na==nn ? k*np:0,difr);
-			memcpy(r->a+k*np, T.a+np, np*sizeof(dual));
+			mgl_progonka_hc(A,B,C,D,tt,nx,k*np, na==nn ? k*np:0,difr);
+			memcpy(r->a+k*np, tt+np, np*sizeof(dual));
 		}
+		delete []tt;
 	}
 	else	{	delete r;	r=0;	}
 	return r;
