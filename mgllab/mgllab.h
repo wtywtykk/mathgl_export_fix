@@ -68,9 +68,10 @@ extern int scheme;		///< FLTK scheme
 extern int font_kind;	///< Editor font kind
 extern int font_size;	///< Editor font size
 extern int complete_word;	///< enable word completion
+extern int dark;		///< use dark color scheme
 //-----------------------------------------------------------------------------
 void set_scheme_lang(int s, int l);		///< Set FLTK scheme and locale
-void set_style(int fkind, int fsize);	///< Change the style of highlight
+void set_style(int fkind, int fsize, int fdark);	///< Change the style of highlight
 void style_init();		///< Initialize the style buffer
 void save_pref();		///< Apply and save preferences
 void load_pref();		///< Load preferences

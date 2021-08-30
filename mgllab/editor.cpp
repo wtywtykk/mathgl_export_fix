@@ -41,20 +41,24 @@ Fl_Text_Display::Style_Table_Entry styletable[10] = {	// Style table
 		{ FL_DARK_CYAN,	FL_COURIER,		14, 0 },		// F - Flow command
 		{ FL_DARK_MAGENTA,	FL_COURIER,	14, 0 },		// G - New-data command
 		{ FL_DARK_RED,	FL_COURIER,		14, 0 },		// H - Option
-		{ FL_DARK_GREEN,FL_COURIER,		14, 0 },		// I - Inactive command
+		{ FL_GRAY,		FL_COURIER,		14, 0 },		// I - Inactive command
 		{ FL_MAGENTA,	FL_COURIER,		14, 0 }			// J - Error line ???
 	};
 int font_kind;	///< Editor font kind
 int font_size;	///< Editor font size
 //-----------------------------------------------------------------------------
-void set_style(int kind, int size)
+void set_style(int kind, int size, int fdark)
 {
+	Fl_Color c1[10]={FL_BLACK,FL_DARK_GREEN,FL_BLUE,FL_RED,FL_DARK_BLUE,FL_DARK_CYAN,FL_DARK_MAGENTA,FL_DARK_RED,FL_GRAY,FL_MAGENTA};
+	Fl_Color c2[10]={FL_WHITE,FL_GREEN,FL_CYAN,FL_YELLOW,FL_BLUE,FL_CYAN,FL_MAGENTA,FL_RED,FL_GRAY,FL_MAGENTA};
 	if(kind<0 || kind>2)	kind = 1;
 	if(size<1)	size = 14;
 	for(int i=0;i<10;i++)	// set font for styles
 	{	styletable[i].size = size;	styletable[i].font = 4*kind;	}
 	styletable[1].font = 4*kind+2;
 	font_kind = kind;	font_size = size;
+	if(fdark)	for(int i=0;i<10;i++)	styletable[i].color = c2[i];
+	else		for(int i=0;i<10;i++)	styletable[i].color = c1[i];
 }
 //-----------------------------------------------------------------------------
 bool MGL_FUNC_PURE is_sfx(const char *s)	// suffix

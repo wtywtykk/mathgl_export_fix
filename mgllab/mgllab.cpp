@@ -46,6 +46,7 @@ std::string helpname;
 std::string fontname;
 int lang;
 int scheme;
+int dark;
 std::string lastfiles[5];
 Fl_Preferences pref(Fl_Preferences::USER,"abalakin","mgllab");
 //-----------------------------------------------------------------------------
@@ -91,6 +92,7 @@ void save_pref()
 	pref.set("wnd_width", wndW);
 	pref.set("wnd_height",wndH);
 	pref.set("txt_width", txtW);
+	pref.set("dark",dark);
 }
 //-----------------------------------------------------------------------------
 void load_pref(ScriptWindow *w)
@@ -108,7 +110,8 @@ void load_pref(ScriptWindow *w)
 	pref.get("complete_word",complete_word,1);
 	pref.get("font_kind",font_kind,1);
 	pref.get("font_size",font_size,14);
-	set_style(font_kind, font_size);
+	pref.get("dark", dark,0);
+	set_style(font_kind, font_size,dark);
 	pref.get("font_name",s,"");
 	if(s)	{	fontname=s;	free(s);	}
 
@@ -455,13 +458,14 @@ class PropDlg : public GeneralDlg
 	Fl_Check_Button *highlight_w;
 	Fl_Check_Button *mouse_zoom_w;
 	Fl_Check_Button *use_thr_w;
+	Fl_Check_Button *dark_w;
 	Fl_Choice *lang_w;
 	Fl_Choice *scheme_w;
 public:
 	PropDlg() : GeneralDlg()
 	{
 		Fl_Button *o;
-		w = new Fl_Double_Window(340, 390, _("Properties"));
+		w = new Fl_Double_Window(340, 415, _("Properties"));
 		w->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
 		fkind = new Fl_Choice(75, 10, 90, 25, _("Font kind"));
 		fkind->add("Helvetica");	fkind->add("Courier");	fkind->add("Times");
@@ -478,12 +482,13 @@ public:
 		highlight_w = new Fl_Check_Button(5, 220, 330, 25, _("Highlight current object(s)"));
 		mouse_zoom_w = new Fl_Check_Button(5, 245, 330, 25, _("Enable mouse wheel for zooming"));
 		use_thr_w = new Fl_Check_Button(5, 270, 330, 25, _("Use multi-threading for drawing"));
-		lang_w = new Fl_Choice(160, 300, 175, 25, _("Language for mgllab"));
+		dark_w = new Fl_Check_Button(5, 295, 330, 25, _("Use dark color scheme"));
+		lang_w = new Fl_Choice(160, 325, 175, 25, _("Language for mgllab"));
 		for(long i=0;i<NUM_LOCALE;i++)	lang_w->add(loc[i]);
-		scheme_w = new Fl_Choice(160, 330, 175, 25, _("Widget scheme"));
+		scheme_w = new Fl_Choice(160, 355, 175, 25, _("Widget scheme"));
 		scheme_w->add("base");	scheme_w->add("gtk+");	scheme_w->add("plastic");	scheme_w->add("gleam");
-		o = new Fl_Button(85, 360, 75, 25, _("Cancel"));	o->callback(cb_dlg_cancel,this);
-		o = new Fl_Return_Button(180, 360, 75, 25, _("OK"));	o->callback(cb_dlg_ok,this);
+		o = new Fl_Button(85, 385, 75, 25, _("Cancel"));	o->callback(cb_dlg_cancel,this);
+		o = new Fl_Return_Button(180, 385, 75, 25, _("OK"));	o->callback(cb_dlg_ok,this);
 		w->set_modal();	w->end();
 	}
 	void init()
@@ -500,10 +505,10 @@ public:
 		use_thr_w->value(use_thr);
 		lang_w->value(lang);
 		scheme_w->value(scheme);
+		dark_w->value(dark);
 	}
 	void cb_ok()
 	{
-		set_style(fkind->value(),fsize->value());
 		auto_exec = auto_exec_w->value();
 		exec_save = exec_save_w->value();
 		highlight = highlight_w->value();
@@ -512,6 +517,8 @@ public:
 		use_thr = use_thr_w->value();
 		docdir = help_path->value();
 		fontname = font_path->value();
+		dark = dark_w->value();
+		set_style(fkind->value(),fsize->value(),dark);
 		if(e->graph->get_graph())
 			mgl_load_font(e->graph->get_graph(),fontname.c_str(),NULL);
 		set_scheme_lang(scheme_w->value(),lang_w->value());	// NOTE: must be after setting docdir
