@@ -3340,6 +3340,7 @@ Draws spectrogram of complex array @var{re}+i*@var{im} for Fourier size of @var{
 @node Vector fields, Other plotting, Dual plotting, MathGL core
 @section Vector fields
 @nav{}
+@cindex Lines
 @cindex Traj
 @cindex Vect
 @cindex Dew
@@ -3348,6 +3349,21 @@ Draws spectrogram of complex array @var{re}+i*@var{im} for Fourier size of @var{
 @cindex Pipe
 
 These functions perform plotting of 2D and 3D vector fields. There are 5 generally different types of vector fields representations: simple vector field (Vect), vectors along the curve (Traj), vector field by dew-drops (Dew), flow threads (Flow, FlowP), flow pipes (Pipe). By default (if absent) values of @var{x}, @var{y}, @var{z} are equidistantly distributed in axis range. The minor dimensions of arrays @var{x}, @var{y}, @var{z}, @var{ax} should be equal. The size of @var{ax}, @var{ay} and @var{az} must be equal. Arrays @var{x}, @var{y}, @var{z} can be vectors (not matrices as @var{ax}). String @var{sch} sets the color scheme (see @ref{Color scheme}) for plot. String @var{opt} contain command options (see @ref{Command options}).
+
+@anchor{lines}
+@deftypefn {MGL command} {} lines y1dat y2dat ['sch'='']
+@deftypefnx {MGL command} {} lines x1dat y1dat x2dat y2dat ['sch'='']
+@deftypefnx {MGL command} {} lines x1dat y1dat z1dat x2dat y2dat z2dat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}y1, @code{const mglDataA &}y2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}x1, @code{const mglDataA &}y1, @code{const mglDataA &}x2, @code{const mglDataA &}y2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}x1, @code{const mglDataA &}y1, @code{const mglDataA &}z1, @code{const mglDataA &}x2, @code{const mglDataA &}y2, @code{const mglDataA &}z2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {C function} @code{void} mgl_lines_xyz (@code{HMGL} gr, @code{HCDT}x1, @code{HCDT}y1, @code{HCDT}z1, @code{HCDT}x2, @code{HCDT}y2, @code{HCDT}z2, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {C function} @code{void} mgl_lines_xy (@code{HMGL} gr, @code{HCDT}x1, @code{HCDT}y1, @code{HCDT}x2, @code{HCDT}y2, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {C function} @code{void} mgl_lines (@code{HMGL} gr, @code{HCDT}y1, @code{HCDT}y2, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+The function draws lines between points @{@var{x1}, @var{y1}, @var{z1}@} and @{@var{x2}, @var{y2}, @var{z2}@}. String @var{pen} specifies the color (see @ref{Line styles}). By default (@code{pen=""}) color from palette is used (see @ref{Palette and colors}). The minor sizes of all arrays must be the same. The plots are drawn for each row if one of the data is the matrix. See also @ref{plot}, @ref{traj}. @sref{lines sample}
+@end deftypefn
 
 @anchor{traj}
 @deftypefn {MGL command} {} traj xdat ydat udat vdat ['sch'='']

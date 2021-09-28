@@ -1710,6 +1710,23 @@ void smgl_traj(mglGraph *gr)
 	gr->Box();	gr->Plot(x,y);	gr->Traj(x,y,y1,y2);
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_lines="subplot 1 1 0 '':title 'Lines plot'\n"
+"new x1 11 '0.3*cos(pi*i/5)'\nnew y1 11 '0.3*sin(pi*i/5)'\nnew x2 11 '0.7*cos(pi*i/5)'\nnew y2 11 '0.7*sin(pi*i/5)'\nplot x1 y1\nlines x1 y1 x2 y2 '_A'";
+void smgl_lines(mglGraph *gr)
+{
+	mglData x1(11),y1(11),x2(11),y2(11);
+	for(long i=0;i<11;i++)
+	{
+		x1.a[i] = 0.3*cos(M_PI*i/5);
+		y1.a[i] = 0.3*sin(M_PI*i/5);
+		x2.a[i] = 0.7*cos(M_PI*i/5);
+		y2.a[i] = 0.7*sin(M_PI*i/5);
+	}
+	if(big!=3)	{gr->SubPlot(1,1,0,"");	gr->Title("Lines plot");}
+	gr->Plot(x1,y1);
+	gr->Lines(x1,y1,x2,y2,"_A");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_mesh="call 'prepare2d'\ntitle 'Mesh plot':rotate 50 60:box:mesh a";
 void smgl_mesh(mglGraph *gr)
 {
@@ -3564,6 +3581,7 @@ mglSample samp[] = {
 	{"lamerey", smgl_lamerey, mmgl_lamerey, "Function @ref{lamerey} draw Lamerey diagram."},
 	{"legend", smgl_legend, mmgl_legend , "Example of @ref{legend} styles."},
 	{"light", smgl_light, mmgl_light, "Example of @ref{light} with different types."},
+	{"lines", smgl_lines, mmgl_lines, "Function @ref{lines} draw a set of lines."},
 	{"loglog", smgl_loglog, mmgl_loglog, "Example of log- and log-log- axis labels."},
 	{"map", smgl_map, mmgl_map, "Example of @ref{map}."},
 	{"mark", smgl_mark, mmgl_mark, "Example of @ref{mark}."},

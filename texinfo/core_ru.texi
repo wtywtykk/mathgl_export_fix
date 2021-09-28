@@ -3308,6 +3308,21 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 
 Эти функции рисуют графики для 2D и 3D векторных полей. Есть несколько типов графиков: просто векторное поле (Vect), вектора вдоль траектории (Traj), векторное поле каплями (Dew), нити тока (Flow, FlowP), трубки тока (Pipe). По умолчанию (если отсутствуют) значения @var{x}, @var{y} и @var{z} равно распределены в диапазоне осей координат. Младшие размерности массивов @var{x}, @var{y}, @var{z} и @var{ax} должны быть одинаковы. Размеры массивов @var{ax}, @var{ay} и @var{az} должны быть одинаковы. Массивы @var{x}, @var{y} и @var{z} могут быть векторами (не матрицами как @var{ax}). Строка @var{sch} задает цветовую схему (см. @ref{Color scheme}). Строка @var{opt} задает опции графика (см. @ref{Command options}).
 
+@anchor{lines}
+@deftypefn {Команда MGL} {} lines y1dat y2dat ['sch'='']
+@deftypefnx {Команда MGL} {} lines x1dat y1dat x2dat y2dat ['sch'='']
+@deftypefnx {Команда MGL} {} lines x1dat y1dat z1dat x2dat y2dat z2dat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}y1, @code{const mglDataA &}y2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}x1, @code{const mglDataA &}y1, @code{const mglDataA &}x2, @code{const mglDataA &}y2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Lines (@code{const mglDataA &}x1, @code{const mglDataA &}y1, @code{const mglDataA &}z1, @code{const mglDataA &}x2, @code{const mglDataA &}y2, @code{const mglDataA &}z2, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_lines_xyz (@code{HMGL} gr, @code{HCDT}x1, @code{HCDT}y1, @code{HCDT}z1, @code{HCDT}x2, @code{HCDT}y2, @code{HCDT}z2, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {Функция С} @code{void} mgl_lines_xy (@code{HMGL} gr, @code{HCDT}x1, @code{HCDT}y1, @code{HCDT}x2, @code{HCDT}y2, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {Функция С} @code{void} mgl_lines (@code{HMGL} gr, @code{HCDT}y1, @code{HCDT}y2, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Функция рисует линии между точками @{@var{x1}, @var{y1}, @var{z1}@} и @{@var{x2}, @var{y2}, @var{z2}@}. Строка @var{pen} задает цвет (см. @ref{Line styles}). По умолчанию (@code{pen=""}) используется текущий цвет из палитры (см. @ref{Palette and colors}). Размер по 1-му индексу должен быть одинаков. График рисуется для каждой строки если один из массивов матрица. См. также @ref{plot}, @ref{traj}. @sref{lines sample}
+@end deftypefn
+
 @anchor{traj}
 @deftypefn {Команда MGL} {} traj xdat ydat udat vdat ['sch'='']
 @deftypefnx {Команда MGL} {} traj xdat ydat zdat udat vdat wdat ['sch'='']
