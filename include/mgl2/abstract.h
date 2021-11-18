@@ -248,7 +248,7 @@ public:
 	void (*func)(void *);	///< Callback function for destroying
 	void *o; 		///< Pointer to external object
 
-	mglDataA()	{	mglDataList.push_back(this);	temp=false;	func=0;	o=0;	}
+	mglDataA()	{	mgl_init();	mglDataList.push_back(this);	temp=false;	func=0;	o=0;	}
 	virtual ~mglDataA()
 	{
 		for(long i = mglDataList.size()-1; i>=0; i--)
@@ -401,7 +401,7 @@ struct MGL_EXPORT mglColorID
 	mglColor col;
 };
 MGL_EXPORT extern mglColorID mglColorIds[31];
-MGL_EXPORT extern std::string mglGlobalMess;	///< Buffer for receiving global messages
+// MGL_EXPORT extern std::string mglGlobalMess;	///< Buffer for receiving global messages
 //-----------------------------------------------------------------------------
 #endif
 

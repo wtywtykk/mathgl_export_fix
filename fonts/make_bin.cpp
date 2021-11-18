@@ -20,7 +20,16 @@
 #include <getopt.h>
 #include "mgl2/font.h"
 //-----------------------------------------------------------------------------
-mglFont mglDefFont;
+extern mglFont *mglDefFont;
+void mgl_init()	// TODO try to add ld option: "-init mgl_init"
+{
+	static bool ini=true;
+	if(ini)
+	{
+		ini = false;
+		mglDefFont = new mglFont(MGL_DEF_FONT_NAME);
+	}
+}
 int main(int argc, char *argv[])
 {
 	mglFont fnt;

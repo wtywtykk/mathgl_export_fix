@@ -129,6 +129,7 @@ void MGL_EXPORT mgl_strlwr(char *str)
 //-----------------------------------------------------------------------------
 mglBase::mglBase()
 {
+	mgl_init();
 	Flag=0;	saved=false;	PrmInd=NULL;
 	limit_pm1 = false;
 #if MGL_HAVE_PTHREAD
@@ -279,6 +280,7 @@ void mglBase::SetWarn(int code, const char *who)
 //-----------------------------------------------------------------------------
 //		Add glyph to the buffer
 //-----------------------------------------------------------------------------
+#if MGL_HAVE_FREETYPE
 MGL_NO_EXPORT int mgl_glf_moveto(const FT_Vector *to, void *user)
 {
 	std::vector<double> *a = (std::vector<double> *)user;
@@ -323,7 +325,7 @@ MGL_NO_EXPORT int mgl_glf_cubeto(const FT_Vector *ctrl1, const FT_Vector *ctrl2,
 	}
 	return 0;
 }
-
+#endif
 void mglGlyph::Load(wchar_t id, const char *fname)
 {
 #if MGL_HAVE_FREETYPE

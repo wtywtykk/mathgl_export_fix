@@ -661,6 +661,11 @@ Setsize: размер(ы) равны нулю или отрицательны
 Возвращает предупреждения, не привязанные к конкретному объекту рисования.
 @end deftypefn
 
+@deftypefn {Метод класса @code{mglGraph}} @code{void} ClearGlobalWarn () static
+@deftypefnx {Функция С} @code{void} mgl_clear_global_warn ()
+Удаляет общие предупреждения.
+@end deftypefn
+
 
 @end ifclear
 
@@ -3060,7 +3065,7 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefn {Команда MGL} {} cont3 adat ['sch'='' @code{sval=-1}]
 @deftypefnx {Команда MGL} {} cont3 xdat ydat zdat adat ['sch'='' @code{sval=-1}]
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Метод класса @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Функция С} @code{void} mgl_cont3 (@code{HMGL} gr, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @deftypefnx {Функция С} @code{void} mgl_cont3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
@@ -3083,7 +3088,7 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefn {Команда MGL} {} contf3 adat ['sch'='' @code{sval=-1}]
 @deftypefnx {Команда MGL} {} contf3 xdat ydat zdat adat ['sch'='' @code{sval=-1}]
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Метод класса @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Функция С} @code{void} mgl_contf3 (@code{HMGL} gr, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @deftypefnx {Функция С} @code{void} mgl_contf3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
@@ -3101,6 +3106,29 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @deftypefnx {Функция С} @code{void} mgl_grid3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @end ifclear
 Рисует сетку для 3d массива, заданного параметрически @var{a}[i,j,k](@var{x}[i,j,k], @var{y}[i,j,k], @var{z}[i,j,k]). График рисуется на срезе @var{sVal} в направлении @{@samp{x}, @samp{y}, @samp{z}@}, указанном в строке @var{sch} (по умолчанию, в напралении @samp{y}). См. также @ref{cont3}, @ref{contf3}, @ref{dens3}, @ref{grid2}, @ref{meshnum}.
+@end deftypefn
+
+@anchor{dcont}
+@deftypefn {Команда MGL} {} dcont vdat adat bdat ['sch'='']
+@deftypefnx {Команда MGL} {} dcont vdat xdat ydat zdat adat bdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}v, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}v, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_dcont_val (@code{HMGL} gr, @code{HCDT} v, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {Функция С} @code{void} mgl_dcont_xyz_val (@code{HMGL} gr, @code{HCDT} v, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Рисует линии пересечений поверхностей постоянного уровня для 3d данных @var{a}, @var{b} заданных параметрически @var{a}[i,j,k](@var{x}[i,j,k], @var{y}[i,j,k], @var{z}[i,j,k]). Поверхности уровня берутся при значениях функции равных элементам массива @var{v}. См. также @ref{cont}, @ref{cont3}. @sref{dcont sample}
+@end deftypefn
+
+@deftypefn {Команда MGL} {} dcont adat bdat ['sch'='' @code{sval=-1}]
+@deftypefnx {Команда MGL} {} dcont xdat ydat zdat adat bdat ['sch'='' @code{sval=-1}]
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_dcont (@code{HMGL} gr, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
+@deftypefnx {Функция С} @code{void} mgl_@code{HCDT} b, cont_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+Аналогично предыдущему для @var{num} уровней равномерно распределённых в диапазоне изменения цвета. Величина @var{num} равна значению параметра @code{value} в опциях @var{opt} (по умолчанию 7).
 @end deftypefn
 
 @anchor{beam}

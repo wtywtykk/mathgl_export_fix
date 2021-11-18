@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 		setlocale(LC_NUMERIC, loc.c_str());
 		gr.EndFrame();	gr.Update();
 	}
-	if(!mglGlobalMess.empty())	printf("%s",mglGlobalMess.c_str());
+	printf("%s",mgl_get_global_warn());
 	return gr.Run();
 }
 //-----------------------------------------------------------------------------

@@ -44,7 +44,7 @@ public:
 	bool enableWheel;	///< Enable mouse wheel handlers
 	QString primitives;	///< Manual primitives, defined by user
 
-	QMathGL(QWidget *parent = 0, Qt::WindowFlags f = 0);
+	QMathGL(QWidget *parent = 0, Qt::WindowFlags f = Qt::WindowFlags());
 	virtual ~QMathGL();
 	double getRatio();
 	void setPopup(QMenu *p)	{	popup = p;	}	///< Set popup menu pointer

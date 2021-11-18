@@ -39,8 +39,9 @@
 #include "tex_table.cc"
 //-----------------------------------------------------------------------------
 //mglFont mglDefFont("nofont");
-extern mglFont mglDefFont;
 #define MGL_USE_H12	{if(h1<y1) y1=h1;	if(h2>y2) y2=h2;	h1=1e5;	h2=-1e5;}
+//-----------------------------------------------------------------------------
+mglFont *mglDefFont=NULL;
 //-----------------------------------------------------------------------------
 size_t MGL_EXPORT_PURE mgl_wcslen(const wchar_t *str)
 {
@@ -731,7 +732,7 @@ bool mglFont::read_main(const char *fname, std::vector<short> &buf)
 //-----------------------------------------------------------------------------
 void mglFont::FillY12()
 {
-#pragma omp parallel
+//#pragma omp parallel	// TODO problem at initialization of global object ... enable back after fixing global obj issue
 	for(long i=0;i<long(glyphs.size());i++)
 	{
 		for(int s=0;s<4;s++)
@@ -955,37 +956,20 @@ bool mglFont::Load(const char *base, const char *path)
 	return true;
 }
 //-----------------------------------------------------------------------------
-#if MGL_HAVE_PTHREAD
-pthread_mutex_t mutexRnd;
-#endif
-//-----------------------------------------------------------------------------
-float mgl_cos[360];
-void static mgl_init()
-{
-	mgl_textdomain(NULL,"");
-#if MGL_HAVE_PTHREAD
-	pthread_mutex_init(&mutexRnd,0);
-#endif
-#ifndef WIN32	// win32 don't initialized threads before main()
-#pragma omp parallel for
-#endif
-	for(long i=0;i<360;i++)	mgl_cos[i] = cos(i*M_PI/180.);
-}
-//-----------------------------------------------------------------------------
 mglFont::mglFont(const char *name, const char *path)
 {
 	parse = true;	gr=0;	Buf=0;	Hscale=1;
-//	if(this==&mglDefFont)	Load(name, path);	else	Copy(&mglDefFont);
 	if(name && *name)	Load(name, path);
-	else if(this!=&mglDefFont)	Copy(&mglDefFont);
-	else
-	{
-		mgl_init();		// NOTE: this call init function for the library.
-		Load(MGL_DEF_FONT_NAME,0);
-	}
+	else	Load(MGL_DEF_FONT_NAME,0);
+}
+mglFont::mglFont()
+{
+	parse = true;	gr=0;	Buf=0;	Hscale=1;
+	if(!mglDefFont)	mgl_init();
+	Copy(mglDefFont);
 }
 mglFont::~mglFont()	{	if(Buf)	delete []Buf;	}
-void mglFont::Restore()	{	Copy(&mglDefFont);	}
+void mglFont::Restore()	{	Copy(mglDefFont);	}
 //-----------------------------------------------------------------------------
 void mglFont::Clear()
 {

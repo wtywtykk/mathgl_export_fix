@@ -77,17 +77,23 @@ int MGL_EXPORT_PURE mgl_get_warn(HMGL gr)	{	return gr->GetWarn();	}
 void MGL_EXPORT mgl_set_warn(HMGL gr, int code, const char *txt)
 {	gr->SetWarn(code,txt);	}
 extern bool mglPrintWarn;
+extern MGL_EXPORT std::string *mglGlobalMess;	///< Buffer for receiving global messages
 void MGL_EXPORT mgl_set_global_warn(const char *txt)
 {
 	if(txt && *txt)
 	{
-		mglGlobalMess += txt;	mglGlobalMess += '\n';
+		*mglGlobalMess += txt;	*mglGlobalMess += '\n';
 		if(mglPrintWarn)	fprintf(stderr,_("Global message - %s\n"),txt);
 	}
 }
 void MGL_EXPORT mgl_set_global_warn_(const char *txt, int l)
 {	char *s=new char[l+1];	memcpy(s,txt,l);	s[l]=0;	mgl_set_global_warn(s);	delete []s;	}
-MGL_EXPORT_PURE const char *mgl_get_global_warn()	{	return mglGlobalMess.c_str();	}
+void MGL_EXPORT mgl_clear_global_warn()
+{	*mglGlobalMess = "";	}
+void MGL_EXPORT mgl_clear_global_warn_()
+{	mgl_clear_global_warn();	}
+MGL_EXPORT_PURE const char *mgl_get_global_warn()
+{	return mglGlobalMess->empty()?"":mglGlobalMess->c_str();	}
 int MGL_EXPORT mgl_get_global_warn_(char *out, int len)
 {
 	const char *res = mgl_get_global_warn();
@@ -234,13 +240,13 @@ void MGL_EXPORT mgl_restore_font_(uintptr_t *gr)	{	_GR_->RestoreFont();	}
 void MGL_EXPORT mgl_define_symbol_(uintptr_t *gr, char *id, uintptr_t *x, uintptr_t *y, int)
 {	_GR_->DefineGlyph(_DA_(x),_DA_(y),id?*id:0);	}
 //-----------------------------------------------------------------------------
-extern mglFont mglDefFont;
+extern mglFont *mglDefFont;
 void MGL_EXPORT mgl_def_font(const char *name, const char *path)
-{	mglDefFont.Load(name,path);	}
+{	mglDefFont->Load(name,path);	}
 void MGL_EXPORT mgl_def_font_(const char *name, const char *path,int l,int n)
 {	char *s=new char[l+1];		memcpy(s,name,l);	s[l]=0;
 	char *d=new char[n+1];		memcpy(d,path,n);	d[n]=0;
-	mglDefFont.Load(name,path);	delete []s;		delete []d;	}
+	mglDefFont->Load(name,path);	delete []s;		delete []d;	}
 //-----------------------------------------------------------------------------
 int MGL_EXPORT mgl_check_version(const char *ver)
 {	double v=0;	int r = sscanf(ver,"2.%lg",&v);

@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 		if(gr.Message()[0])	printf("%s\n",gr.Message());
 		if(!none)	gr.WriteFrame(oname);
 	}
-	if(!mglGlobalMess.empty())	printf("%s",mglGlobalMess.c_str());
+	printf("%s",mgl_get_global_warn());
 	if(!none || gif)	printf("Write output to %s\n",oname);
 	return 0;
 }

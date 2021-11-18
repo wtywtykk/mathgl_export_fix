@@ -61,6 +61,8 @@
 #if MGL_HAVE_ATTRIBUTE
 #define MGL_FUNC_CONST	__attribute__((const))
 #define MGL_FUNC_PURE	__attribute__((pure))
+#define MGL_FUNC_INIT	__attribute__((constructor))
+#define MGL_FUNC_FINI	__attribute__((destructor))
 #else
 #define MGL_FUNC_CONST
 #define MGL_FUNC_PURE
@@ -352,7 +354,9 @@ typedef cmdual mdual;
 #endif
 #endif
 //-----------------------------------------------------------------------------
-extern float mgl_cos[360];	///< contain cosine with step 1 degree
+extern float MGL_EXPORT mgl_cos[360];	///< contain cosine with step 1 degree
+void MGL_EXPORT MGL_FUNC_INIT mgl_init();	///< initialize MathGL structures
+void MGL_EXPORT MGL_FUNC_FINI mgl_fini();	///< free MathGL structures
 //-----------------------------------------------------------------------------
 /// Calculate sqrt(x*x+y*y)
 double MGL_EXPORT_CONST mgl_hypot(double x, double y);
@@ -389,6 +393,9 @@ void MGL_EXPORT mgl_set_global_warn_(const char *text,int);
 /// Get text of global warning message(s)
 MGL_EXPORT_PURE const char *mgl_get_global_warn();
 int MGL_EXPORT mgl_get_global_warn_(char *out, int len);
+/// Clear global warning message
+void MGL_EXPORT mgl_clear_global_warn();
+void MGL_EXPORT mgl_clear_global_warn_();
 /// Setup gettext usage. NOTE: Russian translation MUST be installed.
 void MGL_EXPORT mgl_textdomain(const char *argv0, const char *locale);
 void MGL_EXPORT mgl_textdomain_(const char *locale, int);

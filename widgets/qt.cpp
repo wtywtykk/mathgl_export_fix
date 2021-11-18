@@ -439,7 +439,7 @@ void QMathGL::mousePressEvent(QMouseEvent *ev)
 
 		p = gr->CalcXYZ(ev->x(), ev->y(), true);
 		if(mgl_isnan(p.x))	mousePos = "";
-		else	mousePos.sprintf("x=%g, y=%g, z=%g",p.x,p.y,p.z);
+		else	mousePos.asprintf("x=%g, y=%g, z=%g",p.x,p.y,p.z);
 		emit posChanged(mousePos);
 		repaint();
 	}
@@ -625,7 +625,7 @@ void QMathGL::mouseMoveEvent(QMouseEvent *ev)
 	{
 		mglPoint p = gr->CalcXYZ(ev->x(), ev->y(), true);
 		if(mgl_isnan(p.x))	mousePos = "";
-		else	mousePos.sprintf("x=%g, y=%g, z=%g",p.x,p.y,p.z);
+		else	mousePos.asprintf("x=%g, y=%g, z=%g",p.x,p.y,p.z);
 		emit posChanged(mousePos);
 	}*/
 	ev->accept();

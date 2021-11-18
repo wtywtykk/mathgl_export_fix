@@ -59,7 +59,8 @@
 22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring + progonka.
 25. Check '\overline'
 26. Colorbar options?!
-
+27. Unicode in option 'legend'
+28. Try to add ld options: "-init mgl_init -fini mgl_fini" for MSVC ???
 
 ZZ. Update *.i for new functions {before release!!!}
 ZZ. Update *.i for new functions {before release!!!}
@@ -111,10 +112,8 @@ D. Docs about JS interface
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
 
-7. Docs about 'dcont'
-8. Docs about 'connect'
+8. Docs about 'connect' ???
 9. user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
-10. Docs about 'lines'
 11. Docs about Armadillo interface
 12. Docs about 'keep'
 13. Docs about inline function (after '\'); functions 'sum', 'prod'.

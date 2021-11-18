@@ -26,9 +26,38 @@
 #undef _GR_
 #define _GR_	((mglCanvas *)(*gr))
 //-----------------------------------------------------------------------------
-mglFont mglDefFont;
-MGL_EXPORT std::string mglGlobalMess;	///< Buffer for receiving global messages
-MGL_EXPORT mglCanvas mglDefaultGr(600,400);	///< Default HMGL object
+MGL_EXPORT std::string *mglGlobalMess;	///< Buffer for receiving global messages
+MGL_EXPORT mglCanvas *mglDefaultGr=NULL;	///< Default HMGL object
+extern mglFont *mglDefFont;
+#if MGL_HAVE_PTHREAD
+pthread_mutex_t mutexRnd;
+#endif
+//-----------------------------------------------------------------------------
+float MGL_EXPORT mgl_cos[360];
+void MGL_EXPORT MGL_FUNC_INIT mgl_init()	// TODO try to add ld option: "-init mgl_init"
+{
+	static bool ini=true;
+	if(ini)
+	{
+		ini = false;
+		mglGlobalMess = new std::string;
+		mgl_textdomain(NULL,"");
+#if MGL_HAVE_PTHREAD
+		pthread_mutex_init(&mutexRnd,0);
+#endif
+#ifndef WIN32	// win32 don't initialized threads before main()
+#pragma omp parallel for
+#endif
+		for(long i=0;i<360;i++)	mgl_cos[i] = cos(i*M_PI/180.);
+		if(!mglDefFont)		mglDefFont = new mglFont(MGL_DEF_FONT_NAME);
+		if(!mglDefaultGr)	mglDefaultGr = new mglCanvas(600,400);
+	}
+}
+void MGL_EXPORT MGL_FUNC_FINI mgl_fini()	// TODO try to add ld option: "-fini mgl_fini"
+{
+	if(mglDefaultGr)	{	delete mglDefaultGr;mglDefaultGr=NULL;	}
+	if(mglDefFont)		{	delete mglDefFont;	mglDefFont=NULL;	}
+}
 //-----------------------------------------------------------------------------
 MGL_EXPORT const unsigned char *mgl_get_rgb(HMGL gr)
 {	mglCanvas *g = dynamic_cast<mglCanvas *>(gr);	return g?g->GetBits():0;	}
@@ -301,7 +330,12 @@ double mgl_size_scl = 1;
 HMGL MGL_EXPORT mgl_create_graph(int width, int height)
 {	return new mglCanvas(width,height);	}
 void MGL_EXPORT mgl_delete_graph(HMGL gr)	{	if(gr)	delete gr;	}
-HMGL MGL_EXPORT mgl_default_graph()	{	return &mglDefaultGr;	}
+HMGL MGL_EXPORT mgl_default_graph()
+{
+	if(!mglDefaultGr)
+		mglDefaultGr = new mglCanvas(600,400);
+	return mglDefaultGr;
+}
 void MGL_EXPORT mgl_set_size_scl(double scl){	if(scl>0)	mgl_size_scl = scl;	}
 void MGL_EXPORT mgl_set_size(HMGL gr, int width, int height)
 {

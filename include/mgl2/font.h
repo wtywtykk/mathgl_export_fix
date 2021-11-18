@@ -67,7 +67,8 @@ class MGL_EXPORT mglFont
 {
 public:
 	mglBase *gr;	///< mglBase class used for drawing characters
-	mglFont(const char *name=0, const char *path=0);
+	mglFont();
+	mglFont(const char *name, const char *path=0);
 	virtual ~mglFont();
 	bool parse;		///< Parse LaTeX symbols
 

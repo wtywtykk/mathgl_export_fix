@@ -183,6 +183,8 @@ public:
 	static inline void SetGlobalWarn(const char *text)	{	mgl_set_global_warn(text);	}
 	/// Get text of global warning message(s)
 	static inline const char *GlobalWarn()	{	return mgl_get_global_warn();	}
+	/// Clear global warning message
+	static inline void ClearGlobalWarn()	{	mgl_clear_global_warn();	}
 	/// Suppress printing warnings to stderr
 	static inline void SuppressWarn(bool on)	{	mgl_suppress_warn(on);	}
 	/// Check if MathGL version is valid (return false) or not (return true)

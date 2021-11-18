@@ -115,9 +115,9 @@ void DatPanel::refresh()
 		dual f = cc->a[i+nx*(j+ny*kz)];
 		if(mgl_isnan(f))	s = "nan";
 		else if(mgl_isbad(f))	s="inf";
-		else if(imag(f)>0)	s.sprintf("%.15g+%.15gi",real(f),imag(f));
-		else if(imag(f)<0)	s.sprintf("%.15g-%.15gi",real(f),-imag(f));
-		else	s.sprintf("%15g",real(f));
+		else if(imag(f)>0)	s.asprintf("%.15g+%.15gi",real(f),imag(f));
+		else if(imag(f)<0)	s.asprintf("%.15g-%.15gi",real(f),-imag(f));
+		else	s.asprintf("%15g",real(f));
 		tab->item(j,i)->setText(s);
 	}
 	else	for(long i=0;i<nx;i++)	for(long j=0;j<ny;j++)
@@ -125,7 +125,7 @@ void DatPanel::refresh()
 		double f = var->v(i,j,kz);
 		if(mgl_isnan(f))	s = "nan";
 		else if(mgl_isbad(f))	s=f>0?"inf":"-inf";
-		else	s.sprintf("%.15g",f);
+		else	s.asprintf("%.15g",f);
 		tab->item(j,i)->setText(s);
 	}
 	infoDlg->allowRefresh=true;	infoDlg->refresh();
@@ -134,7 +134,7 @@ void DatPanel::refresh()
 	QChar *ss = new QChar[m+1];
 	for(long i=0;i<m;i++)	ss[i] = vs[i];
 	s = QString(ss, m);	delete []ss;
-	d.sprintf("%d * %d * %d", nx, ny, nz);
+	d.asprintf("%d * %d * %d", nx, ny, nz);
 	ready = true;
 }
 //-----------------------------------------------------------------------------
@@ -222,9 +222,9 @@ void DatPanel::putValue(int r, int c)
 		{
 			if(mgl_isnan(g))	s="nan";
 			else if(mgl_isbad(g))	s="inf";
-			else if(imag(g)>0)	s.sprintf("%g+%gi",real(g),imag(g));
-			else if(imag(g)<0)	s.sprintf("%g-%gi",real(g),-imag(g));
-			else	s.sprintf("%g",real(g));
+			else if(imag(g)>0)	s.asprintf("%g+%gi",real(g),imag(g));
+			else if(imag(g)<0)	s.asprintf("%g-%gi",real(g),-imag(g));
+			else	s.asprintf("%g",real(g));
 			tab->item(r,c)->setText(s);
 		}
 		cc->a[c+nx*(r+ny*kz)] = g;
@@ -235,7 +235,7 @@ void DatPanel::putValue(int r, int c)
 		{
 			if(mgl_isnan(f))	s="nan";
 			else if(mgl_isbad(f))	s=f>0?"inf":"-inf";
-			else	s.sprintf("%g", f);
+			else	s.asprintf("%g", f);
 			tab->item(r,c)->setText(s);
 		}
 		var->set_v(f,c,r,kz);
@@ -338,7 +338,7 @@ void DatPanel::list()	// TODO: in which script insert ???
 	{
 	for(long i=0;i<nx;i++)
 		{
-			s.sprintf("%g\t",d->a[i+nx*(j+kz*ny)]);
+			s.asprintf("%g\t",d->a[i+nx*(j+kz*ny)]);
 			res += s;
 		}
 		if(j<ny-1)	res = res + "|\t";
@@ -398,7 +398,7 @@ void DatPanel::create()
 void DatPanel::reSize()
 {
 	QString mx, my, mz;
-	mx.sprintf("%d",nx);	my.sprintf("%d",ny);	mz.sprintf("%d",nz);
+	mx.asprintf("%d",nx);	my.asprintf("%d",ny);	mz.asprintf("%d",nz);
 	if(sizesDialog(_("UDAV - Resize data"), _("Enter new data sizes"), _("X-size"), _("Y-size"), _("Z-size"), mx, my, mz))
 	{
 		mglData *d = dynamic_cast<mglData *>(var);
@@ -432,7 +432,7 @@ void DatPanel::crop()
 void DatPanel::rearrange()
 {
 	QString mx, my, mz;
-	mx.sprintf("%d",nx);	my.sprintf("%d",ny);	mz.sprintf("%d",nz);
+	mx.asprintf("%d",nx);	my.asprintf("%d",ny);	mz.asprintf("%d",nz);
 	if(sizesDialog(_("UDAV - Rearrange data"), _("Enter new data sizes"), _("X-size"), _("Y-size"), _("Z-size"), mx, my, mz))
 	{
 		mglData *d = dynamic_cast<mglData *>(var);

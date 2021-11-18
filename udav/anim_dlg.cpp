@@ -75,7 +75,7 @@ AnimParam::AnimParam(QWidget *parent) : QDialog(parent)
 	connect(b, SIGNAL(clicked()),this, SLOT(putTxt()));
 	lbl = new QLabel(_("Delay (in ms)"),this);	a->addWidget(lbl);
 	delay = new QLineEdit(this);	a->addWidget(delay);
-	QString s;	s.sprintf("%d",animDelay);	delay->setText(s);
+	QString s;	s.asprintf("%d",animDelay);	delay->setText(s);
 	// export to gif/jpeg
 	a = new QHBoxLayout();		o->addLayout(a);
 //	fname = new QLineEdit(this);	a->addWidget(fname);

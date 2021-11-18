@@ -1682,6 +1682,25 @@ void smgl_surf3ca(mglGraph *gr)
 	gr->Box();	gr->Surf3CA(c,d,c);
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_dcont="call 'prepare3d'\ntitle 'DCont plot':rotate 50 60:light on:alpha on:box:surf3 c 0 'r':surf3 d 0 'b'\ndcont 0 c d '2k'";
+void smgl_dcont(mglGraph *gr)
+{
+	mglData c,d,v;	mgls_prepare3d(&c,&d);
+	if(big!=3)	gr->Title("DCont plot");
+	gr->Rotate(50,60);	gr->Light(true);	gr->Alpha(true);
+	gr->Box();	gr->Surf3(0,c,"r");	gr->Surf3(0,d,"b");
+	gr->DCont(v,c,d,"2k");
+}
+//-----------------------------------------------------------------------------
+const char *mmgl_daisy="title 'Advanced formulas'\nnew b 256 256 'dsum(fn1(_i*pi/5),10)\\exp(-64*(x*cos(_1)-y*sin(_1))^2-16*(0.5+y*cos(_1)+x*sin(_1))^2)'\ncrange b:dens b 'BbwrR'";
+void smgl_daisy(mglGraph *gr)
+{
+	if(big!=3)	gr->Title("Advanced formulas");
+	mglData b(256,256);
+	gr->Fill(b,"dsum(fn1(_i*pi/5),10)\\exp(-64*(x*cos(_1)-y*sin(_1))^2-16*(0.5+y*cos(_1)+x*sin(_1))^2)");
+	gr->SetRange('c',b);	gr->Dens(b,"BbwrR");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_cut="call 'prepare2d'\ncall 'prepare3d'\nsubplot 2 2 0:title 'Cut on (default)':rotate 50 60:light on:box:surf a; zrange -1 0.5\n"
 "subplot 2 2 1:title 'Cut off':rotate 50 60:box:surf a; zrange -1 0.5; cut off\n"
 "subplot 2 2 2:title 'Cut in box':rotate 50 60:box:alpha on\ncut 0 -1 -1 1 0 1.1:surf3 c\ncut 0 0 0 0 0 0\t# restore back\n"
@@ -3545,10 +3564,12 @@ mglSample samp[] = {
 //	{"crust", smgl_crust, mmgl_crust, ""},	// TODO: open after triangulation
 	{"curvcoor", smgl_curvcoor, mmgl_curvcoor, "Some common curvilinear coordinates."},
 	{"cut", smgl_cut, mmgl_cut, "Example of point cutting (@ref{cut}."},
+	{"daisy", smgl_daisy, mmgl_daisy, "Example of subfunctions and summation in textual formulas."},
 	{"dat_diff", smgl_dat_diff, mmgl_dat_diff, "Example of @ref{diff} and @ref{integrate}."},
 	{"dat_extra", smgl_dat_extra, mmgl_dat_extra , "Example of @ref{envelop}, @ref{sew}, @ref{smooth} and @ref{resize}."},
 	{"data1", smgl_data1, mmgl_data1, ""},
 	{"data2", smgl_data2, mmgl_data2, ""},
+	{"dcont", smgl_dcont, mmgl_dcont, "Function @ref{dcont} draw lines of intersections of two isosurfaces."},
 	{"dens", smgl_dens, mmgl_dens, "Function @ref{dens} draw density plot (also known as color-map) for surface."},
 	{"dens3", smgl_dens3, mmgl_dens3, "Function @ref{dens3} draw ordinary density plots but at slices of 3D data."},
 	{"dens_xyz", smgl_dens_xyz, mmgl_dens_xyz, "Functions @ref{densz}, @ref{densy}, @ref{densx} draw density plot on plane perpendicular to corresponding axis. One of possible application is drawing projections of 3D field."},

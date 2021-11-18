@@ -364,7 +364,7 @@ int main(int argc,char **argv)
 			default:	usage();	return 0;
 		}
 
-	if(dotest==1)	printf("Global (before):%s\n",mglGlobalMess.c_str());
+	if(dotest==1)	printf("Global (before):%s\n",mgl_get_global_warn());
 	gr = new mglGraph;
 	if(	type==11|| type==12|| type==5 || type==9)	width=height;
 	switch(big)
@@ -388,7 +388,7 @@ int main(int argc,char **argv)
 		gr->WriteSVG("test.svg");
 		gr->WriteEPS("test.eps");
 		printf("Messages:%s\n",gr->Message());
-		printf("Global:%s\n",mglGlobalMess.c_str());
+		printf("Global:%s\n",mgl_get_global_warn());
 		delete gr;	return 0;
 	}
 	else if(dotest==2)	// NOTE mgl_gen_fnt[###][6] have to be updated if new glyphs will be added to built-in font

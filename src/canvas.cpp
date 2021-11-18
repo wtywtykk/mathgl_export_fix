@@ -226,7 +226,7 @@ GifFileType *gif;*/
 	ax.Clear();	ay.Clear();	az.Clear();	ac.Clear();
 	mgl_clear_fft();		DefMaskAn=0;	ResetMask();
 	SetTickRotate(true);	SetTickSkip(true);
-	SetWarn(mglWarnNone,"");	mglGlobalMess = "";
+	SetWarn(mglWarnNone,"");	mgl_clear_global_warn();
 	ObjId = -1;	HighId = INT_MIN;
 	SetFunc(0,0);	CutOff(0);	Ternary(0);
 	Stop=false;	event_cb = NULL;	event_par=NULL;

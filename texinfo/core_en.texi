@@ -662,6 +662,11 @@ Set warning message @var{info} for global scope.
 Get warning message(s) for global scope.
 @end deftypefn
 
+@deftypefn {Method on @code{mglGraph}} @code{void} ClearGlobalWarn () static
+@deftypefnx {C function} @code{void} mgl_clear_global_warn ()
+Clears global warning messages.
+@end deftypefn
+
 @end ifclear
 
 @c ==================================================================
@@ -3102,7 +3107,7 @@ The function draws contour plot for 3d data specified parametrically @var{a}[i,j
 @deftypefn {MGL command} {} cont3 adat ['sch'='' @code{sval=-1}]
 @deftypefnx {MGL command} {} cont3 xdat ydat zdat adat ['sch'='' @code{sval=-1}]
 @ifclear UDAV
-@deftypefnx {Method on @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Method on @code{mglGraph}} @code{void} Cont3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {C function} @code{void} mgl_cont3 (@code{HMGL} gr, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_cont3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
@@ -3125,7 +3130,7 @@ The function draws solid (or filled) contour plot for 3d data specified parametr
 @deftypefn {MGL command} {} contf3 adat ['sch'='' @code{sval=-1}]
 @deftypefnx {MGL command} {} contf3 xdat ydat zdat adat ['sch'='' @code{sval=-1}]
 @ifclear UDAV
-@deftypefnx {Method on @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {Method on @code{mglGraph}} @code{void} Contf3 (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const char *}sch=@code{""}, @code{mreal} sVal=@code{-1}, @code{const char *}opt=@code{""})
 @deftypefnx {C function} @code{void} mgl_contf3 (@code{HMGL} gr, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @deftypefnx {C function} @code{void} mgl_contf3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
@@ -3143,6 +3148,30 @@ The same as previous with vector @var{v} of @var{num}-th elements equidistantly 
 @deftypefnx {C function} @code{void} mgl_grid3_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
 @end ifclear
 The function draws grid for 3d data specified parametrically @var{a}[i,j,k](@var{x}[i,j,k], @var{y}[i,j,k], @var{z}[i,j,k]). Grid is plotted at slice @var{sVal} in direction @{@samp{x}, @samp{y}, @samp{z}@} if @var{sch} contain corresponding symbol (by default, @samp{y} direction is used). See also @ref{cont3}, @ref{contf3}, @ref{dens3}, @ref{grid2}, @ref{meshnum}.
+@end deftypefn
+
+
+@anchor{dcont}
+@deftypefn {MGL command} {} dcont vdat adat bdat ['sch'='']
+@deftypefnx {MGL command} {} dcont vdat xdat ydat zdat adat bdat ['sch'='']
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}v, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}v, @code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {C function} @code{void} mgl_dcont_val (@code{HMGL} gr, @code{HCDT} v, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {C function} @code{void} mgl_dcont_xyz_val (@code{HMGL} gr, @code{HCDT} v, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+The function draws lines at intersections of isosurfaces for 3d data @var{a}, @var{b} specified parametrically @var{a}[i,j,k](@var{x}[i,j,k], @var{y}[i,j,k], @var{z}[i,j,k]). Isosurfaces are taken for values specified in array @var{v}. See also @ref{cont}, @ref{cont3}. @sref{dcont sample}
+@end deftypefn
+
+@deftypefn {MGL command} {} dcont adat bdat ['sch'='' @code{sval=-1}]
+@deftypefnx {MGL command} {} dcont xdat ydat zdat adat bdat ['sch'='' @code{sval=-1}]
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {Method on @code{mglGraph}} @code{void} DCont (@code{const mglDataA &}x, @code{const mglDataA &}y, @code{const mglDataA &}z, @code{const mglDataA &}a, @code{const mglDataA &}b, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
+@deftypefnx {C function} @code{void} mgl_dcont (@code{HMGL} gr, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{mreal} sVal, @code{const char *}opt)
+@deftypefnx {C function} @code{void} mgl_@code{HCDT} b, cont_xyz (@code{HMGL} gr, @code{HCDT} x, @code{HCDT} y, @code{HCDT} z, @code{HCDT} a, @code{HCDT} b, @code{const char *}sch, @code{const char *}opt)
+@end ifclear
+The same as previous with vector @var{v} of @var{num}-th elements equidistantly distributed in color range. Here @var{num} is equal to parameter @code{value} in options @var{opt} (default is 7).
 @end deftypefn
 
 @anchor{beam}
