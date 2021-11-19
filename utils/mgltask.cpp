@@ -2,6 +2,9 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#if ((defined(_MSC_VER) || defined(__BORLANDC__)) && !defined(M_PI))	//_MSC_VER needs this before math.h
+#define	_USE_MATH_DEFINES
+#endif
 #include <math.h>
 #include <time.h>
 

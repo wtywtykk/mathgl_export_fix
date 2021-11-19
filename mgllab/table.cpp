@@ -559,8 +559,8 @@ public:
 		o->tooltip(_("Change data values and close this window"));
 		w->set_modal();	w->end();
 	}
-	double min()	{	return wmin->value();	}
-	double max()	{	return wmax->value();	}
+	double vmin()	{	return wmin->value();	}
+	double vmax()	{	return wmax->value();	}
 	int sym()		{	return wsym->value();	}
 	bool ok()		{	return !result.empty();	}
 	void cb_ok()
@@ -581,8 +581,8 @@ void fill_cb(Fl_Widget*, void*v)
 		HMDT d = dynamic_cast<HMDT>(e->var);
 		HADT c = dynamic_cast<HADT>(e->var);
 		char ch = nrm_dlg.result[0];
-		if(d)	{	d->Fill(nrm_dlg.min(),nrm_dlg.max(),ch);	e->refresh();	}
-		if(c)	{	c->Fill(nrm_dlg.min(),nrm_dlg.max(),ch);	e->refresh();	}
+		if(d)	{	d->Fill(nrm_dlg.vmin(),nrm_dlg.vmax(),ch);	e->refresh();	}
+		if(c)	{	c->Fill(nrm_dlg.vmin(),nrm_dlg.vmax(),ch);	e->refresh();	}
 	}
 }
 //-----------------------------------------------------------------------------
@@ -594,8 +594,8 @@ void normal_cb(Fl_Widget*, void*v)
 	{
 		HMDT d = dynamic_cast<HMDT>(e->var);
 		HADT c = dynamic_cast<HADT>(e->var);
-		if(d)	{	d->Norm(nrm_dlg.min(),nrm_dlg.max(),nrm_dlg.sym());	e->refresh();	}
-		if(c)	{	c->Fill(nrm_dlg.min(),nrm_dlg.max(),nrm_dlg.sym());	e->refresh();	}
+		if(d)	{	d->Norm(nrm_dlg.vmin(),nrm_dlg.vmax(),nrm_dlg.sym());	e->refresh();	}
+		if(c)	{	c->Fill(nrm_dlg.vmin(),nrm_dlg.vmax(),nrm_dlg.sym());	e->refresh();	}
 	}
 }
 //-----------------------------------------------------------------------------

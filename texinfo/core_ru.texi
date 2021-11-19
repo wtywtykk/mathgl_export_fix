@@ -66,6 +66,10 @@
 @deftypefn {Метод класса @code{mglGraph}} @code{HMGL} Self ()
 Возвращает указатель на используемый объект типа @code{HMGL}.
 @end deftypefn
+
+@deftypefn {Функция С} @code{HMGL} mgl_default_graph ()
+Возвращает указатель на экземпляр класса mglGraph. Этот объект используется по умолчанию при создании нового класса с целью сохранения настроек и ускорения инициализации в различных графиках.
+@end deftypefn
 @end ifclear
 
 @ifset UDAV
@@ -450,6 +454,15 @@ MGL не требует создания данного типа объекто�
 @deftypefnx {Функция С} @code{void} mgl_set_scale_text (@code{HMGL} gr, @code{int} val)
 @end ifclear
 Включает/выключает масштабирование текста в относительных @ref{inplot}-ах (в том числе @ref{columnplot}, @ref{gridplot}, @ref{stickplot}, @ref{shearplot}).
+@end deftypefn
+
+@anchor{texparse}
+@deftypefn {Команда MGL} {} texparse @code{val}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} SetTeXparse (@code{bool} val)
+@deftypefnx {Функция С} @code{void} mgl_set_tex_parse (@code{HMGL} gr, @code{int} val)
+@end ifclear
+Включает/выключает распознавание TeX-подобных команд при печати текста.
 @end deftypefn
 
 @anchor{loadfont}

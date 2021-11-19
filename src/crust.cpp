@@ -18,7 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include <float.h>
-#include <math.h>
 #include <list>
 #include <limits>
 #include "mgl2/other.h"

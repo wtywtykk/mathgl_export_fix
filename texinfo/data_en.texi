@@ -1842,8 +1842,25 @@ Solves GO ray equation like dr/dt = d @var{ham}/dp, dp/dt = -d @var{ham}/dr. Thi
 @deftypefnx {C function} @code{HMDT} mgl_ode_solve (@code{void (*}df@code{)(const mreal *x, mreal *dx, void *par)}, @code{int} n, @code{const mreal *}ini, @code{mreal} dt, @code{mreal} tmax)
 @deftypefnx {C function} @code{HMDT} mgl_ode_solve_ex (@code{void (*}df@code{)(const mreal *x, mreal *dx, void *par)}, @code{int} n, @code{const mreal *}ini, @code{mreal} dt, @code{mreal} tmax, @code{void (*}bord@code{)(mreal *x, const mreal *xprev, void *par)})
 @end ifclear
-Solves ODE equations dx/dt = df(x). The functions @var{df} can be specified as string of ';'-separated textual formulas (argument @var{var} set the character ids of variables x[i]) or as callback function, which fill @code{dx} array for give @code{x}'s. Parameters @var{ini}, @var{dt}, @var{tmax} set initial values, time step and maximal time of the calculation. Function stop execution if @code{NAN} or @code{INF} values appears. Result is data array with dimensions @{@var{n} * @var{Nt}@}, where @var{Nt} <= int(@var{tmax}/@var{dt}+1)
+Solves ODE equations dx/dt = df(x). The functions @var{df} can be specified as string of ';'-separated textual formulas (argument @var{var} set the character ids of variables x[i]) or as callback function, which fill @code{dx} array for give @code{x}'s. Parameters @var{ini}, @var{dt}, @var{tmax} set initial values, time step and maximal time of the calculation. Function stop execution if @code{NAN} or @code{INF} values appears. Result is data array with dimensions @{@var{n} * @var{Nt}@}, where @var{Nt} <= int(@var{tmax}/@var{dt}+1). 
+
+If @var{dt}*@var{tmax}<0 then regularization is switched on, which change equations to dx/ds = df(x)/max(|df(x)|) to allow accurately passes region of strong df variation or quickly bypass region of small df. Here s is the new "time". At this, real time is determined as dt/ds=max(|df(x)|). If you need real time, then add it into equations manually, like @samp{ode res 'y;-sin(x);1' 'xyt' [3,0] 0.3 -100}. This also preserve accuracy at stationary points (i.e. at small df in periodic case).
 @end deftypefn
+
+
+
+@deftypefn {MGL command} {} ode @sc{res} 'df' 'var' 'brd' ini [@code{dt=0.1 tmax=10}]
+@ifclear UDAV
+@deftypefnx {Global function} @code{mglData} mglODEs (@code{const char *}df, @code{const char *}var, @code{char} brd, @code{const mglDataA &}ini, @code{mreal} dt=@code{0.1}, @code{mreal} tmax=@code{10})
+@deftypefnx {Global function} @code{mglDataC} mglODEcs (@code{const char *}df, @code{const char *}var, @code{char} brd, @code{const mglDataA &}ini, @code{mreal} dt=@code{0.1}, @code{mreal} tmax=@code{10})
+@deftypefnx {C function} @code{HMDT} mgl_ode_solve_set (@code{const char *}df, @code{const char *}var, @code{char} brd, @code{HCDT} ini, @code{mreal} dt, @code{mreal} tmax)
+@deftypefnx {C function} @code{HADT} mgl_ode_solve_set_c (@code{const char *}df, @code{const char *}var, @code{char} brd, @code{HCDT} ini, @code{mreal} dt, @code{mreal} tmax)
+@end ifclear
+Solves difference approximation of PDE as a set of ODE dx/dt = df(x,j). Functions @var{df} can be specified as string of ';'-separated textual formulas, which can depend on index @var{j} and current time @samp{t}. Argument @var{var} set the character ids of variables x[i]. Parameter @var{brd} sets the kind of boundary conditions on @var{j}: @samp{0} or @samp{z} -- zero at border, @samp{1} or @samp{c} -- constant at border, @samp{2} or @samp{l} -- linear at border (laplacian is zero), @samp{3} or @samp{s} -- square at border, @samp{4} or @samp{e} -- exponential at border, @samp{5} or @samp{g} -- gaussian at border. The cases @samp{e} and @samp{g} are applicable for the complex variant only. Parameters @var{ini}, @var{dt}, @var{tmax} set initial values, time step and maximal time of the calculation. Function stop execution if @code{NAN} or @code{INF} values appears. Result is data array with dimensions @{@var{n} * @var{Nt}@}, where @var{Nt} <= int(@var{tmax}/@var{dt}+1). For example, difference aprroximation of diffusion equation with zero boundary conditions can be solved by call: @samp{ode res 'u(j+1)-2*u(j)+u(j-1)' 'u' '0' u0}, where @samp{u0} is an initial data array.
+
+If @var{dt}*@var{tmax}<0 then regularization is switched on, which change equations to dx/ds = df(x)/max(|df(x)|) to allow accurately passes region of strong df variation or quickly bypass region of small df. Here s is the new "time". At this, real time is determined as dt/ds=max(|df(x)|). If you need real time, then add it into equations manually, like @samp{ode res 'y;-sin(x);1' 'xyt' [3,0] 0.3 -100}. This also preserve accuracy at stationary points (i.e. at small df in periodic case).
+@end deftypefn
+
 
 @anchor{qo2d}
 @deftypefn {MGL command} {} qo2d @sc{res} 'ham' ini_re ini_im ray [@code{r=1 k0=100} xx yy]

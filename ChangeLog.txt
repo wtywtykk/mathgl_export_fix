@@ -4,16 +4,21 @@
 * Add functions 'sum', 'prod' at formula evaluation, like "sum(_i^2,5)" will produce "30"=0+1^2+2^2+3^2+4^2, and "prod(1+_i,5)" will produce 5!="120". You can nest them for variables _i,_j,...,_z, like "sum(sum(_j+_i^2,5),5)" will give "200".
 * Add functions 'value', 'spline' at formula evaluation, like "value(a,5)" will give value of 6-th element of a, i.e. a[5].
 * Add user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
+* Add mglODEs() (i.e. 'ode') for solving PDE/cascade/etc: ode res 'eqs' 'vars' 'bnd_kind' ini [dt tmax]. Here 'eqs' may contain relative pointer, like 'u(j+1)-2*u(j)+u(j-1)', and can be complex. Variables have 'j' for current index, 't' for current time.
 * Add 'lines' to draw a set of lines with arrows between points.
 * Add 'dcont' to draw a set of curves, which are intersection of two isosurfaces at given level.
 * Add 'first', 'last' to get array of first/last indexes of values larger specified one along given direction.
+* Add 'texparse' to enable/disable TeX-like command parsing at text output.
+* Update ODE: regularization is used if dt*tmax<0 (total time may differ, but number of steps still the same).
+* Add mgl_default_graph() -- the global (default) pointer to HMGL for keeping plot settings, simplifying external scripts and capture it in GUI.
 * Add style 'p' in command 'smooth' to use parabolic smoothing of arbitrary points.
 * Allow 'background' for scaling image, centering image and tessellate image as mosaic.
 * Allow masks for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
 * Allow value for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricont', 'tricontv', 'cont3', 'dcont'.
 * Allow value for saving in 'save', 'savehdf'.
 * Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf() for saving single number in HDF5 file. Correspondingly, commands 'save' and 'savehdf' can save single value now.
-* Add mgl_formula_calc(), mgl_formula_calc_c() for evaluating textual formulas of arbitrary set of data arays.
+* Add mgl_formula_calc(), mgl_formula_calc_c() for evaluating textual formulas of arbitrary set of data arrays.
+* Add mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
 * Allow mask usage for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
 * If nsub paramenter of command 'hist' is negative (nsub<0) then the linear interpolated is used instead of spline one.
 * Add Armadillo interface for mglData*

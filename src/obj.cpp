@@ -30,8 +30,6 @@ void MGL_NO_EXPORT mgl_printf(void *fp, bool gz, const char *str, ...);
 #include <climits>
 #include <cassert>
 #include <float.h>
-#include <math.h>
-
 #include <deque>
 #include <map>
 #include <iostream>

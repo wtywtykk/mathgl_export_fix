@@ -66,6 +66,10 @@ Deletes the instance of class mglGraph.
 @deftypefn {Method on @code{mglGraph}} @code{HMGL} Self ()
 Returns the pointer to internal object of type @code{HMGL}.
 @end deftypefn
+
+@deftypefn {C function} @code{HMGL} mgl_default_graph ()
+Returns pointer to default instance of class mglGraph. This is default instance, used with new classes, which can be used to keep plot settings and to speed up initialization in small different plots.
+@end deftypefn
 @end ifclear
 
 @ifset UDAV
@@ -451,6 +455,15 @@ Sets to use or not text rotation.
 @deftypefnx {C function} @code{void} mgl_set_scale_text (@code{HMGL} gr, @code{int} val)
 @end ifclear
 Sets to scale text in relative @ref{inplot} (including @ref{columnplot}, @ref{gridplot}, @ref{stickplot}, @ref{shearplot}) or not.
+@end deftypefn
+
+@anchor{texparse}
+@deftypefn {MGL command} {} texparse @code{val}
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} SetTeXparse (@code{bool} val)
+@deftypefnx {C function} @code{void} mgl_set_tex_parse (@code{HMGL} gr, @code{int} val)
+@end ifclear
+Enables/disables TeX-like command parsing at text output.
 @end deftypefn
 
 @anchor{loadfont}

@@ -178,7 +178,7 @@ uintptr_t MGL_EXPORT mgl_data_section_(uintptr_t *d, uintptr_t *ids, const char 
 HMDT MGL_EXPORT mgl_data_section_val(HCDT dat, long id, char dir, mreal val);
 uintptr_t MGL_EXPORT mgl_data_section_val_(uintptr_t *d, int *id, const char *dir, mreal *val,int);
 /// Get contour lines for dat[i,j]=val. NAN values separate the the curves
-HMDT mgl_data_conts(mreal val, HCDT dat);
+HMDT MGL_EXPORT mgl_data_conts(mreal val, HCDT dat);
 /// Evaluate formula 'str' for given list of variables.
 HMDT MGL_EXPORT mgl_formula_calc(const char *str, long n, ...);
 

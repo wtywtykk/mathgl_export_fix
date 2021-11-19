@@ -246,6 +246,8 @@ Note, some of these functions are unavailable if MathGL was compiled without GSL
 
 There is no difference between lower or upper case in formulas. If argument value lie outside the range of function definition then function returns NaN.
 
+MathGL version 2.5 introduce user-defined functions @samp{fn1()...fn9()} at formula evaluation, which are defined after symbol @samp{\}. For example, "fn1(3)\x^_1" will produce "x^3". Also functions @samp{sum}, @samp{dsum}, @samp{prod} are added at formula evaluation for summation, summation with variable sign and product evaluation. For example, "sum(_i^2,5)" will produce "30"=0+1^2+2^2+3^2+4^2, "dsum(_i^2,5)" will produce "10"=0-1^2+2^2-3^2+4^2, and "prod(1+_i,5)" will produce 5!="120". You can nest them for variables _i,_j,...,_z, like "sum(sum(_j+_i^2,5),5)" will give "200". Also you can use user-defined functions, like "sum(fn1(_i)-fn2(_i),4)\_1^4\_1^3" is the same as "sum(_i^4-_i^3,4)" and will produce "62".
+
 @c ------------------------------------------------------------------
 @external{}
 @node  Command options, Interfaces, Textual formulas, General concepts

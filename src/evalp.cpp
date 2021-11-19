@@ -861,7 +861,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 			{
 				HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 				long m = long(b->a[0]+0.5);
-				const char *s = head[head.size()-1]->s.s;
+				const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 				if(m>0)
 				{
 					std::vector<mglDataA*> hh(head);
@@ -1012,7 +1012,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		{
 			HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 			long m = long(b->a[0]+0.5);
-			const char *s = head[head.size()-1]->s.s;
+			const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 			if(m>0)
 			{
 				std::vector<mglDataA*> hh(head);
@@ -1039,7 +1039,7 @@ HMDT MGL_NO_EXPORT mglFormulaCalcA(std::wstring str, mglParser *arg, const std::
 		{
 			HMDT a=NULL, b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 			long m = long(b->a[0]+0.5);
-			const char *s = head[head.size()-1]->s.s;
+			const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 			if(m>0)
 			{
 				std::vector<mglDataA*> hh(head);
@@ -1418,7 +1418,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 				HADT a=NULL;
 				HMDT b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 				long m = long(b->a[0]+0.5);
-				const char *s = head[head.size()-1]->s.s;
+				const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 				if(m>0)
 				{
 					std::vector<mglDataA*> hh(head);
@@ -1511,7 +1511,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 			HADT a=NULL;
 			HMDT b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 			long m = long(b->a[0]+0.5);
-			const char *s = head[head.size()-1]->s.s;
+			const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 			if(m>0)
 			{
 				std::vector<mglDataA*> hh(head);
@@ -1539,7 +1539,7 @@ HADT MGL_NO_EXPORT mglFormulaCalcAC(std::wstring str, mglParser *arg, const std:
 			HADT a=NULL;
 			HMDT b=mglFormulaCalcA(str.substr(n+1), arg, head, fns);
 			long m = long(b->a[0]+0.5);
-			const char *s = head[head.size()-1]->s.s;
+			const char *s = head.size()>0?head[head.size()-1]->s.s:"";
 			if(m>0)
 			{
 				std::vector<mglDataA*> hh(head);

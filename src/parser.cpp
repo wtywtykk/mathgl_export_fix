@@ -429,7 +429,11 @@ void mglParser::FillArg(mglGraph *gr, int k, std::wstring *arg, mglArg *a)
 					id.push_back(4);	s.push_back(str.substr(ii,i-ii));
 					op=0;	ii=i+1;	ns--;
 				}
-				else if(na%2==0 && np==1 && str[i]==')' && ns==0)	np--;
+				else if(na%2==0 && np>0 && ns==0)
+				{
+					if(str[i]==')')	np--;
+					if(str[i]=='(')	np++;
+				}
 			}
 			if(op && ll>ii)
 			{	id.push_back(op);	s.push_back(str.substr(ii,ll-ii));	}
@@ -1095,7 +1099,7 @@ void mglParser::Execute(mglGraph *gr, const wchar_t *text)
 		if(text[i]=='\\')	next = i;
 		else if(text[i]>' ')next = 0;
 		if(text[i]=='\n')
-		{	// if string need to be continued then I but ' ' instead of 0x0 and
+		{	// if string need to be continued then I put ' ' instead of 0x0 and
 			// pointer next string to 0x0. Last one for keeping number of strings.
 			if(next)
 			{	for(size_t ii=next;ii<=i;ii++)	wcs[ii]='\b';	str[n] = wcs+s-1;	next=0;	}

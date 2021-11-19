@@ -148,7 +148,6 @@ typedef size_t msize;
 
 #if !MGL_SYS_NAN
 #include <float.h>
-#include <math.h>
 const unsigned long long mgl_nan[2] = {0x7fffffffffffffff, 0x7fffffff};
 const unsigned long long mgl_inf[2] = {0x7ff0000000000000, 0x7f800000};
 #define NANd    (*(double*)mgl_nan)
