@@ -598,6 +598,99 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @end deftypefn
 
 
+
+@anchor{bernoulli}
+@deftypefn {Команда MGL} {} bernoulli dat [@code{p=0.5}]
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndBernoulli (@code{mreal} p=0.5)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_bernoulli (@code{HMDT} dat, @code{mreal} p)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_bernoulli (@code{mreal} p)
+@end ifclear
+Заполняет массив случайными числами с распределением Бернулли вероятности @var{p}.
+@end deftypefn
+
+@anchor{binomial}
+@deftypefn {Команда MGL} {} binomial dat @code{n [p=0.5]}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndBinomial (@code{long} n, @code{mreal} p=0.5)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_binomial (@code{HMDT} dat, @code{long} n, @code{mreal} p)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_binomial (@code{long} n, @code{mreal} p)
+@end ifclear
+Заполняет массив случайными числами с биномиальным распределением в @var{n} бросков с вероятностью @var{p}.
+@end deftypefn
+
+@anchor{brownian}
+@deftypefn {Команда MGL} {} brownian dat @code{y1 y2 sigma h}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndBrownian (@code{mreal} y1, @code{mreal} y2, @code{mreal} sigma, @code{mreal} h)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_brownian (@code{HMDT} dat, @code{mreal} y1, @code{mreal} y2, @code{mreal} sigma, @code{mreal} h)
+@end ifclear
+Заполняет массив случайным броуновским движением.
+@end deftypefn
+
+@anchor{discrete}
+@deftypefn {Команда MGL} {} discrete dat vdat
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndDiscrete (@code{const mglDataA &}vdat)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_discrete (@code{HMDT} dat, @code{HCDT} vdat)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_discrete (@code{HCDT} vdat)
+@end ifclear
+Заполняет массив случайными числами с дискретным распределением.
+@end deftypefn
+
+@anchor{exponential}
+@deftypefn {Команда MGL} {} exponential dat [@code{p}]
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndExponential (@code{mreal} p)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_exponential (@code{HMDT} dat, @code{mreal} p)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_exponential (@code{mreal} p)
+@end ifclear
+Заполняет массив случайными числами с экспоненциальным распределением масштаба @var{p}.
+@end deftypefn
+
+@anchor{gaussian}
+@deftypefn {Команда MGL} {} gaussian dat [@code{mu=0 sigma=1}]
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndGaussian (@code{mreal} mu=0, @code{mreal} sigma=1)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_gaussian (@code{HMDT} dat, @code{mreal} mu, @code{mreal} sigma)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_gaussian (@code{mreal} mu, @code{mreal} sigma)
+@end ifclear
+Заполняет массив случайными числами с гауссовым распределением со средним @var{mu} и масштабом @var{sigma}.
+@end deftypefn
+
+@anchor{shuffle}
+@deftypefn {Команда MGL} {} shuffle dat ['dir'='a']
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndShuffle (@code{char} dir='a')
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_shuffle (@code{HMDT} dat, @code{char} dir)
+@end ifclear
+Перемешивает содержимое ячеек (для @var{dir}=@samp{a}) или срезов (для @var{dir}=@samp{xyz}).
+@end deftypefn
+
+@anchor{uniform}
+@deftypefn {Команда MGL} {} uniform dat @code{lo hi}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndUniform (@code{mreal} lo, @code{mreal} hi)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_uniform (@code{HMDT} dat, @code{mreal} lo, @code{mreal} hi)
+@deftypefnx {Функция С} @code{mreal} mgl_rnd_uniform (@code{mreal} lo, @code{mreal} hi)
+@end ifclear
+Заполняет массив случайными числами с равномерным распределением в интервале (@var{lo},@var{hi}).
+@end deftypefn
+
+@anchor{uniformint}
+@deftypefn {Команда MGL} {} uniformint dat @code{lo hi}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} RndInteger (@code{long} lo, @code{long} hi)
+@deftypefnx {Функция С} @code{void} mgl_data_rnd_integer (@code{HMDT} dat, @code{long} lo, @code{mreal} hi)
+@deftypefnx {Функция С} @code{long} mgl_rnd_integer (@code{long} lo, @code{long} hi)
+@end ifclear
+Заполняет массив случайными целыми числами с равномерным распределением в интервале [@var{lo},@var{hi}).
+@end deftypefn
+
+
+
+
+
 @c ------------------------------------------------------------------
 @external{}
 @node File I/O, Make another data, Data filling, Data processing
@@ -617,7 +710,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefn {Команда MGL} {} read @sc{dat} 'fname'
 @deftypefnx {Команда MGL} {} read @sc{redat} @sc{imdat} 'fname'
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglData}} @code{void} Read (@code{const char *}fname)
+@deftypefnx {Метод класса @code{mglData}} @code{bool} Read (@code{const char *}fname)
 @deftypefnx {Метод класса @code{mglDataC}} @code{bool} Read (@code{const char *}fname)
 @deftypefnx {Функция С} @code{int} mgl_data_read (@code{HMDT} dat, @code{const char *}fname)
 @deftypefnx {Функция С} @code{int} mgl_datac_read (@code{HADT} dat, @code{const char *}fname)
@@ -628,7 +721,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefn {Команда MGL} {} read @sc{dat} 'fname' @code{mx [my=1 mz=1]}
 @deftypefnx {Команда MGL} {} read @sc{redat} @sc{imdat} 'fname' @code{mx [my=1 mz=1]}
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglData}} @code{void} Read (@code{const char *}fname, @code{int} mx, @code{int} my=@code{1}, @code{int} mz=@code{1})
+@deftypefnx {Метод класса @code{mglData}} @code{bool} Read (@code{const char *}fname, @code{int} mx, @code{int} my=@code{1}, @code{int} mz=@code{1})
 @deftypefnx {Метод класса @code{mglDataC}} @code{bool} Read (@code{const char *}fname, @code{int} mx, @code{int} my=@code{1}, @code{int} mz=@code{1})
 @deftypefnx {Функция С} @code{int} mgl_data_read_dim (@code{HMDT} dat, @code{const char *}fname, @code{int} mx, @code{int} my, @code{int} mz)
 @deftypefnx {Функция С} @code{int} mgl_datac_read_dim (@code{HADT} dat, @code{const char *}fname, @code{int} mx, @code{int} my, @code{int} mz)
@@ -639,7 +732,7 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @anchor{readmat}
 @deftypefn {Команда MGL} {} readmat @sc{dat} 'fname' [@code{dim=2}]
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglData}} @code{void} ReadMat (@code{const char *}fname, @code{int} dim=@code{2})
+@deftypefnx {Метод класса @code{mglData}} @code{bool} ReadMat (@code{const char *}fname, @code{int} dim=@code{2})
 @deftypefnx {Метод класса @code{mglDataC}} @code{bool} ReadMat (@code{const char *}fname, @code{int} dim=@code{2})
 @deftypefnx {Функция С} @code{int} mgl_data_read_mat (@code{HMDT} dat, @code{const char *}fname, @code{int} dim)
 @deftypefnx {Функция С} @code{int} mgl_datac_read_mat (@code{HADT} dat, @code{const char *}fname, @code{int} dim)
@@ -650,8 +743,8 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @anchor{readall}
 @deftypefn {Команда MGL} {} readall @sc{dat} 'templ' @code{v1 v2 [dv=1 slice=off]}
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglData}} @code{void} ReadRange (@code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step=@code{1.f}, @code{bool} as_slice=@code{false})
-@deftypefnx {Метод класса @code{mglDataC}} @code{void} ReadRange (@code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step=@code{1}, @code{bool} as_slice=@code{false})
+@deftypefnx {Метод класса @code{mglData}} @code{bool} ReadRange (@code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step=@code{1.f}, @code{bool} as_slice=@code{false})
+@deftypefnx {Метод класса @code{mglDataC}} @code{bool} ReadRange (@code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step=@code{1}, @code{bool} as_slice=@code{false})
 @deftypefnx {Функция С} @code{int} mgl_data_read_range (@code{HMDT} dat, @code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step, @code{int} as_slice)
 @deftypefnx {Функция С} @code{int} mgl_datac_read_range (@code{HADT} dat, @code{const char *}templ, @code{mreal} from, @code{mreal} to, @code{mreal} step, @code{int} as_slice)
 @end ifclear
@@ -660,8 +753,8 @@ Allocate memory and set data from variable argument list of @emph{double} values
 
 @deftypefn {Команда MGL} {} readall @sc{dat} 'templ' @code{[slice=off]}
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglData}} @code{void} ReadAll (@code{const char *}templ, @code{bool} as_slice=@code{false})
-@deftypefnx {Метод класса @code{mglDataC}} @code{void} ReadAll (@code{const char *}templ, @code{bool} as_slice=@code{false})
+@deftypefnx {Метод класса @code{mglData}} @code{bool} ReadAll (@code{const char *}templ, @code{bool} as_slice=@code{false})
+@deftypefnx {Метод класса @code{mglDataC}} @code{bool} ReadAll (@code{const char *}templ, @code{bool} as_slice=@code{false})
 @deftypefnx {Функция С} @code{int} mgl_data_read_all (@code{HMDT} dat, @code{const char *}templ, @code{int} as_slice)
 @deftypefnx {Функция С} @code{int} mgl_datac_read_all (@code{HADT} dat, @code{const char *}templ, @code{int} as_slice)
 @end ifclear
@@ -765,6 +858,15 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @deftypefnx {Функция С} @code{void} mgl_data_export (@code{HMDT} dat, @code{const char *}fname, @code{const char *}scheme, @code{mreal} v1, mreal v2, @code{int} ns) const
 @end ifclear
 Сохраняет данные в растровый файл. Числовые значения, нормированные в диапазон [@var{v1}, @var{v2}], преобразуются в RGB значения пикселов, используя цветовую схему @var{sch} (@pxref{Color scheme}). Если @var{v1}>=@var{v2}, то значения @var{v1}, @var{v2} определяются автоматически как минимальное и максимальное значение данных.
+@end deftypefn
+
+@anchor{readbin}
+@deftypefn {Команда MGL} {} readbin dat 'fname' @code{type}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{bool} ReadBin (@code{const char *}fname, @code{int} type)
+@deftypefnx {Функция С} @code{int} mgl_data_read_bin (@code{HMDT} dat, @code{const char *}fname, @code{int} type)
+@end ifclear
+Читает данные из файла в бинарном формате. Параметр @var{type} задает тип данных в файле: 0 - double, 1 - float, 2 - long double, 3 - long int, 4 - int, 5 - short int, 6 - char. Внимание! Эту функцию не рекомендуется использовать с данными, сохраненными на других компьютерах из-за возможных проблем с бинарным представлением чисел. Предпочтительнее использовать HDF формат, см. @ref{readhdf}.
 @end deftypefn
 
 @c ------------------------------------------------------------------
@@ -1041,8 +1143,8 @@ res_k = \sum_ij how(x_i,y_j,z_k) a_ij/ \sum_ij a_ij
 @end deftypefn
 
 @ifclear UDAV
-@deftypefn {C function} @code{HMDT} mgl_formula_calc (@code{const char *}str, @code{long} n, ...)
-@deftypefnx {C function} @code{HADT} mgl_formula_calc_c (@code{const char *}str, @code{long} n, ...)
+@deftypefn {Функция С} @code{HMDT} mgl_formula_calc (@code{const char *}str, @code{long} n, ...)
+@deftypefnx {Функция С} @code{HADT} mgl_formula_calc_c (@code{const char *}str, @code{long} n, ...)
 Вычисляет формулу @var{str} для заданного списка из @var{n} массивов данных типа @code{HCDT}. Имена переменных соответствуют именам массивов. Возвращенный массив должен быть удален пользователем по окончании использования. См. также @ref{fill}.
 @end deftypefn
 @end ifclear
@@ -1306,6 +1408,18 @@ These functions change the data in some direction like differentiations, integra
 @math{\sqrt@{\sum a_ij(k)/\sum a_ij(0)@}}.
 @end ifnottex
 @end deftypefn
+
+@anchor{keep}
+@deftypefn {Команда MGL} {} keep dat 'dir' @code{i [j=0]}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{void} Keep (@code{const char *}dir, @code{long} i, @code{long} j=0)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Keep (@code{const char *}dir, @code{long} i, @code{long} j=0)
+@deftypefnx {Функция С} @code{void} mgl_data_keep (@code{HMDT} dat, @code{const char *}dir, @code{long} i, @code{long} j)
+@deftypefnx {Функция С} @code{void} mgl_datac_keep (@code{HADT} dat, @code{const char *}dir, @code{long} i, @code{long} j=0)
+@end ifclear
+Ограничивает изменение фазы/знака или амплитуды (если @var{dir} содержит @samp{a}) данных вдоль направления @var{dir} фиксируя значение в точке @{@var{i},@var{j}@} начального среза. Функция полезна для удаления общего набега фазы в комплексных данных. @sref{keep sample}
+@end deftypefn
+
 
 @anchor{limit}
 @deftypefn {Команда MGL} {} limit dat @code{val}

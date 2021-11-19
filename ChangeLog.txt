@@ -1,6 +1,6 @@
 2.5 Released ?? August 2021
 
-* Add 'keep' for keeping the data sign or value along line i and j in given direction
+* Add 'keep' for keeping the data phase/sign or value along line i and j in given direction
 * Add functions 'sum', 'prod' at formula evaluation, like "sum(_i^2,5)" will produce "30"=0+1^2+2^2+3^2+4^2, and "prod(1+_i,5)" will produce 5!="120". You can nest them for variables _i,_j,...,_z, like "sum(sum(_j+_i^2,5),5)" will give "200".
 * Add functions 'value', 'spline' at formula evaluation, like "value(a,5)" will give value of 6-th element of a, i.e. a[5].
 * Add user-defined functions fn1()...fn9() at formula evaluation, like "fn1(3)\x^_1" will produce "x^3".
@@ -8,6 +8,8 @@
 * Add 'lines' to draw a set of lines with arrows between points.
 * Add 'dcont' to draw a set of curves, which are intersection of two isosurfaces at given level.
 * Add 'first', 'last' to get array of first/last indexes of values larger specified one along given direction.
+* Add 'bernoulli', 'binomial', 'brownian', 'discrete', 'exponential', 'gaussian', 'shuffle', 'uniform', 'uniformint' for data filling by random numbers with different distributions.
+* Add 'readbin' to read data from binary files.
 * Add 'texparse' to enable/disable TeX-like command parsing at text output.
 * Update ODE: regularization is used if dt*tmax<0 (total time may differ, but number of steps still the same).
 * Add mgl_default_graph() -- the global (default) pointer to HMGL for keeping plot settings, simplifying external scripts and capture it in GUI.

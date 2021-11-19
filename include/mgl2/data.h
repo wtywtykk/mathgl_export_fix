@@ -251,13 +251,13 @@ using mglDataA::Last;
 	/// Fills data by random numbers of uniform distribution in range [lo,hi]
 	inline void RndUniform(mreal lo, mreal hi)
 	{	mgl_data_rnd_uniform(this, lo, hi);	}
-	/// Fills data by random numbers of bernoulli distribution
+	/// Fills data by random numbers of Bernoulli distribution
 	inline void RndBernoulli(mreal p=0.5)
 	{	mgl_data_rnd_bernoulli(this, p);	}
 	/// Fills data by random numbers of binomial distribution
 	inline void RndBinomial(long trials, mreal p=0.5)
 	{	mgl_data_rnd_binomial(this, trials, p);	}
-	/// Fills data by random numbers of gaussian distribution
+	/// Fills data by random numbers of Gaussian distribution
 	inline void RndGaussian(mreal mu=0.0, mreal sigma=1.0)
 	{	mgl_data_rnd_gaussian(this, mu, sigma);	}
 	/// Fills data by random numbers of exponential distribution
@@ -267,10 +267,10 @@ using mglDataA::Last;
 	inline void RndDiscrete(const mglDataA &A)
 	{	mgl_data_rnd_discrete(this, &A);	}
 	/// Shuffles elements or slices of data array
-	inline void Shuffle(char dir='a')
+	inline void RndShuffle(char dir='a')
 	{	mgl_shuffle(this, dir);	}
 	/// Fills data by fractional brownian motions along x-direction
-	inline void Brownian(mreal y1, mreal y2, mreal sigma, mreal alpha)
+	inline void RndBrownian(mreal y1, mreal y2, mreal sigma, mreal alpha)
 	{	mgl_data_brownian(this, y1, y2, sigma, alpha);	}
 	
 	/// Read data from tab-separated text file with auto determining size

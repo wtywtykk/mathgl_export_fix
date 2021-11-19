@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-19 15:00+0300\n"
+"POT-Creation-Date: 2021-11-20 00:15+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -2265,41 +2265,41 @@ msgstr "Llenar en rango"
 msgid "Fill x-,k-samples for transforms"
 msgstr "Llenar muestreo x o k para transformada"
 
-#: src/random.cpp:343
+#: src/random.cpp:350
 msgid "Fills by fractional brownian motion"
 msgstr ""
 
-#: src/random.cpp:349
+#: src/random.cpp:356
 msgid "Fills by random integers uniformly chosen in [lo, hi)"
 msgstr ""
 
-#: src/random.cpp:341
+#: src/random.cpp:348
 msgid ""
 "Fills by random numbers according to Bernoulli distribution with probability "
 "p"
 msgstr ""
 
-#: src/random.cpp:346
+#: src/random.cpp:353
 msgid "Fills by random numbers according to Gaussian distribution"
 msgstr ""
 
-#: src/random.cpp:342
+#: src/random.cpp:349
 msgid ""
 "Fills by random numbers according to binomial distribution in n coin flips "
 "with probability p"
 msgstr ""
 
-#: src/random.cpp:344
+#: src/random.cpp:351
 msgid "Fills by random numbers according to discrete distribution"
 msgstr ""
 
-#: src/random.cpp:345
+#: src/random.cpp:352
 msgid ""
 "Fills by random numbers according to exponential distribution with "
 "probability p"
 msgstr ""
 
-#: src/random.cpp:348
+#: src/random.cpp:355
 msgid "Fills by random numbers uniformly chosen in [lo,hi)"
 msgstr ""
 
@@ -4814,7 +4814,7 @@ msgstr "Mostrar cuadro previo de la animación"
 msgid "Show previous slide (Ctrl+,)."
 msgstr "Mostrar cuadro previo (Ctrl+,)."
 
-#: src/random.cpp:347
+#: src/random.cpp:354
 msgid "Shuffle data cells (for dir='a') or slices (for dir='xyz')"
 msgstr ""
 

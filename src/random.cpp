@@ -31,31 +31,62 @@
 //
 //-----------------------------------------------------------------------------
 mreal MGL_EXPORT mgl_rnd_integer(long lo, long hi)
-{	return round((hi - lo) * mgl_rnd() + lo);	}
+{	return round((hi - lo)*mgl_rnd() + lo);	}
 double MGL_EXPORT mgl_rnd_integer_(int *lo, int *hi)
 {	return mgl_rnd_integer(*lo, *hi);	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_rnd_integer(HMDT d, long lo, long hi)
+{
+	const long n = d->GetNN(), da=hi-lo;
+	for (long i=0; i<n; i++)    d->a[i] = round(da*mgl_rnd() + lo);
+}
+void MGL_EXPORT mgl_data_rnd_integer_(uintptr_t *d, int *lo, int *hi)
+{	mgl_data_rnd_integer(_DT_,*lo,*hi);	}
 //-----------------------------------------------------------------------------
 mreal MGL_EXPORT mgl_rnd_uniform(mreal lo, mreal hi)
 {	return (hi - lo) * mgl_rnd() + lo;	}
 double MGL_EXPORT mgl_rnd_uniform_(double *lo, double *hi)
 {	return mgl_rnd_uniform(*lo,*hi);	}
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_rnd_uniform(HMDT d, mreal lo, mreal hi)
+{
+	const long n = d->GetNN();
+	const mreal da = hi-lo;
+	for (long i=0; i<n; i++)    d->a[i] = da*mgl_rnd() + lo;
+}
+void MGL_EXPORT mgl_data_rnd_uniform_(uintptr_t *d, double *lo, double *hi)
+{	mgl_data_rnd_uniform(_DT_,*lo,*hi);	}
+//-----------------------------------------------------------------------------
 mreal MGL_EXPORT mgl_rnd_bernoulli(mreal p)
 {	return (mgl_rnd() < p)? 1:0;	}
 double MGL_EXPORT mgl_rnd_bernoulli_(double *p)
 {	return mgl_rnd_bernoulli(*p);	}
 //-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_rnd_bernoulli(HMDT d, mreal p=0.5)
+{
+	const long n = d->GetNN();
+	for (long i=0; i<n; i++)    d->a[i] = (mgl_rnd() < p)? 1:0;
+}
+void MGL_EXPORT mgl_data_rnd_bernoulli_(uintptr_t *d, double *p)
+{	mgl_data_rnd_bernoulli(_DT_,*p);	}
+//-----------------------------------------------------------------------------
 long MGL_EXPORT mgl_rnd_binomial(long trials, mreal p)
 {
 	long heads=0;
 	for(long i=0; i<trials; i++)
-	{
-		if(mgl_rnd() < p)  heads++;
-	}
+		if(mgl_rnd()<p)  heads++;
 	return heads;
 }
 int MGL_EXPORT mgl_rnd_binomial_(int *trials, double *p)
 {	return mgl_rnd_binomial(*trials, *p);	}
+//-----------------------------------------------------------------------------
+void MGL_EXPORT mgl_data_rnd_binomial(HMDT d, long trials, mreal p=0.5)
+{
+	const long n = d->GetNN();
+	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_binomial(trials, p);
+}
+void MGL_EXPORT mgl_data_rnd_binomial_(uintptr_t *d, double *p)
+{	mgl_data_rnd_binomial(_DT_,*p);	}
 //-----------------------------------------------------------------------------
 mreal MGL_EXPORT mgl_rnd_gaussian(mreal mu, mreal sigma)
 {
@@ -71,99 +102,75 @@ mreal MGL_EXPORT mgl_rnd_gaussian(mreal mu, mreal sigma)
 double MGL_EXPORT mgl_rnd_gaussian_(double *mu, double *sigma)
 {	return mgl_rnd_gaussian(*mu, *sigma);	}
 //-----------------------------------------------------------------------------
-mreal MGL_EXPORT mgl_rnd_exponential(mreal lambda)
-{	return -log(1.0 - mgl_rnd()) / lambda;	}
-double MGL_EXPORT mgl_rnd_exponential_(double *lambda)
-{	return mgl_rnd_exponential(*lambda);	}
-//-----------------------------------------------------------------------------
-long MGL_EXPORT mgl_rnd_discrete(HCDT A) // this assumes A to be 1d
-{
-	long i, n=A->GetNx();
-	mreal amax=0.0, sum_prob=0.0;
-
-	for(long i=0; i<n; i++) amax += A->v(i);
-
-	mreal r=amax*mgl_rnd();
-	for(i=0; i<n; i++)
-	{
-		sum_prob += A->v(i);
-		if(sum_prob > r)   break;
-	}
-	return i;
-}
-double MGL_EXPORT mgl_rnd_discrete_(uintptr_t *d)
-{	return mgl_rnd_discrete(_DT_);	}
-//-----------------------------------------------------------------------------
-//
-//	Data filling randomly
-//
-//-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_data_rnd_integer(HMDT d, long lo, long hi)
-{
-	long n = d->GetNN();
-	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_integer(lo, hi);
-}
-void MGL_EXPORT mgl_data_rnd_integer_(uintptr_t *d, int *lo, int *hi)
-{	mgl_data_rnd_integer(_DT_,*lo,*hi);	}
-//-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_data_rnd_uniform(HMDT d, mreal lo, mreal hi)
-{
-	long n = d->GetNN();
-	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_uniform(lo, hi);
-}
-void MGL_EXPORT mgl_data_rnd_uniform_(uintptr_t *d, double *lo, double *hi)
-{	mgl_data_rnd_uniform(_DT_,*lo,*hi);	}
-//-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_data_rnd_bernoulli(HMDT d, mreal p=0.5)
-{
-	long n = d->GetNN();
-	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_bernoulli(p);
-}
-void MGL_EXPORT mgl_data_rnd_bernoulli_(uintptr_t *d, double *p)
-{	mgl_data_rnd_bernoulli(_DT_,*p);	}
-//-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_data_rnd_binomial(HMDT d, long trials, mreal p=0.5)
-{
-	long n = d->GetNN();
-	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_binomial(trials, p);
-}
-void MGL_EXPORT mgl_data_rnd_binomial_(uintptr_t *d, double *p)
-{	mgl_data_rnd_binomial(_DT_,*p);	}
-//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_data_rnd_gaussian(HMDT d, mreal mu=0.0, mreal sigma=1.0)
 {
-	long n = d->GetNN();
+	const long n = d->GetNN();
 	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_gaussian(mu, sigma);
 }
 void MGL_EXPORT mgl_data_rnd_gaussian_(uintptr_t *d, double *mu, double *s)
 {	mgl_data_rnd_gaussian(_DT_,*mu,*s);	}
 //-----------------------------------------------------------------------------
+mreal MGL_EXPORT mgl_rnd_exponential(mreal lambda)
+{	return -log(1.0 - mgl_rnd()) / lambda;	}
+double MGL_EXPORT mgl_rnd_exponential_(double *lambda)
+{	return mgl_rnd_exponential(*lambda);	}
+//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_data_rnd_exponential(HMDT d, mreal lambda)
 {
-	long n = d->GetNN();
-	for (long i=0; i<n; i++)    d->a[i] = mgl_rnd_exponential(lambda);
+	const long n = d->GetNN();
+	for (long i=0; i<n; i++)    d->a[i] = -log(1.0 - mgl_rnd()) / lambda;
 }
 void MGL_EXPORT mgl_data_rnd_exponential_(uintptr_t *d, double *l)
 {	mgl_data_rnd_exponential(_DT_,*l);	}
 //-----------------------------------------------------------------------------
+long MGL_EXPORT mgl_rnd_discrete(HCDT A) // this assumes A to be 1d
+{
+	long n=A->GetNx();
+	mreal amax=0.0, sum_prob=0.0;
+
+	mreal *sum = new mreal[n];
+	for(long i=0; i<n; i++)
+	{	sum[i] = amax;	amax += A->v(i);	}
+
+	mreal r=amax*mgl_rnd();
+// 	for(i=0; i<n; i++)
+// 	{
+// 		sum_prob += A->v(i);
+// 		if(sum_prob > r)   break;
+// 	}
+	long i1=0,i2=n-1,i=0;
+	while(i2>i1+1)
+	{
+		i = (i1+i2)/2;
+		if(sum[i]<r)	i1=i;	else	i2=i;
+	}
+	delete []sum;
+	return i+1;
+}
+double MGL_EXPORT mgl_rnd_discrete_(uintptr_t *d)
+{	return mgl_rnd_discrete(_DT_);	}
+//-----------------------------------------------------------------------------
 void MGL_EXPORT mgl_data_rnd_discrete(HMDT d, HCDT a)
 {
 	if (!d || !a)    return;
-	long m = d->GetNN(), n=a->GetNx();
+	const long m = d->GetNN(), n=a->GetNx();
 	mreal amax=0;
-	for(long i=0; i<n; i++) amax += a->v(i);
+	mreal *sum = new mreal[n];
+	for(long i=0; i<n; i++)
+	{	sum[i] = amax;	amax += a->v(i);	}
 #pragma omp parallel for
 	for(long j=0;j<m;j++)
 	{
-		mreal r=amax*mgl_rnd(), sum_prob=0;
-		long i;
-		for(i=0; i<n; i++)
+		mreal r=amax*mgl_rnd();
+		long i1=0,i2=n-1,i=0;
+		while(i2>i1+1)
 		{
-			sum_prob += a->v(i);
-			if(sum_prob > r)   break;
+			i = (i1+i2)/2;
+			if(sum[i]<r)	i1=i;	else	i2=i;
 		}
-		d->a[j] = i;
+		d->a[j] = i+1;
 	}
+	delete []sum;
 }
 void MGL_EXPORT mgl_data_rnd_discrete_(uintptr_t *d, uintptr_t *a)
 {	mgl_data_rnd_discrete(_DT_,_DM_(a));	}
@@ -226,7 +233,7 @@ void MGL_NO_EXPORT mgl_fill_brownian(HMDT d, long n1, long n2, mreal sigma, mrea
 			mreal delta = mgl_rnd_gaussian(0, sigma);
 			d->a[m+n*i] = (d->a[n1+n*i]+d->a[n2+n*i])/2 + delta;
 		}
-		mgl_fill_brownian(d, n1, m, sigma/alpha, alpha);
+		mgl_fill_brownian(d, n1, m, sigma/alpha, alpha);	// NOTE: probably stack overflow for huge d->nx
 		mgl_fill_brownian(d, m, n2, sigma/alpha, alpha);
 	}
 }
@@ -321,8 +328,8 @@ int MGL_NO_EXPORT mgls_shuffle(mglGraph *, long, mglArg *a, const char *k, const
 	int res=0;
 	if(k[0]=='d' && a[0].d->temp)	return 5;
 	mglData *d = dynamic_cast<mglData*>(a[0].d);
-	if (d && !strcmp(k, "ds"))	d->Shuffle(a[1].s[0]);
-	else if (d && !strcmp(k, "d"))	d->Shuffle();
+	if (d && !strcmp(k, "ds"))	d->RndShuffle(a[1].s[0]);
+	else if (d && !strcmp(k, "d"))	d->RndShuffle();
 	else    res = 1;
 	return res;
 }
@@ -332,7 +339,7 @@ int MGL_NO_EXPORT mgls_brownian(mglGraph *, long, mglArg *a, const char *k, cons
 	int res=0;
 	if(k[0]=='d' && a[0].d->temp)	return 5;
 	mglData *d = dynamic_cast<mglData*>(a[0].d);
-	if (d && !strcmp(k, "dnnnn"))	d->Brownian(a[1].v,a[2].v,a[3].v,a[4].v);
+	if (d && !strcmp(k, "dnnnn"))	d->RndBrownian(a[1].v,a[2].v,a[3].v,a[4].v);
 	else    res = 1;
 	return res;
 }

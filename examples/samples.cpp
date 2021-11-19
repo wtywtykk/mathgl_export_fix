@@ -1701,6 +1701,21 @@ void smgl_daisy(mglGraph *gr)
 	gr->SetRange('c',b);	gr->Dens(b,"BbwrR");
 }
 //-----------------------------------------------------------------------------
+const char *mmgl_keep="yrange 0 pi\nnew !a 100 300 'exp(-6*x^2+10i*(x+y^2))'"
+"subplot 2 1 0 '':box\ndens real(a) 'BbwrR'\ntext 1.1 0.5 '\to' 'a'"
+"keep a 'y' 50\nsubplot 2 1 1 '':box\ndens real(a) 'BbwrR'";
+void smgl_keep(mglGraph *gr)
+{
+	gr->SetRange('y',0,M_PI);
+	mglDataC a(100,300);	gr->Fill(a,"exp(-6*x^2+10i*(x+y^2))");
+	gr->SubPlot(2,1,0,"");	gr->Box();
+	gr->Dens(a.Real(),"BbwrR");
+	gr->Puts(1.1,0.5,"\\to","a");
+	a.Keep("y",50);
+	gr->SubPlot(2,1,1,"");	gr->Box();
+	gr->Dens(a.Real(),"BbwrR");
+}
+//-----------------------------------------------------------------------------
 const char *mmgl_cut="call 'prepare2d'\ncall 'prepare3d'\nsubplot 2 2 0:title 'Cut on (default)':rotate 50 60:light on:box:surf a; zrange -1 0.5\n"
 "subplot 2 2 1:title 'Cut off':rotate 50 60:box:surf a; zrange -1 0.5; cut off\n"
 "subplot 2 2 2:title 'Cut in box':rotate 50 60:box:alpha on\ncut 0 -1 -1 1 0 1.1:surf3 c\ncut 0 0 0 0 0 0\t# restore back\n"
@@ -3598,6 +3613,7 @@ mglSample samp[] = {
 	{"indirect",smgl_indirect,mmgl_indirect, "Comparison of @ref{subdata} vs @ref{evaluate}/"},
 	{"inplot", smgl_inplot, mmgl_inplot, "Example of @ref{inplot}, @ref{multiplot}, @ref{columnplot}, @ref{gridplot}, @ref{shearplot}, @ref{stickplot}."},
 	{"iris", smgl_iris, mmgl_iris, "Function @ref{iris} draw Iris plot for columns of data array."},
+	{"keep", smgl_keep, mmgl_keep, "Function @ref{keep} conserve initial phase along specified direction(s)."},
 	{"label", smgl_label, mmgl_label, "Function @ref{label} print text at data points. The string may contain @samp{%x}, @samp{%y}, @samp{%z} for x-, y-, z-coordinates of points, @samp{%n} for point index."},
 	{"lamerey", smgl_lamerey, mmgl_lamerey, "Function @ref{lamerey} draw Lamerey diagram."},
 	{"legend", smgl_legend, mmgl_legend , "Example of @ref{legend} styles."},

@@ -548,7 +548,7 @@ double MGL_EXPORT mgl_rnd_integer_(int *lo, int *hi);
 /// Gets random numbers of uniform distribution in range [lo,hi]
 mreal MGL_EXPORT mgl_rnd_uniform(mreal lo, mreal hi);
 double MGL_EXPORT mgl_rnd_uniform_(double *lo, double *hi);
-/// Gets random numbers of bernoulli distribution
+/// Gets random numbers of Bernoulli distribution
 mreal MGL_EXPORT mgl_rnd_bernoulli(mreal p);
 double MGL_EXPORT mgl_rnd_bernoulli_(double *p);
 /// Gets random numbers of binomial distribution

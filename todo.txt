@@ -50,16 +50,16 @@
 13. Algorithm of combining primitives with the same color to the larger one.
 
 14. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
-15. Check colorbar sample
 16. Add mgl_set_font_hscale() to MGL
 17. Add Rotate() around a point (not {0,0,0} by default).
 18. Bug of absent argument in option (like "xrange")
 19. Recurrence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
 
-22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mappring + progonka.
+22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mapping + progonka.
 25. Check '\overline'
 26. Colorbar options?!
 27. Unicode in option 'legend'
+
 28. Try to add ld options: "-init mgl_init -fini mgl_fini" for MSVC ???
 
 ZZ. Update *.i for new functions {before release!!!}
@@ -108,6 +108,8 @@ D. Docs about JS interface
 	* Example of 'roots'
 	* Example of custom dialog
 	* Example of 'progress'
+	* Example of 'shuffle'
+	* Example of 'brownian'
 	
 3. Docs about mgllab (overview, dialogs, ...)
 4. Example of Evaluate + ".mx" ???
@@ -119,12 +121,8 @@ D. Docs about JS interface
 
 9. Docs about Armadillo interface
 
-12. Docs about 'keep'
-16. Add docs about 'readbin'
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 26. Update docs about .s[axyz], .k[axyz]
-28. Brownian&Shuffle&RND filling sample
-30. Docs about random.cpp functions
 
 ZZ. Update time.texi {before release!!!}
 
