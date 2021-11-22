@@ -483,7 +483,6 @@ void mglCanvas::Axis(const char *dir, const char *stl, const char *opt)
 
 	mreal angl = SaveState(opt);
 	AdjustTicks(dir,mglchr(stl,'a'),Tstl);
-	LoadState();
 
 	ax.pos = strchr(dir,'X') ? 'T':'t';
 	ay.pos = strchr(dir,'Y') ? 'T':'t';
@@ -505,6 +504,7 @@ void mglCanvas::Axis(const char *dir, const char *stl, const char *opt)
 	else if(strchr(dir,'Y') || strchr(dir,'y'))
 	{	ay.inv = inv;	DrawAxis(ay, text, arr, stl, angl);	}
 	set(ret, MGL_ENABLE_RTEXT);
+	LoadState();
 }
 //-----------------------------------------------------------------------------
 void mglCanvas::DrawAxis(mglAxis &aa, int text, char arr,const char *stl,mreal angl)
@@ -974,7 +974,7 @@ void mglCanvas::Box(const char *col, bool ticks)
 	clr(MGL_NOSUBTICKS);	Org=o;	TickLen=tl;
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::Colorbar(const char *sch)
+void mglCanvas::Colorbar(const char *sch, const char *opt)
 {
 	bool in = mglchr(sch,'I');
 	mreal sx = (fabs(B.b[0])+fabs(B.b[1])+fabs(B.b[2]))/B.pf/B1.b[0], x=1;
@@ -983,10 +983,10 @@ void mglCanvas::Colorbar(const char *sch)
 	else if(mglchr(sch,'^'))	{	x=0;	y=in?(1+sy)/2:0.95;	}
 	else if(mglchr(sch,'_'))	{	x=0;	y=in?(1-sy)/2:0.05;	}
 	else	{	x=in?(1+sx)/2:0.95;	y=0;	}
-	Colorbar(sch, x, y, 1, 1);
+	Colorbar(sch, x, y, 1, 1, opt);
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h)
+void mglCanvas::Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h, const char *opt)
 {
 	bool in = mglchr(sch,'I');
 	bool text = !mglchr(sch,'~');
@@ -1010,12 +1010,12 @@ void mglCanvas::Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h)
 	{	v.Fill(log(-Min.c), log(-Max.c));	v.Modify("-exp(u)");	}
 	mreal *c=new mreal[n];
 	for(long i=0;i<n;i++)	c[i] = GetC(s,v.a[i]);
-	colorbar(&v, c, where, x, y, w, h, text);
+	colorbar(&v, c, where, x, y, w, h, text, opt);
 	delete []c;
 	if(mglchr(sch,'A'))	Pop();
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::Colorbar(HCDT v, const char *sch)
+void mglCanvas::Colorbar(HCDT v, const char *sch, const char *opt)
 {
 	bool in = mglchr(sch,'I');
 	mreal sx = (fabs(B.b[0])+fabs(B.b[1])+fabs(B.b[2]))/B.pf/B1.b[0], x=1;
@@ -1024,10 +1024,10 @@ void mglCanvas::Colorbar(HCDT v, const char *sch)
 	if(mglchr(sch,'<'))	{	x=in?(1-sx)/2:0;	y=0;	}
 	if(mglchr(sch,'^'))	{	x=0;	y=in?(1+sy)/2:1;	}
 	if(mglchr(sch,'_'))	{	x=0;	y=in?(1-sy)/2:0;	}
-	Colorbar(v, sch, x, y, 1, 1);
+	Colorbar(v, sch, x, y, 1, 1, opt);
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::Colorbar(HCDT v, const char *sch, mreal x, mreal y, mreal w, mreal h)
+void mglCanvas::Colorbar(HCDT v, const char *sch, mreal x, mreal y, mreal w, mreal h, const char *opt)
 {
 	bool in = mglchr(sch,'I');
 	bool text = !mglchr(sch,'~');
@@ -1048,14 +1048,16 @@ void mglCanvas::Colorbar(HCDT v, const char *sch, mreal x, mreal y, mreal w, mre
 	int nc = GetNumPal(s*256);
 	mreal dc = nc>1 ? 1/(MGL_EPSILON*(nc-1)):0;
 	for(long i=0;i<v->GetNx();i++)	c[i] = s+i*dc;
-	colorbar(v, c, where, x, y, w, h, text);
+	colorbar(v, c, where, x, y, w, h, text, opt);
 	delete []c;
 	if(mglchr(sch,'A'))	Pop();
 }
 //-----------------------------------------------------------------------------
-void mglCanvas::colorbar(HCDT vv, const mreal *c, int where, mreal x, mreal y, mreal w, mreal h, bool text)
+void mglCanvas::colorbar(HCDT vv, const mreal *c, int where, mreal x, mreal y, mreal w, mreal h, bool text, const char *opt)
 {
 	static int cgid=1;	StartGroup("Colorbar",cgid++);
+	mreal angl = SaveState(opt);
+
 	long n=vv->GetNx();
 	mreal s3=B.pf,ss=1/s3;		// NOTE: colorbar was wider ss=0.9;
 	mglPoint p1,p2;
@@ -1136,7 +1138,7 @@ void mglCanvas::colorbar(HCDT vv, const mreal *c, int where, mreal x, mreal y, m
 	}
 	SetPenPal(AxisStl);
 	bool inv = where!=3 && where!=0;
-	ac.ns = where;	ac.angl=NAN;	// NOTE ns isn't used for colorbar
+	ac.ns = where;	ac.angl=angl;	//NAN;	// NOTE ns isn't used for colorbar
 	if(text)	DrawLabels(ac,inv,&M);
 	clr(MGL_DISABLE_SCALE);	EndGroup();
 }

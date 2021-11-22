@@ -319,11 +319,11 @@ using mglBase::Light;
 	void Labelw(char dir, const wchar_t *text, mreal pos=0, const char *opt="");
 
 	/// Draw colorbar at edge of axis
-	void Colorbar(const char *sch=0);
-	void Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h);
+	void Colorbar(const char *sch=0, const char *opt=0);
+	void Colorbar(const char *sch, mreal x, mreal y, mreal w, mreal h, const char *opt=0);
 	/// Draw colorbar at edge of axis for manual colors
-	void Colorbar(HCDT v, const char *sch=0);
-	void Colorbar(HCDT v, const char *sch, mreal x, mreal y, mreal w, mreal h);
+	void Colorbar(HCDT v, const char *sch=0, const char *opt=0);
+	void Colorbar(HCDT v, const char *sch, mreal x, mreal y, mreal w, mreal h, const char *opt=0);
 
 	/// Draw legend of accumulated strings at position (x, y) by font with size
 	inline void Legend(mreal x, mreal y, const char *font="#", const char *opt="")
@@ -494,7 +494,7 @@ private:
 	float pen_delta;	///< delta pen width (dpw) -- the size of semi-transparent region for lines, marks, ...
 
 	/// Draw generic colorbar
-	void colorbar(HCDT v, const mreal *s, int where, mreal x, mreal y, mreal w, mreal h, bool text);
+	void colorbar(HCDT v, const mreal *s, int where, mreal x, mreal y, mreal w, mreal h, bool text, const char *opt=0);
 	/// Draw labels for ticks
 	void DrawLabels(mglAxis &aa, bool inv=false, const mglMatrix *M=0);
 	/// Get label style

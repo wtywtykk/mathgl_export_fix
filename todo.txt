@@ -27,7 +27,12 @@
 15. Add quadratic and cubic Bezier curves as primitives (update export to SVG/EPS + simplify some functions) ?!?
 16. Bypass realloc() ???
 17. Add PGM|PPM export (see https://en.wikipedia.org/wiki/Netpbm_format)
-18. UTF8 in legend-option ?
+
+18. Chord diagram ???
+19. Dendrogram specified by string "{val, {lVal,{...},{...}}, {rVal,{...},{...}} }" with styles: 's' for hor/vert lines, or straight lines by default ???
+20. Voronoi diagram ??? -- triangulation + coloring by point
+
+18. Unicode/UTF8 in legend-option ?
 
 ============= NEW FEATURES =============
 
@@ -35,13 +40,10 @@
 2. Quality=3 for mirror+shadows + arrow_plot_3d? Could be in bitmap only mode
 3. Add "text3d x y z lx ly lz nx ny nz 'txt' ['stl'='' depth=0.1 depth2=nan]"
 4. Flag to determine discontinuous surfaces in 'fsurf'
-
 5. mgl.cgi -- add log-file{IP,time,script}, add file-password (enable I/O if pass is the same as in a file)
-6. Chord diagram ???
+
+6. Recurrence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
 7. Calendar diagram -- 1D data as dens for 7-row (day) or 12-row (months) + divisions at month or year
-8. Dendrogram specified by string "{val, {lVal,{...},{...}}, {rVal,{...},{...}} }" with styles: 's' for hor/vert lines, or straight lines by default ???
-9. Voronoi diagram ??? -- triangulation + coloring by point
-10. Sankey diagram -- 2d version of tube
 
 11. Use FreeType for getting font/glyph information. This need quick drawing of quadratic and cubic Bezier curves (see example5.cpp). https://www.freetype.org/freetype2/docs/tutorial/step3.html -- add optimization of bezier curves by number of points. Use it as glyph definition or as default source for all/unknown glyphs!?
 
@@ -50,19 +52,12 @@
 13. Algorithm of combining primitives with the same color to the larger one.
 
 14. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
+
 16. Add mgl_set_font_hscale() to MGL
 17. Add Rotate() around a point (not {0,0,0} by default).
-18. Bug of absent argument in option (like "xrange")
-19. Recurrence plot u_{ij} = |a_i-a_j|<epsilon && Cross-reccurence plot u_{ij} = |a_i-b_j|<epsilon. See http://www.recurrence-plot.tk/crps.php
-
 22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mapping + progonka.
-25. Check '\overline'
-26. Colorbar options?!
-27. Unicode in option 'legend'
-
 28. Try to add ld options: "-init mgl_init -fini mgl_fini" for MSVC ???
 
-ZZ. Update *.i for new functions {before release!!!}
 ZZ. Update *.i for new functions {before release!!!}
 
 curve_draw: step?, bifurcation?, flow3d
@@ -119,10 +114,7 @@ D. Docs about JS interface
 7. Add doc about mglWnd::Window();
 8. Add docs about Fl_MGLView.
 
-9. Docs about Armadillo interface
-
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
-26. Update docs about .s[axyz], .k[axyz]
 
 ZZ. Update time.texi {before release!!!}
 

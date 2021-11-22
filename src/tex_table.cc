@@ -20,7 +20,7 @@
 #include "mgl2/font.h"
 
 /// Table of LaTeX symbols and its UTF8 codes. This array MUST BE sorted!!!
-const size_t mgl_tex_num=1924;
+const size_t mgl_tex_num=1925;
 const mglTeXsymb mgl_tex_symb[] = {
 	{0x23, L"#"},
 	{0x25, L"%"},
@@ -1201,7 +1201,7 @@ const mglTeXsymb mgl_tex_symb[] = {
 	{0x2a35, L"otimesrhrim"},
 	{0x23de, L"overbrace"},
 	{0x23b4, L"overbracket"},
-	{0x203e, L"overline"},
+// 	{0x203e, L"overline"},
 	{0x23dc, L"overparen"},
 	{0x220b, L"owns"},
 	{0x2225, L"parallel"},

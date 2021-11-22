@@ -453,11 +453,28 @@ Allocates memory and copies the data from the @code{std::vector<T>} array.
 Allocates memory and scanf the data from the string.
 @end deftypefn
 
-
 @deftypefn {Method on @code{mglData}} @code{void} SetList (@code{long} n, ...)
 Allocate memory and set data from variable argument list of @emph{double} values. Note, you need to specify decimal point @samp{.} for integer values! For example, the code @code{SetList(2,0.,1.);} is correct, but the code @code{SetList(2,0,1);} is incorrect.
 @end deftypefn
 
+@deftypefn {Method on @code{mglData}} @code{void} Set (@code{const arma::vec &}d)
+@deftypefnx {Method on @code{mglData}} @code{void} Set (@code{const arma::mat &}d)
+@deftypefnx {Method on @code{mglData}} @code{void} Set (@code{const arma::cube &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::vec &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::cx_vec &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::mat &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::cx_mat &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::cube &}d)
+@deftypefnx {Method on @code{mglDataC}} @code{void} Set (@code{const arma::cx_cube &}d)
+Allocates memory and copies the data from the Armadillo structures.
+@end deftypefn
+
+@deftypefn {Method on @code{mglData}} @code{arma::mat} arma_mat (@code{long} k=0)
+@deftypefnx {Method on @code{mglData}} @code{arma::cube} arma_cube ()
+@deftypefnx {Method on @code{mglData}} @code{arma::cx_mat} arma_mat (@code{long} k=0)
+@deftypefnx {Method on @code{mglData}} @code{arma::cx_cube} arma_cube ()
+Return data in Armadillo format.
+@end deftypefn
 
 
 @deftypefn {Method on @code{mglData}} @code{void} Link (@code{mglData &}from)

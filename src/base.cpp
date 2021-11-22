@@ -1575,7 +1575,7 @@ mreal mglBase::SaveState(const char *opt)
 			if(a[0]=='x')		{	Min.x=ff;	Max.x=ss;	}
 			else if(a[0]=='y')	{	Min.y=ff;	Max.y=ss;	}
 			else if(a[0]=='z')	{	Min.z=ff;	Max.z=ss;	}
-//			else if(a[0]=='c')	{	Min.c=ff;	Max.c=ss;	}	// Bad idea since there is formula for coloring
+// NOTE!	else if(a[0]=='c')	{	Min.c=ff;	Max.c=ss;	}	// Bad idea since there is formula for coloring
 		}
 		else if(!strcmp(a,"cut"))		SetCut(ff!=0);
 		else if(!strcmp(a,"meshnum"))	SetMeshNum(ff);

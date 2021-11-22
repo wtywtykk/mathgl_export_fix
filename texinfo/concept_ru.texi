@@ -260,14 +260,14 @@ MathGL версии 2.5 позволяет использовать пользо
 @deffn {Опция MGL} alpha @code{val}
 Задает величину прозрачности поверхности. Значение должно быть в диапазоне [0, 1]. См. также @ref{alphadef}
 @end deffn
-@c @cindex ambient
-@c @deffn {Опция MGL} ambient @code{val}
-@c Задает яркость фонового освещения. Значение должно быть в диапазоне [0, 1]. См. также @ref{ambient}
-@c @end deffn
-@c @cindex diffuse
-@c @deffn {Опция MGL} diffuse @code{val}
-@c Задает яркость диффузного освещения для поверхности. Значение должно быть в диапазоне [0, 1]. См. также @ref{diffuse}.
-@c @end deffn
+@cindex ambient
+@deffn {Опция MGL} ambient @code{val}
+Задает яркость фонового освещения. Значение должно быть в диапазоне [0, 1]. См. также @ref{ambient}
+@end deffn
+@cindex diffuse
+@deffn {Опция MGL} diffuse @code{val}
+Задает яркость диффузного освещения для поверхности. Значение должно быть в диапазоне [0, 1]. См. также @ref{diffuse}.
+@end deffn
 
 @cindex xrange
 @deffn {Опция MGL} xrange @code{val1 val2}

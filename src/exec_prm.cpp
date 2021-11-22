@@ -107,20 +107,21 @@ int static mgls_circle(mglGraph *gr, long , mglArg *a, const char *k, const char
 //-----------------------------------------------------------------------------
 int static mgls_colorbar(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)
 {
-	int res=0;	gr->Self()->SaveState(opt);
-	if(k[0]==0)	gr->Colorbar();
-	else if(!strcmp(k,"s"))		gr->Colorbar(a[0].s.s);
-	else if(!strcmp(k,"d"))		gr->Colorbar(*(a[0].d));
-	else if(!strcmp(k,"ds"))	gr->Colorbar(*(a[0].d), a[1].s.s);
-	else if(!strcmp(k,"snn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v);
-	else if(!strcmp(k,"snnn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v, a[3].v,1);
-	else if(!strcmp(k,"snnnn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v, a[3].v,a[4].v);
-	else if(!strcmp(k,"dsnn"))	gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v);
-	else if(!strcmp(k,"dsnnn"))	gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v, a[4].v,1);
+	int res=0;	//gr->Self()->SaveState(opt);
+	if(k[0]==0)	gr->Colorbar("",opt);
+	else if(!strcmp(k,"s"))		gr->Colorbar(a[0].s.s,opt);
+	else if(!strcmp(k,"d"))		gr->Colorbar(*(a[0].d),opt);
+	else if(!strcmp(k,"ds"))	gr->Colorbar(*(a[0].d), a[1].s.s,opt);
+	else if(!strcmp(k,"snn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v,1,1,opt);
+	else if(!strcmp(k,"snnn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v, a[3].v,1,opt);
+	else if(!strcmp(k,"snnnn"))	gr->Colorbar(a[0].s.s, a[1].v, a[2].v, a[3].v,a[4].v,opt);
+	else if(!strcmp(k,"dsnn"))	gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v,1,1,opt);
+	else if(!strcmp(k,"dsnnn"))	gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v, a[4].v,1,opt);
 	else if(!strcmp(k,"dsnnnn"))
-		gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v, a[4].v,a[5].v);
+		gr->Colorbar(*(a[0].d), a[1].s.s, a[2].v, a[3].v, a[4].v,a[5].v,opt);
 	else res = 1;
-	gr->Self()->LoadState();	return res;
+//	gr->Self()->LoadState();	
+	return res;
 }
 //-----------------------------------------------------------------------------
 int static mgls_cone(mglGraph *gr, long , mglArg *a, const char *k, const char *opt)

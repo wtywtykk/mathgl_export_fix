@@ -16,14 +16,16 @@
 * Add style 'p' in command 'smooth' to use parabolic smoothing of arbitrary points.
 * Allow 'background' for scaling image, centering image and tessellate image as mosaic.
 * Allow masks for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
-* Allow value for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricont', 'tricontv', 'cont3', 'dcont'.
+* Allow single value specification for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricont', 'tricontv', 'cont3', 'dcont'.
 * Allow value for saving in 'save', 'savehdf'.
 * Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf() for saving single number in HDF5 file. Correspondingly, commands 'save' and 'savehdf' can save single value now.
 * Add mgl_formula_calc(), mgl_formula_calc_c() for evaluating textual formulas of arbitrary set of data arrays.
 * Add mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
+* Add Armadillo interface for mglData and mglDataC.
 * Allow mask usage for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
-* If nsub paramenter of command 'hist' is negative (nsub<0) then the linear interpolated is used instead of spline one.
-* Add Armadillo interface for mglData*
+* If nsub parameter of command 'hist' is negative (nsub<0) then the linear interpolation is used instead of spline one.
+INCOMPATIBLE: 
+* Functions 'colorbar' have now extra argument 'opt' for options, similarly to 'axis'. In C++ and SWIG-based interfaces this change "masked" by providing default value for the argument.
 
 2.4.4 Released 8 July 2019
 

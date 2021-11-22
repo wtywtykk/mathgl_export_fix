@@ -456,6 +456,28 @@ Allocate memory and set data from variable argument list of @emph{double} values
 @end deftypefn
 
 
+
+@deftypefn {Метод класса @code{mglData}} @code{void} Set (@code{const arma::vec &}d)
+@deftypefnx {Метод класса @code{mglData}} @code{void} Set (@code{const arma::mat &}d)
+@deftypefnx {Метод класса @code{mglData}} @code{void} Set (@code{const arma::cube &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::vec &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::cx_vec &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::mat &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::cx_mat &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::cube &}d)
+@deftypefnx {Метод класса @code{mglDataC}} @code{void} Set (@code{const arma::cx_cube &}d)
+Выделяет память и копирует данные из Armadillo структур.
+@end deftypefn
+
+@deftypefn {Метод класса @code{mglData}} @code{arma::mat} arma_mat (@code{long} k=0)
+@deftypefnx {Метод класса @code{mglData}} @code{arma::cube} arma_cube ()
+@deftypefnx {Метод класса @code{mglData}} @code{arma::cx_mat} arma_mat (@code{long} k=0)
+@deftypefnx {Метод класса @code{mglData}} @code{arma::cx_cube} arma_cube ()
+Возвращает данные в формате структур Armadillo.
+@end deftypefn
+
+
+
 @deftypefn {Метод класса @code{mglData}} @code{void} Link (@code{mglData &}from)
 @deftypefnx {Метод класса @code{mglData}} @code{void} Link (@code{mreal *}A, @code{int} NX, @code{int} NY=@code{1}, @code{int} NZ=@code{1})
 @deftypefnx {Функция С} @code{void} mgl_data_link (@code{HMDT} dat, @code{const mreal *}A, @code{int} NX, @code{int} NY, @code{int} NZ)
