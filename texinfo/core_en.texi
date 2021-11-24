@@ -3762,6 +3762,7 @@ The function draws the surface of triangles. Triangle vertexes are set by indexe
 The function draws contour lines for surface of triangles at @var{z}=@var{v}[k] (or at  @var{z} equal to minimal z-axis value if @var{sch} contain symbol @samp{_}). Triangle vertexes are set by indexes @var{id} of data points @{@var{x}[i], @var{y}[i], @var{z}[i]@}. Contours are plotted for @var{z}[i,j]=@var{v}[k] where @var{v}[k] are values of data array @var{v}. If @var{v} is absent then arrays of option @code{value} elements  equidistantly distributed in color range is used. String @var{sch} sets the color scheme. Array @var{c} (if specified) is used for contour coloring. First dimensions of @var{id} must be 3 or greater. Arrays @var{x}, @var{y}, @var{z} must have equal sizes. Parameter @var{c} set the colors of triangles (if @var{id}.ny=@var{c}.nx) or colors of vertexes (if @var{x}.nx=@var{c}.nx). See also @ref{triplot}, @ref{cont}, @ref{triangulation}.
 @end deftypefn
 
+
 @anchor{quadplot}
 @deftypefn {MGL command} {} quadplot idat xdat ydat ['sch'='']
 @deftypefnx {MGL command} {} quadplot idat xdat ydat zdat ['sch'='']

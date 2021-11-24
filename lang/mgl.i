@@ -21,39 +21,38 @@
 /// Wrapper class for all graphics
 class mglGraph
 {
-	mglGraph(const mglGraph &t) {}	// copying is not allowed
-	const mglGraph &operator=(const mglGraph &t)	{	return t;	}
+	mglGraph(const mglGraph &) {gr=0;}	// copying is not allowed
+	const mglGraph &operator=(const mglGraph &t)	{	gr=0;	return t;	}
 protected:
 	HMGL gr;
 public:
-	mglGraph(int kind=2)
+	HMPR pr;	///< Pointer to associated MGL parser
+	mglGraph(int kind=-1)
 	{	pr = NULL;
 		if(kind==0)	gr=mgl_create_graph(600, 400);
-		else if(kind==-1)	gr=NULL;
 #if MGL_HAVE_OPENGL
 		else if(kind==1)	gr=mgl_create_graph_gl();
 #else
 		else if(kind==1)
-		{	gr=mgl_gr;	mgl_use_graph(gr,1);
+		{	gr=mgl_default_graph();	mgl_use_graph(gr,1);
 			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
 #endif
-		else	{	gr=mgl_gr;	mgl_use_graph(gr,1);	}
+		else	{	gr=mgl_default_graph();	mgl_use_graph(gr,1);	}
 	}
 	mglGraph(int kind, int width, int height)
 	{	pr = NULL;
 		if(kind==0)	gr=mgl_create_graph(width, height);
-		else if(kind==-1)	gr=NULL;
 #if MGL_HAVE_OPENGL
 		else if(kind==1)	gr=mgl_create_graph_gl();
 #else
 		else if(kind==1)
-		{	gr=mgl_create_graph(width, height);
+		{	gr=mgl_default_graph();	mgl_use_graph(gr,1);
 			SetGlobalWarn("OpenGL support was disabled. Please, enable it and rebuild MathGL.");	}
 #endif
-		else	{	gr=mgl_gr;	mgl_use_graph(gr,1);	}
+		else	{	gr=mgl_default_graph();	mgl_use_graph(gr,1);	mgl_set_size(gr,width,height);	}
 	}
-	inline mglGraph(HMGL graph)
-	{	gr = graph;		mgl_use_graph(gr,1);	}
+	mglGraph(HMGL graph)
+	{	pr = NULL;	gr = graph;		mgl_use_graph(gr,1);	}
 	virtual ~mglGraph()
 	{	if(mgl_use_graph(gr,-1)<1)	mgl_delete_graph(gr);	}
 	/// Get pointer to internal HMGL object
@@ -111,6 +110,8 @@ public:
 	inline void SetMeshNum(int num)			{	mgl_set_meshnum(gr, num);	}
 	/// Set number of visible faces (use 0 to draw all of them)
 	inline void SetFaceNum(int num)			{	mgl_set_facenum(gr, num);	}
+	/// Set TeX parsing at text drawing
+	inline void SetTeXparse(bool val)		{	mgl_set_tex_parse(gr, val);	}
 
 	/// Set cutting for points outside of bounding box
 	inline void SetCut(bool cut)				{	mgl_set_cut(gr, cut);	}
@@ -171,6 +172,8 @@ public:
 	static inline void SetGlobalWarn(const char *text)	{	mgl_set_global_warn(text);	}
 	/// Get text of global warning message(s)
 	static inline const char *GlobalWarn()	{	return mgl_get_global_warn();	}
+	/// Clear global warning message
+	static inline void ClearGlobalWarn()	{	mgl_clear_global_warn();	}
 	/// Suppress printing warnings to stderr
 	static inline void SuppressWarn(bool on)	{	mgl_suppress_warn(on);	}
 	/// Check if MathGL version is valid (return false) or not (return true)
@@ -577,9 +580,19 @@ public:
 	/// Clear unused points and primitives. Useful only in combination with SetFaceNum().
 	inline void ClearUnused()	{	mgl_clear_unused(gr);	}
 
-	/// Load background image
+	/// Load background image (basic variant: no scaling, whole image)
 	inline void LoadBackground(const char *fname, double alpha=1)
 	{	mgl_load_background(gr,fname,alpha);	}
+	/// Load image for background from file. 
+	/** Parameter 'how' can be:
+	 *   'a' for filling current subplot only;
+	 *   's' for scaling (resizing) image to whole area;
+	 *   'c' for centering image;
+	 *   'm' for tessellate image as mosaic. */
+	void LoadBackground(const char *fname, const char *how, double alpha=1)
+	{	mgl_load_background_ext(gr,fname,how,alpha);	}
+	/// Fill background image by specified color
+	void FillBackground(const mglColor &cc);
 	/// Force drawing the image and use it as background one
 	inline void Rasterize()			{	mgl_rasterize(gr);	}
 
@@ -781,8 +794,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const char *sch="")
-	{	mgl_colorbar(gr, sch);	}
+	inline void Colorbar(const char *sch="", const char *opt="")
+	{	mgl_colorbar(gr, sch, opt);	}
 	/// Draw colorbar at manual position
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -796,8 +809,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const char *sch,double x,double y,double w=1,double h=1)
-	{	mgl_colorbar_ext(gr, sch, x,y,w,h);	}
+	inline void Colorbar(const char *sch,double x,double y,double w=1,double h=1, const char *opt="")
+	{	mgl_colorbar_ext(gr, sch, x,y,w,h, opt);	}
 	/// Draw colorbar with manual colors at edge of axis
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -811,8 +824,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const mglData &val, const char *sch="")
-	{	mgl_colorbar_val(gr, &val, sch);	}
+	inline void Colorbar(const mglData &val, const char *sch="", const char *opt="")
+	{	mgl_colorbar_val(gr, &val, sch, opt);	}
 	/// Draw colorbar with manual colors at manual position
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -826,8 +839,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const mglData &val, const char *sch,double x,double y,double w=1,double h=1)
-	{	mgl_colorbar_val_ext(gr, &val, sch, x,y,w,h);	}
+	inline void Colorbar(const mglData &val, const char *sch,double x,double y,double w=1,double h=1, const char *opt="")
+	{	mgl_colorbar_val_ext(gr, &val, sch, x,y,w,h, opt);	}
 
 	/// Add string to legend
 	inline void AddLegend(const char *text,const char *style)
@@ -940,6 +953,17 @@ public:
 	/** Gradient filling is used if number of specified colors is equal to 2*number of curves.*/
 	inline void Region(const mglData &x1, const mglData &y1, const mglData &x2, const mglData &y2, const char *pen="", const char *opt="")
 	{	mgl_region_3d(gr, &x1, &y1, NULL, &x2, &y2, NULL, pen, opt);	}
+
+	/// Draw lines with arrows between points {x1,y1,z1} and {x2,y2,z2}
+	inline void Lines(const mglData &x1, const mglData &y1, const mglData &z1, const mglData &x2, const mglData &y2, const mglData &z2, const char *pen="", const char *opt="")
+	{	mgl_lines_xyz(gr, &x1, &y1, &z1, &x2, &y2, &z2, pen, opt);	}
+	/// Draw lines with arrows between points {x1,y1,zMin} and {x2,y2,zMin}
+	inline void Lines(const mglData &x1, const mglData &y1, const mglData &x2, const mglData &y2, const char *pen="", const char *opt="")
+	{	mgl_lines_xy(gr, &x1, &y1, &x2, &y2, pen, opt);	}
+	/// Draw lines with arrows between: points {x1,y} and {x2,y} with y in y-axis range if \a pen contain 'x'; or points {x,y1} and {x,y2} with x in x-axis range.
+	inline void Lines(const mglData &y1, const mglData &y2, const char *pen="", const char *opt="")
+	{	if(mglchr(pen,'x'))	mgl_lines_x(gr, &y1, &y2, pen, opt);
+		else	mgl_lines(gr, &y1, &y2, pen, opt);	}
 
 	/// Draw vertical lines from points {x,y,z} to axis plane
 	inline void Stem(const mglData &x, const mglData &y, const mglData &z, const char *pen="", const char *opt="")
@@ -1377,6 +1401,10 @@ public:
 	 * Option "value" set the number of contour levels (default is 7). */
 	inline void Cont(const mglData &z, const char *sch="", const char *opt="")
 	{	mgl_cont(gr, &z, sch, opt);	}
+	/// Draw contour lines at a[i,j]=val specified parametrically
+	/** Style 't'/'T' draw contour labels below/above contours.*/
+	inline void ContGen(mreal val, const mglData &a, const mglData &x, const mglData &y, const mglData &z, const char *sch="", const char *opt="")
+	{	mgl_cont_gen(gr, val, &a, &x, &y, &z, sch, opt);	}
 
 	/// Draw solid contours at manual levels for 2d data specified parametrically
 	/** Style ‘_’ to draw contours at bottom of axis box. */
@@ -1396,6 +1424,9 @@ public:
 	 * Option "value" set the number of contour levels (default is 7). */
 	inline void ContF(const mglData &z, const char *sch="", const char *opt="")
 	{	mgl_contf(gr, &z, sch, opt);	}
+	/// Draw solid contours between a[i,j]=v1 and a[i,j]=v2 specified parametrically */
+	inline void ContFGen(mreal v1, mreal v2, const mglData &a, const mglData &x, const mglData &y, const mglData &z, const char *sch="", const char *opt="")
+	{	mgl_contf_gen(gr, v1,v2, &a, &x, &y, &z, sch, opt);	}
 
 	/// Draw solid contours at manual levels for 2d data specified parametrically with specified colors
 	/** Style ‘_’ to draw contours at bottom of axis box. */
@@ -1465,6 +1496,25 @@ public:
 	 * Option "value" set the number of isosurfaces (default is 3). */
 	inline void Axial(const mglData &z, const char *sch="", const char *opt="")
 	{	mgl_axial(gr, &z, sch, opt);	}
+
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data specified parametrically
+	/** Style ‘t’/‘T’ draw contour labels below/above contours. */
+	inline void DCont(const mglData &v, const mglData &x, const mglData &y, const mglData &z, const mglData &a, const mglData &b, const char *sch="", const char *opt="")
+	{	mgl_dcont_xyz(gr, &v, &x, &y, &z, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data
+	/** Style ‘t’/‘T’ draw contour labels below/above contours. */
+	inline void DCont(const mglData &v, const mglData &a, const mglData &b, const char *sch="", const char *opt="")
+	{	mgl_dcont(gr, &v, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data specified parametrically
+	/** Style ‘t’/‘T’ draw contour labels below/above contours.
+	 * Option "value" set the number of isosurfaces (default is 3). */
+	inline void DCont(const mglData &x, const mglData &y, const mglData &z, const mglData &a, const mglData &b, const char *sch="", const char *opt="")
+	{	mgl_dcont_xyz(gr, NULL, &x, &y, &z, &a, &b, sch, opt);	}
+	/// Draw curves of cross-section of isosurfaces a and b at manual levels for 3d data
+	/** Style ‘t’/‘T’ draw contour labels below/above contours.
+	 * Option "value" set the number of isosurfaces (default is 3). */
+	inline void DCont(const mglData &a, const mglData &b, const char *sch="", const char *opt="")
+	{	mgl_dcont(gr, NULL, &a, &b, sch, opt);	}
 
 	/// Draw grid lines for density plot at slice for 3d data specified parametrically
 	/** Style ‘x’ or ‘z’ produce plot perpendicular to x- or z-direction correspondingly.*/

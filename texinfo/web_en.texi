@@ -77,6 +77,37 @@ Javascript interface was developed with support of @url{http://www.datadvance.ne
 
 @itemize
 
+@item @strong{30 November 2021}
+New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
+@itemize @bullet
+
+@item Add @ref{keep} for keeping the data phase/sign or value along line @var{i} and @var{j} in given direction
+@item Add functions @samp{sum}, @samp{prod} at formula evaluation, like @samp{sum(_i^2,5)} will produce @code{30=0+1^2+2^2+3^2+4^2}, and @samp{prod(1+_i,5)} will produce @code{120=5!}. You can nest them for variables @samp{_i},@samp{_j},...,@samp{_z}, like @samp{sum(sum(_j+_i^2,5),5)} will give @code{200}.
+@item Add functions @samp{value}, @samp{spline} at formula evaluation, like @samp{value(a,5)} will give value of 6-th element of a, i.e. a[5].
+@item Add user-defined functions @samp{fn1()}...@samp{fn9()} at formula evaluation, like @samp{fn1(3)\x^_1} will produce @code{x^3}.
+@item Add mglODEs() (i.e. extend @ref{ode}) for solving PDE/cascade/etc.
+@item Add @ref{lines} to draw a set of lines with arrows between points.
+@item Add @ref{dcont} to draw a set of curves, which are intersection of two isosurfaces at given level.
+@item Add @ref{first}, @ref{last} to get array of first/last indexes of values larger specified one along given direction.
+@item Add @ref{bernoulli}, @ref{binomial}, @ref{brownian}, @ref{discrete}, @ref{exponential}, @ref{gaussian}, @ref{shuffle}, @ref{uniform}, @ref{uniformint} for data filling by random numbers with different distributions.
+@item Add @ref{readbin} to read data from binary files.
+@item Add @ref{texparse} to enable/disable TeX-like command parsing at text output.
+@item Update @ref{ode}: regularization is used if dt*tmax<0 (total time may differ, but number of steps still the same).
+@item Add mgl_default_graph() -- the global (default) pointer to HMGL for keeping plot settings, simplifying external scripts and capture it in GUI.
+@item Add style @samp{p} in command @ref{smooth} to use parabolic smoothing of arbitrary points.
+@item Allow @ref{background} for scaling image, centering image and tessellate image as mosaic.
+@item Allow masks for @ref{candle}, @ref{area}, @ref{region}, @ref{bars}, @ref{barh}, @ref{chart}, @ref{tape}, @ref{face}, @ref{polygon}, @ref{ellipse}, @ref{rhomb}.
+@item Allow single value specification for contour level in @ref{cont}, @ref{contd}, @ref{contp}, @ref{contv}, @ref{cont3}, @ref{dcont}, @ref{tricont}.
+@item Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf() for saving single number in HDF5 file. Correspondingly, commands @ref{save} and @ref{savehdf} can save single value now.
+@item Add mgl_formula_calc(), mgl_formula_calc_c() for evaluating textual formulas of arbitrary set of data arrays.
+@item Add mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
+@item Add Armadillo interface for mglData and mglDataC.
+@item If nsub parameter of command @ref{hist} is negative (nsub<0) then the linear interpolation is used instead of spline one.
+@item Add dark text colors for mgllab.
+@item Minor bugfixes.
+@item INCOMPATIBLE: Functions @ref{colorbar} have now extra argument @var{opt} for options, similarly to @ref{axis} and other plotting functions. In C++ and SWIG-based interfaces this change "masked" by providing the default value for the argument.
+@end itemize
+
 @item @strong{8 July 2019}
 New version (v.2.4.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
 @itemize @bullet

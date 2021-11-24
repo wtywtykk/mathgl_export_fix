@@ -114,6 +114,8 @@ D. Docs about JS interface
 7. Add doc about mglWnd::Window();
 8. Add docs about Fl_MGLView.
 
+9. Docs and sample about 'tricontv'
+
 19. Docs about mgltask: $1,$2,$3 loops, $0 is rnd, $R are formulas for R=a,b,...,z, which depend on v0=$0, v1=$1, v2=$2, v3=$3.
 
 ZZ. Update time.texi {before release!!!}

@@ -185,6 +185,34 @@ public:
 	/// Make new id
 	inline void NewId()	{	id.clear();	}
 
+	/// Fills data by integer random numbers of uniform distribution in range [lo,hi]
+	inline void RndInteger(long lo, long hi)
+	{	mgl_data_rnd_integer(this, lo, hi);	}
+	/// Fills data by random numbers of uniform distribution in range [lo,hi]
+	inline void RndUniform(mreal lo, mreal hi)
+	{	mgl_data_rnd_uniform(this, lo, hi);	}
+	/// Fills data by random numbers of Bernoulli distribution
+	inline void RndBernoulli(mreal p=0.5)
+	{	mgl_data_rnd_bernoulli(this, p);	}
+	/// Fills data by random numbers of binomial distribution
+	inline void RndBinomial(long trials, mreal p=0.5)
+	{	mgl_data_rnd_binomial(this, trials, p);	}
+	/// Fills data by random numbers of Gaussian distribution
+	inline void RndGaussian(mreal mu=0.0, mreal sigma=1.0)
+	{	mgl_data_rnd_gaussian(this, mu, sigma);	}
+	/// Fills data by random numbers of exponential distribution
+	inline void RndExponential(mreal lambda)
+	{	mgl_data_rnd_exponential(this, lambda);	}
+	/// Fills data by random numbers of discrete distribution according A
+	inline void RndDiscrete(const mglData &A)
+	{	mgl_data_rnd_discrete(this, &A);	}
+	/// Shuffles elements or slices of data array
+	inline void RndShuffle(char dir='a')
+	{	mgl_shuffle(this, dir);	}
+	/// Fills data by fractional brownian motions along x-direction
+	inline void RndBrownian(mreal y1, mreal y2, mreal sigma, mreal alpha)
+	{	mgl_data_brownian(this, y1, y2, sigma, alpha);	}
+	
 	/// Read data from tab-separated text file with auto determining size
 	inline bool Read(const char *fname)
 	{	return mgl_data_read(this,fname); }
@@ -221,6 +249,11 @@ public:
 	/// Scan textual file for template and fill data array
 	inline int ScanFile(const char *fname, const char *templ)
 	{	return mgl_data_scan_file(this,fname, templ);	}
+	/// Read data from binary file of type: 0 - double, 1 - float, 2 - long double, 3 - long int, 4 - int, 5 - short int, 6 - char.
+	/** NOTE: this function may not correctly read binary files written in different CPU kind! */
+	inline bool ReadBin(const char *fname, int type)
+	{	return mgl_data_read_bin(this, fname, type);	}
+
 
 	/// Get column (or slice) of the data filled by formulas of named columns
 	inline mglData Column(const char *eq) const
@@ -246,6 +279,9 @@ public:
 	{	return mglData(true,mgl_data_section(this,&ids,dir,val));	}
 	inline mglData Section(long id, char dir='y', mreal val=NAN) const
 	{	return mglData(true,mgl_data_section_val(this,id,dir,val));	}
+	/// Get contour lines for dat[i,j]=val. NAN values separate the the curves.
+	inline mglData Conts(mreal val)
+	{	return mglData(true,mgl_data_conts(val,this));	}
 
 	/// Get trace of the data array
 	inline mglData Trace() const
@@ -259,12 +295,22 @@ public:
 	/// Get array which is result of summation in given direction or directions
 	inline mglData Sum(const char *dir) const
 	{	return mglData(true,mgl_data_sum(this,dir));	}
+	/// Get array of positions of first value large val
+	inline mglData First(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_first_dir(this,dir,val));	}
+	/// Get array of positions of last value large val
+	inline mglData Last(const char *dir, mreal val) const
+	{	return mglData(true,mgl_data_last_dir(this,dir,val));	}
+
 	/// Get array which is result of maximal values in given direction or directions
 	inline mglData Max(const char *dir) const
 	{	return mglData(true,mgl_data_max_dir(this,dir));	}
 	/// Get array which is result of minimal values in given direction or directions
 	inline mglData Min(const char *dir) const
 	{	return mglData(true,mgl_data_min_dir(this,dir));	}
+	/// Get positions of local maximums and minimums
+	inline mglData MinMax() const
+	{	return mglData(true,mgl_data_minmax(this));	}
 	/// Get the data which is direct multiplication (like, d[i,j] = this[i]*a[j] and so on)
 	inline mglData Combine(const mglData &dat) const
 	{	return mglData(true,mgl_data_combine(this,&dat));	}
@@ -340,7 +386,9 @@ public:
 	 *  ‘x’, ‘y’, ‘z’ for 1st, 2nd or 3d dimension;
 	 *  ‘dN’ for linear averaging over N points;
 	 *  ‘3’ for linear averaging over 3 points;
-	 *  ‘5’ for linear averaging over 5 points.
+	 *  ‘5’ for linear averaging over 5 points;
+	 *  ‘^’ for finding upper bound;
+	 *  ‘_’ for finding lower bound.
 	 *  By default quadratic averaging over 5 points is used. */
 	inline void Smooth(const char *dirs="xyz",mreal delta=0)
 	{	mgl_data_smooth(this,dirs,delta);	}
@@ -356,6 +404,10 @@ public:
 	/// Project the periodical data to range [v1,v2] (like mod() function). Separate branches by NAN if sep=true.
 	inline void Coil(mreal v1, mreal v2, bool sep=true)
 	{	mgl_data_coil(this, v1, v2, sep);	}
+	/// Keep the data sign/value along line i and j in given direction. 
+	/** Parameter "how" may contain: 'x','y' or 'z' for direction (default is 'y'); 'a' for keeping amplitude instead of sign.*/
+	inline void Keep(const char *how, long i, long j=0)
+	{	mgl_data_keep(this, how, i, j);	}
 
 	/// Apply Hankel transform
 	inline void Hankel(const char *dir)	{	mgl_data_hankel(this,dir);	}
@@ -516,6 +568,9 @@ inline mglData mglRay(const char *ham, mglPoint r0, mglPoint p0, mreal dt=0.1, m
 /// Saves result of ODE solving for var complex variables with right part func (separated by ';') and initial conditions x0 over time interval [0,tmax] with time step dt
 inline mglData mglODE(const char *func, const char *var, const mglData &ini, mreal dt=0.1, mreal tmax=10)
 {	return mglData(true, mgl_ode_solve_str(func,var, &ini, dt, tmax));	}
+/// Saves result of ODE solving for var complex variables with right part func (separated by ';') and initial conditions x0 of size n*m over time interval [0,tmax] with time step dt
+inline mglData mglODEs(const char *func, const char *var, char brd, const mglData &ini, mreal dt=0.1, mreal tmax=10)
+{	return mglData(true, mgl_ode_solve_set(func,var, brd, &ini, dt, tmax));	}
 //-----------------------------------------------------------------------------
 /// Get array as solution of tridiagonal system of equations a[i]*x[i-1]+b[i]*x[i]+c[i]*x[i+1]=d[i]
 /** String \a how may contain:

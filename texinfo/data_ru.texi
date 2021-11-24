@@ -1164,14 +1164,32 @@ res_k = \sum_ij how(x_i,y_j,z_k) a_ij/ \sum_ij a_ij
 Находит параметры импульса вдоль направления @var{dir}: максимальное значение (в колонке 0), его положение (в колонке 1), ширина по параболлической аппроксимации (в колонке 3) и по полувысоте (в колонке 2), энергию около максимума (в колонке 4). NAN значения используются для ширин если максимум расположен вблизи границ массива. Отмечу, что для комплексных массивов есть неопределенность определения параметров. Обычно следует использовать квадрат абсолютного значения амплитуды (т.е. |dat[i]|^2). Поэтому MathGL не включает эту функцию в @code{mglDataC}, хотя формально C функция будет работать и для них, но будет использовать абсолютное значение амплитуды (т.е. |dat[i]|). Функция возвращает NULL или пустой массив если данные не могут быть созданы при данных значениях аргументов. См. также @ref{max}, @ref{min}, @ref{momentum}, @ref{sum}. @sref{Pulse properties}
 @end deftypefn
 
+@anchor{first}
+@deftypefn {Команда MGL} {} first @sc{res} dat 'dir' @code{val}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{mglData} First (@code{const char *}dir, @code{mreal} val) @code{const}
+@deftypefnx {Метод класса @code{mglDataC}} @code{mglData} First (@code{const char *}dir, @code{mreal} val) @code{const}
+@deftypefnx {Функция С} @code{HMDT} mgl_data_first_dir (@code{HCDT} dat, @code{const char *}dir, @code{mreal} val)
+@end ifclear
+Возвращает массив положений ячеек со значениями впервые превысившими @var{val}. Для комплексных данных используется абсолютное значение. См. также @ref{last}.
+@end deftypefn
+
+@anchor{last}
+@deftypefn {Команда MGL} {} last @sc{res} dat 'dir' @code{val}
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglData}} @code{mglData} Last (@code{const char *}dir, @code{mreal} val) @code{const}
+@deftypefnx {Метод класса @code{mglDataC}} @code{mglData} Last (@code{const char *}dir, @code{mreal} val) @code{const}
+@deftypefnx {Функция С} @code{HMDT} mgl_data_last_dir (@code{HCDT} dat, @code{const char *}dir, @code{mreal} val)
+@end ifclear
+Возвращает массив положений ячеек со значениями последний раз превысившими @var{val}. Для комплексных данных используется абсолютное значение. См. также @ref{first}.
+@end deftypefn
+
 @ifclear UDAV
 @deftypefn {Функция С} @code{HMDT} mgl_formula_calc (@code{const char *}str, @code{long} n, ...)
 @deftypefnx {Функция С} @code{HADT} mgl_formula_calc_c (@code{const char *}str, @code{long} n, ...)
 Вычисляет формулу @var{str} для заданного списка из @var{n} массивов данных типа @code{HCDT}. Имена переменных соответствуют именам массивов. Возвращенный массив должен быть удален пользователем по окончании использования. См. также @ref{fill}.
 @end deftypefn
 @end ifclear
-
-
 
 @c ------------------------------------------------------------------
 @external{}
