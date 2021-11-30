@@ -53,6 +53,9 @@ Generally, MathGL is GPL library. However, you can use LGPL license for MathGL c
 @strong{Latest news}
 @itemize
 
+@item @strong{1 December 2021.}
+New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are big improve in formula evaluation (user-defined function, summation and product, new functions for data interpolation), new plot kind @ref{dcont} and @ref{lines}, set of functions for random distributions, new data handling functions (like, @ref{keep}), extend @ref{ode} to solve PDE/cascade/etc, add mask for most of plotting functions and bugfixes, which denoted @ref{News, here}.
+
 @item @strong{8 July 2019.}
 New version (v.2.4.4) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are new @ref{minmax} for positions of local minimums and maximums, add @ref{conts} for coordinates of contour lines, extend formula evaluation to read and interpolate data files.
 
@@ -77,17 +80,17 @@ Javascript interface was developed with support of @url{http://www.datadvance.ne
 
 @itemize
 
-@item @strong{30 November 2021}
+@item @strong{1 December 2021}
 New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
 @itemize @bullet
 
-@item Add @ref{keep} for keeping the data phase/sign or value along line @var{i} and @var{j} in given direction
 @item Add functions @samp{sum}, @samp{prod} at formula evaluation, like @samp{sum(_i^2,5)} will produce @code{30=0+1^2+2^2+3^2+4^2}, and @samp{prod(1+_i,5)} will produce @code{120=5!}. You can nest them for variables @samp{_i},@samp{_j},...,@samp{_z}, like @samp{sum(sum(_j+_i^2,5),5)} will give @code{200}.
-@item Add functions @samp{value}, @samp{spline} at formula evaluation, like @samp{value(a,5)} will give value of 6-th element of a, i.e. a[5].
 @item Add user-defined functions @samp{fn1()}...@samp{fn9()} at formula evaluation, like @samp{fn1(3)\x^_1} will produce @code{x^3}.
-@item Add mglODEs() (i.e. extend @ref{ode}) for solving PDE/cascade/etc.
-@item Add @ref{lines} to draw a set of lines with arrows between points.
+@item Add functions @samp{value}, @samp{spline} at formula evaluation, like @samp{value(a,5)} will give value of 6-th element of a, i.e. a[5].
+@item Add @ref{keep} for keeping the data phase/sign or value along line @var{i} and @var{j} in given direction
+@item Add mglODEs() (i.e. extend @ref{ode}) for solving PDE, cascades and etc.
 @item Add @ref{dcont} to draw a set of curves, which are intersection of two isosurfaces at given level.
+@item Add @ref{lines} to draw a set of lines with arrows between points.
 @item Add @ref{first}, @ref{last} to get array of first/last indexes of values larger specified one along given direction.
 @item Add @ref{bernoulli}, @ref{binomial}, @ref{brownian}, @ref{discrete}, @ref{exponential}, @ref{gaussian}, @ref{shuffle}, @ref{uniform}, @ref{uniformint} for data filling by random numbers with different distributions.
 @item Add @ref{readbin} to read data from binary files.

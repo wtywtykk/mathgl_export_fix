@@ -343,7 +343,8 @@ void MGL_EXPORT mgl_wcstombs(char *dst, const wchar_t *src, int size)
 MGL_LOCAL_PURE const mglDataA *FindVar(const std::vector<mglDataA*> &head, const std::wstring &name)
 {
 	for(size_t i=0;i<head.size();i++)
-		if(head[i] && head[i]->Name()==name)	return head[i];
+		if(head[i] && !wcscmp(head[i]->Name(),name.c_str()))	// bypass std::string comparison warning
+			return head[i];
 	return 0;
 }
 //-----------------------------------------------------------------------------

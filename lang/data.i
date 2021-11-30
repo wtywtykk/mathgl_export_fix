@@ -30,7 +30,6 @@ public:
 	bool link;		///< use external data (i.e. don't free it)
 
 	/// Initiate by other mglData variable
-	mglData(const mglData &d)	{	a=0;	mgl_data_set(this,&d);		}	// NOTE: must be constructor for mglData& to exclude copy one
 	mglData(const mglData *d)	{	a=0;	mgl_data_set(this, d);		}
 	mglData(bool, mglData *d)	// NOTE: Variable d will be deleted!!!
 	{	if(d)
