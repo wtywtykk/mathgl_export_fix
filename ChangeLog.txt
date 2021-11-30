@@ -22,8 +22,6 @@
 * Add mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
 * Add Armadillo interface for mglData and mglDataC.
 * If nsub parameter of command 'hist' is negative (nsub<0) then the linear interpolation is used instead of spline one.
-INCOMPATIBLE: 
-* Functions 'colorbar' have now extra argument 'opt' for options, similarly to 'axis' and other plotting functions. In C++ and SWIG-based interfaces this change "masked" by providing default value for the argument.
 
 2.4.4 Released 8 July 2019
 

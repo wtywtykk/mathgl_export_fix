@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 20:42+0300\n"
+"POT-Creation-Date: 2021-12-01 01:00+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -3702,7 +3702,7 @@ msgstr ""
 msgid "PNG Files \t*.png"
 msgstr "PNG файлы \t*.png"
 
-#: src/canvas_cf.cpp:546 src/canvas_cf.cpp:548 src/data_png.cpp:118
+#: src/canvas_cf.cpp:542 src/canvas_cf.cpp:544 src/data_png.cpp:118
 #: src/export.cpp:75 src/export.cpp:109
 msgid "PNG support was disabled. Please, enable it and rebuild MathGL."
 msgstr "PNG поддержка отключена. Включите ее и пересоберите MathGL."

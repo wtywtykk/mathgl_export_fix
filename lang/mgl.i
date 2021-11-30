@@ -794,8 +794,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const char *sch="", const char *opt="")
-	{	mgl_colorbar(gr, sch, opt);	}
+	inline void Colorbar(const char *sch="")
+	{	mgl_colorbar(gr, sch);	}
 	/// Draw colorbar at manual position
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -809,8 +809,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const char *sch,double x,double y,double w=1,double h=1, const char *opt="")
-	{	mgl_colorbar_ext(gr, sch, x,y,w,h, opt);	}
+	inline void Colorbar(const char *sch,double x,double y,double w=1,double h=1)
+	{	mgl_colorbar_ext(gr, sch, x,y,w,h);	}
 	/// Draw colorbar with manual colors at edge of axis
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -824,8 +824,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const mglData &val, const char *sch="", const char *opt="")
-	{	mgl_colorbar_val(gr, &val, sch, opt);	}
+	inline void Colorbar(const mglData &val, const char *sch="")
+	{	mgl_colorbar_val(gr, &val, sch);	}
 	/// Draw colorbar with manual colors at manual position
 	/** Parameter \a sch may contain:
 	 *	 ‘<>^_’ for positioning at left, at right, at top or at bottom correspondingly;
@@ -839,8 +839,8 @@ public:
 	 *	 ‘+’ for printing ‘+’ for positive ticks;
 	 *	 ‘-’ for printing usual ‘-’ in ticks labels;
 	 *	 ‘0123456789’ for precision at printing ticks labels.*/
-	inline void Colorbar(const mglData &val, const char *sch,double x,double y,double w=1,double h=1, const char *opt="")
-	{	mgl_colorbar_val_ext(gr, &val, sch, x,y,w,h, opt);	}
+	inline void Colorbar(const mglData &val, const char *sch,double x,double y,double w=1,double h=1)
+	{	mgl_colorbar_val_ext(gr, &val, sch, x,y,w,h);	}
 
 	/// Add string to legend
 	inline void AddLegend(const char *text,const char *style)

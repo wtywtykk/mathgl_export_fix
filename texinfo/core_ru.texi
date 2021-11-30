@@ -2086,8 +2086,8 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 @anchor{colorbar}
 @deftypefn {Команда MGL} {} colorbar ['sch'='']
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
-@deftypefnx {Функция С} @code{void} mgl_colorbar (@code{HMGL} gr, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const char *}sch=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_colorbar (@code{HMGL} gr, @code{const char *}sch)
 @end ifclear
 Рисует полосу соответствия цвета и числовых значений (colorbar) для цветовой схемы @var{sch} (используется текущая для @code{sch=""}) с краю от графика. Строка @var{sch} также может содержать:
 @itemize
@@ -2109,24 +2109,24 @@ Draw bitmap (logo) along whole axis range, which can be changed by @ref{Command 
 
 @deftypefn {Команда MGL} {} colorbar vdat ['sch'='']
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const mglDataA &}v, @code{const char *}sch=@code{""}, @code{const char *}opt=@code{""})
-@deftypefnx {Функция С} @code{void} mgl_colorbar_val (@code{HMGL} gr, @code{HCDT} v, @code{const char *}sch, @code{const char *}opt)
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const mglDataA &}v, @code{const char *}sch=@code{""})
+@deftypefnx {Функция С} @code{void} mgl_colorbar_val (@code{HMGL} gr, @code{HCDT} v, @code{const char *}sch)
 @end ifclear
 Аналогично предыдущему, но для цветовой схемы без сглаживания с заданными значениями @var{v}. @sref{contd sample}
 @end deftypefn
 
 @deftypefn {Команда MGL} {} colorbar 'sch' @code{x y [w=1 h=1]}
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w=@code{1}, @code{mreal} h=@code{1}, @code{const char *}opt=@code{""})
-@deftypefnx {Функция С} @code{void} mgl_colorbar_ext (@code{HMGL} gr, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w, @code{mreal} h, @code{const char *}opt)
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w=@code{1}, @code{mreal} h=@code{1})
+@deftypefnx {Функция С} @code{void} mgl_colorbar_ext (@code{HMGL} gr, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w, @code{mreal} h)
 @end ifclear
 Аналогично первому, но в произвольном месте графика @{@var{x}, @var{y}@} (полагаются в диапазоне [0,1]). Параметры @var{w}, @var{h} задают относительную ширину и высоту colorbar.
 @end deftypefn
 
 @deftypefn {Команда MGL} {} colorbar vdat 'sch' @code{x y [w=1 h=1]}
 @ifclear UDAV
-@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const mglDataA &}v, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w=@code{1}, @code{mreal} h=@code{1}, @code{const char *}opt=@code{""})
-@deftypefnx {Функция С} @code{void} mgl_colorbar_val_ext (@code{HMGL} gr, @code{HCDT} v, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w, @code{mreal} h, @code{const char *}opt)
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} Colorbar (@code{const mglDataA &}v, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w=@code{1}, @code{mreal} h=@code{1})
+@deftypefnx {Функция С} @code{void} mgl_colorbar_val_ext (@code{HMGL} gr, @code{HCDT} v, @code{const char *}sch, @code{mreal} x, @code{mreal} y, @code{mreal} w, @code{mreal} h)
 @end ifclear
 Аналогично предыдущему, но для цветовой схемы @var{sch} без сглаживания с заданными значениями @var{v}. @sref{contd sample}
 @end deftypefn

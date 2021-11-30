@@ -108,7 +108,8 @@ New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is 
 @item If nsub parameter of command @ref{hist} is negative (nsub<0) then the linear interpolation is used instead of spline one.
 @item Add dark text colors for mgllab.
 @item Minor bugfixes.
-@item INCOMPATIBLE: Functions @ref{colorbar} have now extra argument @var{opt} for options, similarly to @ref{axis} and other plotting functions. In C++ and SWIG-based interfaces this change "masked" by providing the default value for the argument.
+@item OBSOLETE: Qt4 interface will be disabled in the next release.
+@item OBSOLETE: Functions @ref{colorbar} will have extra argument @var{opt} for options, similarly to @ref{axis} and other plotting functions. In C++ and SWIG-based interfaces this change "masked" by providing the default value for the argument.
 @end itemize
 
 @item @strong{8 July 2019}
