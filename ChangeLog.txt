@@ -1,4 +1,4 @@
-2.5 Released 1 December 2021
+2.5 Released 2 December 2021
 
 * Add 'keep' for keeping the data phase/sign or value along line i and j in given direction
 * Add functions 'sum', 'prod' at formula evaluation, like "sum(_i^2,5)" will produce "30"=0+1^2+2^2+3^2+4^2, and "prod(1+_i,5)" will produce 5!="120". You can nest them for variables _i,_j,...,_z, like "sum(sum(_j+_i^2,5),5)" will give "200".

@@ -53,7 +53,7 @@ Generally, MathGL is GPL library. However, you can use LGPL license for MathGL c
 @strong{Latest news}
 @itemize
 
-@item @strong{1 December 2021.}
+@item @strong{2 December 2021.}
 New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released. There are big improve in formula evaluation (user-defined function, summation and product, new functions for data interpolation), new plot kind @ref{dcont} and @ref{lines}, set of functions for random distributions, new data handling functions (like, @ref{keep}), extend @ref{ode} to solve PDE/cascade/etc, add mask for most of plotting functions and bugfixes, which denoted @ref{News, here}.
 
 @item @strong{8 July 2019.}
@@ -80,7 +80,7 @@ Javascript interface was developed with support of @url{http://www.datadvance.ne
 
 @itemize
 
-@item @strong{1 December 2021}
+@item @strong{2 December 2021}
 New version (v.2.5) of @uref{http://sourceforge.net/projects/mathgl, MathGL} is released.
 @itemize @bullet
 
