@@ -529,7 +529,7 @@ Fl_Widget *add_editor(ScriptWindow *w, int txtW, int wndH)
 	o = new Fl_Button(210, 1, 25, 25);	o->image(img_calc);	o->callback(calc_dlg_cb,w);
 	o->tooltip(_("Show calculator window"));
 	o = new Fl_Button(240, 1, 25, 25);	o->image(img_curve);o->callback(prim_dlg_cb,w);
-	o->tooltip(_("Show calculator window"));
+	o->tooltip(_("Show window for primitives"));
 	g->end();	g->resizable(0);
 
 	w->editor = new Fl_Text_Editor(0, 28, txtW, wndH-85);

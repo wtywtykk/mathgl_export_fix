@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-01 01:00+0300\n"
+"POT-Creation-Date: 2021-12-02 11:30+0300\n"
 "PO-Revision-Date: 2017-04-19 01:17+0300\n"
 "Last-Translator: Alexey Balakin <mathgl.abalakin@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -4708,7 +4708,7 @@ msgstr ""
 "Показать калькулятор, который вычисляет текстовые формулы,\n"
 "которые могут содержать и переменные из скрипта."
 
-#: mgllab/editor.cpp:530 mgllab/editor.cpp:532
+#: mgllab/editor.cpp:530
 msgid "Show calculator window"
 msgstr "Показать окно калькулятора"
 
@@ -4793,6 +4793,11 @@ msgstr "Показать предыдущий кадр"
 #: widgets/qt.cpp:1275 udav/plot_pnl.cpp:578
 msgid "Show previous slide (Ctrl+,)."
 msgstr "Показать предыдущий кадр (Ctrl+,)."
+
+#: mgllab/editor.cpp:532
+#, fuzzy
+msgid "Show window for primitives"
+msgstr "Показать диалог настроек UDAV"
 
 #: src/random.cpp:354
 msgid "Shuffle data cells (for dir='a') or slices (for dir='xyz')"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MathGL2 2.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-01 01:00+0300\n"
+"POT-Creation-Date: 2021-12-02 11:30+0300\n"
 "PO-Revision-Date: 2018-03-24 11:08-0400\n"
 "Last-Translator: Diego Sejas Viscarra <dsejas.math@protonmail.com>\n"
 "Language-Team: \n"
@@ -4725,7 +4725,7 @@ msgstr ""
 "Mostrar calculadora que escribe y evalua formulas textuales.\n"
 "Las formulas textuales pueden contener variables también."
 
-#: mgllab/editor.cpp:530 mgllab/editor.cpp:532
+#: mgllab/editor.cpp:530
 msgid "Show calculator window"
 msgstr "Mostrar ventana de calculadora"
 
@@ -4813,6 +4813,11 @@ msgstr "Mostrar cuadro previo de la animación"
 #: widgets/qt.cpp:1275 udav/plot_pnl.cpp:578
 msgid "Show previous slide (Ctrl+,)."
 msgstr "Mostrar cuadro previo (Ctrl+,)."
+
+#: mgllab/editor.cpp:532
+#, fuzzy
+msgid "Show window for primitives"
+msgstr "Mostrar dialogo de propiedades de UDAV."
 
 #: src/random.cpp:354
 msgid "Shuffle data cells (for dir='a') or slices (for dir='xyz')"
