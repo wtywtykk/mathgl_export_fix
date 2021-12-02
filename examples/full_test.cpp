@@ -434,7 +434,7 @@ int main(int argc,char **argv)
 				else 	par.Execute(gr,buf);
 				gr->Finish();
 				end = clock();
-				fprintf(fp," @tab %.3g",double(end-beg)/CLOCKS_PER_SEC);
+				fprintf(fp," @tab %.2g",double(end-beg)/CLOCKS_PER_SEC);
 				printf("\t%d->%g",qual[i],double(end-beg)/CLOCKS_PER_SEC);
 				fflush(fp);	fflush(stdout);
 			}

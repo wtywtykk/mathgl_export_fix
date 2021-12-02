@@ -2056,9 +2056,7 @@ msgstr "Введите номер среза:"
 msgid ""
 "Enter step of saved points. For example, '1' save all, '2' save each 2nd "
 "point, '3' save each 3rd and so on."
-msgstr ""
-"Введите шаг сохранения. Например, '1' - все точки, '2' - каждая вторая, и т."
-"д."
+msgstr "Введите шаг сохранения. Например, '1' - все точки, '2' - каждая вторая, и т.д."
 
 #: widgets/qt.cpp:962
 msgid "Enter text"
@@ -2082,9 +2080,7 @@ msgstr "Сузить данные большие val"
 msgid ""
 "Error reading from file '%s':\n"
 "%s."
-msgstr ""
-"Ошибка чтения файла '%s':\n"
-"%s."
+msgstr "Ошибка чтения файла '%s':\n%s."
 
 #: src/export.cpp:629 src/export.cpp:638 src/export.cpp:645
 #, c-format
@@ -2096,9 +2092,7 @@ msgstr "Ошибка вызова внешнего просмотра\n"
 msgid ""
 "Error writing to file '%s':\n"
 "%s."
-msgstr ""
-"Ошибка записи в файл '%s':\n"
-"%s."
+msgstr "Ошибка записи в файл '%s':\n%s."
 
 #: src/exec_dat.cpp:1753
 msgid ""
@@ -2251,41 +2245,41 @@ msgstr "Заполнить как x-,k-координаты для трансф�
 
 #: src/random.cpp:350
 msgid "Fills by fractional brownian motion"
-msgstr ""
+msgstr "Заполнить броуновским движением"
 
 #: src/random.cpp:356
 msgid "Fills by random integers uniformly chosen in [lo, hi)"
-msgstr ""
+msgstr "Заполнить случайными целыми числами в интервале [lo, hi)"
 
 #: src/random.cpp:348
 msgid ""
 "Fills by random numbers according to Bernoulli distribution with probability "
 "p"
-msgstr ""
+msgstr "Заполнить случайными числами с распределением Бернулли"
 
 #: src/random.cpp:353
 msgid "Fills by random numbers according to Gaussian distribution"
-msgstr ""
+msgstr "Заполнить случайными числами с гауссовым распределением"
 
 #: src/random.cpp:349
 msgid ""
 "Fills by random numbers according to binomial distribution in n coin flips "
 "with probability p"
-msgstr ""
+msgstr "Заполнить случайными числами с биномиальным распределением"
 
 #: src/random.cpp:351
 msgid "Fills by random numbers according to discrete distribution"
-msgstr ""
+msgstr "Заполнить случайными числами с дискретным распределением"
 
 #: src/random.cpp:352
 msgid ""
 "Fills by random numbers according to exponential distribution with "
 "probability p"
-msgstr ""
+msgstr "Заполнить случайными числами с экспоненциальным распределением"
 
 #: src/random.cpp:355
 msgid "Fills by random numbers uniformly chosen in [lo,hi)"
-msgstr ""
+msgstr "Заполнить случайными числами в интервале [lo, hi)"
 
 #: udav/find_dlg.cpp:48 mgllab/editor.cpp:564
 msgid "Find"
@@ -2922,7 +2916,7 @@ msgstr "Сохранить каждый n-ый элемент массива д�
 
 #: src/exec_dat.cpp:1774
 msgid "Keep phase/amplitude along line"
-msgstr ""
+msgstr "Сохраняет фазу/амплитуду вдоль линии"
 
 #: mgllab/mathgl.cpp:200
 msgid "Keep slides in memory (faster animation but require more memory)"
@@ -4801,7 +4795,7 @@ msgstr "Показать диалог настроек UDAV"
 
 #: src/random.cpp:354
 msgid "Shuffle data cells (for dir='a') or slices (for dir='xyz')"
-msgstr ""
+msgstr "Перемешать ячейки (для dir='a') или срезы (для dir='xyz') данных"
 
 #: mgllab/table.cpp:779
 msgid "Sin FFT"
@@ -5846,7 +5840,7 @@ msgid ""
 "`'abc'[1]` will give 'b'), or add a value to the last character of the "
 "string using `+` (for example, `'abc'+3` will give 'abf'), or use it all "
 "together."
-msgstr ""
+msgstr "Вы можете объединять строки и числа с помощью `,` без пробелов (например, `'max (u) =',u.max,' a.u.' 'или`'u = ',!(1+i2)` для комплексных чисел). Также вы можете получить n-й символ строки с помощью `[]` (например, `'abc'[1]` даст 'b') или добавить значение к последнему символу строки с помощью `+` (например, `'abc'+3` даст 'abf') или использовать все вместе."
 
 #: src/window.cpp:411
 msgid ""
