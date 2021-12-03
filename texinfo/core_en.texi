@@ -1742,6 +1742,13 @@ Force drawing the plot and use it as background. After it, function clear the li
 Load PNG or JPEG file @var{fname} as background for the plot. Parameter @var{alpha} manually set transparency of the background. Parameter @var{how} can be: @samp{a} for filling current subplot only, @samp{s} for scaling (resizing) image to whole area, @samp{c} for centering image, @samp{m} for tessellate image as mosaic.
 @end deftypefn
 
+@deftypefn {MGL command} {} background @code{r g b}
+@ifclear UDAV
+@deftypefnx {Method on @code{mglGraph}} @code{void} FillBackground (@code{const mglColor &}rgb)
+@deftypefnx {C function} @code{void} mgl_fill_background (@code{HMGL} gr, @code{double} r, @code{double} g, @code{double} b)
+@end ifclear
+Fill background by the specified color. Values should be in range [0,1].
+@end deftypefn
 
 
 @c ##################################################################

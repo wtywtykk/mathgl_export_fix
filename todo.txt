@@ -53,10 +53,12 @@
 
 14. Add interpolated point(s) at boundary of invisible/cutted region at drawing of lines and triangles
 
+15. Use new interface for HDF5 (assume v.1.8 was too many years ago :( )
 16. Add mgl_set_font_hscale() to MGL
 17. Add Rotate() around a point (not {0,0,0} by default).
 22. Add "map res 'eqs' 'vars' ini ['how' A B C [D E]]" -- like "ode" but just simple mapping + progonka.
 28. Try to add ld options: "-init mgl_init -fini mgl_fini" for MSVC ???
+
 
 ZZ. Update *.i for new functions {before release!!!}
 

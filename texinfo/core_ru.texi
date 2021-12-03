@@ -1740,6 +1740,13 @@ These functions change background image.
 Загружает PNG или JPEG файл @var{fname} в качестве фона для графика. Параметр @var{alpha} задает прозрачность фона вручную. Параметр @var{how} может содержать: @samp{a} для заполнения текущего @ref{subplot}, @samp{s} для растягивания на всю область, @samp{c} для центрирования, @samp{m} для заполнения мозаикой.
 @end deftypefn
 
+@deftypefn {Команда MGL} {} background [@code{r g b}]
+@ifclear UDAV
+@deftypefnx {Метод класса @code{mglGraph}} @code{void} FillBackground (@code{const mglColor &}rgb)
+@deftypefnx {Функция С} @code{void} mgl_fill_background (@code{HMGL} gr, @code{double} r, @code{double} g, @code{double} b)
+@end ifclear
+Заполняет фон указанным цветом. Значения должны быть в диапазоне от 0 до 1.
+@end deftypefn
 
 @c ##################################################################
 @external{}

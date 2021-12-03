@@ -448,13 +448,16 @@ void MGL_EXPORT mgl_clf_str_(uintptr_t *gr, const char *col, int);
 void MGL_EXPORT mgl_load_background(HMGL gr, const char *fname, double alpha);
 void MGL_EXPORT mgl_load_background_(uintptr_t *gr, const char *fname, mreal *alpha, int);
 /// Load background image
-	/** Parameter 'how' can be:
-	 *   'a' for filling current subplot only;
-	 *   's' for scaling (resizing) image to whole area;
-	 *   'c' for centering image;
-	 *   'm' for tessellate image as mosaic. */
+/** Parameter 'how' can be:
+	*   'a' for filling current subplot only;
+	*   's' for scaling (resizing) image to whole area;
+	*   'c' for centering image;
+	*   'm' for tessellate image as mosaic. */
 void MGL_EXPORT mgl_load_background_ext(HMGL gr, const char *fname, const char *how, double alpha);
 void MGL_EXPORT mgl_load_background_ext_(uintptr_t *gr, const char *fname, const char *how, mreal *alpha, int,int);
+/// Fill background by specified color. Colors r,g,b should be in range [0,1].
+void MGL_EXPORT mgl_fill_background(HMGL gr, double r, double g, double b);
+void MGL_EXPORT mgl_fill_background_(uintptr_t *gr, double *r, double *g, double *b);
 
 /// Put further plotting in m-th cell of nx*ny grid of the image.
 /** String \a style may contain:

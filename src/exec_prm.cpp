@@ -69,6 +69,7 @@ int static mgls_background(mglGraph *gr, long , mglArg *a, const char *k, const 
 	else if(!strcmp(k,"sn"))	gr->LoadBackground(a[0].s.s,a[1].v);
 	else if(!strcmp(k,"ss"))	gr->LoadBackground(a[0].s.s,a[1].s.s);
 	else if(!strcmp(k,"ssn"))	gr->LoadBackground(a[0].s.s,a[1].s.s,a[2].v);
+	else if(!strcmp(k,"nnn"))	gr->FillBackground(mglColor(a[0].v,a[1].v,a[2].v));
 	else res = 1;
 	return res;
 }
