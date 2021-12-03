@@ -592,7 +592,8 @@ public:
 	void LoadBackground(const char *fname, const char *how, double alpha=1)
 	{	mgl_load_background_ext(gr,fname,how,alpha);	}
 	/// Fill background image by specified color
-	void FillBackground(const mglColor &cc);
+	void FillBackground(const mglColor &cc)
+	{	mgl_fill_background(gr, cc.r,cc.g,cc.b);	}
 	/// Force drawing the image and use it as background one
 	inline void Rasterize()			{	mgl_rasterize(gr);	}
 
