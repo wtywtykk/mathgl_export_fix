@@ -1,4 +1,4 @@
-2.5 Released 2 December 2021
+2.5 Released 8 December 2021
 
 * Add 'keep' for keeping the data phase/sign or value along line i and j in given direction
 * Add functions 'sum', 'prod' at formula evaluation, like "sum(_i^2,5)" will produce "30"=0+1^2+2^2+3^2+4^2, and "prod(1+_i,5)" will produce 5!="120". You can nest them for variables _i,_j,...,_z, like "sum(sum(_j+_i^2,5),5)" will give "200".
@@ -15,6 +15,7 @@
 * Add mgl_default_graph() -- the global (default) pointer to HMGL for keeping plot settings, simplifying external scripts and capture it in GUI.
 * Add style 'p' in command 'smooth' to use parabolic smoothing of arbitrary points.
 * Allow 'background' for scaling image, centering image and tessellate image as mosaic.
+* Allow filling 'background' by the specified color.
 * Allow masks for 'candle', 'area', 'region', 'bars', 'barh', 'chart', 'tape', 'face', 'polygon', 'ellipse', 'rhomb'.
 * Allow single value specification for contour level in 'cont', 'tricont', 'contd', 'contp', 'contv', 'tricontv', 'cont3', 'dcont'.
 * Add mgl_dual_save_hdf(), mgl_real_save_hdf(), mgl_int_save_hdf() for saving single number in HDF5 file. Correspondingly, commands 'save' and 'savehdf' can save single value now.
@@ -22,6 +23,7 @@
 * Add mglDataList -- global mglDataA* collection for viewing/changing in GUI data from external languages (like, Python, ...).
 * Add Armadillo interface for mglData and mglDataC.
 * If nsub parameter of command 'hist' is negative (nsub<0) then the linear interpolation is used instead of spline one.
+* Add dark text colors for mgllab.
 
 2.4.4 Released 8 July 2019
 

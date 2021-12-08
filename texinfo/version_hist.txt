@@ -1,3 +1,6 @@
+2.5 	Released 8 December 2021
+2.4.4	Released 8 July 2019
+2.4.3	Released 14 March 2019
 2.4.2.1	Released 31 March 2018
 2.4.2	Released 21 March 2018
 2.4.1	Released 20 July 2017
