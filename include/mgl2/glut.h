@@ -26,30 +26,30 @@
 extern "C" {
 #endif
 void _mgl_key_up(unsigned char ch,int ,int );
-HMGL MGL_EXPORT mgl_create_graph_glut(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p));
+HMGL MGL_FEATURES_EXPORT mgl_create_graph_glut(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p));
 
 
 /// Switch on/off transparency (do not overwrite user settings)
-void MGL_EXPORT mgl_glut_toggle_alpha(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_toggle_alpha(HMGL gr);
 /// Switch on/off lighting (do not overwrite user settings)
-void MGL_EXPORT mgl_glut_toggle_light(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_toggle_light(HMGL gr);
 /// Switch off all zooming and rotation
-void MGL_EXPORT mgl_glut_toggle_no(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_toggle_no(HMGL gr);
 /// Update picture by calling user drawing function
-void MGL_EXPORT mgl_glut_update(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_update(HMGL gr);
 /// Reload user data and update picture
-void MGL_EXPORT mgl_glut_reload(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_reload(HMGL gr);
 /// Show next frame (if one)
-void MGL_EXPORT mgl_glut_next_frame(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_next_frame(HMGL gr);
 /// Show previous frame (if one)
-void MGL_EXPORT mgl_glut_prev_frame(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_prev_frame(HMGL gr);
 /// Run slideshow (animation) of frames
-void MGL_EXPORT mgl_glut_animation(HMGL gr);
+void MGL_FEATURES_EXPORT mgl_glut_animation(HMGL gr);
 
 #ifdef __cplusplus
 }
 //-----------------------------------------------------------------------------
-class MGL_EXPORT mglGLUT: public mglGraph
+class MGL_FEATURES_EXPORT mglGLUT: public mglGraph
 {
 	mglGLUT(const mglGLUT &) {}	// copying is not allowed
 	const mglGLUT &operator=(const mglGLUT &t)	{	return t;	}

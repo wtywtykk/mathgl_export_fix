@@ -85,7 +85,7 @@ protected:
 	QSpinBox *tet, *phi;	///< Spin box for angles
 };
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_ask_qt(const wchar_t *quest, wchar_t *res)
+void MGL_FEATURES_EXPORT mgl_ask_qt(const wchar_t *quest, wchar_t *res)
 {	QInputDialog::getText(QApplication::activeWindow(), "MathGL",
 						QString::fromWCharArray(quest)).toWCharArray(res);	}
 //-----------------------------------------------------------------------------
@@ -1071,7 +1071,7 @@ void mglCanvasQT::Window(int argc, char **argv, int (*draw)(mglBase *gr, void *p
 #include "xpm/stop.xpm"
 #include "xpm/pause.xpm"
 //-----------------------------------------------------------------------------
-MGL_EXPORT QMenu *mglMakeMenu(QMainWindow *Wnd, QMathGL *QMGL, QSpinBox *&tet, QSpinBox *&phi)
+MGL_FEATURES_EXPORT QMenu *mglMakeMenu(QMainWindow *Wnd, QMathGL *QMGL, QSpinBox *&tet, QSpinBox *&phi)
 {
 	QAction *a;
 	QMenu *o, *oo, *f;
@@ -1296,24 +1296,24 @@ MGL_EXPORT QMenu *mglMakeMenu(QMainWindow *Wnd, QMathGL *QMGL, QSpinBox *&tet, Q
 	return popup;
 }
 //-----------------------------------------------------------------------------
-HMGL MGL_EXPORT mgl_create_graph_qt(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
+HMGL MGL_FEATURES_EXPORT mgl_create_graph_qt(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
 {
 	mglCanvasQT *g = new mglCanvasQT;
 	g->Window(0,0,draw,title,par,load);
 	return g;
 }
-MGL_EXPORT_PURE void* mgl_qt_widget(HMGL gr)
+MGL_FEATURES_EXPORT_PURE void* mgl_qt_widget(HMGL gr)
 {
 	mglCanvasQT *g = dynamic_cast<mglCanvasQT *>(gr);
 	return g?g->QMGL:NULL;
 }
-int MGL_EXPORT mgl_qt_run()	{	return (qApp)?qApp->exec():-1;	}
+int MGL_FEATURES_EXPORT mgl_qt_run()	{	return (qApp)?qApp->exec():-1;	}
 //-----------------------------------------------------------------------------
-uintptr_t MGL_EXPORT mgl_create_graph_qt_(const char *title, int l)
+uintptr_t MGL_FEATURES_EXPORT mgl_create_graph_qt_(const char *title, int l)
 {
 	char *s = new char[l+1];	memcpy(s,title,l);	s[l]=0;
 	uintptr_t t = uintptr_t(mgl_create_graph_qt(0,s,0,0));
 	delete []s;	return t;
 }
-int MGL_EXPORT mgl_qt_run_()	{	return mgl_qt_run();	}
+int MGL_FEATURES_EXPORT mgl_qt_run_()	{	return mgl_qt_run();	}
 //-----------------------------------------------------------------------------

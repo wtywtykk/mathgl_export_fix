@@ -67,7 +67,7 @@ using mglCanvasWnd::Window;
 	void WndMove(int x, int y)	{	Wnd->position(x,y);	}	///< Move window
 };
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_ask_fltk(const wchar_t *quest, wchar_t *res)
+void MGL_FEATURES_EXPORT mgl_ask_fltk(const wchar_t *quest, wchar_t *res)
 {
 	static char buf[1024];	*res=0;	// TODO
 #if FL_MINOR_VERSION>=3
@@ -85,7 +85,7 @@ void MGL_EXPORT mgl_ask_fltk(const wchar_t *quest, wchar_t *res)
 //		class Fl_MathGL
 //
 //-----------------------------------------------------------------------------
-MGL_EXPORT const char *mgl_file_chooser(const char *mess, const char *filter, bool save)
+MGL_FEATURES_EXPORT const char *mgl_file_chooser(const char *mess, const char *filter, bool save)
 {
 	static Fl_Native_File_Chooser fnfc;
 	fnfc.title(mess);
@@ -95,7 +95,7 @@ MGL_EXPORT const char *mgl_file_chooser(const char *mess, const char *filter, bo
 	fnfc.show();
 	return fnfc.filename();
 }
-MGL_EXPORT const char *mgl_dir_chooser(const char *mess, const char *path)
+MGL_FEATURES_EXPORT const char *mgl_dir_chooser(const char *mess, const char *path)
 {
 	static Fl_Native_File_Chooser fnfc;
 	fnfc.title(mess);
@@ -959,7 +959,7 @@ void mglCanvasFL::GotoFrame(int d)
 	if(GetNumFig()>0 && d)	{	SetCurFig(f);	mgl->FMGL->refresh();	}
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_makemenu_fltk(Fl_Menu_ *m, Fl_MGLView *w)
+void MGL_FEATURES_EXPORT mgl_makemenu_fltk(Fl_Menu_ *m, Fl_MGLView *w)
 {
 	m->add(_("Graphics/Alpha"), "^t", mgl_alpha_cb, w, FL_MENU_TOGGLE);
 	m->add(_("Graphics/Light"), "^l", mgl_light_cb, w, FL_MENU_TOGGLE);
@@ -1048,32 +1048,32 @@ void mglCanvasFL::Window(int argc, char **argv, int (*draw)(mglBase *gr, void *p
 	Wnd->show(argv ? argc:0, argv ? argv:tmp);
 }
 //-----------------------------------------------------------------------------
-HMGL MGL_EXPORT mgl_create_graph_fltk(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
+HMGL MGL_FEATURES_EXPORT mgl_create_graph_fltk(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
 {
 	mglCanvasFL *g = new mglCanvasFL;
 	g->Window(0,0,draw,title,par,load);
 	g->mgl->FMGL->set_handle_key(true);
 	return g;
 }
-MGL_EXPORT_PURE void* mgl_fltk_widget(HMGL gr)
+MGL_FEATURES_EXPORT_PURE void* mgl_fltk_widget(HMGL gr)
 {
 	mglCanvasFL *g = dynamic_cast<mglCanvasFL *>(gr);
 	return g?g->mgl:NULL;
 }
-int MGL_EXPORT mgl_fltk_run()		{	return Fl::run();	}
+int MGL_FEATURES_EXPORT mgl_fltk_run()		{	return Fl::run();	}
 //-----------------------------------------------------------------------------
-uintptr_t MGL_EXPORT mgl_create_graph_fltk_(const char *title, int l)
+uintptr_t MGL_FEATURES_EXPORT mgl_create_graph_fltk_(const char *title, int l)
 {
 	char *s = new char[l+1];	memcpy(s,title,l);	s[l]=0;
 	uintptr_t t = uintptr_t(mgl_create_graph_fltk(0,s,0,0));
 	delete []s;	return t;
 }
-int MGL_EXPORT mgl_fltk_run_()	{	return mgl_fltk_run();	}
+int MGL_FEATURES_EXPORT mgl_fltk_run_()	{	return mgl_fltk_run();	}
 //-----------------------------------------------------------------------------
 static void *mgl_fltk_tmp(void *)
 {	mgl_fltk_run();	return 0;	}
 //-----------------------------------------------------------------------------
-int MGL_EXPORT mgl_fltk_thr()		// NOTE: Qt couldn't be running in non-primary thread
+int MGL_FEATURES_EXPORT mgl_fltk_thr()		// NOTE: Qt couldn't be running in non-primary thread
 {
 #if MGL_HAVE_PTHR_WIDGET
 	static pthread_t thr;
@@ -1217,7 +1217,7 @@ void Fl_MGLView::set_progress(int value, int maximal)
 	Fl::awake();
 }
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_progress_fltk(int value, int maximal, HMGL gr)
+void MGL_FEATURES_EXPORT mgl_progress_fltk(int value, int maximal, HMGL gr)
 {
 	mglCanvasFL *g = dynamic_cast<mglCanvasFL *>(gr);
 	if(g && g->mgl)	g->mgl->set_progress(value,maximal);

@@ -28,10 +28,10 @@
 class mglCanvas;
 //-----------------------------------------------------------------------------
 /// Convert MathGL image to wxBitmap
-wxBitmap MGL_EXPORT ConvertFromGraph(HMGL gr);
+wxBitmap MGL_FEATURES_EXPORT ConvertFromGraph(HMGL gr);
 //-----------------------------------------------------------------------------
 /// Class is Wx widget which display MathGL graphics
-class MGL_EXPORT wxMathGL : public wxWindow
+class MGL_FEATURES_EXPORT wxMathGL : public wxWindow
 {
 public:
 	wxString appName;	///< Application name for message boxes

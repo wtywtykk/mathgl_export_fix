@@ -241,7 +241,7 @@ void mglCanvasGLUT::Window(int argc, char **argv,int (*draw)(mglBase *gr, void *
 	if(NumFig>0)	glDeleteLists(1,NumFig);
 }
 //-----------------------------------------------------------------------------
-HMGL MGL_EXPORT mgl_create_graph_glut(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
+HMGL MGL_FEATURES_EXPORT mgl_create_graph_glut(int (*draw)(HMGL gr, void *p), const char *title, void *par, void (*load)(void *p))
 {
 	mglCanvasGLUT *g = new mglCanvasGLUT;
 	g->Window(0,0,draw,title,par, load);
@@ -250,28 +250,28 @@ HMGL MGL_EXPORT mgl_create_graph_glut(int (*draw)(HMGL gr, void *p), const char 
 //-----------------------------------------------------------------------------
 mglCanvasGLUT::mglCanvasGLUT() : mglCanvasGL()	{}
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_glut_toggle_alpha(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_toggle_alpha(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->ToggleAlpha();	}
-void MGL_EXPORT mgl_glut_toggle_light(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_toggle_light(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->ToggleLight();	}
-void MGL_EXPORT mgl_glut_toggle_no(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_toggle_no(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->ToggleNo();	}
-void MGL_EXPORT mgl_glut_update(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_update(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->Update();	}
-void MGL_EXPORT mgl_glut_reload(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_reload(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->ReLoad();	}
-void MGL_EXPORT mgl_glut_next_frame(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_next_frame(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->NextFrame();	}
-void MGL_EXPORT mgl_glut_prev_frame(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_prev_frame(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->PrevFrame();	}
-void MGL_EXPORT mgl_glut_animation(HMGL gr)
+void MGL_FEATURES_EXPORT mgl_glut_animation(HMGL gr)
 {	mglCanvasGLUT *g = dynamic_cast<mglCanvasGLUT*>(gr);
 	if(g)	g->Animation();	}
 //-----------------------------------------------------------------------------

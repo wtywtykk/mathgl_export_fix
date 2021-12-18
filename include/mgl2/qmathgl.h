@@ -34,7 +34,7 @@ class mglCanvas;
 class mglTask;
 //-----------------------------------------------------------------------------
 /// Class is Qt widget which display MathGL graphics
-class MGL_EXPORT QMathGL : public QWidget
+class MGL_FEATURES_EXPORT QMathGL : public QWidget
 {
 	Q_OBJECT
 public:
@@ -226,7 +226,7 @@ private:
 };
 //-----------------------------------------------------------------------------
 /// Class for drawing the MGL script
-class MGL_EXPORT mglDrawScript : public mglDraw
+class MGL_FEATURES_EXPORT mglDrawScript : public mglDraw
 {
 public:
 	HMPR par;		///< Parser to be used
@@ -250,6 +250,6 @@ public:
 /// Convert bitmap from mglCanvasWnd to QPixmap
 void mglConvertFromGraph(QPixmap &pic, mglCanvas *gr, uchar **buf, QImage *out=NULL);
 /// Make menu, toolbars and return popup menu for MainWindow
-MGL_EXPORT QMenu *mglMakeMenu(QMainWindow* Wnd, QMathGL* QMGL, QSpinBox*& tet, QSpinBox*& phi);
+MGL_FEATURES_EXPORT QMenu *mglMakeMenu(QMainWindow* Wnd, QMathGL* QMGL, QSpinBox*& tet, QSpinBox*& phi);
 //-----------------------------------------------------------------------------
 #endif

@@ -25,7 +25,7 @@
 //#include "mgl2/wx.h"
 //-----------------------------------------------------------------------------
 /// Wrapper class for all windows displaying graphics
-class MGL_EXPORT mglWindow : public mglWnd
+class MGL_FEATURES_EXPORT mglWindow : public mglWnd
 {
 	mglWindow(const mglWindow &t) {}	// copying is not allowed
 	const mglWindow &operator=(const mglWindow &t)	{	return t;	}

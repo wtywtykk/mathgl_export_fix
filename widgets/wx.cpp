@@ -30,7 +30,7 @@
 #include "mgl2/canvas_wnd.h"
 #include "mgl2/wx.h"
 //-----------------------------------------------------------------------------
-class MGL_EXPORT mglCanvasWX : public mglCanvasWnd
+class MGL_FEATURES_EXPORT mglCanvasWX : public mglCanvasWnd
 {
 friend class wxMathGL;
 public:
@@ -213,7 +213,7 @@ void wxMathGL::Update()
 	MousePos.Empty();	Repaint();
 }
 //-----------------------------------------------------------------------------
-wxBitmap MGL_EXPORT ConvertFromGraph(HMGL gr)
+wxBitmap MGL_FEATURES_EXPORT ConvertFromGraph(HMGL gr)
 {
 	const unsigned char *bb = mgl_get_rgb(gr);
 	int w=mgl_get_width(gr), h=mgl_get_height(gr);

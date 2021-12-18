@@ -36,7 +36,7 @@ class mglCanvas;
 class Fl_Double_Window;
 //-----------------------------------------------------------------------------
 /// Class is FLTK widget which display MathGL graphics
-class MGL_EXPORT Fl_MathGL : public Fl_Widget
+class MGL_FEATURES_EXPORT Fl_MathGL : public Fl_Widget
 {
 	friend class Fl_MGLView;
 public:
@@ -155,7 +155,7 @@ protected:
 	void resize(int x, int y, int w, int h);	///< resize control
 };
 //-----------------------------------------------------------------------------
-class MGL_EXPORT Fl_MGLView : public Fl_Window
+class MGL_FEATURES_EXPORT Fl_MGLView : public Fl_Window
 {
 public:
 	Fl_MathGL *FMGL;		///< Control which draw graphics
@@ -246,8 +246,8 @@ protected:
 
 };
 //-----------------------------------------------------------------------------
-void MGL_EXPORT mgl_makemenu_fltk(Fl_Menu_ *m, Fl_MGLView *w);
-MGL_EXPORT const char *mgl_file_chooser(const char *mess, const char *filter="", bool save=false);
-MGL_EXPORT const char *mgl_dir_chooser(const char *mess, const char *path);
+void MGL_FEATURES_EXPORT mgl_makemenu_fltk(Fl_Menu_ *m, Fl_MGLView *w);
+MGL_FEATURES_EXPORT const char *mgl_file_chooser(const char *mess, const char *filter="", bool save=false);
+MGL_FEATURES_EXPORT const char *mgl_dir_chooser(const char *mess, const char *path);
 //-----------------------------------------------------------------------------
 #endif
