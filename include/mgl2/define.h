@@ -71,7 +71,6 @@
 #endif
 #define MGL_EXPORT_CONST	MGL_EXPORT MGL_FUNC_CONST
 #define MGL_EXPORT_PURE		MGL_EXPORT MGL_FUNC_PURE
-#define MGL_FEATURES_EXPORT_PURE		MGL_FEATURES_EXPORT MGL_FUNC_PURE
 #define MGL_LOCAL_CONST		MGL_NO_EXPORT MGL_FUNC_CONST
 #define MGL_LOCAL_PURE		MGL_NO_EXPORT MGL_FUNC_PURE
 
@@ -141,7 +140,9 @@ typedef long msize;
 #define getcwd	_getcwd
 #define chdir	_chdir // BORLAND has chdir
 #endif
+#if (_MSC_VER<1500)
 #define snprintf _snprintf
+#endif
 #if (_MSC_VER<1600) // based on https://hg.python.org/cpython/rev/9aedb876c2d7
 #define hypot	_hypot
 #endif
